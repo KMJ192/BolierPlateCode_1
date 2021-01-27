@@ -97,6 +97,19 @@
 							"width": 137,
 							"height": 40,
 							"text": "Back_End Start"
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAF3Q9RF0NRj1yU=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 264,
+							"top": 144,
+							"width": 80.09716796875,
+							"height": 25,
+							"text": "Sequelize.js"
 						}
 					]
 				},
