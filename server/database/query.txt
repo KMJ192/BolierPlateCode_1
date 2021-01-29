@@ -1,0 +1,19 @@
+//test 스키마 생성
+CREATE SCHEMA `test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin ;
+
+
+//test.user Data table 생성
+CREATE TABLE `test`.`user` (
+  `name` INT NOT NULL,
+  `email` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
+  `user_image` VARCHAR(100) NULL,
+  `token` VARCHAR(500) NULL,
+  `token_exp` INT NULL,
+  `user_rol` VARCHAR(20) NOT NULL,
+  `created_at` DATETIME NOT NULL,
+  `created_by` VARCHAR(45) NOT NULL,
+  `updated_at` DATETIME NULL,
+  `updated_by` VARCHAR(45) NULL,
+  PRIMARY KEY (`email`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
