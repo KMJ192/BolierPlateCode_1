@@ -17,3 +17,23 @@ CREATE TABLE `test`.`user` (
   `updated_by` VARCHAR(45) NULL,
   PRIMARY KEY (`email`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
+
+//테이블 조회
+Select * from test.user;
+
+//예제 입력  
+insert into test.user
+values("명준", "myeongjun@google.com", "1234", "", "", 10, "0", now(), "나", now(), "나")
+
+//ormconfig.json
+{
+    "type" : "mysql", //DB Type
+    "host" : "localhost", //DB host
+    "port" : 3306, //DB port
+    "username" : "root", //login user name
+    "password" : 1234, // DB pw
+    "database" : "user", // DB name
+    "entities" : ["src/entities/*.entity{.ts,.js"], //entity file location
+    "logging" : true, //logging 여부
+    "synchronize" : true //동기화 여부
+}

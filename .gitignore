@@ -1,5 +1,4 @@
 .vscode/
 server/node_modules/
-server/nestjs
-server/database/node_modules
-server/database/package-lock.json
+server/back-end/ormconfig.json
+server/back-end/src/user/database

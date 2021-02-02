@@ -1,0 +1,9 @@
+nestjs에 MySQL연결
+
+
+npm install --save-dev @nestjs/typeorm typeorm
+Typeorm를 이용하여 MySQL과 연동시키기
+Typeorm -> Type Object-Relational-Mapping
+객체와 RDB의 Data를 자동으로 Mapping 해줌
+ - Active Record 패턴 : 모델 그 자체에 Qeury메소드를 정의하고, 모델의 메소드를 사용하여 객체를 저장 제거 불러옴
+ - Data Mapper 패턴 : BaseEntity라는 클래스를 사용하여 새로운 클래스에 상속하게 한 후 사용.
