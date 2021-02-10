@@ -1,4 +1,12 @@
 .vscode/
-server/node_modules/
-server/back-end/ormconfig.json
-server/back-end/src/user/database
+# test-server
+# test-server
+test-server/node_modules
+
+# operator-server
+server/node_modules
+
+# test-client
+
+
+# operator-client

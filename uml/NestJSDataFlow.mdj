@@ -1,0 +1,257 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "Untitled",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model",
+			"ownedElements": [
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAFF+qBtyKM79qY=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Main",
+					"defaultDiagram": true,
+					"ownedViews": [
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAF3ipORT0LHlvA=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;24;0",
+							"left": 528,
+							"top": 24,
+							"width": 281,
+							"height": 36,
+							"text": "NestJS Data Flow Chart"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3ipXT2ULQTTg=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 560,
+							"top": 64,
+							"width": 233,
+							"height": 41,
+							"text": "NestJS Global install\nnpm i -g @nestjs/cli"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3ipavK0Ldumg=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 560,
+							"top": 136,
+							"width": 233,
+							"height": 40,
+							"text": "Create new NestJS project\nnest new 프로젝트이름"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3ipku/ELr7B4=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 560,
+							"top": 208,
+							"width": 233,
+							"height": 72,
+							"text": "NestJS entry point\nmain.ts\nmain.ts의 bootstrap function을 실행시키며 실행됨.\n\n"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3iq5QakMB/GY=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 560,
+							"top": 400,
+							"width": 233,
+							"height": 87,
+							"text": "app.module.ts\n@Module 데코레이터 설정\n자식모듈 Import\ncontroller : app.controller.ts\nprovider : app.servise.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3iq9CWUMOcn4=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 560,
+							"top": 296,
+							"width": 233,
+							"height": 73,
+							"text": "main.ts\nbootstrap function\napp.module 실행\n실행되는 port 설정"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irQQTUM/pzk=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 304,
+							"top": 496,
+							"width": 113.20263671875,
+							"height": 40,
+							"text": "자식1.module.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irR7VkNG5TY=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 304,
+							"top": 648,
+							"width": 113.20263671875,
+							"height": 40,
+							"text": "자식2.module.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irSWCkNN8N0=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 280,
+							"top": 808,
+							"width": 161,
+							"height": 40,
+							"text": "자식n번째.module.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irg8iENvrq4=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 232,
+							"top": 544,
+							"width": 123.314453125,
+							"height": 40,
+							"text": "자식1.controller.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irioU0N3PKs=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 360,
+							"top": 544,
+							"width": 123.314453125,
+							"height": 40,
+							"text": "자식1.service.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irktiUODe2Q=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 241,
+							"top": 696,
+							"width": 123.314453125,
+							"height": 40,
+							"text": "자식2.controller.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irktiUOEqBk=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 368,
+							"top": 696,
+							"width": 123.314453125,
+							"height": 40,
+							"text": "자식2.service.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irm1BUOWSq0=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 238,
+							"top": 859,
+							"width": 123.314453125,
+							"height": 40,
+							"text": "자식n.controller.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irm1BUOX6vM=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 365,
+							"top": 859,
+							"width": 123.314453125,
+							"height": 40,
+							"text": "자식n.service.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irtIcUOtskU=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 632,
+							"top": 528,
+							"width": 107.4453125,
+							"height": 40,
+							"text": "app.contoller.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irtx3UO3TWI=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 848,
+							"top": 528,
+							"width": 107.4453125,
+							"height": 40,
+							"text": "app.service.ts"
+						}
+					]
+				},
+				{
+					"_type": "UMLPackage",
+					"_id": "AAAAAAF3ipNHDEKcCeY=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "NestJs"
+				}
+			]
+		}
+	]
+}
