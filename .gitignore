@@ -1,12 +1,14 @@
 .vscode/
-# test-server
-# test-server
-test-server/node_modules
+
+# operator-client
 
 # operator-server
 server/node_modules
 
+
+# test-server
+test-server/node_modules
+test-server
+
 # test-client
-
-
-# operator-client
+test-client
