@@ -12,8 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
-var db_config = require("../db_connect/db_connect");
-var conn = db_config.init();
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -21,13 +19,40 @@ let UserController = class UserController {
     getUser() {
         return this.userService.getUser();
     }
+    createUser() {
+        return this.userService.createUser();
+    }
+    deleteUser() {
+        return this.userService.deleteUser();
+    }
+    patchUser() {
+        return this.userService.patchUser();
+    }
 };
 __decorate([
-    common_1.Get("/user"),
+    common_1.Get("/get_user"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "getUser", null);
+__decorate([
+    common_1.Post("/register_user"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "createUser", null);
+__decorate([
+    common_1.Delete("/deluser"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "deleteUser", null);
+__decorate([
+    common_1.Patch("/patch_user"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "patchUser", null);
 UserController = __decorate([
     common_1.Controller('/user'),
     __metadata("design:paramtypes", [user_service_1.UserService])

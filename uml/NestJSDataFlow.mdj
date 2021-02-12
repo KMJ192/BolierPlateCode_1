@@ -80,10 +80,10 @@
 							},
 							"font": "Arial;13;0",
 							"left": 560,
-							"top": 400,
+							"top": 384,
 							"width": 233,
-							"height": 87,
-							"text": "app.module.ts\n@Module 데코레이터 설정\n자식모듈 Import\ncontroller : app.controller.ts\nprovider : app.servise.ts"
+							"height": 102,
+							"text": "app.module.ts\n@Module 데코레이터 설정\n모든 module의 root module\n자식모듈 Import\ncontroller : app.controller.ts\nprovider : app.servise.ts\n"
 						},
 						{
 							"_type": "UMLNoteView",
@@ -105,9 +105,9 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 304,
-							"top": 496,
-							"width": 113.20263671875,
+							"left": 224,
+							"top": 592,
+							"width": 113.68505859375,
 							"height": 40,
 							"text": "자식1.module.ts"
 						},
@@ -118,9 +118,9 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 304,
-							"top": 648,
-							"width": 113.20263671875,
+							"left": 528,
+							"top": 592,
+							"width": 113.68505859375,
 							"height": 40,
 							"text": "자식2.module.ts"
 						},
@@ -131,8 +131,8 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 280,
-							"top": 808,
+							"left": 960,
+							"top": 592,
 							"width": 161,
 							"height": 40,
 							"text": "자식n번째.module.ts"
@@ -144,9 +144,9 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 232,
-							"top": 544,
-							"width": 123.314453125,
+							"left": 152,
+							"top": 640,
+							"width": 125.22509765625,
 							"height": 40,
 							"text": "자식1.controller.ts"
 						},
@@ -157,8 +157,8 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 360,
-							"top": 544,
+							"left": 280,
+							"top": 640,
 							"width": 123.314453125,
 							"height": 40,
 							"text": "자식1.service.ts"
@@ -170,9 +170,9 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 241,
-							"top": 696,
-							"width": 123.314453125,
+							"left": 465,
+							"top": 640,
+							"width": 125.22509765625,
 							"height": 40,
 							"text": "자식2.controller.ts"
 						},
@@ -183,8 +183,8 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 368,
-							"top": 696,
+							"left": 592,
+							"top": 640,
 							"width": 123.314453125,
 							"height": 40,
 							"text": "자식2.service.ts"
@@ -196,9 +196,9 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 238,
-							"top": 859,
-							"width": 123.314453125,
+							"left": 926,
+							"top": 643,
+							"width": 125.58056640625,
 							"height": 40,
 							"text": "자식n.controller.ts"
 						},
@@ -209,8 +209,8 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 365,
-							"top": 859,
+							"left": 1053,
+							"top": 643,
 							"width": 123.314453125,
 							"height": 40,
 							"text": "자식n.service.ts"
@@ -222,11 +222,11 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 632,
-							"top": 528,
-							"width": 107.4453125,
-							"height": 40,
-							"text": "app.contoller.ts"
+							"left": 808,
+							"top": 392,
+							"width": 249,
+							"height": 41,
+							"text": "app.contoller.ts\nURL을 가져오고 함수를 실행시킴"
 						},
 						{
 							"_type": "UMLNoteView",
@@ -235,11 +235,11 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 848,
-							"top": 528,
-							"width": 107.4453125,
-							"height": 40,
-							"text": "app.service.ts"
+							"left": 808,
+							"top": 440,
+							"width": 265,
+							"height": 41,
+							"text": "app.service.ts\n실질적인 Business logic을 작성하는 곳"
 						}
 					]
 				},
