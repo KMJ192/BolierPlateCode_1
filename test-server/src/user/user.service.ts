@@ -3,32 +3,20 @@ import { Injectable } from '@nestjs/common';
 let db_config = require("../db_connect/db_connect");
 let conn = db_config.init();
 
+//test를 위해 임시로 Global email을 설정해놓음
 let g_email : string= "aja2467@google.com"
 
 @Injectable()
 export class UserService {
     getUser(){
-        let sql : string = "select exists (select * from test.users where email='" + g_email + "') as success";
-        let ds : boolean = false
-        conn.query(sql, function(err : string, rows:string){
-            if(err){
-                return "데이터 조회 실패 : " + err;
-            }
-            console.log(rows);
-        });
-        sql = "select * from test.users where email='" + g_email + "'";
-        conn.query(sql, function(err : string, rows : string){
+        let sql : string = "select * from test.users where email='" + g_email + "'";
+        conn.query(sql, function(err : string, rows){
             if(err){
                 console.log("query is not excuted. select fail" + err);
                 return "query is not excuted. select fail" + err;
             }else{
-                if(rows.includes("RowDataPacket")){
-                    
-                }else{
-                    console.log("유저가 없습니다.")
-                }
                 console.log(rows)
-                return "User search completed";
+                return rows;
             }
         });
     }

@@ -4,16 +4,16 @@ CREATE SCHEMA `test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin ;
 
 //test.user Data table 생성
 CREATE TABLE `test`.`user` (
-  `name` INT NOT NULL,
   `email` VARCHAR(50) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
   `user_image` VARCHAR(100) NULL,
   `token` VARCHAR(500) NULL,
-  `token_exp` INT NULL,
+  `token_exp` INT NOT NULL,
   `user_rol` VARCHAR(20) NOT NULL,
-  `created_at` DATETIME NOT NULL,
+  `created_at` VARCHAR(25) NOT NULL,
   `created_by` VARCHAR(45) NOT NULL,
-  `updated_at` DATETIME NULL,
+  `updated_at` VARCHAR(25) NULL,
   `updated_by` VARCHAR(45) NULL,
   PRIMARY KEY (`email`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
@@ -24,16 +24,3 @@ Select * from test.user;
 //예제 입력  
 insert into test.user
 values("명준", "myeongjun@google.com", "1234", "", "", 10, "0", now(), "나", now(), "나")
-
-//ormconfig.json
-{
-    "type" : "mysql", //DB Type
-    "host" : "localhost", //DB host
-    "port" : 3306, //DB port
-    "username" : "root", //login user name
-    "password" : 1234, // DB pw
-    "database" : "user", // DB name
-    "entities" : ["src/entities/*.entity{.ts,.js"], //entity file location
-    "logging" : true, //logging 여부
-    "synchronize" : true //동기화 여부
-}

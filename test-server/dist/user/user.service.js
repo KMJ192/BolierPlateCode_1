@@ -13,28 +13,15 @@ let conn = db_config.init();
 let g_email = "aja2467@google.com";
 let UserService = class UserService {
     getUser() {
-        let sql = "select exists (select * from test.users where email='" + g_email + "') as success";
-        let ds = false;
-        conn.query(sql, function (err, rows) {
-            if (err) {
-                return "데이터 조회 실패 : " + err;
-            }
-            console.log(rows);
-        });
-        sql = "select * from test.users where email='" + g_email + "'";
+        let sql = "select * from test.users where email='" + g_email + "'";
         conn.query(sql, function (err, rows) {
             if (err) {
                 console.log("query is not excuted. select fail" + err);
                 return "query is not excuted. select fail" + err;
             }
             else {
-                if (rows.includes("RowDataPacket")) {
-                }
-                else {
-                    console.log("유저가 없습니다.");
-                }
                 console.log(rows);
-                return "User search completed";
+                return rows;
             }
         });
     }

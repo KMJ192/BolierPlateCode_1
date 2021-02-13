@@ -1,14 +1,10 @@
-var mysql = require('mysql');
-var db_connect = {
-    host: "localhost",
-    port: "3306",
-    user: "root",
-    password: "1234",
-    database: "test"
-};
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const db_info_1 = require("./db_info");
+let mysql = require('mysql');
 module.exports = {
     init: function () {
-        return mysql.createConnection(db_connect);
+        return mysql.createConnection(db_info_1.db_connect);
     },
     connect: function (conn) {
         conn.connect(function (err) {

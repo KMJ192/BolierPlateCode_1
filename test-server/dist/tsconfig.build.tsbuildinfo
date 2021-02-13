@@ -1187,7 +1187,7 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
-        "version": "277f8a2750bde174c937958671780ed491e4d9d6131c7b8f315a129bdf54d36e",
+        "version": "c352e5e51c90591cb805ff460359b9d09eba02855fc896252f9bebe9e6d82442",
         "signature": "b5969faff5ec9eb3286f180a42680bc46acc8e3db38c4fb56bdbbb10adfbe021",
         "affectsGlobalScope": false
       },
@@ -1387,14 +1387,24 @@
         "affectsGlobalScope": false
       },
       "../src/main.ts": {
-        "version": "e25d9bd8f80b6ffbcc8826ed1b407e747e4fbe346c5bab62cbe5837da4eeb189",
+        "version": "4e950e61a1722df77a45b83f58bec781ca9b0bc364e7d9aaacd826f1a11e973a",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
+      "../src/db_connect/db_info.ts": {
+        "version": "c4310654860b3f9d707b1fe625fcd7ee9c9bda95a1fdfd74c01956b958eae4ef",
+        "signature": "357ce90db4c95ad8f2a458adceac968ecebeb30fd943596cb53909205acaf2b0",
+        "affectsGlobalScope": false
+      },
       "../src/db_connect/db_connect.ts": {
-        "version": "84e87b1c1451f90f38eb968be96ce7e3585d65e7849aa4eefd44a7359d687ca7",
-        "signature": "3234031034375032d13b77898fbc3c1a2e6ef02b9259dd1dd1c3f14ddbefdde1",
-        "affectsGlobalScope": true
+        "version": "beec8c9f320b25ca4c466895d6472e65a7069f405a4a8dbd5554a6fee6dafa0c",
+        "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
+        "affectsGlobalScope": false
+      },
+      "../src/middleware/auth.ts": {
+        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": false
       },
       "../node_modules/@types/anymatch/index.d.ts": {
         "version": "48b52264fa193879a074197839dbb4796fa07e86350ff888e5361e06aa46df76",
@@ -3244,6 +3254,9 @@
       "../src/app.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts"
       ],
+      "../src/db_connect/db_connect.ts": [
+        "../src/db_connect/db_info.ts"
+      ],
       "../src/main.ts": [
         "../node_modules/@nestjs/core/index.d.ts",
         "../src/app.module.ts"
@@ -4928,7 +4941,8 @@
       "../src/app.module.ts",
       "../src/app.service.ts",
       "../src/db_connect/db_connect.ts",
-      "../src/main.ts",
+      "../src/db_connect/db_info.ts",
+      "../src/middleware/auth.ts",
       "../src/user/user.controller.ts",
       "../src/user/user.module.ts",
       "../src/user/user.service.ts"

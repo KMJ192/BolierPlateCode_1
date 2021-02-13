@@ -8,7 +8,7 @@ server/node_modules
 
 # test-server
 test-server/node_modules
-test-server
+test-server/src/db_connect/db_info
 
 # test-client
 test-client
