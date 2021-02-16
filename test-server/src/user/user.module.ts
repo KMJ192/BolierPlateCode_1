@@ -6,6 +6,4 @@ import { UserService } from './user.service';
   controllers: [UserController],
   providers: [UserService]
 })
-//mysql에 직접연결 시키기
-export class UserModule {
-}
+export class UserModule {}

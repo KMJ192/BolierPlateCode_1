@@ -1,0 +1,158 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "Untitled",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model",
+			"ownedElements": [
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAFF+qBtyKM79qY=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Main",
+					"defaultDiagram": true,
+					"ownedViews": [
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3qI47c8Aa9aw=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 744,
+							"top": 136,
+							"width": 113,
+							"height": 41,
+							"text": "회원가입 기능"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3qJPJ8cBD110=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 552,
+							"top": 216,
+							"width": 217,
+							"height": 66,
+							"text": "Client\n가입할 Email, Password, Nikname등의 정보를 Server로 전송"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3qJZNoMBOicw=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 832,
+							"top": 216,
+							"width": 209,
+							"height": 65,
+							"text": "Server\n유저정보를 전송받음"
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAF3qJgbUcBo+fU=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 528,
+							"top": 184,
+							"width": 60,
+							"height": 25,
+							"text": "1."
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAF3qJgtysBsXuA=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 528,
+							"top": 296,
+							"width": 60,
+							"height": 25,
+							"text": "2."
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3qJg7vcBwiQQ=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 552,
+							"top": 424,
+							"width": 217,
+							"height": 83,
+							"text": "Server\n동일한 Email이 DB에 없을 경우,\n유저정보를 DB에 저장\nPW는 Bcrypt Library를 이용하여 저장"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3qJqF5cCF2Lg=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 832,
+							"top": 424,
+							"width": 209,
+							"height": 81,
+							"text": "Client\n가입완료 출력"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3qJsaUMCNRag=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 552,
+							"top": 320,
+							"width": 217,
+							"height": 73,
+							"text": "Server\n전송받은 Data 중\n동일한 Email이 있는지 확인"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3qJwBuMCgcn0=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 832,
+							"top": 320,
+							"width": 209,
+							"height": 73,
+							"text": "Client\n동일한 Email이 DB에 있을 경우 Client로 가입 불가 사유 전송"
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAF3qJ2Lf8Cx61I=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 528,
+							"top": 400,
+							"width": 60,
+							"height": 25,
+							"text": "3."
+						}
+					]
+				}
+			]
+		}
+	]
+}

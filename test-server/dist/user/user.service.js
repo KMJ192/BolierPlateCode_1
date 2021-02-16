@@ -11,33 +11,51 @@ const common_1 = require("@nestjs/common");
 let db_config = require("../db_connect/db_connect");
 let conn = db_config.init();
 let g_email = "aja2467@google.com";
+let g_password = "1234";
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 let UserService = class UserService {
     getUser() {
-        let sql = "select * from test.users where email='" + g_email + "'";
-        conn.query(sql, function (err, rows) {
+        let bSuccess;
+        let sql = "select EXISTS (select password from test.users where email='" + g_email + "') as success";
+        conn.query(sql, function (err, result) {
             if (err) {
-                console.log("query is not excuted. select fail" + err);
                 return "query is not excuted. select fail" + err;
             }
             else {
-                console.log(rows);
-                return rows;
+                console.log(result[0]["success"]);
+                if (result[0]["success"] == 1) {
+                    console.log("있음");
+                    bSuccess = true;
+                    let sql = "select password from test.users where email='" + g_email + "'";
+                }
+                else {
+                    console.log("없음");
+                    return {
+                        selectSuccess: false,
+                        message: "email에 대한 데이터가 없음"
+                    };
+                }
             }
         });
     }
     createUser() {
-        let sql = "insert into test.users value('" + g_email + "', '1234', 'kmj', '', '', 100, 0, '" + NowTime() + "', 'kmj', '" + NowTime() + "', 'kmj')";
+        console.log(g_password);
+        let sql = "insert into test.users value('" + g_email + "', '" + g_password + "', 'kmj', '', '', 100, 0, '" + NowTime() + "', 'kmj', '" + NowTime() + "', 'kmj')";
         conn.query(sql, function (err) {
             if (err) {
-                if (String(err).includes("Duplicate")) {
-                    console.log("중복된 email");
-                }
                 console.log("유저 생성 실패 : " + err);
-                return "유저 생성 실패 : " + err;
+                return {
+                    createSuccess: false,
+                    message: "가입실패"
+                };
             }
             else {
                 console.log("유저 생성 성공");
-                return "User created completed";
+                return {
+                    createSuccess: true,
+                    message: "가입성공"
+                };
             }
         });
     }
@@ -100,10 +118,10 @@ function NowTime() {
         temp = temp + ":" + String(dateTime.getMinutes());
     }
     if (String(dateTime.getSeconds()).length == 1) {
-        temp = temp + ":0" + String(dateTime.getSeconds()) + "." + String(dateTime.getMilliseconds());
+        temp = temp + ":0" + String(dateTime.getSeconds());
     }
     else {
-        temp = temp + ":" + String(dateTime.getSeconds()) + "." + String(dateTime.getMilliseconds());
+        temp = temp + ":" + String(dateTime.getSeconds());
     }
     return temp;
 }
