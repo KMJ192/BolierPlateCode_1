@@ -1187,7 +1187,7 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
-        "version": "ff3ebf4f70e2a38ca92593b7966d98eea9f59b5430104d271d6deae0567ae6bc",
+        "version": "d76393ce8698601669e47f76bb8b063cef5768e9adbdc5cdd92c033686e792b9",
         "signature": "b5969faff5ec9eb3286f180a42680bc46acc8e3db38c4fb56bdbbb10adfbe021",
         "affectsGlobalScope": false
       },
@@ -1404,11 +1404,6 @@
       "../src/middleware/auth.ts": {
         "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "affectsGlobalScope": false
-      },
-      "../src/user/password_encryption/password_encryption.ts": {
-        "version": "88e5ba536a57847b563ce4bb9fc085f4f307f3af84310d7ed3f87c56fcf28ad8",
-        "signature": "ef53b9490f6aed5b08d1e3b42e6735cae9b7ecb809a5439235460e72848e75be",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/anymatch/index.d.ts": {
@@ -4949,7 +4944,6 @@
       "../src/db_connect/db_info.ts",
       "../src/main.ts",
       "../src/middleware/auth.ts",
-      "../src/user/password_encryption/password_encryption.ts",
       "../src/user/user.controller.ts",
       "../src/user/user.module.ts",
       "../src/user/user.service.ts"

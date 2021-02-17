@@ -8,55 +8,105 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 let db_config = require("../db_connect/db_connect");
 let conn = db_config.init();
 let g_email = "aja2467@google.com";
-let g_password = "1234";
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+let g_password = "12345";
 let UserService = class UserService {
     getUser() {
-        let bSuccess;
         let sql = "select EXISTS (select password from test.users where email='" + g_email + "') as success";
-        conn.query(sql, function (err, result) {
-            if (err) {
-                return "query is not excuted. select fail" + err;
-            }
-            else {
-                console.log(result[0]["success"]);
-                if (result[0]["success"] == 1) {
-                    console.log("있음");
-                    bSuccess = true;
-                    let sql = "select password from test.users where email='" + g_email + "'";
+        const comPw = new Promise((resolve, reject) => {
+            conn.query(sql, function (err, result) {
+                if (err) {
+                    reject(err);
                 }
-                else {
-                    console.log("없음");
+                resolve(result);
+            });
+        });
+        sql = "select password from test.users where email='" + g_email + "'";
+        comPw
+            .then(result => {
+            if (result[0]["success"] != 1) {
+                console.log("email이 없음");
+                return {
+                    getUser: false,
+                    message: "등록된 email이 아닙니다."
+                };
+            }
+            conn.query(sql, function (err, result) {
+                if (err) {
                     return {
-                        selectSuccess: false,
-                        message: "email에 대한 데이터가 없음"
+                        getUser: false,
+                        message: err
                     };
                 }
-            }
+                const match = bcrypt.compareSync(g_password, result[0]["password"]);
+                if (!match) {
+                    console.log("password가 다르다.");
+                    return {
+                        getUser: false,
+                        message: "password가 다름"
+                    };
+                }
+                console.log("token 생성해야 된다.");
+                return {
+                    getUser: true,
+                    message: "성공"
+                };
+            });
+        })
+            .catch(err => {
+            return {
+                getUser: false,
+                message: err
+            };
         });
     }
     createUser() {
-        console.log(g_password);
-        let sql = "insert into test.users value('" + g_email + "', '" + g_password + "', 'kmj', '', '', 100, 0, '" + NowTime() + "', 'kmj', '" + NowTime() + "', 'kmj')";
-        conn.query(sql, function (err) {
-            if (err) {
-                console.log("유저 생성 실패 : " + err);
-                return {
-                    createSuccess: false,
-                    message: "가입실패"
-                };
-            }
-            else {
-                console.log("유저 생성 성공");
-                return {
-                    createSuccess: true,
-                    message: "가입성공"
-                };
-            }
+        const pwEncrypt = new Promise((resolve, rejects) => {
+            bcrypt.genSalt(saltRounds, function (err, salt) {
+                if (err) {
+                    rejects(err);
+                }
+                resolve(salt);
+            });
+        });
+        pwEncrypt
+            .then((salt) => {
+            bcrypt.hash(g_password, salt, function (err, hash) {
+                if (err) {
+                    return {
+                        createSuccess: false,
+                        message: err
+                    };
+                }
+                g_password = hash;
+                let sql = "insert into test.users value('" + g_email + "', '" + g_password + "', 'kmj', '', '', 100, 0, '" + NowTime() + "', 'kmj', '" + NowTime() + "', 'kmj')";
+                conn.query(sql, function (err) {
+                    if (err) {
+                        console.log("유저 생성 실패 : " + err);
+                        return {
+                            createSuccess: false,
+                            message: "가입실패"
+                        };
+                    }
+                    else {
+                        console.log("유저 생성 성공");
+                        return {
+                            createSuccess: true,
+                            message: "가입성공"
+                        };
+                    }
+                });
+            });
+        })
+            .catch(err => {
+            return {
+                createSuccess: false,
+                message: err
+            };
         });
     }
     deleteUser() {
@@ -73,7 +123,7 @@ let UserService = class UserService {
         });
     }
     patchUser() {
-        let sql = "update test.users set name='명준' where email='" + g_email + "'";
+        let sql = "update test.users set name='명준'  where email='" + g_email + "'";
         conn.query(sql, function (err) {
             if (err) {
                 console.log("유저 수정 실패 : " + err);
