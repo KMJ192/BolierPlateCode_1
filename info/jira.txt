@@ -1,0 +1,2 @@
+jira my page URL
+https://myeongjun222.atlassian.net/secure/BrowseProjects.jspa?selectedProjectType=software

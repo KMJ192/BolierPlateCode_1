@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 
 @Controller('/user')
@@ -6,21 +6,21 @@ export class UserController {
     constructor(private readonly userService : UserService){}
     
     //조회
-    @Get("/get_user")
-    getUser(){
-       return this.userService.getUser();
+    @Get("/login")
+    getUser(@Body() body : JSON){
+       return this.userService.getUser(body);  
     }
 
     //생성
     @Post("/register_user")
-    createUser(){
-        return this.userService.createUser();
+    createUser(@Body() body : JSON){
+        return this.userService.createUser(body);
     }
 
     //제거
-    @Delete("/deluser")
-    deleteUser(){
-        return this.userService.deleteUser();
+    @Delete("/delete_user")
+    deleteUser(@Body() body : JSON){
+        return this.userService.deleteUser(body);
     }
 
     //수정

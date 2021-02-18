@@ -1,6 +1,6 @@
 export declare class UserService {
-    getUser(): void;
-    createUser(): void;
-    deleteUser(): void;
+    getUser(body: JSON): void;
+    createUser(body: JSON): void;
+    deleteUser(body: JSON): void;
     patchUser(): void;
 }

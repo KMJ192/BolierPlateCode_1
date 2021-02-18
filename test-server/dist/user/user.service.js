@@ -12,11 +12,13 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 let db_config = require("../db_connect/db_connect");
 let conn = db_config.init();
-let g_email = "aja2467@google.com";
-let g_password = "12345";
+let userEmail;
+let userPassword;
 let UserService = class UserService {
-    getUser() {
-        let sql = "select EXISTS (select password from test.users where email='" + g_email + "') as success";
+    getUser(body) {
+        userEmail = body["email"];
+        userPassword = body["password"];
+        let sql = "select EXISTS (select password from test.users where email='" + userEmail + "') as success";
         const comPw = new Promise((resolve, reject) => {
             conn.query(sql, function (err, result) {
                 if (err) {
@@ -25,7 +27,7 @@ let UserService = class UserService {
                 resolve(result);
             });
         });
-        sql = "select password from test.users where email='" + g_email + "'";
+        sql = "select password from test.users where email='" + userEmail + "'";
         comPw
             .then(result => {
             if (result[0]["success"] != 1) {
@@ -42,7 +44,7 @@ let UserService = class UserService {
                         message: err
                     };
                 }
-                const match = bcrypt.compareSync(g_password, result[0]["password"]);
+                const match = bcrypt.compareSync(userPassword, result[0]["password"]);
                 if (!match) {
                     console.log("password가 다르다.");
                     return {
@@ -64,7 +66,14 @@ let UserService = class UserService {
             };
         });
     }
-    createUser() {
+    createUser(body) {
+        userEmail = body["email"];
+        userPassword = body["password"];
+        let userName = body["name"];
+        let token_exp = body["token_exp"];
+        let userRol = body["user_rol"];
+        let createdUser = body["created_at"];
+        let updatedUser = body["updated_at"];
         const pwEncrypt = new Promise((resolve, rejects) => {
             bcrypt.genSalt(saltRounds, function (err, salt) {
                 if (err) {
@@ -75,15 +84,15 @@ let UserService = class UserService {
         });
         pwEncrypt
             .then((salt) => {
-            bcrypt.hash(g_password, salt, function (err, hash) {
+            bcrypt.hash(userPassword, salt, function (err, hash) {
                 if (err) {
                     return {
                         createSuccess: false,
                         message: err
                     };
                 }
-                g_password = hash;
-                let sql = "insert into test.users value('" + g_email + "', '" + g_password + "', 'kmj', '', '', 100, 0, '" + NowTime() + "', 'kmj', '" + NowTime() + "', 'kmj')";
+                userPassword = hash;
+                let sql = "insert into test.users value('" + userEmail + "', '" + userPassword + "', '" + userName + "', '', '', " + token_exp + ", '" + userRol + "', '" + NowTime() + "', '" + createdUser + "', '" + NowTime() + "', '" + updatedUser + "')";
                 conn.query(sql, function (err) {
                     if (err) {
                         console.log("유저 생성 실패 : " + err);
@@ -109,8 +118,10 @@ let UserService = class UserService {
             };
         });
     }
-    deleteUser() {
-        let sql = "delete from test.users where email='" + g_email + "'";
+    deleteUser(body) {
+        userEmail = body["email"];
+        userPassword = body["password"];
+        let sql = "delete from test.users where email='" + userEmail + "'";
         conn.query(sql, function (err) {
             if (err) {
                 console.log("유저 삭제 실패 : " + err);
@@ -123,7 +134,9 @@ let UserService = class UserService {
         });
     }
     patchUser() {
-        let sql = "update test.users set name='명준'  where email='" + g_email + "'";
+        userEmail = "aja2467@google.com";
+        let sql = "update test.users set name='명준', updated_at='" + NowTime() + "' where email='" + userEmail + "'";
+        console.log(sql);
         conn.query(sql, function (err) {
             if (err) {
                 console.log("유저 수정 실패 : " + err);
@@ -173,6 +186,7 @@ function NowTime() {
     else {
         temp = temp + ":" + String(dateTime.getSeconds());
     }
+    temp = temp + ":" + String(dateTime.getMilliseconds());
     return temp;
 }
 //# sourceMappingURL=user.service.js.map

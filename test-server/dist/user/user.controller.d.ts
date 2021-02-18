@@ -2,8 +2,8 @@ import { UserService } from './user.service';
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
-    getUser(): void;
-    createUser(): void;
-    deleteUser(): void;
+    getUser(body: JSON): void;
+    createUser(body: JSON): void;
+    deleteUser(body: JSON): void;
     patchUser(): void;
 }

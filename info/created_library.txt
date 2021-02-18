@@ -1,0 +1,9 @@
+//mysql 연동시 필요한 라이브러리
+npm install mysql
+
+
+
+//jwt 생성시 필요한 라이브러리
+npm install --save @nestjs/passport passport passport-local
+npm install --save-dev @types/passport-local
+npm install @nestjs/jwt --save
