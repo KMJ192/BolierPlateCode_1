@@ -1187,13 +1187,13 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
-        "version": "809d288b44d9bd8416d9a78a587eb357a1b23c3579d8311126ff3bdf7e8f7f45",
-        "signature": "f653d578242b0a760681f2ce6cddea7ffd490a6e3c9db9351ee6b16ba457329a",
+        "version": "d679ae601885ffd092c58e4a101ed7cc89c569fd9316dbed7f22e1ffb4d6edaa",
+        "signature": "79af8eca1546f042ec0fa4eda42308880a8b50fe921f2ababa0cf0e523b99a97",
         "affectsGlobalScope": false
       },
       "../src/user/user.controller.ts": {
-        "version": "5d03d6d947254b3dabe66cbdcff30c34530d3e8ec7a265185421eeab0cd20e06",
-        "signature": "6a30e3c5aa8317707bed0cb713220d94f2e6003804aa42898b5f864259596fc7",
+        "version": "d33d250b4b6fb2eb0cfda8f60b7172b46ec51f12dbee52c01363a87771326f65",
+        "signature": "431edd776c016264a0501df4cf978d0d92c3f2d8a84ea255ec8c33a09693cedd",
         "affectsGlobalScope": false
       },
       "../src/user/user.module.ts": {
@@ -3384,6 +3384,7 @@
       ],
       "../src/user/user.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/rxjs/index.d.ts",
         "../src/user/user.service.ts"
       ],
       "../src/user/user.module.ts": [

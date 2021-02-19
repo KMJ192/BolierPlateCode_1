@@ -1,173 +1,95 @@
 import { Injectable } from '@nestjs/common';
 
-const bcrypt = require('bcrypt');
-const saltRounds : number= 10;
-//const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
 
 let db_config = require("../db_connect/db_connect");
 let conn = db_config.init();
-
-//test를 위해 임시로 Global email, password를 설정해놓음
-let userEmail : string;
-let userPassword : string;
 
 //비동기처리가 되어있어서 그런것 같은데 DB연결이 완료된 다음 return하도록 하게 방법을 찾아야 된다.
 //function을 return 시키는 방법 찾아봐야 될듯
 @Injectable()
 export class UserService {
-    
-    getUser(body : JSON){
-        userEmail = body["email"];
-        userPassword = body["password"];
-        //1. 입력받은 이메일이 있는지 확인
-        let sql : string = "select EXISTS (select password from test.users where email='" + userEmail + "') as success";
-        const comPw = new Promise((resolve, reject) => {
-            conn.query(sql, function(err : string, result){
-                if(err){
-                    reject(err);
-                }
-                resolve(result);
-            });
-        });
-
-        //2. 입력받은 email이 있는 경우, 해당 Email에 대하여 Password 비교
-        sql = "select password from test.users where email='" + userEmail + "'";
-        comPw
-            .then(result => {
-                if(result[0]["success"] != 1) {
-                    console.log("email이 없음");
-                    return {
-                        getUser : false, 
-                        message : "등록된 email이 아닙니다."
-                    };
-                }
-                //입력받은 email이 있음
-                    conn.query(sql, function(err : string, result) {
-                        if(err){
-                            return {
-                                getUser : false, 
-                                message : err
-                            }
-                        }
-                        const match : boolean = bcrypt.compareSync(userPassword, result[0]["password"]);
-                        if(!match){
-                            //password와 email모두 비교 완료
-                            console.log("password가 다르다.");
-                            return {
-                                getUser : false,
-                                message : "password가 다름"
-                            };
-                        }
-                        //3. email에 대한 password가 있을 경우 token 생성
-                        //토큰 생성하기위해 email과 생성 시간을 조합하여 token 생성
-                        console.log("token 생성해야 된다.");
-                        
-                        return {
-                            getUser : true,
-                            message : "성공"
-                        };
-                    });
-                })
-                .catch(err => {
-                    return {
-                        getUser : false,
-                        message : err
-                    }
-                });
+    //User login
+    async getUser(body : JSON){
+        let resultMsg : string;
+        let sFlag : boolean = false;
+        //1. 입력받은 email의 존재 유무 파악
+        let sql : string = "select EXISTS (select password from test.users where email='" + body["email"] + "') as success";
+        const emailExists = await SQLQueryRun(sql);
+        if(emailExists[0]["success"]== 1){
+            //2. password 일치여부 파악
+            sql = "select password from test.users where email='" + body["email"] + "'";
+            const dbPw = await SQLQueryRun(sql);
+            const match = await bcrypt.compareSync(body["password"], dbPw[0]["password"]);
+            if(match){
+                //3. token 생성
+                sFlag = true;
+                resultMsg = "token생성하기"
+            }else{
+                resultMsg = "Different pw";
+            }
+        }else{
+            resultMsg = "Dose not exist email";
+        }
+        return {
+            login : sFlag,
+            message : resultMsg
+        };
     }
     
-    createUser(body : JSON){
-        //email, password, name, user_image, token, token_exp, user_rol, created_at, created_by, updated_at, updated_by
-        userEmail = body["email"];
-        userPassword = body["password"];
-
-        let userName : string = body["name"];
-        //userImage nullable
-        //token nullable
-        let token_exp : string = body["token_exp"];
-        let userRol : string = body["user_rol"];
-        let createdUser : string = body["created_at"];
-        let updatedUser : string = body["updated_at"];
-        //=받은 password를 암호화=
-        //1. salt 생성
-        const pwEncrypt = new Promise((resolve, rejects) =>{
-            bcrypt.genSalt(saltRounds, function(err : string, salt){
-                if(err) {
-                    rejects(err);
-                }
-                resolve(salt);
-            });  
-        });
-
-        //2. hash 생성
-        pwEncrypt
-            .then((salt) => {
-                bcrypt.hash(userPassword, salt, function(err : string, hash){
-                    if(err){
-                        return {
-                            createSuccess : false,
-                            message : err
-                        }
-                    }
-                    //생성된 hash값 password로 입력
-                    userPassword = hash;
-                    let sql : string = "insert into test.users value('" + userEmail + "', '" + userPassword + "', '" + userName+ "', '', '', " + token_exp + ", '" + userRol + "', '" + NowTime() + "', '" + createdUser + "', '" + NowTime() + "', '" + updatedUser + "')";
-                    conn.query(sql, function(err: string){
-                        if(err){
-                            console.log("유저 생성 실패 : " + err);
-                            return {
-                                createSuccess : false,
-                                message : "가입실패"
-                            }
-                        }else{
-                            console.log("유저 생성 성공");
-                            return {
-                                createSuccess : true,
-                                message : "가입성공"
-                            }
-                        }});
-                    });
-                })
-                .catch(err => {
-                    return {
-                        createSuccess : false,
-                        message : err
-                    }
-                });
+    //User 가입
+    async createUser(userData : JSON){
+        //1. 입력받은 email이 DB에 있는지 파악
+        let sql : string = "select EXISTS (select password from test.users where email='" + userData["email"] + "') as success";
+        const emailExists = await SQLQueryRun(sql);
+        if(emailExists[0]["success"] == 0){
+            //2. 입력받은 email이 DB에 없을 경우 DB에 Input
+            //encryption password => parameter plain password, SaltRound
+            const hashedPassword = await bcrypt.hash(userData["password"], 10);
+            sql = "insert into test.users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" + userData["user_image"] + "', '', " + userData["token_exp"] + ", '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
+            return SQLQueryRun(sql);
+        }else{
+            //3. 입력받은 email이 있을 경우 결과 발송
+            return {
+                registerd : false,
+                message : "중복된 이메일"
+            }
+        }
     }
 
-    deleteUser(body : JSON){
-        userEmail = body["email"];
-        userPassword = body["password"];
-
+    //User 삭제
+    async deleteUser(body : JSON){
         //삭제 query
-        let sql : string = "delete from test.users where email='" + userEmail + "'";
-        conn.query(sql, function(err: string){
-            if(err){
-                console.log("유저 삭제 실패 : " + err);
-                return "유저 삭제 실패 : " + err;
-            }else{
-                console.log("유저 삭제 성공");
-                return "User deleted completed";
-            }
-        });
+        let sql : string = "delete from test.users where email='" + body["email"] + "'";
+        const result = await SQLQueryRun(sql);
+        return result;
     }
 
-    patchUser(){
+    //User 내용수정
+    async patchUser(body : JSON){
         //수정 query 작성 
-        userEmail = "aja2467@google.com"; 
-        let sql : string = "update test.users set name='명준', updated_at='" + NowTime() + "' where email='" + userEmail + "'";
-        console.log(sql);
-        conn.query(sql, function(err: string){
-            if(err){
-                console.log("유저 수정 실패 : " + err);
-                return "유저 수정 실패 : " + err;
-            }else{
-                console.log("유저 수정 성공");
-                return "User patched completed";
-            }
-        });
+        let sql : string = "update test.users set name='" + body["name"] + "', updated_at='" + NowTime() + "' where email='" + body["email"] + "'";
+        const result = await SQLQueryRun(sql);
+        return result;
     }
+    
+    //테스트용 Method
+    async dbTest(userData : JSON){
+        //여기에 return logic 작성
+        return userData;
+    }
+}
+
+//SQL Query 실행
+function SQLQueryRun(sql : string) {
+    return new Promise((resolve, reject) => {
+        conn.query(sql, function(err, result){
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
 }
 
 function NowTime() : string{
@@ -189,9 +111,9 @@ function NowTime() : string{
 
     //hour 길이
     if(String(dateTime.getHours()).length == 1){
-        temp = temp + "  0" + String(dateTime.getHours());
+        temp = temp + " 0" + String(dateTime.getHours());
     }else{
-        temp = temp + "  " + String(dateTime.getHours());
+        temp = temp + " " + String(dateTime.getHours());
     }
 
     //minute 길이

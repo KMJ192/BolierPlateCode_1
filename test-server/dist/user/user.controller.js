@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
+const bcrypt = require("bcrypt");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -28,8 +29,11 @@ let UserController = class UserController {
     deleteUser(body) {
         return this.userService.deleteUser(body);
     }
-    patchUser() {
-        return this.userService.patchUser();
+    patchUser(body) {
+        return this.userService.patchUser(body);
+    }
+    dbTest(body) {
+        return this.userService.dbTest(body);
     }
 };
 __decorate([
@@ -55,10 +59,18 @@ __decorate([
 ], UserController.prototype, "deleteUser", null);
 __decorate([
     common_1.Patch("/patch_user"),
+    __param(0, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "patchUser", null);
+__decorate([
+    common_1.Get("/test"),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "dbTest", null);
 UserController = __decorate([
     common_1.Controller('/user'),
     __metadata("design:paramtypes", [user_service_1.UserService])

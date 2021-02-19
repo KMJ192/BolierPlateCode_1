@@ -1,5 +1,8 @@
 import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import { VirtualTimeScheduler } from 'rxjs';
 import { UserService } from './user.service';
+
+const bcrypt = require("bcrypt");
 
 @Controller('/user')
 export class UserController {
@@ -25,7 +28,13 @@ export class UserController {
 
     //수정
     @Patch("/patch_user")
-    patchUser(){
-        return this.userService.patchUser();
+    patchUser(@Body() body : JSON){
+        return this.userService.patchUser(body);
+    }
+
+    //테스트
+    @Get("/test")
+    dbTest(@Body() body : JSON){
+        return this.userService.dbTest(body);
     }
 }
