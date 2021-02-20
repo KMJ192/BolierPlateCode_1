@@ -68,12 +68,12 @@ export class UserService {
 
     //User Verify
     async ConfirmUser(request : Request){
-        const cookie = request.cookies['jwt'];
-        return await this.jwtService.verifyAsync(cookie);
+        const cookie = await request.cookies['jwt'];
+        return this.jwtService.verifyAsync(cookie);
     }
 
     //Logout
-    async Logout(response : Response){
+    Logout(response : Response){
         response.clearCookie('jwt')
         return {
             message : "success"
