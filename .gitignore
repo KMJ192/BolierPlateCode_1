@@ -8,8 +8,6 @@ server/node_modules
 
 # test-server
 test-server/node_modules
-test-server/src/db_connect/db_info
-test-server/src/user/constance.ts
 
 # test-client
 test-client
