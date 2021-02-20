@@ -22,16 +22,15 @@ let UserController = class UserController {
     }
     Login(email, password, response) {
         return this.userService.Login(email, password, response);
-        ;
-    }
-    ConfirmUser(request) {
-        return this.userService.ConfirmUser(request);
     }
     logout(response) {
         return this.userService.Logout(response);
     }
+    ConfirmUser(request) {
+        return this.userService.ConfirmUser(request);
+    }
     createUser(body) {
-        return this.userService.RegisteUser(body);
+        return this.userService.RegisterUser(body);
     }
     deleteUser(body) {
         return this.userService.DeleteUser(body);
@@ -54,20 +53,20 @@ __decorate([
 ], UserController.prototype, "Login", null);
 __decorate([
     common_1.UseGuards(user_guard_1.UserGuard),
-    common_1.Get("/email=:email"),
-    __param(0, common_1.Req()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], UserController.prototype, "ConfirmUser", null);
-__decorate([
-    common_1.UseGuards(user_guard_1.UserGuard),
     common_1.Post('/logout'),
     __param(0, common_1.Res({ passthrough: true })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "logout", null);
+__decorate([
+    common_1.UseGuards(user_guard_1.UserGuard),
+    common_1.Get("/email=:email"),
+    __param(0, common_1.Req()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "ConfirmUser", null);
 __decorate([
     common_1.Post("/register_user"),
     __param(0, common_1.Body()),
@@ -76,6 +75,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "createUser", null);
 __decorate([
+    common_1.UseGuards(user_guard_1.UserGuard),
     common_1.Delete("/delete_user"),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -83,6 +83,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "deleteUser", null);
 __decorate([
+    common_1.UseGuards(user_guard_1.UserGuard),
     common_1.Patch("/patch_user"),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),

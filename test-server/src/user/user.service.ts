@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
+import { switching } from '../switch/switch';
 
 const bcrypt = require("bcrypt");
 
-let db_config = require("../db_connect/db_connect");
+let db_config = require("../database/db_connect");
 let conn = db_config.init();
 
 @Injectable()
@@ -12,14 +13,14 @@ export class UserService {
     constructor(private jwtService : JwtService){}
     
     //User SignUp
-    async RegisteUser(userData : JSON){
+    async RegisterUser(userData : JSON){
         //1. 입력받은 email이 DB에 있는지 파악
-        let sql : string = "select EXISTS (select password from test.users where email='" + userData["email"] + "') as success";
+        let sql : string = "select EXISTS (select password from " + switching + ".users where email='" + userData["email"] + "') as success";
         const emailExists = await SQLQueryRun(sql);
         if(emailExists[0]["success"] == 0){
             //2. 입력받은 email이 DB에 없을 경우 DB에 Input -> encryption password => parameter plain password, SaltRound
             const hashedPassword = await bcrypt.hash(userData["password"], 10);
-            sql = "insert into test.users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" + userData["user_image"] + "', '', " + userData["token_exp"] + ", '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
+            sql = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" + userData["user_image"] + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
             return SQLQueryRun(sql);
         }else{
             //3. 입력받은 email이 있을 경우 결과 발송
@@ -35,12 +36,12 @@ export class UserService {
         let resultMsg : string;
         let sFlag : boolean = false;
         //1. 입력받은 email의 존재 유무 파악
-        let sql : string = "select EXISTS (select password from test.users where email='" + email + "') as success";
+        let sql : string = "select EXISTS (select password from " + switching + ".users where email='" + email + "') as success";
         const emailExists = await SQLQueryRun(sql);
 
         if(emailExists[0]["success"]== 1){
             //2. password 일치여부 파악
-            sql = "select password from test.users where email='" + email + "'";
+            sql = "select password from " + switching + ".users where email='" + email + "'";
             const dbPw = await SQLQueryRun(sql);
             const match = await bcrypt.compareSync(password, dbPw[0]["password"]);
             if(match){
@@ -83,7 +84,7 @@ export class UserService {
     //User delete
     async DeleteUser(body : JSON){
         //삭제 query
-        let sql : string = "delete from test.users where email='" + body["email"] + "'";
+        let sql : string = "delete from " + switching + ".users where email='" + body["email"] + "'";
         const result = await SQLQueryRun(sql);
         return result;
     }
@@ -91,7 +92,7 @@ export class UserService {
     //User patch
     async PatchUser(body : JSON){
         //수정 query 작성
-        let sql : string = "update test.users set name='" + body["name"] + "', updated_at='" + NowTime() + "' where email='" + body["email"] + "'";
+        let sql : string = "update " + switching + ".users set name='" + body["name"] + "', updated_at='" + NowTime() + "' where email='" + body["email"] + "'";
         const result = await SQLQueryRun(sql);
         return result;
     }

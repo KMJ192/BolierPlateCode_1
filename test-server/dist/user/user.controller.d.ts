@@ -7,10 +7,10 @@ export declare class UserController {
         login: boolean;
         message: string;
     }>;
-    ConfirmUser(request: Request): Promise<any>;
-    logout(response: Response): Promise<{
+    logout(response: Response): {
         message: string;
-    }>;
+    };
+    ConfirmUser(request: Request): Promise<any>;
     createUser(body: JSON): Promise<unknown>;
     deleteUser(body: JSON): Promise<unknown>;
     patchUser(body: JSON): Promise<unknown>;

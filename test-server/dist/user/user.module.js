@@ -16,10 +16,12 @@ let UserModule = class UserModule {
 };
 UserModule = __decorate([
     common_1.Module({
-        imports: [jwt_1.JwtModule.register({
+        imports: [
+            jwt_1.JwtModule.register({
                 secret: constance_1.jwtConstants.secret,
                 signOptions: { expiresIn: "1h" }
-            })],
+            })
+        ],
         controllers: [user_controller_1.UserController],
         providers: [user_service_1.UserService]
     })

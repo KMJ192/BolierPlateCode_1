@@ -34,7 +34,7 @@ export class UserController {
     //User SignUp
     @Post("/register_user")
     createUser(@Body() body : JSON){
-        return this.userService.RegisteUser(body);
+        return this.userService.RegisterUser(body);
     }
 
     //User delete
