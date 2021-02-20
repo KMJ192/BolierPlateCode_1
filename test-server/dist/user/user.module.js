@@ -10,11 +10,16 @@ exports.UserModule = void 0;
 const common_1 = require("@nestjs/common");
 const user_controller_1 = require("./user.controller");
 const user_service_1 = require("./user.service");
+const jwt_1 = require("@nestjs/jwt");
+const constance_1 = require("./constance");
 let UserModule = class UserModule {
 };
 UserModule = __decorate([
     common_1.Module({
-        imports: [],
+        imports: [jwt_1.JwtModule.register({
+                secret: constance_1.jwtConstants.secret,
+                signOptions: { expiresIn: "1h" }
+            })],
         controllers: [user_controller_1.UserController],
         providers: [user_service_1.UserService]
     })

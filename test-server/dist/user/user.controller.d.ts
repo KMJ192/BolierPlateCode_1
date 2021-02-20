@@ -1,9 +1,14 @@
 import { UserService } from './user.service';
+import { Response, Request } from 'express';
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
-    getUser(body: JSON): Promise<{
+    Login(email: string, password: string, response: Response): Promise<{
         login: boolean;
+        message: string;
+    }>;
+    ConfirmUser(request: Request): Promise<any>;
+    logout(response: Response): Promise<{
         message: string;
     }>;
     createUser(body: JSON): Promise<unknown>;

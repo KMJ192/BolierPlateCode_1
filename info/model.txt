@@ -1,0 +1,7 @@
+user model
+
+//module, service, controller, guard
+nest g mo user
+nest g s user
+nest g co user
+nest g gu user/user

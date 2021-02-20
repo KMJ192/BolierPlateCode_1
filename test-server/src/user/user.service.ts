@@ -1,50 +1,23 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { Response, Request } from 'express';
 
 const bcrypt = require("bcrypt");
 
 let db_config = require("../db_connect/db_connect");
 let conn = db_config.init();
 
-//비동기처리가 되어있어서 그런것 같은데 DB연결이 완료된 다음 return하도록 하게 방법을 찾아야 된다.
-//function을 return 시키는 방법 찾아봐야 될듯
 @Injectable()
 export class UserService {
-    //User login
-    async getUser(body : JSON){
-        let resultMsg : string;
-        let sFlag : boolean = false;
-        //1. 입력받은 email의 존재 유무 파악
-        let sql : string = "select EXISTS (select password from test.users where email='" + body["email"] + "') as success";
-        const emailExists = await SQLQueryRun(sql);
-        if(emailExists[0]["success"]== 1){
-            //2. password 일치여부 파악
-            sql = "select password from test.users where email='" + body["email"] + "'";
-            const dbPw = await SQLQueryRun(sql);
-            const match = await bcrypt.compareSync(body["password"], dbPw[0]["password"]);
-            if(match){
-                //3. token 생성
-                sFlag = true;
-                resultMsg = "token생성하기"
-            }else{
-                resultMsg = "Different pw";
-            }
-        }else{
-            resultMsg = "Dose not exist email";
-        }
-        return {
-            login : sFlag,
-            message : resultMsg
-        };
-    }
+    constructor(private jwtService : JwtService){}
     
-    //User 가입
-    async createUser(userData : JSON){
+    //User Login
+    async RegisteUser(userData : JSON){
         //1. 입력받은 email이 DB에 있는지 파악
         let sql : string = "select EXISTS (select password from test.users where email='" + userData["email"] + "') as success";
         const emailExists = await SQLQueryRun(sql);
         if(emailExists[0]["success"] == 0){
-            //2. 입력받은 email이 DB에 없을 경우 DB에 Input
-            //encryption password => parameter plain password, SaltRound
+            //2. 입력받은 email이 DB에 없을 경우 DB에 Input -> encryption password => parameter plain password, SaltRound
             const hashedPassword = await bcrypt.hash(userData["password"], 10);
             sql = "insert into test.users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" + userData["user_image"] + "', '', " + userData["token_exp"] + ", '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
             return SQLQueryRun(sql);
@@ -52,22 +25,72 @@ export class UserService {
             //3. 입력받은 email이 있을 경우 결과 발송
             return {
                 registerd : false,
-                message : "중복된 이메일"
-            }
+                message : "Duplicated email"
+            };
         }
     }
 
-    //User 삭제
-    async deleteUser(body : JSON){
+    //User SignUp
+    async Login(email : string, password : string, response : Response){
+        let resultMsg : string;
+        let sFlag : boolean = false;
+        //1. 입력받은 email의 존재 유무 파악
+        let sql : string = "select EXISTS (select password from test.users where email='" + email + "') as success";
+        const emailExists = await SQLQueryRun(sql);
+
+        if(emailExists[0]["success"]== 1){
+            //2. password 일치여부 파악
+            sql = "select password from test.users where email='" + email + "'";
+            const dbPw = await SQLQueryRun(sql);
+            const match = await bcrypt.compareSync(password, dbPw[0]["password"]);
+            if(match){
+                //password까지 일치할 경우 token 생성 및 로그인 완료
+                //Json Web Token을 이용하여 token 생성
+                const jwt = await this.jwtService.signAsync({
+                    id : email
+                });
+                response.cookie('jwt', jwt, {httpOnly : true});
+
+                sFlag = true;
+                resultMsg = "login success"
+            }else{
+                resultMsg = "Different pw";
+            }
+        }else{
+            resultMsg = "Dose not exist email";
+        }
+        
+        return {
+            login : sFlag,
+            message : resultMsg
+        };
+    }
+
+    //User Verify
+    async ConfirmUser(request : Request){
+        const cookie = request.cookies['jwt'];
+        return await this.jwtService.verifyAsync(cookie);
+    }
+
+    //User Logout
+    async Logout(response : Response){
+        response.clearCookie('jwt')
+        return {
+            message : "success"
+        };
+    }
+
+    //User delete
+    async DeleteUser(body : JSON){
         //삭제 query
         let sql : string = "delete from test.users where email='" + body["email"] + "'";
         const result = await SQLQueryRun(sql);
         return result;
     }
 
-    //User 내용수정
-    async patchUser(body : JSON){
-        //수정 query 작성 
+    //User patch
+    async PatchUser(body : JSON){
+        //수정 query 작성
         let sql : string = "update test.users set name='" + body["name"] + "', updated_at='" + NowTime() + "' where email='" + body["email"] + "'";
         const result = await SQLQueryRun(sql);
         return result;

@@ -15,34 +15,59 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
-const bcrypt = require("bcrypt");
+const user_guard_1 = require("./user.guard");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
-    getUser(body) {
-        return this.userService.getUser(body);
+    Login(email, password, response) {
+        return this.userService.Login(email, password, response);
+        ;
+    }
+    ConfirmUser(request) {
+        return this.userService.ConfirmUser(request);
+    }
+    logout(response) {
+        return this.userService.Logout(response);
     }
     createUser(body) {
-        return this.userService.createUser(body);
+        return this.userService.RegisteUser(body);
     }
     deleteUser(body) {
-        return this.userService.deleteUser(body);
+        return this.userService.DeleteUser(body);
     }
     patchUser(body) {
-        return this.userService.patchUser(body);
+        return this.userService.PatchUser(body);
     }
     dbTest(body) {
         return this.userService.dbTest(body);
     }
 };
 __decorate([
-    common_1.Get("/login"),
-    __param(0, common_1.Body()),
+    common_1.Post("/login"),
+    __param(0, common_1.Body('email')),
+    __param(1, common_1.Body('password')),
+    __param(2, common_1.Res({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "Login", null);
+__decorate([
+    common_1.UseGuards(user_guard_1.UserGuard),
+    common_1.Get("/email=:email"),
+    __param(0, common_1.Req()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], UserController.prototype, "getUser", null);
+], UserController.prototype, "ConfirmUser", null);
+__decorate([
+    common_1.UseGuards(user_guard_1.UserGuard),
+    common_1.Post('/logout'),
+    __param(0, common_1.Res({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "logout", null);
 __decorate([
     common_1.Post("/register_user"),
     __param(0, common_1.Body()),
