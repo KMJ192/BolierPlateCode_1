@@ -7,43 +7,45 @@ import { UserGuard } from './user.guard';
 export class UserController {
     constructor(private readonly userService : UserService){}
     
-    //로그인
+    //Login
     @Post("/login")
     Login(
         @Body('email') email : string, 
         @Body('password') password: string, 
         @Res({passthrough : true}) response : Response
     ){
-        return this.userService.Login(email, password, response);;
+        return this.userService.Login(email, password, response);
     }
 
+    //Logout
     //Guard => 토큰을 확인하여 토큰이 없을경우(로그인을 하지않았거나, 토큰이 만료되었을 경우 접근을 제한한다.)
-    @UseGuards(UserGuard)
-    @Get("/email=:email")
-    ConfirmUser(@Req() request : Request){        
-        return this.userService.ConfirmUser(request);
-    }
-
-    //쿠키 삭제 -> logout
     @UseGuards(UserGuard)
     @Post('/logout')
     logout(@Res({passthrough : true}) response : Response){
         return this.userService.Logout(response);
     }
 
-    //회원가입
+    @UseGuards(UserGuard)
+    @Get("/email=:email")
+    ConfirmUser(@Req() request : Request){        
+        return this.userService.ConfirmUser(request);
+    }
+
+    //User SignUp
     @Post("/register_user")
     createUser(@Body() body : JSON){
         return this.userService.RegisteUser(body);
     }
 
-    //회원삭제
+    //User delete
+    @UseGuards(UserGuard)
     @Delete("/delete_user")
     deleteUser(@Body() body : JSON){
         return this.userService.DeleteUser(body);
     }
 
-    //수정
+    //User patch
+    @UseGuards(UserGuard)
     @Patch("/patch_user")
     patchUser(@Body() body : JSON){
         return this.userService.PatchUser(body);

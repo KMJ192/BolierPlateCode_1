@@ -11,7 +11,7 @@ let conn = db_config.init();
 export class UserService {
     constructor(private jwtService : JwtService){}
     
-    //User Login
+    //User SignUp
     async RegisteUser(userData : JSON){
         //1. 입력받은 email이 DB에 있는지 파악
         let sql : string = "select EXISTS (select password from test.users where email='" + userData["email"] + "') as success";
@@ -30,7 +30,7 @@ export class UserService {
         }
     }
 
-    //User SignUp
+    //User Login
     async Login(email : string, password : string, response : Response){
         let resultMsg : string;
         let sFlag : boolean = false;
@@ -72,7 +72,7 @@ export class UserService {
         return await this.jwtService.verifyAsync(cookie);
     }
 
-    //User Logout
+    //Logout
     async Logout(response : Response){
         response.clearCookie('jwt')
         return {
