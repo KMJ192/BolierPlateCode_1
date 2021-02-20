@@ -6,10 +6,12 @@ import { jwtConstants } from './constance'
 
 
 @Module({
-  imports : [JwtModule.register({
-    secret : jwtConstants.secret,
-    signOptions : {expiresIn : "1h"}
-  })],
+  imports : [
+      JwtModule.register({
+      secret : jwtConstants.secret,
+      signOptions : {expiresIn : "1h"}
+    })
+  ],
   controllers: [UserController],
   providers: [UserService]
 })
