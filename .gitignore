@@ -5,9 +5,8 @@
 # operator-server
 server/node_modules
 
-
 # test-server
 test-server/node_modules
 
 # test-client
-test-client
+test-client/node_modules

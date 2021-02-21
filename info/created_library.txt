@@ -1,6 +1,19 @@
+ Front-End
+ ---- React ----
+//React프로젝트 생성(typescript용)
+npx create-react-app client
+    //npx --ignore-existing create-react-app test-client --template typescript // ---→ typescript 버전 react 설치인데 현재 정보가 없으므로 javascript로 개발할것.
+
+//router-dom 설치
+npm install react-router-dom
+
+
+Back-End
+ ---- Nestjs ----
+//Nestjs 프로젝트 생성
+nest new server
 //mysql 연동시 필요한 라이브러리
 npm install mysql
-
 
 //jwt 생성시 필요한 라이브러리
 npm install --save @nestjs/passport passport passport-local
