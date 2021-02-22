@@ -10,3 +10,6 @@ test-server/node_modules
 
 # test-client
 test-client/node_modules
+
+# test-client2
+test-client2/node_modules
