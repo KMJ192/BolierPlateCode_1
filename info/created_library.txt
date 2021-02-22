@@ -1,4 +1,4 @@
- Front-End
+    ####################### Front-End #######################
  ---- React ----
 //React프로젝트 생성(typescript용)
 npx create-react-app client
@@ -7,8 +7,14 @@ npx create-react-app client
 //router-dom 설치
 npm install react-router-dom
 
+//server와 http 통신을 위한 axios 라이브러리
+npm install axios --save
+npm install http-proxy-middleware --save
 
-Back-End
+
+
+
+    ####################### Back-End #######################
  ---- Nestjs ----
 //Nestjs 프로젝트 생성
 nest new server

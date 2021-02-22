@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
 import { switching } from '../switch/switch';
@@ -97,11 +97,6 @@ export class UserService {
         return result;
     }
     
-    //테스트용 Method
-    async dbTest(userData : JSON){
-        //여기에 return logic 작성
-        return userData;
-    }
 }
 
 //SQL Query 실행

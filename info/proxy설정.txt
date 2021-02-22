@@ -1,0 +1,20 @@
+ - 다른 port를 가지고 있는 서버는 CORS 정책에 의해 
+아무런 설정없이 server-client 통신(Request, Response)이 불가함. (보안 설정)
+
+ - CORS(Cross-Origin Resource Sharing)
+다른 포트를 가지고 있는 서버는 아무런 설정없이 Request를 보낼 수 없다.
+
+proxy를 사용하여 해결하기
+//라이브러리 설치 -> npm install http-proxy-middleware --save
+
+//setUpProxy.js 파일 설정
+const { createProxyMiddleware } = require('http-proxy-middleware');
+module.exports = function(app) {
+  app.use(
+    '/api',
+    createProxyMiddleware({
+      target: 'http://localhost:8080', //서버에 대한 포트
+      changeOrigin: true
+    })
+  );
+};

@@ -20,7 +20,7 @@ export class UserController {
     //Logout
     //Guard => 토큰을 확인하여 토큰이 없을경우(로그인을 하지않았거나, 토큰이 만료되었을 경우 접근을 제한한다.)
     @UseGuards(UserGuard)
-    @Post('/logout')
+    @Post("/logout")
     logout(@Res({passthrough : true}) response : Response){
         return this.userService.Logout(response);
     }
@@ -51,9 +51,4 @@ export class UserController {
         return this.userService.PatchUser(body);
     }
 
-    //테스트
-    @Get("/test")
-    dbTest(@Body() body : JSON){
-        return this.userService.dbTest(body);
-    }
 }

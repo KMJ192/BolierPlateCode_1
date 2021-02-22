@@ -9,15 +9,9 @@ function App() {
     <Router>
       <div>
         <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <Route exact path="/login">
-            <LoginPage/>
-          </Route>
-          <Route exact path="/register">
-            <RegisterPage/>
-          </Route>
+          <Route exact path="/" component={LandingPage}/>
+          <Route exact path="/login" component={LoginPage}/>
+          <Route exact path="/register" component={RegisterPage}/>
         </Switch>
       </div>
     </Router>

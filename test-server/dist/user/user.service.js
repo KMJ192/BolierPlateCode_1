@@ -84,9 +84,6 @@ let UserService = class UserService {
         const result = await SQLQueryRun(sql);
         return result;
     }
-    async dbTest(userData) {
-        return userData;
-    }
 };
 UserService = __decorate([
     common_1.Injectable(),

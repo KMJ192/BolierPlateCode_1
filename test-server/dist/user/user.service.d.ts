@@ -14,5 +14,4 @@ export declare class UserService {
     };
     DeleteUser(body: JSON): Promise<unknown>;
     PatchUser(body: JSON): Promise<unknown>;
-    dbTest(userData: JSON): Promise<JSON>;
 }

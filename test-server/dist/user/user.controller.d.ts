@@ -14,5 +14,4 @@ export declare class UserController {
     createUser(body: JSON): Promise<unknown>;
     deleteUser(body: JSON): Promise<unknown>;
     patchUser(body: JSON): Promise<unknown>;
-    dbTest(body: JSON): Promise<JSON>;
 }

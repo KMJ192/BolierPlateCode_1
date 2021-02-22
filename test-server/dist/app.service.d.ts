@@ -1,3 +1,4 @@
+import { Response, Request } from 'express';
 export declare class AppService {
-    getMainPage(): string;
+    getMainPage(response: Response, request: Request): string;
 }

@@ -38,9 +38,6 @@ let UserController = class UserController {
     patchUser(body) {
         return this.userService.PatchUser(body);
     }
-    dbTest(body) {
-        return this.userService.dbTest(body);
-    }
 };
 __decorate([
     common_1.Post("/login"),
@@ -53,7 +50,7 @@ __decorate([
 ], UserController.prototype, "Login", null);
 __decorate([
     common_1.UseGuards(user_guard_1.UserGuard),
-    common_1.Post('/logout'),
+    common_1.Post("/logout"),
     __param(0, common_1.Res({ passthrough: true })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -90,13 +87,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "patchUser", null);
-__decorate([
-    common_1.Get("/test"),
-    __param(0, common_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], UserController.prototype, "dbTest", null);
 UserController = __decorate([
     common_1.Controller('/user'),
     __metadata("design:paramtypes", [user_service_1.UserService])
