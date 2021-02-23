@@ -8,14 +8,12 @@ export class Wrapper extends Component {
         return (
             <>
                 <NavBar/>
+                <SideBar/>
                 <div className="container-fluid">
-                    <div className="row">
-                        <SideBar/>
-                    </div>
+                    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                        {this.props.children}
+                    </main>
                 </div>
-                <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                    {this.props.children}
-                </main>
                 <Footer/>
             </>
         )
