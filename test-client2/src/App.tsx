@@ -1,21 +1,20 @@
-import React from 'react';
-import './App.css';
-import Footer from './components/views/footer/Footer';
-import NavBar from './components/views/nav_bar/NavBar';
+import React, { Component } from 'react'
+import { BrowserRouter, Route } from 'react-router-dom';
+import LandingPage from './components/views/landing_page/LandingPage';
+import LoginPage from './components/views/login_page/LoginPage';
 
-function App() {
-  return (
-    <div>
-      <div>
-        <NavBar/>
+export class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <BrowserRouter>
+          <Route path={'/'} component={LandingPage}/>
+          <Route path={'/login_page'} component={LoginPage}/>
+        </BrowserRouter>
       </div>
-      <div>
-        <Footer/>
-      </div> 
-    </div>
-      
-    
-  );
+    )
+  }
 }
 
-export default App;
+export default App
+

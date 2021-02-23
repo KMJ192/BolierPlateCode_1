@@ -1,22 +1,23 @@
-    ####################### Front-End #######################
+####################### Front-End #######################
  ---- React ----
-//React프로젝트 생성(typescript용)
+//React프로젝트 생성(javascript)
 npx create-react-app client
-    //npx --ignore-existing create-react-app test-client --template typescript // ---→ typescript 버전 react 설치인데 현재 정보가 없으므로 javascript로 개발할것.
+//React프로젝트 생성(typescript)
+npx --ignore-existing create-react-app test-client --template typescript // ---→ typescript 버전 react 설치인데 현재 정보가 없으므로 javascript로 개발할것.
+npm install --save @types/react @types/react-dom
 
 //router-dom 설치
-npm install react-router-dom
+npm install react-router-dom @types/react-router-dom
 
 //server와 http 통신을 위한 axios 라이브러리
 npm install axios --save
 npm install http-proxy-middleware --save
 
-
 //html, css
 https://getbootstrap.com/
 
 
-    ####################### Back-End #######################
+####################### Back-End #######################
  ---- Nestjs ----
 //Nestjs 프로젝트 생성
 nest new server

@@ -1,23 +1,24 @@
-import React from 'react'
+import React, { Component } from 'react';
 
-function NavBar() {
-    return (
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+export class NavBar extends Component {
+    render() {
+        return (
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">Top navbar</a>
+                <a className="navbar-brand" href="#">Logo</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
+                    <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <ul className="navbar-nav me-auto mb-2 mb-md-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
+                            <a className="nav-link" aria-current="page" href="#">상단메뉴1</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Link</a>
+                            <a className="nav-link" href="#">상단메뉴2</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link disabled" href="#" aria-disabled="true">Disabled</a>
+                            <a className="nav-link" href="#" aria-disabled="true">상단메뉴3</a>
                         </li>
                         <li className="nav-item">
                             <form className="d-flex">
@@ -27,12 +28,13 @@ function NavBar() {
                         </li>
                     </ul>
                     <form>
-                        <a href="#">Login</a>
+                        <a href="/login_page">Login</a>
                     </form>
                 </div>
             </div>
         </nav>
-    );
+        )
+    }
 }
 
 export default NavBar
