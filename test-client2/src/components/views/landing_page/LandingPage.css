@@ -1,0 +1,14 @@
+* {
+    margin: 0; 
+    padding: 0; 
+    border: 0;
+}
+
+#landing-page{
+    position: absolute;
+    background-color: aqua;
+    margin-top: 65px;
+    margin-left: 194px;
+    width : 1725px;
+    height: 850px;
+}
