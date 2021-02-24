@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Wrapper from '../../default/Wrapper';
 import './LandingPage.css';
 
-export class LandingPage extends Component {
+class LandingPage extends Component {
     render() {
         return (
             <Wrapper>

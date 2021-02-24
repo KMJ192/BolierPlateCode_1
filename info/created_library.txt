@@ -10,7 +10,7 @@ npm install --save @types/react @types/react-dom
 npm install react-router-dom @types/react-router-dom
 
 //server와 http 통신을 위한 axios 라이브러리
-npm install axios --save
+npm install axios @types/axios --save
 npm install http-proxy-middleware --save
 
 //html, css

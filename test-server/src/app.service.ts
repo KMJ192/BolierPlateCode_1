@@ -3,13 +3,8 @@ import  {Response, Request } from 'express';
 
 @Injectable()
 export class AppService {
-  getMainPage(response : Response, request : Request){
-    const tData = {
-      bo : true,
-      message : "ㄹㅇ"
-    }
-    console.log(response.send(tData));
-    //console.log(request);
+  getMainPage(body : JSON){
+    console.log(body);
     return "This will output main page";
   }
 }

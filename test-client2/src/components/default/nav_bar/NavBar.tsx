@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './rust_logo.png'
 import './NavBar.css';
 
-export class NavBar extends Component {
+class NavBar extends Component {
     render() {
         return (
             <nav>

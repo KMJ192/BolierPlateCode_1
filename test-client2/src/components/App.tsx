@@ -10,8 +10,8 @@ export class App extends Component {
       <div>
         <BrowserRouter>
               <Route path={'/'} exact component={LandingPage}/>
-              <Route path={'/register_page'} exact component={RegisterPage}/>
-              <Route path={'/login_page'} exact component={LoginPage}/>
+              <Route path={'/register_user'} exact component={RegisterPage}/>
+              <Route path={'/login_user'} exact component={LoginPage}/>
         </BrowserRouter>
       </div>
     )

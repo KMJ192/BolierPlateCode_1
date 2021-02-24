@@ -19,15 +19,15 @@ let AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
     }
-    getMainPage(response, request) {
-        return this.appService.getMainPage(response, request);
+    getMainPage(body) {
+        return this.appService.getMainPage(body);
     }
 };
 __decorate([
-    common_1.Get('/test'),
-    __param(0, common_1.Res()), __param(1, common_1.Req()),
+    common_1.Post('/test'),
+    __param(0, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getMainPage", null);
 AppController = __decorate([

@@ -9,12 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
 let AppService = class AppService {
-    getMainPage(response, request) {
-        const tData = {
-            bo: true,
-            message: "ㄹㅇ"
-        };
-        console.log(response.send(tData));
+    getMainPage(body) {
+        console.log(body);
         return "This will output main page";
     }
 };

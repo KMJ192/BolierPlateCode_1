@@ -30,6 +30,7 @@ let UserController = class UserController {
         return this.userService.ConfirmUser(request);
     }
     createUser(body) {
+        console.log(body);
         return this.userService.RegisterUser(body);
     }
     deleteUser(body) {
@@ -88,7 +89,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "patchUser", null);
 UserController = __decorate([
-    common_1.Controller('/user'),
+    common_1.Controller(),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;
