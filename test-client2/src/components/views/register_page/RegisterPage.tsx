@@ -16,7 +16,7 @@ class RegisterPage extends Component {
     submit = async (e : SyntheticEvent) => {
         //확인 버튼을 눌렀을때 페이지 새로고침(기본동작) 방지 및 데이터 전체 submit
         e.preventDefault();
-        if(this.password == this.password_confirm){
+        if(this.password === this.password_confirm){
             const response = await axios.post("/api/register_user", {
                 email : this.email,
                 password : this.password,
@@ -26,9 +26,9 @@ class RegisterPage extends Component {
                 created_by : this.name,
                 updated_by : this.name
             });
-            if(response.data["message"] == "Duplicated email"){
+            if(response.data["message"] === "Duplicated email"){
                 alert("이미 등록된 이메일 입니다.");
-            }else if(response.data["message"] == "sign up success"){
+            }else if(response.data["message"] === "sign up success"){
                 alert("등록에 성공하였습니다.");
                 this.setState({
                     redirect : true
@@ -42,9 +42,8 @@ class RegisterPage extends Component {
     }
 
     render() {
-
-        if(this.state.redirect == true){
-            return <Redirect to={'/login'} />
+        if(this.state.redirect === true){
+            return <Redirect to={'/login_user'} />
         }
 
         return (
