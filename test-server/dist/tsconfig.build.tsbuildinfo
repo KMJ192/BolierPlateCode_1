@@ -1502,8 +1502,8 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
-        "version": "0f460b52a7b1cbe6a8b5cb186e1fb8aaa68072110d1e6ebf5e07b480ce471089",
-        "signature": "8443b349ac4c54b229f2a207abaa4274c363590b5e2f8519767f4c3a39d1165a",
+        "version": "ecf8ea5b069518d13e668dfaeec443117f81eca07389a8403da0b38ef6d288d7",
+        "signature": "ecbe27d4986ea054ecf51b698a95759246428abe082f44e96fa72a7b68f7c51e",
         "affectsGlobalScope": false
       },
       "../src/user/user.guard.ts": {
@@ -1512,8 +1512,8 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.controller.ts": {
-        "version": "6e36dfd568f5cb0553b5199d60e47b1868d42da9909fe39216d78beee31868c9",
-        "signature": "85f97a53137fdd7a89a02376dc1b2e8a432e3790e948ffbe8eb8f2e0985ed63a",
+        "version": "745ddf7b729bd05a3194231565b73f1839b872935fa97b63e9c89f7e57f80838",
+        "signature": "d28387b07466ba47d53b1b25fc668780e312555e5bd5d7b7df72da17435961fd",
         "affectsGlobalScope": false
       },
       "../src/user/constance.ts": {
@@ -3376,6 +3376,7 @@
       "../src/user/user.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@types/express/index.d.ts",
+        "../node_modules/rxjs/internal/observable/connectableobservable.d.ts",
         "../src/user/user.guard.ts",
         "../src/user/user.service.ts"
       ],
@@ -3394,6 +3395,8 @@
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/jwt/index.d.ts",
         "../node_modules/@types/express/index.d.ts",
+        "../node_modules/@types/node/assert.d.ts",
+        "../node_modules/@types/node/path.d.ts",
         "../src/switch/switch.ts"
       ]
     },

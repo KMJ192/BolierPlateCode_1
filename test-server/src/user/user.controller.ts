@@ -2,8 +2,9 @@ import { Body, Controller, Delete, Get, Patch, Post, Res, Req, UseGuards } from 
 import { UserService } from './user.service';
 import { Response, Request } from 'express';
 import { UserGuard } from './user.guard';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
-@Controller()
+@Controller('')
 export class UserController {
     constructor(private readonly userService : UserService){}
     
@@ -34,7 +35,6 @@ export class UserController {
     //User SignUp
     @Post("/register_user")
     createUser(@Body() body : JSON){
-        console.log(body);
         return this.userService.RegisterUser(body);
     }
 

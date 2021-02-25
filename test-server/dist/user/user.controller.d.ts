@@ -11,7 +11,10 @@ export declare class UserController {
         message: string;
     };
     ConfirmUser(request: Request): Promise<any>;
-    createUser(body: JSON): Promise<unknown>;
+    createUser(body: JSON): Promise<{
+        registerd: boolean;
+        message: string;
+    }>;
     deleteUser(body: JSON): Promise<unknown>;
     patchUser(body: JSON): Promise<unknown>;
 }

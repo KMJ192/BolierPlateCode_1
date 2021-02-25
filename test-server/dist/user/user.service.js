@@ -21,19 +21,25 @@ let UserService = class UserService {
         this.jwtService = jwtService;
     }
     async RegisterUser(userData) {
+        let resultMsg;
+        let sFlag = false;
         let sql = "select EXISTS (select password from " + switch_1.switching + ".users where email='" + userData["email"] + "') as success";
         const emailExists = await SQLQueryRun(sql);
         if (emailExists[0]["success"] == 0) {
             const hashedPassword = await bcrypt.hash(userData["password"], 10);
             sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + userData["user_image"] + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
-            return SQLQueryRun(sql);
+            SQLQueryRun(sql);
+            sFlag = true;
+            resultMsg = "sign up success";
         }
         else {
-            return {
-                registerd: false,
-                message: "Duplicated email"
-            };
+            sFlag = false;
+            resultMsg = "Duplicated email";
         }
+        return {
+            registerd: sFlag,
+            message: resultMsg
+        };
     }
     async Login(email, password, response) {
         let resultMsg;
@@ -99,6 +105,7 @@ function SQLQueryRun(sql) {
             resolve(result);
         });
     });
+    ;
 }
 function NowTime() {
     let dateTime = new Date();

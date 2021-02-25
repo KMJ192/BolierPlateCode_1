@@ -2,18 +2,22 @@ import React, { Component, SyntheticEvent } from 'react';
 import './RegisterPage.css';
 import logo from './rust_logo.png';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class RegisterPage extends Component {
     name = "";
     email = "";
     password = "";
     password_confirm= "";
+    state = {
+        redirect : false
+    };
 
-    submit = (e : SyntheticEvent) => {
+    submit = async (e : SyntheticEvent) => {
         //확인 버튼을 눌렀을때 페이지 새로고침(기본동작) 방지 및 데이터 전체 submit
         e.preventDefault();
         if(this.password == this.password_confirm){
-            axios.post("/api/test", {
+            const response = await axios.post("/api/register_user", {
                 email : this.email,
                 password : this.password,
                 name : this.name,
@@ -21,15 +25,28 @@ class RegisterPage extends Component {
                 user_rol : 0,
                 created_by : this.name,
                 updated_by : this.name
-            }).then(res => {
-                console.log(res);
             });
+            if(response.data["message"] == "Duplicated email"){
+                alert("이미 등록된 이메일 입니다.");
+            }else if(response.data["message"] == "sign up success"){
+                alert("등록에 성공하였습니다.");
+                this.setState({
+                    redirect : true
+                })
+            }else{
+                alert("알수없는 오류가 발생하였습니다.");
+            }
         }else{
             alert("패스워드와 패스워드 확인의 내용이 다릅니다. 다시 확인해주세요.");
         }
     }
 
     render() {
+
+        if(this.state.redirect == true){
+            return <Redirect to={'/login'} />
+        }
+
         return (
             <div id="register_form">
                 <main className="form-signin">

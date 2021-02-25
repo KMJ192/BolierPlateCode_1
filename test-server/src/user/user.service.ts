@@ -1,6 +1,8 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Response, Request } from 'express';
+import { rejects } from 'assert';
+import e, { Response, Request } from 'express';
+import { resolve } from 'path';
 import { switching } from '../switch/switch';
 
 const bcrypt = require("bcrypt");
@@ -14,6 +16,8 @@ export class UserService {
     
     //User SignUp
     async RegisterUser(userData : JSON){
+        let resultMsg : string;
+        let sFlag : boolean = false;
         //1. 입력받은 email이 DB에 있는지 파악
         let sql : string = "select EXISTS (select password from " + switching + ".users where email='" + userData["email"] + "') as success";
         const emailExists = await SQLQueryRun(sql);
@@ -21,14 +25,18 @@ export class UserService {
             //2. 입력받은 email이 DB에 없을 경우 DB에 Input -> encryption password => parameter plain password, SaltRound
             const hashedPassword = await bcrypt.hash(userData["password"], 10);
             sql = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" + userData["user_image"] + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
-            return SQLQueryRun(sql);
+            SQLQueryRun(sql);
+            sFlag = true;
+            resultMsg = "sign up success"
         }else{
             //3. 입력받은 email이 있을 경우 결과 발송
-            return {
-                registerd : false,
-                message : "Duplicated email"
-            };
+            sFlag = false;
+            resultMsg = "Duplicated email";
         }
+        return {
+            registerd : sFlag,
+            message : resultMsg
+        };
     }
 
     //User Login
@@ -108,7 +116,7 @@ function SQLQueryRun(sql : string) {
             }
             resolve(result);
         });
-    });
+    });;
 }
 
 function NowTime() : string{
