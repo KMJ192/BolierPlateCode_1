@@ -20,9 +20,12 @@ class LoginPage extends Component {
                             </label>
                         </div>
                         <button className="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
-                        <a href="/register_user">
-                            회원가입
-                        </a>
+                        <form>
+                            회원가입이 필요하면 → 
+                            <a href="/register_user">
+                                회원가입 페이지
+                            </a>
+                        </form>
                     </form>
                 </main>
             </div>

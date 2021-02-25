@@ -29,8 +29,8 @@ class NavBar extends Component {
                             <button id="search-button">search</button>
                         </form>
                         <div id="user-auth-container">
-                            <a id="login-button" href="/login_page">Login</a>
-                            <a id="signup-button" href="/register_page">SignUp</a>
+                            <a id="login-button" href="/login_user">Login</a>
+                            <a id="signup-button" href="/register_user">SignUp</a>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,8 @@ let AppController = class AppController {
         this.appService = appService;
     }
     getMainPage(body) {
-        return this.appService.getMainPage(body);
+        console.log(body);
+        return body;
     }
 };
 __decorate([

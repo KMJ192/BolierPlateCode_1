@@ -1457,8 +1457,8 @@
         "affectsGlobalScope": false
       },
       "../src/app.controller.ts": {
-        "version": "4d7c22ff790a14f7cd00d693b0b3308405d8e3e8c6e04a774d03e2a672393f40",
-        "signature": "c133ec8d3ea11a01bb905fbbb537fe7cda779117543b390d5218024cd2f565e3",
+        "version": "3485037e755bee5938af3c4ed6d74bc11f86d3ec687d09df28b5c91e5c20de21",
+        "signature": "d6e4c7d6bd4f82f762a2c9f6edb31648b57fd7a2b8b2ed6aa69718f1fff24eb6",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/jsonwebtoken/index.d.ts": {

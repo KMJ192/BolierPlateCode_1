@@ -7,6 +7,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
   @Post('/test')
   getMainPage(@Body() body : JSON){
-    return this.appService.getMainPage(body);
+    console.log(body);
+    return body;
+    //return this.appService.getMainPage(body);
   }
 }
