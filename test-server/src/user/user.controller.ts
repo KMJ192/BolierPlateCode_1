@@ -2,7 +2,6 @@ import { Body, Controller, Delete, Get, Patch, Post, Res, Req, UseGuards } from 
 import { UserService } from './user.service';
 import { Response, Request } from 'express';
 import { UserGuard } from './user.guard';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Controller('')
 export class UserController {

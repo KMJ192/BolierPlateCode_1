@@ -9,9 +9,9 @@ let db_config = require("../database/db_connect");
 let conn = db_config.init();
 
 @Injectable()
-export class UserService {
+export class UserAuthService {
     constructor(private jwtService : JwtService){}
-    
+
     //User SignUp
     async RegisterUser(userData : JSON){
         let resultMsg : string;
@@ -37,7 +37,6 @@ export class UserService {
         };
     }
 
-    //User Login
     async Login(email : string, password : string, response : Response){
         let resultMsg : string;
         let sFlag : boolean = false;
@@ -66,25 +65,16 @@ export class UserService {
         }else{
             resultMsg = "None email";
         }
-        
         return {
             login : sFlag,
             message : resultMsg
         };
     }
 
-    //User Verify
+    //유저 확인
     async ConfirmUser(request : Request){
         const cookie = await request.cookies['jwt'];
         return this.jwtService.verifyAsync(cookie);
-    }
-
-    //Logout
-    Logout(response : Response){
-        response.clearCookie('jwt')
-        return {
-            message : "success"
-        };
     }
 
     //User delete
@@ -102,8 +92,16 @@ export class UserService {
         const result = await SQLQueryRun(sql);
         return result;
     }
-    
+
+    //Logout
+    Logout(response : Response){
+        response.clearCookie('jwt')
+        return {
+            message : "success"
+        };
+    }
 }
+
 
 //SQL Query 실행
 function SQLQueryRun(sql : string) {

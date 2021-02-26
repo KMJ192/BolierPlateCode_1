@@ -1452,7 +1452,7 @@
         "affectsGlobalScope": false
       },
       "../src/app.service.ts": {
-        "version": "04232cf8307aebf18c2882a8798d1e9d89fdb5771990810613b15d0309fa8c15",
+        "version": "8bd098fd7e2d056f5de5de913b70922cc681efadee1cc6965e2e0335912978e8",
         "signature": "cab0297f2bc2079066448838e886bda435175658eeabb84c7179c049569873aa",
         "affectsGlobalScope": false
       },
@@ -1502,7 +1502,7 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
-        "version": "2bb9d6991881e283f51256662f5c7901bbe20bd4233167e5ad187680d0eb87c9",
+        "version": "28bfcd6f04723e49eebf27c67a17ac2be7b3d9c710c0d0dbda39bb39d3ffe06f",
         "signature": "ecbe27d4986ea054ecf51b698a95759246428abe082f44e96fa72a7b68f7c51e",
         "affectsGlobalScope": false
       },
@@ -1512,7 +1512,7 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.controller.ts": {
-        "version": "745ddf7b729bd05a3194231565b73f1839b872935fa97b63e9c89f7e57f80838",
+        "version": "1cb1db79f052550f661afcbf888d2732b13688dfd65b354270cf4e2874aa793c",
         "signature": "d28387b07466ba47d53b1b25fc668780e312555e5bd5d7b7df72da17435961fd",
         "affectsGlobalScope": false
       },
@@ -1526,8 +1526,33 @@
         "signature": "9e36626cb39f17790cf2403e2e54d8a74542da63e2a49aba7061133a1af26dcd",
         "affectsGlobalScope": false
       },
+      "../src/user-auth/user-auth.service.ts": {
+        "version": "bd4d11eab5306a3afd503756dd340a30b58cae2857d8450726494a3f5dcc2371",
+        "signature": "6652bf19bfbe5f959bee866c33fa821a4bc253c0a054f5e23a25345fc3bddedd",
+        "affectsGlobalScope": false
+      },
+      "../src/user-auth/user-auth.guard.ts": {
+        "version": "2f30f29682b7376c2e3867be59f0396b4843d5908fdcde4a846921a988759040",
+        "signature": "2275a1bc1d37766b41ccd606240052140b2309e11bb1205bf65320b8189c5522",
+        "affectsGlobalScope": false
+      },
+      "../src/user-auth/user-auth.controller.ts": {
+        "version": "9ee082dd099a295f4d04cdbf37d1db2d0b1e3f55734ef23280e7c1f7e89fe12f",
+        "signature": "71e68a58131c38c999c55075efe6943069a2b212af740bca6bdd07f9775c1fcd",
+        "affectsGlobalScope": false
+      },
+      "../src/user-auth/constance.ts": {
+        "version": "c295d439971a652079f3dbd974fa4ce479956135ab220aca77766fdcacbc5f0b",
+        "signature": "541603c0913bf3791cdca6f10c3bcd0042e5858974e191e345bfecb3523124fb",
+        "affectsGlobalScope": false
+      },
+      "../src/user-auth/user-auth.module.ts": {
+        "version": "e0702789976f94399084e5e4a25f9a9430448755029248c414f477beee6bfdbf",
+        "signature": "8400db197b706f7dc05fa17643ef4d4a1a7485a3678cb645026eb985ab0b9a24",
+        "affectsGlobalScope": false
+      },
       "../src/app.module.ts": {
-        "version": "b9017b384457ac47828f54a7be74257b6dbf88528694bfbd5c01e3dd2dce9bfa",
+        "version": "c90645bb0967c87abbcfe36fa393109751f9fce479369ae521a3db72f80eea60",
         "signature": "9fc7f7b6ad854404973b8cba8e6d883f758237991968e9a3965d716d46f1da88",
         "affectsGlobalScope": false
       },
@@ -1717,7 +1742,7 @@
         "affectsGlobalScope": false
       },
       "../src/main.ts": {
-        "version": "75463346c395d3fcb5be62deae1cca403f194ebf46d0f280ee447d160014167a",
+        "version": "65365d68f8b790e2a3a4781ab53aa59bf988182ff9190b17dd9a6fb78907f579",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -3359,11 +3384,11 @@
         "../node_modules/@nestjs/common/index.d.ts",
         "../src/app.controller.ts",
         "../src/app.service.ts",
+        "../src/user-auth/user-auth.module.ts",
         "../src/user/user.module.ts"
       ],
       "../src/app.service.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/@types/express/index.d.ts"
+        "../node_modules/@nestjs/common/index.d.ts"
       ],
       "../src/database/db_connect.ts": [
         "../src/database/db_info.ts"
@@ -3373,10 +3398,32 @@
         "../node_modules/@types/cookie-parser/index.d.ts",
         "../src/app.module.ts"
       ],
+      "../src/user-auth/user-auth.controller.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@types/express/index.d.ts",
+        "../src/user-auth/user-auth.guard.ts",
+        "../src/user-auth/user-auth.service.ts"
+      ],
+      "../src/user-auth/user-auth.guard.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/jwt/index.d.ts"
+      ],
+      "../src/user-auth/user-auth.module.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/jwt/index.d.ts",
+        "../src/user-auth/constance.ts",
+        "../src/user-auth/user-auth.controller.ts",
+        "../src/user-auth/user-auth.service.ts"
+      ],
+      "../src/user-auth/user-auth.service.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/jwt/index.d.ts",
+        "../node_modules/@types/express/index.d.ts",
+        "../src/switch/switch.ts"
+      ],
       "../src/user/user.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@types/express/index.d.ts",
-        "../node_modules/rxjs/internal/observable/connectableobservable.d.ts",
         "../src/user/user.guard.ts",
         "../src/user/user.service.ts"
       ],
@@ -3395,8 +3442,6 @@
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/jwt/index.d.ts",
         "../node_modules/@types/express/index.d.ts",
-        "../node_modules/@types/node/assert.d.ts",
-        "../node_modules/@types/node/path.d.ts",
         "../src/switch/switch.ts"
       ]
     },
@@ -4722,6 +4767,18 @@
       "../src/app.controller.ts": [
         "../src/app.service.ts"
       ],
+      "../src/user-auth/user-auth.controller.ts": [
+        "../node_modules/@types/express/index.d.ts",
+        "../src/user-auth/user-auth.service.ts"
+      ],
+      "../src/user-auth/user-auth.guard.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/jwt/index.d.ts"
+      ],
+      "../src/user-auth/user-auth.service.ts": [
+        "../node_modules/@nestjs/jwt/index.d.ts",
+        "../node_modules/@types/express/index.d.ts"
+      ],
       "../src/user/user.controller.ts": [
         "../node_modules/@types/express/index.d.ts",
         "../src/user/user.service.ts"
@@ -5134,6 +5191,11 @@
       "../src/database/db_info.ts",
       "../src/main.ts",
       "../src/switch/switch.ts",
+      "../src/user-auth/constance.ts",
+      "../src/user-auth/user-auth.controller.ts",
+      "../src/user-auth/user-auth.guard.ts",
+      "../src/user-auth/user-auth.module.ts",
+      "../src/user-auth/user-auth.service.ts",
       "../src/user/constance.ts",
       "../src/user/user.controller.ts",
       "../src/user/user.guard.ts",
