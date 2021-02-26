@@ -30,7 +30,7 @@ let UserService = class UserService {
             sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + userData["user_image"] + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
             SQLQueryRun(sql);
             sFlag = true;
-            resultMsg = "sign up success";
+            resultMsg = "Signup success";
         }
         else {
             sFlag = false;
@@ -56,14 +56,14 @@ let UserService = class UserService {
                 });
                 response.cookie('jwt', jwt, { httpOnly: true });
                 sFlag = true;
-                resultMsg = "login success";
+                resultMsg = "Login success";
             }
             else {
                 resultMsg = "Different pw";
             }
         }
         else {
-            resultMsg = "Dose not exist email";
+            resultMsg = "None email";
         }
         return {
             login: sFlag,

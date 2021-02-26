@@ -27,7 +27,7 @@ export class UserService {
             sql = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" + userData["user_image"] + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
             SQLQueryRun(sql);
             sFlag = true;
-            resultMsg = "sign up success"
+            resultMsg = "Signup success"
         }else{
             //3. 입력받은 email이 있을 경우 결과 발송
             sFlag = false;
@@ -61,12 +61,12 @@ export class UserService {
                 response.cookie('jwt', jwt, {httpOnly : true});
 
                 sFlag = true;
-                resultMsg = "login success"
+                resultMsg = "Login success"
             }else{
                 resultMsg = "Different pw";
             }
         }else{
-            resultMsg = "Dose not exist email";
+            resultMsg = "None email";
         }
         
         return {

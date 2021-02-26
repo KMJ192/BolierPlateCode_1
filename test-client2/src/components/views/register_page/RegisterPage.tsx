@@ -1,14 +1,14 @@
 import React, { Component, SyntheticEvent } from 'react';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import './RegisterPage.css';
 import logo from './rust_logo.png';
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 
 class RegisterPage extends Component {
-    name = "";
-    email = "";
-    password = "";
-    password_confirm= "";
+    name : string= "";
+    email : string= "";
+    password : string = "";
+    password_confirm : string= "";
     state = {
         redirect : false
     };
@@ -28,7 +28,7 @@ class RegisterPage extends Component {
             });
             if(response.data["message"] === "Duplicated email"){
                 alert("이미 등록된 이메일 입니다.");
-            }else if(response.data["message"] === "sign up success"){
+            }else if(response.data["message"] === "Signup success"){
                 alert("등록에 성공하였습니다.");
                 this.setState({
                     redirect : true
