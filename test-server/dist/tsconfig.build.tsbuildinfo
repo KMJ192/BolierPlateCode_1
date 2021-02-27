@@ -1722,7 +1722,7 @@
         "affectsGlobalScope": false
       },
       "../src/database/db_info.ts": {
-        "version": "c4310654860b3f9d707b1fe625fcd7ee9c9bda95a1fdfd74c01956b958eae4ef",
+        "version": "9283a43a22445901cabcbb17aa78280ebbdd2c140b85e72f038d6ef8f228ad50",
         "signature": "357ce90db4c95ad8f2a458adceac968ecebeb30fd943596cb53909205acaf2b0",
         "affectsGlobalScope": false
       },
@@ -3366,6 +3366,9 @@
       ],
       "../src/database/db_connect.ts": [
         "../src/database/db_info.ts"
+      ],
+      "../src/database/db_info.ts": [
+        "../src/switch/switch.ts"
       ],
       "../src/main.ts": [
         "../node_modules/@nestjs/core/index.d.ts",

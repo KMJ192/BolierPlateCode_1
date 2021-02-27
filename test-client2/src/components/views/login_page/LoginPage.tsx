@@ -48,12 +48,7 @@ const LoginPage = () => {
                     <input type="password" id="inputPassword" className="form-control" placeholder="비밀번호" required
                         onChange={e => setPassword(e.target.value)}
                     />
-                    <div className="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" value="remember-me"/> Remember
-                        </label>
-                    </div>
-                    <button className="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+                    <button id="confirm-button" className="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
                     <div>
                         회원가입이 필요하면 → 
                         <a href="/register_user">
