@@ -71,8 +71,27 @@ let UserService = class UserService {
         };
     }
     async ConfirmUser(request) {
-        const cookie = await request.cookies['jwt'];
-        return this.jwtService.verifyAsync(cookie);
+        let email;
+        let verifed;
+        let sql;
+        let user_data;
+        try {
+            const cookie = await request.cookies['jwt'];
+            await this.jwtService.verifyAsync(cookie).then(value => {
+                email = value["id"];
+            });
+            verifed = true;
+            sql = "select name, user_image from " + switch_1.switching + ".users where email='" + email + "'";
+            user_data = await SQLQueryRun(sql);
+        }
+        catch (e) {
+            verifed = false;
+        }
+        return {
+            username: user_data[0]["name"],
+            userimage: user_data[0]["user_image"],
+            result: verifed
+        };
     }
     Logout(response) {
         response.clearCookie('jwt');

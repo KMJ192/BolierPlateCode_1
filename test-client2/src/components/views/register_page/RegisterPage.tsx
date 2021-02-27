@@ -17,7 +17,7 @@ class RegisterPage extends Component {
         //확인 버튼을 눌렀을때 페이지 새로고침(기본동작) 방지 및 데이터 전체 submit
         e.preventDefault();
         if(this.password === this.password_confirm){
-            const response = await axios.post("/api/user-auth/register_user", {
+            const response = await axios.post("/api/register_user", {
                 email : this.email,
                 password : this.password,
                 name : this.name,

@@ -57,8 +57,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "logout", null);
 __decorate([
-    common_1.UseGuards(user_guard_1.UserGuard),
-    common_1.Get("/email=:email"),
+    common_1.Get("/user"),
     __param(0, common_1.Req()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -88,7 +87,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "patchUser", null);
 UserController = __decorate([
-    common_1.Controller(''),
+    common_1.Controller(),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;

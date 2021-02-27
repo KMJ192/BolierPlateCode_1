@@ -75,8 +75,28 @@ export class UserService {
 
     //User Verify
     async ConfirmUser(request : Request){
-        const cookie = await request.cookies['jwt'];
-        return this.jwtService.verifyAsync(cookie);
+        let email : string;
+        let verifed : boolean;
+        let sql : string;
+        let user_data;
+        try{
+            //유저닉네임 추출
+            const cookie = await request.cookies['jwt'];
+            await this.jwtService.verifyAsync(cookie).then(value => {
+                email = value["id"];
+            });
+            verifed = true;
+            sql = "select name, user_image from " + switching + ".users where email='" + email + "'";
+            user_data = await SQLQueryRun(sql);
+        }catch(e){
+            verifed = false;
+        }
+        //email에 대한 유저닉네임 추출
+        return {
+            username : user_data[0]["name"],
+            userimage : user_data[0]["user_image"],
+            result : verifed
+        };
     }
 
     //Logout

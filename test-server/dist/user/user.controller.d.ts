@@ -10,7 +10,11 @@ export declare class UserController {
     logout(response: Response): {
         message: string;
     };
-    ConfirmUser(request: Request): Promise<any>;
+    ConfirmUser(request: Request): Promise<{
+        username: any;
+        userimage: any;
+        result: boolean;
+    }>;
     createUser(body: JSON): Promise<{
         registerd: boolean;
         message: string;

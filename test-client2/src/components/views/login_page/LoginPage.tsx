@@ -14,10 +14,10 @@ const LoginPage = () => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
         //자격증명
-        const {data} = await axios.post('/api/user-auth/login', {
+        const {data} = await axios.post('/api/login', {
             email,
             password
-        }, {withCredentials:true}); //server로부터 token을 확인받음
+        });
 
         if(data["message"] === "None email"){
             alert("등록된 메일이 아닙니다. 다시 확인해주세요");

@@ -1,10 +1,24 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './rust_logo.png'
 import './NavBar.css';
+import axios from 'axios';
 
 const NavBar = () => {
+    const [user, setUser] = useState({
+        username : ''
+    });
     useEffect(() => {
-        
+        (
+            async ()=> {
+                try{
+                    const {data} = await axios.get('/api/user');
+                    setUser(data);
+                    console.log(data);
+                }catch(e){
+                    console.log(e);
+                }
+            }
+        )();
     }, [])
 
     return (
@@ -32,6 +46,7 @@ const NavBar = () => {
                         <button id="search-button">search</button>
                     </form>
                     <div id="user-auth-container">
+                        <a id="user-name" href="#">{user?.username}</a>
                         <a id="login-button" href="/login_user">Login</a>
                         <a id="signup-button" href="/register_user">SignUp</a>
                     </div>

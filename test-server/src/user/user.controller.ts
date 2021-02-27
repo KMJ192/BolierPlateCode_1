@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { Response, Request } from 'express';
 import { UserGuard } from './user.guard';
 
-@Controller('')
+@Controller()
 export class UserController {
     constructor(private readonly userService : UserService){}
     
@@ -25,8 +25,8 @@ export class UserController {
         return this.userService.Logout(response);
     }
 
-    @UseGuards(UserGuard)
-    @Get("/email=:email")
+    //@UseGuards(UserGuard)
+    @Get("/user")
     ConfirmUser(@Req() request : Request){        
         return this.userService.ConfirmUser(request);
     }

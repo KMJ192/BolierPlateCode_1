@@ -11,7 +11,11 @@ export declare class UserService {
         login: boolean;
         message: string;
     }>;
-    ConfirmUser(request: Request): Promise<any>;
+    ConfirmUser(request: Request): Promise<{
+        username: any;
+        userimage: any;
+        result: boolean;
+    }>;
     Logout(response: Response): {
         message: string;
     };
