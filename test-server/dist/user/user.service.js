@@ -73,23 +73,26 @@ let UserService = class UserService {
     async ConfirmUser(request) {
         let email;
         let verifed;
-        let sql;
-        let user_data;
-        try {
+        let username, userimage;
+        if (request["cookies"]["jwt"] == null) {
+            verifed = false;
+        }
+        else {
+            let sql;
+            let user_data;
             const cookie = await request.cookies['jwt'];
             await this.jwtService.verifyAsync(cookie).then(value => {
                 email = value["id"];
             });
-            verifed = true;
             sql = "select name, user_image from " + switch_1.switching + ".users where email='" + email + "'";
             user_data = await SQLQueryRun(sql);
-        }
-        catch (e) {
-            verifed = false;
+            username = user_data[0]["name"];
+            userimage = user_data[0]["user_image"];
+            verifed = true;
         }
         return {
-            username: user_data[0]["name"],
-            userimage: user_data[0]["user_image"],
+            username: username,
+            userimage: userimage,
             result: verifed
         };
     }

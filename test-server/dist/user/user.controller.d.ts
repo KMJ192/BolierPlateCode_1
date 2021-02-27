@@ -11,8 +11,8 @@ export declare class UserController {
         message: string;
     };
     ConfirmUser(request: Request): Promise<{
-        username: any;
-        userimage: any;
+        username: string;
+        userimage: string;
         result: boolean;
     }>;
     createUser(body: JSON): Promise<{
