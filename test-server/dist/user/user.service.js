@@ -27,6 +27,9 @@ let UserService = class UserService {
         const emailExists = await SQLQueryRun(sql);
         if (emailExists[0]["success"] == 0) {
             const hashedPassword = await bcrypt.hash(userData["password"], 10);
+            if (userData["user_image"] == '') {
+                userData["user_image"] = "D:\\develop\\sample_project\\project1\\images\\user_image.png";
+            }
             sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + userData["user_image"] + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
             SQLQueryRun(sql);
             sFlag = true;

@@ -2,7 +2,7 @@ import React, { SyntheticEvent, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './LoginPage.css';
-import logo from './rust_logo.png';
+import OutputImage from '../../../images/Images';
 
 
 const LoginPage = () => {
@@ -39,7 +39,7 @@ const LoginPage = () => {
             <main className="form-signin">
                 <form onSubmit={submit}>
                     <a href="/">
-                        <img id="logo" src={logo} alt="" width="70" height="70"/>
+                        <img id="logo" src={OutputImage(1)} alt="" width="70" height="70"/>
                     </a>
                     <h1 className="h3 mb-3 fw-normal">Login info</h1>
                     <input type="email" id="inputEmail" className="form-control" placeholder="이메일" required autoFocus

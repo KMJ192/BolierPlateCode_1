@@ -7,7 +7,7 @@ CREATE TABLE `test`.`users` (
   `email` VARCHAR(50) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
-  `user_image` VARCHAR(100) NULL,
+  `user_image` BLOB NULL,
   `user_rol` VARCHAR(20) NOT NULL,
   `created_at` VARCHAR(25) NOT NULL,
   `created_by` VARCHAR(45) NOT NULL,
@@ -23,3 +23,8 @@ Select * from test.user;
 //예제 입력  
 insert into test.user
 values("명준", "myeongjun@google.com", "1234", "", "", 10, "0", now(), "나", now(), "나")
+
+//이미지를 저장하는 테이블
+CREATE TABLE `test`.`default_image` (
+  `main_logo` BLOB NULL
+);

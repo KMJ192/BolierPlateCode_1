@@ -12,7 +12,7 @@ class Wrapper extends Component {
                     {this.props.children}
                 </main>
                 <SideBar/>
-                <Footer/>
+                {/* <Footer/> */}
             </div>
         )
     }

@@ -2,7 +2,7 @@ import React, { Component, SyntheticEvent } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './RegisterPage.css';
-import logo from './rust_logo.png';
+import OutputImage from '../../../images/Images';
 
 class RegisterPage extends Component {
     name : string= "";
@@ -51,7 +51,7 @@ class RegisterPage extends Component {
                 <main className="form-signin">
                     <form onSubmit={this.submit}>
                         <a href="/">
-                            <img id="logo"src={logo} alt="" width="70" height="70"/>
+                            <img id="logo" src={OutputImage(1)} alt="" width="70" height="70"/>
                         </a>
                         <h1 className="h3 mb-3 fw-normal">정보를 입력하세요</h1>
                         <input id="inputname" className="form-control" placeholder="이름" required autoFocus
