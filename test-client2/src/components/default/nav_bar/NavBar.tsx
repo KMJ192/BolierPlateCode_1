@@ -46,9 +46,6 @@ const NavBar = () => {
                         <li className="nav-item3">
                             <a href="#">메뉴3</a>
                         </li>
-                        <li>
-                            <img />
-                        </li>
                     </ul>
                     <form id="nav-search">
                         <input id="search-box" type="text" placeholder="example"/>
