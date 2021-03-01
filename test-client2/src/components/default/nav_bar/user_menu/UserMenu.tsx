@@ -7,7 +7,7 @@ function UserMenu(props : any) {
     return(
         <div id="user-auth-container">
             {props.token ? (
-                <AfterLogin name={props.name}/>
+                <AfterLogin name={props.name} image={props.image}/>
             ) : (
                 <BeforeLogin/>
             )}

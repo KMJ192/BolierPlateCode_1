@@ -1,7 +1,6 @@
 import React from 'react';
 import './AfterLogin.css'
 import axios from 'axios';
-import OutputImage from '../../../../images/Images';
 
 function AfterLogin(props : any) {
     let userlogState;
@@ -11,11 +10,11 @@ function AfterLogin(props : any) {
     }
     
     return (
-        <div>
-            <a href="#">
-                <img id="user-logo" src={OutputImage(2)} alt="회원사진"/>
+        <div id="user-container">
+            <a href="/">
+                <img id="user-logo" src={props.image} alt="회원사진"/>
             </a>
-            <a id="user-name" href="#">{props.name}</a>
+            <a id="user-name" href="/">{props.name}</a>
             <a id="login-button" href="/" onClick={userlogState}>Logout</a>
         </div>
     )

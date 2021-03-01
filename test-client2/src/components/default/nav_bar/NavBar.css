@@ -4,49 +4,27 @@
     border: 0;
 }
 
-ul{
-    list-style: none;
-}
-a{
-    text-decoration: none;
-}
-#main_logo{
-    margin:-12px 20px 0px -20px;
+/* navgation을 감싸는 컨테이너 */
+/* 메인 로고 */
+#main-logo{
+    margin:-5px 10px 0px 5px;
     width: 50px;
     height: 50px;
 }
-#main_log_a{
-    width:51px;
-    height:51px;
+
+/* 검색창, 버튼 */
+#search-form-center{
+    text-align: center;
 }
-nav{
-    width:100%;
-    height: 65px;
-    border-bottom: 1px solid #ccc;
-    background-color: rgba(255, 0, 0, .7);
-    /* box-shadow: 7px 7px 7px rgba(0,0,0,.1); */
-    position: absolute;
-}
-#nav_container{
-    width : 1000px;
-    height: 60px;
-}
-.nav-item ul li{
-    float: left;
-    margin-right: 20px;
-}
-.nav-item ul li:first{
-    margin-left: 10px;
-}
-.nav-item1, .nav-item2, .nav-item3{
-    margin-top: 3px;
+#search-form{
+    display: inline;
 }
 #nav-search{
     position: absolute;
     left: 35%;
 }
 #search-box{
-    margin: 2px 0px 0px 100px ;
+    margin: 0px 0px 0px 100px ;
     width : 200px;
     height: 30px;
     border-radius: 7px;
@@ -60,24 +38,8 @@ nav{
     width: 60px;
     height: 30px;
     border-radius: 7px;
-    box-shadow: 7px, 7px, 7px;
 }
 #search-button:hover{
     background-color: rgba(0, 0, 180, .3);
     color:#FFFFFF;
-}
-#user-auth-container{
-    margin-top: 3px;
-    position: absolute;
-    right: 1%;
-}
-#user-name{
-    margin-right: 10px;
-}
-#login-button{
-    margin-right: 10px;
-}
-
-#confirm-button{
-    margin-top: 20px;
 }

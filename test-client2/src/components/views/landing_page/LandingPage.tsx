@@ -7,7 +7,8 @@ class LandingPage extends Component {
         return (
             <Wrapper>
                 <div id="landing-page">
-                    <div>main page</div>
+                    <div>콘텐츠</div>
+                    <i className="bi bi-arrow-left-circle"></i>
                 </div>
             </Wrapper>
         )

@@ -1,3 +1,11 @@
+#user-container{
+    width : auto;
+    float: rigth;
+}
+
 #login-button{
+    margin-right: 10px;
+}
+#signup-button{
     margin-right: 10px;
 }

@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import Footer from './footer/Footer';
 import NavBar from './nav_bar/NavBar';
 import SideBar from './side_bar/SideBar';
+import './Wrapper.css';
 
 class Wrapper extends Component {
     render() {
         return (
             <div>
                 <NavBar/>
-                <main>
-                    {this.props.children}
-                </main>
-                <SideBar/>
-                {/* <Footer/> */}
+                <div id="contents-lander">
+                    <main>
+                        {this.props.children}
+                    </main>
+                </div>
+                <div>
+                    <SideBar/>
+                </div>
             </div>
         )
     }

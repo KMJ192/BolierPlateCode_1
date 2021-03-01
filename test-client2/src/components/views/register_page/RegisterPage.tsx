@@ -16,6 +16,7 @@ class RegisterPage extends Component {
     submit = async (e : SyntheticEvent) => {
         //확인 버튼을 눌렀을때 페이지 새로고침(기본동작) 방지 및 데이터 전체 submit
         e.preventDefault();
+        //빈칸이 있는지 검사, 탭 포함
         if(this.password === this.password_confirm){
             const response = await axios.post("/api/register_user", {
                 email : this.email,

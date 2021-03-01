@@ -3,7 +3,7 @@ import './BeforeLogin.css';
 
 const BeforLogin  = () => {
     return (
-        <div>
+        <div id="user-container">
             <a id="login-button" href="/login_user">Login</a>
             <a id="signup-button" href="/register_user">SignUp</a>
         </div>
