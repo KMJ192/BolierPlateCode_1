@@ -8,7 +8,7 @@ export class AppController {
   @Post('/test')
   getMainPage(@Body() body : JSON){
     console.log(body);
+    
     return body;
-    //return this.appService.getMainPage(body);
   }
 }

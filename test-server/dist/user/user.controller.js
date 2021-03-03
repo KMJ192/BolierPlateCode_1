@@ -30,7 +30,7 @@ let UserController = class UserController {
         return this.userService.ConfirmUser(request);
     }
     createUser(body) {
-        return this.userService.RegisterUser(body);
+        return this.userService.RegisterUser(body, "");
     }
     deleteUser(body) {
         return this.userService.DeleteUser(body);

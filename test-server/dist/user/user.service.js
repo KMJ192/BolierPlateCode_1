@@ -14,27 +14,35 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const switch_1 = require("../switch/switch");
 const bcrypt = require("bcrypt");
+const multer = require("multer");
 let db_config = require("../database/db_connect");
 let conn = db_config.init();
 let UserService = class UserService {
     constructor(jwtService) {
         this.jwtService = jwtService;
     }
-    async RegisterUser(userData) {
+    async RegisterUser(userData, userimagePath) {
         let resultMsg;
         let sFlag = false;
-        let sql = "select EXISTS (select password from " + switch_1.switching + ".users where email='" + userData["email"] + "') as success";
-        const emailExists = await SQLQueryRun(sql);
-        if (emailExists[0]["success"] == 0) {
-            const hashedPassword = await bcrypt.hash(userData["password"], 10);
-            sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + userData["user_image"] + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
-            SQLQueryRun(sql);
-            sFlag = true;
-            resultMsg = "Signup success";
+        if (userData["user_rol"] == 0) {
+            let sql = "select EXISTS (select password from " + switch_1.switching + ".users where email='" + userData["email"] + "') as success";
+            const emailExists = await SQLQueryRun(sql);
+            if (emailExists[0]["success"] == 0) {
+                const hashedPassword = await bcrypt.hash(userData["password"], 10);
+                const user_image = userimagePath;
+                sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
+                SQLQueryRun(sql);
+                sFlag = true;
+                resultMsg = "Signup success";
+            }
+            else {
+                sFlag = false;
+                resultMsg = "Duplicated email";
+            }
         }
         else {
             sFlag = false;
-            resultMsg = "Duplicated email";
+            resultMsg = "User rol error";
         }
         return {
             registerd: sFlag,

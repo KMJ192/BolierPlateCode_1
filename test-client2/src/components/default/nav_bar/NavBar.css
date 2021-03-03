@@ -40,6 +40,11 @@
     border-radius: 7px;
 }
 #search-button:hover{
-    background-color: rgba(0, 0, 180, .3);
+    background-color: rgba(0, 238, 255, 0.767);
     color:#FFFFFF;
+}
+
+#navmenu ul li:hover{
+    color: blueviolet;
+    display: block;
 }

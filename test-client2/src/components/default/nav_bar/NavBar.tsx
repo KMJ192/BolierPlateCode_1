@@ -37,16 +37,16 @@ const NavBar = () => {
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <div className="collapse navbar-collapse" id="navmenu navbarsExampleDefault">
                         <ul className="navbar-nav me-auto mb-2 mb-md-0">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/">메뉴1</a>
+                                <a className="nav-link" aria-current="page" href="/">메뉴1</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/">메뉴2</a>
+                                <a className="nav-link" aria-current="page" href="/">메뉴2</a>
                             </li>
                             <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="/">메뉴3</a>
+                                <a className="nav-link" aria-current="page" href="/">메뉴3</a>
                             </li>
                         </ul>
                         <form id="nav-search">

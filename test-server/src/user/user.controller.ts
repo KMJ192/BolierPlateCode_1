@@ -1,7 +1,10 @@
-import { Body, Controller, Delete, Get, Patch, Post, Res, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, Res, Req, UseGuards, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Response, Request } from 'express';
 import { UserGuard } from './user.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @Controller()
 export class UserController {
@@ -27,14 +30,24 @@ export class UserController {
 
     //@UseGuards(UserGuard)
     @Get("/user")
-    ConfirmUser(@Req() request : Request){        
+    ConfirmUser(@Req() request : Request){
         return this.userService.ConfirmUser(request);
     }
 
     //User SignUp
     @Post("/register_user")
-    createUser(@Body() body : JSON){
-        return this.userService.RegisterUser(body);
+    // @UseInterceptors(FileInterceptor("user_image", {
+    //     storage: diskStorage({
+    //         destination: "./uploads",
+    //         filename(_, file, callback){
+    //             const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+    //             return callback(null, `${randomName}${extname(file.originalname)}`)
+    //         }
+    //     })
+    // }))
+    createUser(@Body() body : JSON /* , @UploadedFile() file : Express.Multer.File */){
+        //console.log(`http://localhost:8080/api/${file.path}`);
+        return this.userService.RegisterUser(body, "");
     }
 
     //User delete
@@ -50,5 +63,4 @@ export class UserController {
     patchUser(@Body() body : JSON){
         return this.userService.PatchUser(body);
     }
-
 }

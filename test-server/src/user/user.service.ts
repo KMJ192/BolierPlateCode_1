@@ -4,6 +4,7 @@ import { Response, Request } from 'express';
 import { switching } from '../switch/switch';
 
 const bcrypt = require("bcrypt");
+const multer = require("multer");
 
 let db_config = require("../database/db_connect");
 let conn = db_config.init();
@@ -13,23 +14,31 @@ export class UserService {
     constructor(private jwtService : JwtService){}
     
     //User SignUp
-    async RegisterUser(userData : JSON){
+    async RegisterUser(userData : JSON, userimagePath : string){
         let resultMsg : string;
         let sFlag : boolean = false;
-        //1. 입력받은 email이 DB에 있는지 파악
-        let sql : string = "select EXISTS (select password from " + switching + ".users where email='" + userData["email"] + "') as success";
-        const emailExists = await SQLQueryRun(sql);
-        if(emailExists[0]["success"] == 0){
-            //2. 입력받은 email이 DB에 없을 경우 DB에 Input -> encryption password => parameter plain password, SaltRound
-            const hashedPassword = await bcrypt.hash(userData["password"], 10);
-            sql = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" + userData["user_image"] + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
-            SQLQueryRun(sql);
-            sFlag = true;
-            resultMsg = "Signup success"
+        if(userData["user_rol"] == 0){
+            //1. 입력받은 email이 DB에 있는지 파악
+            let sql : string = "select EXISTS (select password from " + switching + ".users where email='" + userData["email"] + "') as success";
+            const emailExists = await SQLQueryRun(sql);
+            if(emailExists[0]["success"] == 0){
+                //2. 입력받은 email이 DB에 없을 경우 DB에 Input -> encryption password => parameter plain password, SaltRound
+                const hashedPassword = await bcrypt.hash(userData["password"], 10);
+                //user_image의 경로를 저장
+                const user_image = userimagePath;
+                sql = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
+                SQLQueryRun(sql);
+                sFlag = true;
+                resultMsg = "Signup success";
+            }else{
+                //3. 입력받은 email이 있을 경우 결과 발송
+                sFlag = false;
+                resultMsg = "Duplicated email";
+            }
         }else{
-            //3. 입력받은 email이 있을 경우 결과 발송
+            //유저롤이 잘못된값으로 입력될 경우 가입 제한
             sFlag = false;
-            resultMsg = "Duplicated email";
+            resultMsg = "User rol error";
         }
         return {
             registerd : sFlag,
@@ -44,8 +53,7 @@ export class UserService {
         //1. 입력받은 email의 존재 유무 파악
         let sql : string = "select EXISTS (select password from " + switching + ".users where email='" + email + "') as success";
         const emailExists = await SQLQueryRun(sql);
-
-        if(emailExists[0]["success"]== 1){
+        if(emailExists[0]["success"] == 1){
             //2. password 일치여부 파악
             sql = "select password from " + switching + ".users where email='" + email + "'";
             const dbPw = await SQLQueryRun(sql);
@@ -57,7 +65,6 @@ export class UserService {
                     id : email
                 });
                 response.cookie('jwt', jwt, {httpOnly : true});
-
                 sFlag = true;
                 resultMsg = "Login success"
             }else{
@@ -130,9 +137,9 @@ export class UserService {
         let sql : string = "update " + switching + ".users set name='" + body["name"] + "', updated_at='" + NowTime() + "' where email='" + body["email"] + "'";
         const result = await SQLQueryRun(sql);
         return result;
-    }
-    
+    }   
 }
+
 
 //SQL Query 실행
 function SQLQueryRun(sql : string) {

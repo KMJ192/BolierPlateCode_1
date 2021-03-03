@@ -32,3 +32,7 @@ npm install @nestjs/jwt --save
 //cookie 인증
 npm install cookie-parser
 npm install -D @types/cookie-parser
+
+//파일 업로드
+npm install multer --save
+npm install @types/multer --save

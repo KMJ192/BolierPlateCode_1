@@ -12,16 +12,54 @@
     margin-top: 150px;
 }
 
-.checkbox {
-  font-weight: 400;
-}
 .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
-  margin-top: 5px;
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.userimage-info{
+    margin-left: 40px;
+}
+
+.userimage-box{
+    display: inline-block;
+    margin-left : 20%;
+}
+.userimage-box label{
+    display: inline-block;
+    padding: .6em .88em;
+    line-height: normal;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-radius: .25em;
+}
+.userimage-box input[type="file"]{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+.userimage-place{
+    background-color:  #efefef;
+    width:150px;
+    height: 150px;
+    margin: 10px;
+}
+.userimage{
+    width:150px;
+    height: 150px;
+}
+.userimage-button{
+    margin-left: 15px;
+    margin-bottom: 5px;
 }
 
 #inputname{
