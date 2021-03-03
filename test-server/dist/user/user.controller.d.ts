@@ -1,24 +1,29 @@
+/// <reference types="multer" />
 import { UserService } from './user.service';
 import { Response, Request } from 'express';
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
-    Login(email: string, password: string, response: Response): Promise<{
+    login(email: string, password: string, response: Response): Promise<{
         login: boolean;
         message: string;
     }>;
+    getUserImage(path: any, response: Response): void;
     logout(response: Response): {
         message: string;
     };
-    ConfirmUser(request: Request): Promise<{
+    confirmUser(request: Request): Promise<{
         username: string;
         userimage: string;
         result: boolean;
     }>;
-    createUser(body: JSON): Promise<{
+    createUser(body: JSON, file: Express.Multer.File): Promise<{
         registerd: boolean;
         message: string;
     }>;
     deleteUser(body: JSON): Promise<unknown>;
     patchUser(body: JSON): Promise<unknown>;
+    fileTest(file: Express.Multer.File): {
+        url: string;
+    };
 }

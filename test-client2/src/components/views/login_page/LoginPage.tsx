@@ -14,7 +14,7 @@ const LoginPage = () => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
         //자격증명
-        const {data} = await axios.post('/api/login', {
+        const {data} = await axios.post('/login', {
             email,
             password
         });

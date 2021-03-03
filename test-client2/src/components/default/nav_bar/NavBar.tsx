@@ -12,7 +12,7 @@ const NavBar = () => {
     useEffect(() => {
         (
             async ()=> {
-                const {data} = await axios.get('/api/user');
+                const {data} = await axios.get('/user');
                 if(data["result"] === true){
                     //cookie가 있음(로그인 된 상태)
                     setUsername(data["username"]);

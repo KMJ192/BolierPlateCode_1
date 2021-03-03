@@ -16,27 +16,41 @@ exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const user_guard_1 = require("./user.guard");
+const platform_express_1 = require("@nestjs/platform-express");
+const multer_1 = require("multer");
+const path_1 = require("path");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
-    Login(email, password, response) {
+    login(email, password, response) {
         return this.userService.Login(email, password, response);
+    }
+    getUserImage(path, response) {
+        response.sendFile(path, {
+            root: "user_image"
+        });
     }
     logout(response) {
         return this.userService.Logout(response);
     }
-    ConfirmUser(request) {
+    confirmUser(request) {
         return this.userService.ConfirmUser(request);
     }
-    createUser(body) {
-        return this.userService.RegisterUser(body, "");
+    createUser(body, file) {
+        console.log(file.path);
+        return this.userService.RegisterUser(body, file.path);
     }
     deleteUser(body) {
         return this.userService.DeleteUser(body);
     }
     patchUser(body) {
         return this.userService.PatchUser(body);
+    }
+    fileTest(file) {
+        return {
+            url: `http://localhost:8080/api/${file.path}`
+        };
     }
 };
 __decorate([
@@ -47,7 +61,14 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", void 0)
-], UserController.prototype, "Login", null);
+], UserController.prototype, "login", null);
+__decorate([
+    common_1.Get("/uimg/:path"),
+    __param(0, common_1.Param("path")), __param(1, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getUserImage", null);
 __decorate([
     common_1.UseGuards(user_guard_1.UserGuard),
     common_1.Post("/logout"),
@@ -62,12 +83,21 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], UserController.prototype, "ConfirmUser", null);
+], UserController.prototype, "confirmUser", null);
 __decorate([
     common_1.Post("/register_user"),
-    __param(0, common_1.Body()),
+    common_1.UseInterceptors(platform_express_1.FileInterceptor("user_image", {
+        storage: multer_1.diskStorage({
+            destination: "./user_image",
+            filename(_, file, callback) {
+                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+                return callback(null, `${randomName}${path_1.extname(file.originalname)}`);
+            }
+        })
+    })),
+    __param(0, common_1.Body()), __param(1, common_1.UploadedFile()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "createUser", null);
 __decorate([
@@ -86,6 +116,22 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "patchUser", null);
+__decorate([
+    common_1.Post('/file_test'),
+    common_1.UseInterceptors(platform_express_1.FileInterceptor("user_image", {
+        storage: multer_1.diskStorage({
+            destination: "./user_image",
+            filename(_, file, callback) {
+                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+                return callback(null, `${randomName}${path_1.extname(file.originalname)}`);
+            }
+        })
+    })),
+    __param(0, common_1.UploadedFile()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "fileTest", null);
 UserController = __decorate([
     common_1.Controller(),
     __metadata("design:paramtypes", [user_service_1.UserService])

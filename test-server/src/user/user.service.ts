@@ -4,7 +4,6 @@ import { Response, Request } from 'express';
 import { switching } from '../switch/switch';
 
 const bcrypt = require("bcrypt");
-const multer = require("multer");
 
 let db_config = require("../database/db_connect");
 let conn = db_config.init();

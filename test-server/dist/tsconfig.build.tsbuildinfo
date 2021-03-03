@@ -1502,7 +1502,7 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
-        "version": "8e67eddd76c79d663a41cb94f82c6e61f724e339bd7c8f80f805d2caa090d4fe",
+        "version": "ae84aca02904dfd48d8df7de1b760279e0e84df1c22c86cd74347fa258fff8de",
         "signature": "03da5792f5c554e4b03c7cce0404270e21b2d86443233526a2a80c9c2170d2b5",
         "affectsGlobalScope": false
       },
@@ -1602,8 +1602,8 @@
         "affectsGlobalScope": true
       },
       "../src/user/user.controller.ts": {
-        "version": "612f4fef49d4c1fd30296ef020e2fe06a039d9a2656fdfbbf8e06aa35bf4ce77",
-        "signature": "1c3083bc86086e2c654b3fc4edffe3b7ad5f7419a555c8bd65dd93035e58719a",
+        "version": "c943bcf377d023855350b89c43846f80894b532bf54422ad839c8c9949a8e437",
+        "signature": "403222bffc002f39ac02d286a44d88c8dd092a095e4dc1f467e8a721f040beab",
         "affectsGlobalScope": false
       },
       "../src/user/constance.ts": {

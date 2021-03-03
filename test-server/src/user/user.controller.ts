@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Patch, Post, Res, Req, UseGuards, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, Res, Req, UseGuards, UseInterceptors, UploadedFile, Param } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Response, Request } from 'express';
 import { UserGuard } from './user.guard';
@@ -12,12 +12,19 @@ export class UserController {
     
     //Login
     @Post("/login")
-    Login(
+    login(
         @Body('email') email : string, 
         @Body('password') password: string, 
         @Res({passthrough : true}) response : Response
     ){
         return this.userService.Login(email, password, response);
+    }
+
+    @Get("/uimg/:path")
+    getUserImage(@Param("path") path, @Res() response : Response){
+        response.sendFile(path, {
+            root: "user_image"
+        });
     }
 
     //Logout
@@ -30,24 +37,24 @@ export class UserController {
 
     //@UseGuards(UserGuard)
     @Get("/user")
-    ConfirmUser(@Req() request : Request){
+    confirmUser(@Req() request : Request){
         return this.userService.ConfirmUser(request);
     }
 
     //User SignUp
     @Post("/register_user")
-    // @UseInterceptors(FileInterceptor("user_image", {
-    //     storage: diskStorage({
-    //         destination: "./uploads",
-    //         filename(_, file, callback){
-    //             const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
-    //             return callback(null, `${randomName}${extname(file.originalname)}`)
-    //         }
-    //     })
-    // }))
-    createUser(@Body() body : JSON /* , @UploadedFile() file : Express.Multer.File */){
-        //console.log(`http://localhost:8080/api/${file.path}`);
-        return this.userService.RegisterUser(body, "");
+    @UseInterceptors(FileInterceptor("user_image", {
+        storage: diskStorage({
+            destination: "./user_image",
+            filename(_, file, callback){
+                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+                return callback(null, `${randomName}${extname(file.originalname)}`);
+            }
+        })
+    }))
+    createUser(@Body() body : JSON, @UploadedFile() file : Express.Multer.File){
+        console.log(file.path);
+        return this.userService.RegisterUser(body, file.path);
     }
 
     //User delete
@@ -62,5 +69,22 @@ export class UserController {
     @Patch("/patch_user")
     patchUser(@Body() body : JSON){
         return this.userService.PatchUser(body);
+    }
+
+    //test
+    @Post('/file_test')
+    @UseInterceptors(FileInterceptor("user_image", {
+        storage: diskStorage({
+            destination: "./user_image",
+            filename(_, file, callback){
+                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+                return callback(null, `${randomName}${extname(file.originalname)}`);
+            }
+        })
+    }))
+    fileTest(@UploadedFile() file : Express.Multer.File){
+        return {
+            url : `http://localhost:8080/api/${file.path}`
+        };
     }
 }

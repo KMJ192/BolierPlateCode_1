@@ -6,7 +6,7 @@ function AfterLogin(props : any) {
     let userlogState;
 
     userlogState = async () => {
-        await axios.post("/api/logout", {});
+        await axios.post("/logout", {});
     }
     
     return (

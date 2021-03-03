@@ -14,7 +14,6 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const switch_1 = require("../switch/switch");
 const bcrypt = require("bcrypt");
-const multer = require("multer");
 let db_config = require("../database/db_connect");
 let conn = db_config.init();
 let UserService = class UserService {

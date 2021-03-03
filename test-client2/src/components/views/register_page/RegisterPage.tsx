@@ -14,10 +14,10 @@ class RegisterPage extends Component {
         userimageBase64: "",
         userimage : null
     };
-    
     fileChangedHandler = (e : any) => {
         //이미지 파일 미리보기 설정
         let reader = new FileReader();
+        let formData = new FormData();
         reader.onloadend = () => {
             if(reader.result) {
                 this.setState({
@@ -25,9 +25,11 @@ class RegisterPage extends Component {
                 });
             }
         };
+        
         //파일 설정했을 경우 userimage에 파일 설정
         if(e.target.files[0]){
             reader.readAsDataURL(e.target.files[0]);
+            formData.append("user_image", e.target.files[0]);
             this.setState({
                 userimage : e.target.files[0]
             });
@@ -47,11 +49,11 @@ class RegisterPage extends Component {
         e.preventDefault();
         //빈칸이 있는지 검사, 탭 포함
         if(this.password === this.password_confirm){
-            await axios.post("/api/register_user", {
+            await axios.post("/register_user", {
                 email : this.email,
                 password : this.password,
                 name : this.name,
-                user_image : "", //유저이미지랑 유저데이터 json으로 한번에 보내는 방법 찾아야 됨
+                //user_image : this.state.userimage, //유저이미지랑 유저데이터 json으로 한번에 보내는 방법 찾아야 됨
                 user_rol : 0,
                 created_by : this.name,
                 updated_by : this.name
