@@ -3,7 +3,7 @@ import { Response, Request } from 'express';
 export declare class UserService {
     private jwtService;
     constructor(jwtService: JwtService);
-    RegisterUser(userData: JSON, userimagePath: string): Promise<{
+    RegisterUser(userData: JSON): Promise<{
         registerd: boolean;
         message: string;
     }>;

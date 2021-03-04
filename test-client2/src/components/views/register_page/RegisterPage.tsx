@@ -17,7 +17,7 @@ class RegisterPage extends Component {
     fileChangedHandler = (e : any) => {
         //이미지 파일 미리보기 설정
         let reader = new FileReader();
-        let formData = new FormData();
+        //let formData = new FormData();
         reader.onloadend = () => {
             if(reader.result) {
                 this.setState({
@@ -29,7 +29,7 @@ class RegisterPage extends Component {
         //파일 설정했을 경우 userimage에 파일 설정
         if(e.target.files[0]){
             reader.readAsDataURL(e.target.files[0]);
-            formData.append("user_image", e.target.files[0]);
+            //formData.append("user_image", e.target.files[0]);
             this.setState({
                 userimage : e.target.files[0]
             });
@@ -44,26 +44,34 @@ class RegisterPage extends Component {
         });
     };
 
-    submit = async (e : SyntheticEvent) => {
+    submit = async (e : SyntheticEvent) => {  
+        const config = {
+            header: {
+                'content-type' : 'multipart/form-data'
+            },
+            userData : {
+                email : this.email,
+                password : this.password,
+                name : this.name,
+                user_image : this.state.userimage, //유저이미지랑 유저데이터 json으로 한번에 보내는 방법 찾아야 됨
+                user_rol : 0,
+                created_by : this.name,
+                updated_by : this.name
+            }
+        }
+
         //확인 버튼을 눌렀을때 페이지 새로고침(기본동작) 방지 및 데이터 전체 submit
         e.preventDefault();
         //빈칸이 있는지 검사, 탭 포함
         if(this.password === this.password_confirm){
-            await axios.post("/register_user", {
-                email : this.email,
-                password : this.password,
-                name : this.name,
-                //user_image : this.state.userimage, //유저이미지랑 유저데이터 json으로 한번에 보내는 방법 찾아야 됨
-                user_rol : 0,
-                created_by : this.name,
-                updated_by : this.name
-            }).then((response) => {
+            await axios.post("/register_user", config).then((response) => {
+                console.log(response.data);
                 if(response.data["message"] === "Duplicated email"){
                     alert("이미 등록된 메일입니다.")
                 }else if(response.data["message"] === "Signup success"){
                     // ================= 유저 정보 등록 성공 ================= 
                     alert("등록에 성공하였습니다.");
-                    this.setState({
+                    this.setState({ 
                         redirect : true
                     });
                 }else{
@@ -89,19 +97,19 @@ class RegisterPage extends Component {
                         <img id="logo" src={OutputImage(1)} alt="" width="70" height="70"/>
                     </a>
                     <h1 className="h3 mb-3 fw-normal">가입 정보를 입력하세요</h1>
-                    <div className="userimage-box">
-                        <div className="userimage-info">대표사진설정</div>
-                        <div className="userimage-place">
-                            {this.state.userimageBase64 ? (
-                                <img className="userimage" src={this.state.userimageBase64} alt="대표이미지 설정" onClick={this.handleRemove} />
-                            ) : (
-                                <div></div>
-                            )}
-                        </div>
-                        <label htmlFor="userimage-button" className="btn-primary userimage-button">내 PC에서 찾기</label>
-                        <input id="userimage-button" type="file" onChange={this.fileChangedHandler}/>
-                    </div>
                     <form onSubmit={this.submit}>
+                        <div className="userimage-box">
+                            <div className="userimage-info">대표사진설정</div>
+                            <div className="userimage-place">
+                                {this.state.userimageBase64 ? (
+                                    <img className="userimage" src={this.state.userimageBase64} alt="대표이미지 설정" onClick={this.handleRemove} />
+                                ) : (
+                                    <div></div>
+                                )}
+                            </div>
+                            <label htmlFor="userimage-button" className="btn-primary userimage-button">내 PC에서 찾기</label>
+                            <input id="userimage-button" type="file" onChange={this.fileChangedHandler}/>
+                        </div>
                         <input id="inputname" className="form-control" placeholder="이름" required autoFocus
                             onChange={e => this.name = e.target.value}
                         />

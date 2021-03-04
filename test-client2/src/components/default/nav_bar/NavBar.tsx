@@ -14,7 +14,7 @@ const NavBar = () => {
             async ()=> {
                 const {data} = await axios.get('/user');
                 if(data["result"] === true){
-                    //cookie가 있음(로그인 된 상태)
+                    //cookie 검증 완료(로그인 된 상태)
                     setUsername(data["username"]);
                     setIsLogin(true);
                     

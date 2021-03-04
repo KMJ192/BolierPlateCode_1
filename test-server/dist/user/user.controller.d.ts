@@ -21,6 +21,7 @@ export declare class UserController {
         registerd: boolean;
         message: string;
     }>;
+    saveUserImage(file: Express.Multer.File): string;
     deleteUser(body: JSON): Promise<unknown>;
     patchUser(body: JSON): Promise<unknown>;
     fileTest(file: Express.Multer.File): {

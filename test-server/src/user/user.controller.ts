@@ -4,7 +4,7 @@ import { Response, Request } from 'express';
 import { UserGuard } from './user.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { extname } from 'path';
+import { extname, basename } from 'path';
 
 @Controller()
 export class UserController {
@@ -53,8 +53,23 @@ export class UserController {
         })
     }))
     createUser(@Body() body : JSON, @UploadedFile() file : Express.Multer.File){
-        console.log(file.path);
-        return this.userService.RegisterUser(body, file.path);
+        console.log(body);
+        console.log(file);
+        return this.userService.RegisterUser(body["userData"]);
+    }
+
+    @Post("/user_image")
+    @UseInterceptors(FileInterceptor("user_image", {
+        storage: diskStorage({
+            destination: "./user_image",
+            filename(_, file, callback){
+                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+                return callback(null, `${randomName}${extname(file.originalname)}`);
+            }
+        })
+    }))
+    saveUserImage(@UploadedFile() file : Express.Multer.File){
+        return file.path;
     }
 
     //User delete
