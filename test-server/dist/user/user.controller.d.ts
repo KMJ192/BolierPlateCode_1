@@ -17,14 +17,10 @@ export declare class UserController {
         userimage: string;
         result: boolean;
     }>;
-    createUser(body: JSON, file: Express.Multer.File): Promise<{
+    createUser(file: Express.Multer.File, body: JSON): Promise<{
         registerd: boolean;
         message: string;
     }>;
-    saveUserImage(file: Express.Multer.File): string;
     deleteUser(body: JSON): Promise<unknown>;
     patchUser(body: JSON): Promise<unknown>;
-    fileTest(file: Express.Multer.File): {
-        url: string;
-    };
 }

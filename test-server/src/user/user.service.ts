@@ -13,7 +13,7 @@ export class UserService {
     constructor(private jwtService : JwtService){}
     
     //User SignUp
-    async RegisterUser(userData : JSON){
+    async RegisterUser(userData : JSON, user_image : string){
         let resultMsg : string;
         let sFlag : boolean = false;
         if(userData["user_rol"] == 0){
@@ -24,7 +24,7 @@ export class UserService {
                 //2. 입력받은 email이 DB에 없을 경우 DB에 Input -> encryption password => parameter plain password, SaltRound
                 const hashedPassword = await bcrypt.hash(userData["password"], 10);
                 //user_image의 경로를 저장
-                sql = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" +userData["user_image"] + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
+                sql = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
                 SQLQueryRun(sql);
                 sFlag = true;
                 resultMsg = "Signup success";
@@ -94,6 +94,7 @@ export class UserService {
             
             //유저닉네임 추출
             const cookie = await request.cookies['jwt'];
+            //쿠키 비교
             await this.jwtService.verifyAsync(cookie).then(value => {
                 email = value["id"];
             });

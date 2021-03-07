@@ -35,7 +35,6 @@ export class UserController {
         return this.userService.Logout(response);
     }
 
-    //@UseGuards(UserGuard)
     @Get("/user")
     confirmUser(@Req() request : Request){
         return this.userService.ConfirmUser(request);
@@ -52,24 +51,8 @@ export class UserController {
             }
         })
     }))
-    createUser(@Body() body : JSON, @UploadedFile() file : Express.Multer.File){
-        console.log(body);
-        console.log(file);
-        return this.userService.RegisterUser(body["userData"]);
-    }
-
-    @Post("/user_image")
-    @UseInterceptors(FileInterceptor("user_image", {
-        storage: diskStorage({
-            destination: "./user_image",
-            filename(_, file, callback){
-                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
-                return callback(null, `${randomName}${extname(file.originalname)}`);
-            }
-        })
-    }))
-    saveUserImage(@UploadedFile() file : Express.Multer.File){
-        return file.path;
+    createUser(@UploadedFile() file : Express.Multer.File, @Body() body : JSON){
+        return this.userService.RegisterUser(body, file.filename);
     }
 
     //User delete
@@ -84,22 +67,5 @@ export class UserController {
     @Patch("/patch_user")
     patchUser(@Body() body : JSON){
         return this.userService.PatchUser(body);
-    }
-
-    //test
-    @Post('/file_test')
-    @UseInterceptors(FileInterceptor("user_image", {
-        storage: diskStorage({
-            destination: "./user_image",
-            filename(_, file, callback){
-                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
-                return callback(null, `${randomName}${extname(file.originalname)}`);
-            }
-        })
-    }))
-    fileTest(@UploadedFile() file : Express.Multer.File){
-        return {
-            url : `http://localhost:8080/api/${file.path}`
-        };
     }
 }

@@ -7,7 +7,7 @@ import OutputImage from '../../../images/Images';
 const NavBar = () => {
     const [isLogin, setIsLogin] = useState(false);
     const [username, setUsername] = useState('');
-    const [image, setImage] = useState(OutputImage(2))
+    const [userimage, setUserimage] = useState(OutputImage(2))
     
     useEffect(() => {
         (
@@ -20,7 +20,7 @@ const NavBar = () => {
                     
                     //유저 이미지 정보가 있을 경우 유저 이미지 정보를 설정
                     if(data["userimage"] !== ''){
-                        setImage(data["userImage"]);
+                        setUserimage(data["userimage"]);
                     }
                 }
             }
@@ -55,7 +55,7 @@ const NavBar = () => {
                         </form>
                     </div>
                 </div>
-                <UserMenu name={username} token={isLogin} image={image}/>
+                <UserMenu name={username} token={isLogin} image={userimage}/>
             </nav>
         </div>
     )

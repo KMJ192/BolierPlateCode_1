@@ -37,24 +37,14 @@ let UserController = class UserController {
     confirmUser(request) {
         return this.userService.ConfirmUser(request);
     }
-    createUser(body, file) {
-        console.log(body);
-        console.log(file);
-        return this.userService.RegisterUser(body["userData"]);
-    }
-    saveUserImage(file) {
-        return file.path;
+    createUser(file, body) {
+        return this.userService.RegisterUser(body, file.filename);
     }
     deleteUser(body) {
         return this.userService.DeleteUser(body);
     }
     patchUser(body) {
         return this.userService.PatchUser(body);
-    }
-    fileTest(file) {
-        return {
-            url: `http://localhost:8080/api/${file.path}`
-        };
     }
 };
 __decorate([
@@ -99,27 +89,11 @@ __decorate([
             }
         })
     })),
-    __param(0, common_1.Body()), __param(1, common_1.UploadedFile()),
+    __param(0, common_1.UploadedFile()), __param(1, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "createUser", null);
-__decorate([
-    common_1.Post("/user_image"),
-    common_1.UseInterceptors(platform_express_1.FileInterceptor("user_image", {
-        storage: multer_1.diskStorage({
-            destination: "./user_image",
-            filename(_, file, callback) {
-                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
-                return callback(null, `${randomName}${path_1.extname(file.originalname)}`);
-            }
-        })
-    })),
-    __param(0, common_1.UploadedFile()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], UserController.prototype, "saveUserImage", null);
 __decorate([
     common_1.UseGuards(user_guard_1.UserGuard),
     common_1.Delete("/delete_user"),
@@ -136,22 +110,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "patchUser", null);
-__decorate([
-    common_1.Post('/file_test'),
-    common_1.UseInterceptors(platform_express_1.FileInterceptor("user_image", {
-        storage: multer_1.diskStorage({
-            destination: "./user_image",
-            filename(_, file, callback) {
-                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
-                return callback(null, `${randomName}${path_1.extname(file.originalname)}`);
-            }
-        })
-    })),
-    __param(0, common_1.UploadedFile()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], UserController.prototype, "fileTest", null);
 UserController = __decorate([
     common_1.Controller(),
     __metadata("design:paramtypes", [user_service_1.UserService])
