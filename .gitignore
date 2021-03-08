@@ -3,7 +3,8 @@
 # operator-client
 
 # operator-server
-server/*
+server
+server/src
 
 # test-server
 test-server/node_modules

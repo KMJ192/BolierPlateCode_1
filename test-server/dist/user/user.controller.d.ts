@@ -4,6 +4,7 @@ import { Response, Request } from 'express';
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
+    private filepath;
     login(email: string, password: string, response: Response): Promise<{
         login: boolean;
         message: string;

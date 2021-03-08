@@ -3,9 +3,13 @@ import './BeforeLogin.css';
 
 const BeforLogin  = () => {
     return (
-        <div id="user-container">
-            <a id="login-button" href="/login_user">Login</a>
-            <a id="signup-button" href="/register_user">SignUp</a>
+        <div className="btn-group btn-group-sm befor-login-container">
+            <a href="/login_user">
+                <button type="button" className="btn btn-secondary btn-sm">&nbsp;로그인&nbsp;</button>
+            </a>
+            <a href="/register_user">
+                <button type="button" className="btn btn-secondary btn-sm">회원가입</button>
+            </a>
         </div>
     )
 }

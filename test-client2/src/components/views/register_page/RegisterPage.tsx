@@ -45,7 +45,6 @@ class RegisterPage extends Component {
     };
 
     submit = async (e : SyntheticEvent) => {
-
         //formData에 입력
         formData.append("email", this.email);
         formData.append("password", this.password);
@@ -61,6 +60,8 @@ class RegisterPage extends Component {
             await axios.post("/register_user", formData).then((response) => {
                 if(response.data["message"] === "Duplicated email"){
                     alert("이미 등록된 메일입니다.")
+                }else if(response.data["message"] === "Duplicated name"){
+                    alert("중복된 이름입니다. 다른 이름을 입력해주세요.")
                 }else if(response.data["message"] === "Signup success"){
                     // ================= 유저 정보 등록 성공 ================= 
                     alert("등록에 성공하였습니다.");
@@ -77,20 +78,21 @@ class RegisterPage extends Component {
         }else{
             alert("패스워드와 패스워드 확인의 내용이 다릅니다. 다시 확인해주세요.");
         }
-    };
 
-    render() {
-        if(this.state.redirect === true){
-            return <Redirect to={'/login_user'} />;
-        }
-
-        if(this.register_success === false){
+        //등록에 실패한 경우 formData의 내용을 제거
+        if(this.register_success !== true){
             formData.delete("email");
             formData.delete("password");
             formData.delete("name");
             formData.delete("user_rol");
             formData.delete("created_by");
             formData.delete("updated_by");
+        }
+    };
+
+    render() {
+        if(this.state.redirect === true){
+            return <Redirect to={'/login_user'} />;
         }
 
         return (

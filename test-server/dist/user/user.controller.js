@@ -22,13 +22,14 @@ const path_1 = require("path");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
+        this.filepath = "file-repo/user_image";
     }
     login(email, password, response) {
         return this.userService.Login(email, password, response);
     }
     getUserImage(path, response) {
         response.sendFile(path, {
-            root: "user_image"
+            root: this.filepath
         });
     }
     logout(response) {
@@ -38,7 +39,12 @@ let UserController = class UserController {
         return this.userService.ConfirmUser(request);
     }
     createUser(file, body) {
-        return this.userService.RegisterUser(body, file.filename);
+        if (file) {
+            return this.userService.RegisterUser(body, file.filename);
+        }
+        else {
+            return this.userService.RegisterUser(body, "");
+        }
     }
     deleteUser(body) {
         return this.userService.DeleteUser(body);
@@ -82,7 +88,7 @@ __decorate([
     common_1.Post("/register_user"),
     common_1.UseInterceptors(platform_express_1.FileInterceptor("user_image", {
         storage: multer_1.diskStorage({
-            destination: "./user_image",
+            destination: "./file-repo/user_image",
             filename(_, file, callback) {
                 const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
                 return callback(null, `${randomName}${path_1.extname(file.originalname)}`);

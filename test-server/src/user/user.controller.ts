@@ -9,6 +9,8 @@ import { extname, basename } from 'path';
 @Controller()
 export class UserController {
     constructor(private readonly userService : UserService){}
+
+    private filepath = "file-repo/user_image"
     
     //Login
     @Post("/login")
@@ -22,8 +24,9 @@ export class UserController {
 
     @Get("/uimg/:path")
     getUserImage(@Param("path") path, @Res() response : Response){
+        //저장되어있는 파일 경로 response
         response.sendFile(path, {
-            root: "user_image"
+            root: this.filepath
         });
     }
 
@@ -44,7 +47,7 @@ export class UserController {
     @Post("/register_user")
     @UseInterceptors(FileInterceptor("user_image", {
         storage: diskStorage({
-            destination: "./user_image",
+            destination: "./file-repo/user_image",
             filename(_, file, callback){
                 const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
                 return callback(null, `${randomName}${extname(file.originalname)}`);
@@ -52,7 +55,11 @@ export class UserController {
         })
     }))
     createUser(@UploadedFile() file : Express.Multer.File, @Body() body : JSON){
-        return this.userService.RegisterUser(body, file.filename);
+        if(file){
+            return this.userService.RegisterUser(body, file.filename);
+        }else{
+            return this.userService.RegisterUser(body, "");
+        }
     }
 
     //User delete

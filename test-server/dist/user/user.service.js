@@ -27,11 +27,19 @@ let UserService = class UserService {
             let sql = "select EXISTS (select password from " + switch_1.switching + ".users where email='" + userData["email"] + "') as success";
             const emailExists = await SQLQueryRun(sql);
             if (emailExists[0]["success"] == 0) {
-                const hashedPassword = await bcrypt.hash(userData["password"], 10);
-                sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
-                SQLQueryRun(sql);
-                sFlag = true;
-                resultMsg = "Signup success";
+                sql = "select EXISTS (select password from " + switch_1.switching + ".users where name='" + userData["name"] + "') as success";
+                const dupUsername = await SQLQueryRun(sql);
+                if (dupUsername[0]["success"] == 0) {
+                    const hashedPassword = await bcrypt.hash(userData["password"], 10);
+                    sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
+                    SQLQueryRun(sql);
+                    sFlag = true;
+                    resultMsg = "Signup success";
+                }
+                else {
+                    sFlag = false;
+                    resultMsg = "Duplicated name";
+                }
             }
             else {
                 sFlag = false;

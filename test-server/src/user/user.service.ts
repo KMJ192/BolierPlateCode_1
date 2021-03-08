@@ -17,17 +17,25 @@ export class UserService {
         let resultMsg : string;
         let sFlag : boolean = false;
         if(userData["user_rol"] == 0){
-            //1. 입력받은 email이 DB에 있는지 파악
+            //1. 입력받은 email과 중복된 email이 DB에 있는지 확인
             let sql : string = "select EXISTS (select password from " + switching + ".users where email='" + userData["email"] + "') as success";
             const emailExists = await SQLQueryRun(sql);
             if(emailExists[0]["success"] == 0){
-                //2. 입력받은 email이 DB에 없을 경우 DB에 Input -> encryption password => parameter plain password, SaltRound
-                const hashedPassword = await bcrypt.hash(userData["password"], 10);
-                //user_image의 경로를 저장
-                sql = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
-                SQLQueryRun(sql);
-                sFlag = true;
-                resultMsg = "Signup success";
+                //2. 입력받은 name과 중복된 name이 DB에 있는지 확인
+                sql = "select EXISTS (select password from " + switching + ".users where name='" + userData["name"] + "') as success"
+                const dupUsername = await SQLQueryRun(sql);
+                if(dupUsername[0]["success"] == 0){
+                    //3. email과 name이 중복되지 않았을 경우 DB에 Input -> encryption password => parameter plain password, SaltRound
+                    const hashedPassword = await bcrypt.hash(userData["password"], 10);
+                    //user_image의 경로를 저장
+                    sql = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"]+ "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
+                    SQLQueryRun(sql);
+                    sFlag = true;
+                    resultMsg = "Signup success";
+                }else{
+                    sFlag = false;
+                    resultMsg = "Duplicated name";
+                }
             }else{
                 //3. 입력받은 email이 있을 경우 결과 발송
                 sFlag = false;
