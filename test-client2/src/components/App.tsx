@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Auth from '../hoc/Auth';
 import LandingPage from './views/landing_page/LandingPage';
 import LoginPage from './views/login_page/LoginPage';
 import RegisterPage from './views/register_page/RegisterPage';

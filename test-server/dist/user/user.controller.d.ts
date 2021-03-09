@@ -24,5 +24,8 @@ export declare class UserController {
         message: string;
     }>;
     deleteUser(body: JSON): Promise<unknown>;
-    patchUser(body: JSON): Promise<unknown>;
+    patchUser(body: JSON): Promise<{
+        patch: boolean;
+        message: string;
+    }>;
 }
