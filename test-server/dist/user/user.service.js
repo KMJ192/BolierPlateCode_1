@@ -105,6 +105,7 @@ let UserService = class UserService {
             verifed = true;
         }
         return {
+            useremail: email,
             username: username,
             userimage: userimage,
             result: verifed

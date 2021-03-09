@@ -2,6 +2,14 @@
     width: 40px;
     height: 40px;
     margin-left: 70px;
-    margin-bottom: 5px;
+    margin-top: 10px;    
     border-radius: 75px;
+    cursor:pointer;
+}
+
+/* 화면이 좁아졌을때 안보이게 하기 */
+@media screen and (max-width : 768px){
+    #user-logo{
+        display: none;
+    }
 }

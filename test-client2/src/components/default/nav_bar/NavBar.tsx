@@ -8,7 +8,7 @@ import { server_url } from '../../../server_url/server_url';
 const NavBar = () => {
     const [isLogin, setIsLogin] = useState(false);
     const [username, setUsername] = useState('');
-    const [userimage, setUserimage] = useState(OutputImage(2))
+    const [userimage, setUserimage] = useState(OutputImage(2));
     
     useEffect(() => {
         (

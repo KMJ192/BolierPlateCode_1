@@ -12,13 +12,11 @@ function AfterLogin(props : any) {
 
     return (
         <div>
-            <ul className="nav ml-auto user-menu">
-                <li className="nav-item nav-item-user display-lg-up dropdown show">
-                    <a href="#" className="nav-link" data-toggle="dropdown" aria-expanded="true"
+            <ul>
+                <li>
+                    <img id="user-logo" src={props.image} alt="회원사진"
                         onClick={() => uInfoSelect ? setuInfoSelect(false) : setuInfoSelect(true)}
-                    >
-                        <img id="user-logo" src={props.image} alt="회원사진"/>
-                    </a>
+                    />
                 </li>
             </ul>
             <div className={(uInfoSelect) ? "dropdown-menu dropdown-menu-right show" : "dropdown-menu dropdown-menu-right"}>
@@ -27,7 +25,7 @@ function AfterLogin(props : any) {
                 </div>
                 <div className="dropdown-divider"></div>
                 <div className="dorpdown-group">
-                    <a className="dropdown-item" href="/">정보수정</a>
+                    <a className="dropdown-item" href="/patch_user">정보수정</a>
                 </div>
                 <div className="dropdown-divider"></div>
                 <div className="dropdown-gruop">
