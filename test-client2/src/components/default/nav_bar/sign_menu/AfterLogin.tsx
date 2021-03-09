@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AfterLogin.css'
 import axios from 'axios';
 
 function AfterLogin(props : any) {
     let userlogState;
-
     userlogState = async () => {
         await axios.post("/logout", {});
     }
     
+    const [uInfoSelect, setuInfoSelect] = useState(false);
+
     return (
         <div>
             <ul className="nav ml-auto user-menu">
                 <li className="nav-item nav-item-user display-lg-up dropdown show">
-                    <a href="#" className="nav-link" data-toggle="dropdown" aria-expanded="true">
+                    <a href="#" className="nav-link" data-toggle="dropdown" aria-expanded="true"
+                        onClick={() => uInfoSelect ? setuInfoSelect(false) : setuInfoSelect(true)}
+                    >
                         <img id="user-logo" src={props.image} alt="회원사진"/>
                     </a>
                 </li>
             </ul>
-            <div className="dropdown-menu dropdown-menu-right show">
+            <div className={(uInfoSelect) ? "dropdown-menu dropdown-menu-right show" : "dropdown-menu dropdown-menu-right"}>
                 <div className="dorpdown-group">
                     <div className="dropdown-item">{props.name} 님</div>
                 </div>
