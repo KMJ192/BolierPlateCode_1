@@ -46,11 +46,11 @@ let UserController = class UserController {
             return this.userService.RegisterUser(body, "");
         }
     }
-    deleteUser(body) {
-        return this.userService.DeleteUser(body);
+    deleteUser(data) {
+        return this.userService.DeleteUser(data["data"]);
     }
-    patchUser(body) {
-        return this.userService.PatchUser(body);
+    patchUser(file, body) {
+        return this.userService.PatchUser(body, file.filename);
     }
 };
 __decorate([
@@ -102,8 +102,8 @@ __decorate([
 ], UserController.prototype, "createUser", null);
 __decorate([
     common_1.UseGuards(user_guard_1.UserGuard),
-    common_1.Delete("/delete_user"),
-    __param(0, common_1.Body()),
+    common_1.Delete("/delete_user/:data"),
+    __param(0, common_1.Param()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
@@ -111,9 +111,18 @@ __decorate([
 __decorate([
     common_1.UseGuards(user_guard_1.UserGuard),
     common_1.Patch("/patch_user"),
-    __param(0, common_1.Body()),
+    common_1.UseInterceptors(platform_express_1.FileInterceptor("user_image", {
+        storage: multer_1.diskStorage({
+            destination: "./file-repo/user_image",
+            filename(_, file, callback) {
+                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+                return callback(null, `${randomName}${path_1.extname(file.originalname)}`);
+            }
+        })
+    })),
+    __param(0, common_1.UploadedFile()), __param(1, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "patchUser", null);
 UserController = __decorate([

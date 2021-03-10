@@ -3,10 +3,26 @@ import './AfterLogin.css'
 import axios from 'axios';
 
 function AfterLogin(props : any) {
-    let userlogState;
-    userlogState = async () => {
-        await axios.post("/logout", {});
+    
+    async function logout(){
+        return await axios.post("/logout", {});
     }
+
+    async function deleteReq() {
+        return await axios.delete("/delete_user/" + props.email, {
+                data: props.email
+            });
+    }
+
+    //유저 삭제할 경우 logout 및 유저 삭제
+    const deleteUser = async() => {
+        await axios.all([
+            logout(),
+            deleteReq()
+        ]).catch((err) => {
+            alert("오류 발생 : " + err);
+        });
+    };
     
     const [uInfoSelect, setuInfoSelect] = useState(false);
 
@@ -29,7 +45,11 @@ function AfterLogin(props : any) {
                 </div>
                 <div className="dropdown-divider"></div>
                 <div className="dropdown-gruop">
-                    <a className="dropdown-item" href="/" onClick={userlogState}>Logout</a>
+                    <a className="dropdown-item" href="/" onClick={logout}>Logout</a>
+                </div>
+                <div className="dropdown-divider"></div>
+                <div className="dropdown-gruop">
+                    <a className="dropdown-item" href="/" onClick={deleteUser}>회원탈퇴</a>
                 </div>
             </div>
         </div>

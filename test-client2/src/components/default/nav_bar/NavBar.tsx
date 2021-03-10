@@ -9,6 +9,7 @@ const NavBar = () => {
     const [isLogin, setIsLogin] = useState(false);
     const [username, setUsername] = useState('');
     const [userimage, setUserimage] = useState(OutputImage(2));
+    const [email, setEmail] = useState('');
     
     useEffect(() => {
         (
@@ -18,6 +19,7 @@ const NavBar = () => {
                     //cookie 검증 완료(로그인 된 상태)
                     setUsername(data["username"]);
                     setIsLogin(true);
+                    setEmail(data["useremail"])
                     //유저 이미지 정보가 있을 경우 유저 이미지 정보를 설정
                     if(data["userimage"] !== ''){
                         setUserimage(server_url + "/uimg/" + data["userimage"]);
@@ -54,7 +56,7 @@ const NavBar = () => {
                     </form>
                 </div>
             </div>
-            <UserMenu name={username} token={isLogin} image={userimage}/>
+            <UserMenu name={username} token={isLogin} image={userimage} email={email}/>
         </nav>
     )
 }

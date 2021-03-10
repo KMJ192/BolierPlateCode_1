@@ -122,18 +122,18 @@ let UserService = class UserService {
             message: "success"
         };
     }
-    async DeleteUser(userData) {
-        let sql = "delete from " + switch_1.switching + ".users where email='" + userData["email"] + "'";
+    async DeleteUser(email) {
+        let sql = "delete from " + switch_1.switching + ".users where email='" + email + "'";
         const result = await SQLQueryRun(sql);
         return result;
     }
-    async PatchUser(userData) {
+    async PatchUser(userData, user_image) {
         let sql = "select EXISTS (select password from " + switch_1.switching + ".users where name='" + userData["name"] + "') as success";
         let resultMsg;
         let sFlag = false;
         const dupUsername = await SQLQueryRun(sql);
         if (dupUsername[0]["success"] == 0) {
-            sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
+            sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
             await SQLQueryRun(sql);
             resultMsg = "Patch success";
             sFlag = true;

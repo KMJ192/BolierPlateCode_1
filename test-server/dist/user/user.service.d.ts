@@ -20,8 +20,8 @@ export declare class UserService {
     Logout(response: Response): {
         message: string;
     };
-    DeleteUser(userData: JSON): Promise<unknown>;
-    PatchUser(userData: JSON): Promise<{
+    DeleteUser(email: string): Promise<unknown>;
+    PatchUser(userData: JSON, user_image: string): Promise<{
         patch: boolean;
         message: string;
     }>;

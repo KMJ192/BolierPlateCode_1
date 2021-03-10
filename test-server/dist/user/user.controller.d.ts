@@ -23,8 +23,8 @@ export declare class UserController {
         registerd: boolean;
         message: string;
     }>;
-    deleteUser(body: JSON): Promise<unknown>;
-    patchUser(body: JSON): Promise<{
+    deleteUser(data: JSON): Promise<unknown>;
+    patchUser(file: Express.Multer.File, body: JSON): Promise<{
         patch: boolean;
         message: string;
     }>;

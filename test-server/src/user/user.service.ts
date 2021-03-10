@@ -136,15 +136,15 @@ export class UserService {
     }
 
     //User delete
-    async DeleteUser(userData : JSON){
+    async DeleteUser(email : string){
         //삭제 query
-        let sql : string = "delete from " + switching + ".users where email='" + userData["email"] + "'";
+        let sql : string = "delete from " + switching + ".users where email='" + email + "'";
         const result = await SQLQueryRun(sql);
         return result;
     }
 
     //User patch
-    async PatchUser(userData : JSON){
+    async PatchUser(userData : JSON, user_image : string){
         //수정 query 작성
         let sql : string = "select EXISTS (select password from " + switching + ".users where name='" + userData["name"] + "') as success"
         let resultMsg : string;
@@ -152,7 +152,7 @@ export class UserService {
         const dupUsername = await SQLQueryRun(sql);
         if(dupUsername[0]["success"] == 0){
             //입력된 유저 이름이 중복되어 있지 않으면 수정
-            sql = "update " + switching + ".users set name='" + userData["name"] + "', updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
+            sql = "update " + switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
             await SQLQueryRun(sql);
             resultMsg = "Patch success"
             sFlag = true;

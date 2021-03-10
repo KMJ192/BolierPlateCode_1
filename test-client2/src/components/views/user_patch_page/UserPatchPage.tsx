@@ -57,15 +57,16 @@ function UserPatchPage() {
 
     const submit = async (e : SyntheticEvent) => {
         //formData에 입력
-        formData.append("password", password);
+        formData.append("email", email);
         formData.append("name", name);
+        formData.append("password", password);
         formData.append("updated_by", name);
 
         //확인 버튼을 눌렀을때 페이지 새로고침(기본동작) 방지 및 데이터 전체 submit
         e.preventDefault();
         //빈칸이 있는지 검사, 탭 포함
         if(password === passwordConfirm){
-            await axios.post("/patch_user", formData).then((response) => {
+            await axios.patch("/patch_user", formData).then((response) => {
                 if(response.data["patch"] === true){
                     alert("회원 정보를 수정하였습니다.");
                     setRedirect(true);
@@ -86,8 +87,9 @@ function UserPatchPage() {
 
         //등록에 실패한 경우 formData의 내용을 제거
         if(patch_success !== true){
-            formData.delete("password");
+            formData.delete("email");
             formData.delete("name");
+            formData.delete("password");
             formData.delete("updated_by");
         }
     };

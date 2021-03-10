@@ -64,15 +64,24 @@ export class UserController {
 
     //User delete
     @UseGuards(UserGuard)
-    @Delete("/delete_user")
-    deleteUser(@Body() body : JSON){
-        return this.userService.DeleteUser(body);
+    @Delete("/delete_user/:data")
+    deleteUser(@Param() data : JSON){
+        return this.userService.DeleteUser(data["data"]);
     }
 
     //User patch
     @UseGuards(UserGuard)
     @Patch("/patch_user")
-    patchUser(@Body() body : JSON){
-        return this.userService.PatchUser(body);
+    @UseInterceptors(FileInterceptor("user_image", {
+        storage: diskStorage({
+            destination: "./file-repo/user_image",
+            filename(_, file, callback){
+                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+                return callback(null, `${randomName}${extname(file.originalname)}`);
+            }
+        })
+    }))
+    patchUser(@UploadedFile() file : Express.Multer.File, @Body() body : JSON){
+        return this.userService.PatchUser(body, file.filename);
     }
 }
