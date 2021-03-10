@@ -1,33 +1,47 @@
-import React, { useEffect, Component, SyntheticEvent } from 'react';
+import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './UserPatchPage.css';
 import OutputImage from '../../../images/Images';
+import { server_url } from '../../../server_url/server_url';
 
 let formData = new FormData();
 
-class UserPatchPage extends Component {
-    private name : string= "";
-    private password : string = "";
-    private password_confirm : string = "";
-    private patch_success : boolean = false;
-    state = {
-        redirect : false,
-        userimageBase64: "",
-    };
+function UserPatchPage() {
+    
+    useEffect(() => {
+        (
+            async () => {
+                const {data} = await axios.get('/user');
+                if(data["result"] === true){
+                    setName(data["username"]);
+                    setEmail(data["useremail"]);
+                    setUserImageBase64(server_url + "/uimg/" + data["userimage"]);
+                }
+            }
+        )();
+    }, []);
 
-    fileChangedHandler = (e : any) => {
+    //기존 이름, 대표이미지는 가져오기
+    const [userimageBase64, setUserImageBase64] = useState("");
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordComfirm] = useState("");
+    const [redirect, setRedirect] = useState(false);
+
+    let patch_success : boolean = false;
+
+    const fileChangedHandler = (e : any) => {
         //이미지 파일 미리보기 설정
         let reader = new FileReader();
         reader.onloadend = () => {
             if(reader.result) {
-                this.setState({
-                    userimageBase64: String(reader.result)
-                });
+                setUserImageBase64(String(reader.result));
             }
         };
 
-        //파일 설정했을 경우 userimage에 파일 설정
+        //파일을 변경했을 경우 formData에 image 담기
         if(e.target.files[0]){
             reader.readAsDataURL(e.target.files[0]);
             formData.append("user_image", e.target.files[0]);
@@ -35,29 +49,27 @@ class UserPatchPage extends Component {
     };
 
     //대표이미지 삭제 function
-    handleRemove = () => {
-        this.setState({
-            userimageBase64 : ""
-        });
+    const handleRemove = () => {
+        //useState에 담겨진 이미지 삭제 및 formData의 user_image 삭제
+        setUserImageBase64("");
         formData.delete("user_image");
     };
 
-    submit = async (e : SyntheticEvent) => {
+    const submit = async (e : SyntheticEvent) => {
         //formData에 입력
-        formData.append("password", this.password);
-        formData.append("name", this.name);
-        formData.append("updated_by", this.name);
+        formData.append("password", password);
+        formData.append("name", name);
+        formData.append("updated_by", name);
 
         //확인 버튼을 눌렀을때 페이지 새로고침(기본동작) 방지 및 데이터 전체 submit
         e.preventDefault();
         //빈칸이 있는지 검사, 탭 포함
-        if(this.password === this.password_confirm){
+        if(password === passwordConfirm){
             await axios.post("/patch_user", formData).then((response) => {
                 if(response.data["patch"] === true){
-                    alert("회원 정보를 수정하였습니다.")
-                    this.setState({
-                        redirect : true
-                    });
+                    alert("회원 정보를 수정하였습니다.");
+                    setRedirect(true);
+                    patch_success = true;
                 }else{
                     if(response.data["message"] === "Duplicated name"){
                         alert("중복된 이름입니다. 다른 이름을 입력해주세요.");
@@ -73,56 +85,53 @@ class UserPatchPage extends Component {
         }
 
         //등록에 실패한 경우 formData의 내용을 제거
-        if(this.patch_success !== true){
+        if(patch_success !== true){
             formData.delete("password");
             formData.delete("name");
             formData.delete("updated_by");
         }
     };
 
-    render() {
-        if(this.state.redirect === true){
-            //유저 정보를 수정완료한 후 메인페이지로 이동
-            return <Redirect to={'/'} />;
-        }
-
-        return (
-            <div id="register_form">
-                <main className="form-signin">
-                    <a href="/">
-                        <img id="logo" src={OutputImage(1)} alt="" width="70" height="70"/>
-                    </a>
-                    <h1 className="h3 mb-3 fw-normal">유저 정보 수정</h1>
-                    <form onSubmit={this.submit}>
-                        <div className="userimage-box">
-                            <div className="userimage-info">대표사진수정</div>
-                            <div className="userimage-place">
-                                <div>현재 사용자의 대표이미지가 표시되도록 수정 </div>
-                                {this.state.userimageBase64 ? (
-                                    <img className="userimage" src={this.state.userimageBase64} alt="대표이미지 설정" onClick={this.handleRemove} />
-                                ) : (
-                                    <div></div>
-                                )}
-                            </div>
-                            <label htmlFor="userimage-button" className="btn-primary userimage-button">내 PC에서 찾기</label>
-                            <input id="userimage-button" type="file" onChange={this.fileChangedHandler}/>
-                        </div>
-                        <input type="email" id="inputEmail" className="form-control" placeholder="현재사용자이메일이 출력되도록 수정" readOnly={true} required />
-                        <input id="inputname" className="form-control" placeholder="이름" required autoFocus
-                            onChange={e => this.name = e.target.value}
-                        />
-                        <input type="password" id="inputPassword" className="form-control" placeholder="비밀번호" required
-                            onChange={e => this.password = e.target.value}
-                        />
-                        <input type="password" className="form-control" placeholder="비밀번호 확인" required
-                            onChange={e => this.password_confirm = e.target.value}
-                        />
-                        <button id="confirm" className="w-100 btn btn-lg btn-primary" type="submit">확인</button>
-                    </form>
-                </main>
-            </div>
-        );
+    if(redirect === true){
+        //유저 정보를 수정완료한 후 메인페이지로 이동
+        return <Redirect to={'/'} />;
     }
+
+    return (
+        <div id="register_form">
+            <main className="form-signin">
+                <a href="/">
+                    <img id="logo" src={OutputImage(1)} alt="" width="70" height="70"/>
+                </a>
+                <h1 className="h3 mb-3 fw-normal">유저 정보 수정</h1>
+                <form onSubmit={submit}>
+                    <div className="userimage-box">
+                        <div className="userimage-info">대표사진수정</div>
+                        <div className="userimage-place">
+                            {userimageBase64 ? (
+                                <img className="userimage" src={userimageBase64} alt="대표이미지 설정" onClick={handleRemove} />
+                            ) : (
+                                <div></div>
+                            )}
+                        </div>
+                        <label htmlFor="userimage-button" className="btn-primary userimage-button">내 PC에서 찾기</label>
+                        <input id="userimage-button" type="file" onChange={fileChangedHandler}/>
+                    </div>
+                    <input type="email" id="inputEmail" className="form-control" placeholder={email} readOnly={true} required />
+                    <input id="inputname" className="form-control" value={name} placeholder="이름" required autoFocus
+                        onChange={e => setName(e.target.value)}
+                    />
+                    <input type="password" id="inputPassword" className="form-control" placeholder="비밀번호" required
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <input type="password" className="form-control" placeholder="비밀번호 확인" required
+                        onChange={e => setPasswordComfirm(e.target.value)}
+                    />
+                    <button id="confirm" className="w-100 btn btn-lg btn-primary" type="submit">확인</button>
+                </form>
+            </main>
+        </div>
+    );
 }
 
 export default UserPatchPage

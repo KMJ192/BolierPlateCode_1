@@ -6,6 +6,9 @@ import RegisterPage from './views/register_page/RegisterPage';
 import UserPatchPage from './views/user_patch_page/UserPatchPage';
 
 export class App extends Component {
+
+  //App컴포넌트에서 user접근제어를 할 것.
+  //user Data를 각 컴포넌트에 넘겨줄 것
   render() {
     return (
       <BrowserRouter>
