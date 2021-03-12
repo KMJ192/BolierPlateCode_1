@@ -82,6 +82,11 @@ export class UserController {
         })
     }))
     patchUser(@UploadedFile() file : Express.Multer.File, @Body() body : JSON){
-        return this.userService.PatchUser(body, file.filename);
+        //대표이미지 수정유무 확인하여 Param넘겨줌
+        if(!file){
+            return this.userService.PatchUser(body, "");
+        }else{
+            return this.userService.PatchUser(body, file.filename);
+        }
     }
 }

@@ -50,7 +50,12 @@ let UserController = class UserController {
         return this.userService.DeleteUser(data["data"]);
     }
     patchUser(file, body) {
-        return this.userService.PatchUser(body, file.filename);
+        if (!file) {
+            return this.userService.PatchUser(body, "");
+        }
+        else {
+            return this.userService.PatchUser(body, file.filename);
+        }
     }
 };
 __decorate([

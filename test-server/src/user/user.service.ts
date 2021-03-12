@@ -152,7 +152,11 @@ export class UserService {
         const dupUsername = await SQLQueryRun(sql);
         if(dupUsername[0]["success"] == 0){
             //입력된 유저 이름이 중복되어 있지 않으면 수정
-            sql = "update " + switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
+            if(user_image == ""){
+                sql = "update " + switching + ".users set name='" + userData["name"] + "', updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
+            }else{
+                sql = "update " + switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
+            }
             await SQLQueryRun(sql);
             resultMsg = "Patch success"
             sFlag = true;

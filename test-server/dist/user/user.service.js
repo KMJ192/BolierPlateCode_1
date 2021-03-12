@@ -133,7 +133,12 @@ let UserService = class UserService {
         let sFlag = false;
         const dupUsername = await SQLQueryRun(sql);
         if (dupUsername[0]["success"] == 0) {
-            sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
+            if (user_image == "") {
+                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
+            }
+            else {
+                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
+            }
             await SQLQueryRun(sql);
             resultMsg = "Patch success";
             sFlag = true;
