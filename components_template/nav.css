@@ -1,0 +1,83 @@
+body{
+    margin: 0;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+
+/* Navigation Bar */
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #263343;
+    padding: 8px 12px;
+}
+/* logo - container */
+.logo-container{
+    font-size: 15px;
+    flex: display;
+}
+.navbar-logo{
+    font-size: 24px;
+    color: white;
+}
+.logo-cen{
+    font-size: 15px;
+}
+/* logo - container */
+
+/* nav - menu container */
+.navbar-menu{
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+.navbar-menu li{
+    padding: 8px 12px;
+}
+.navbar-menu li a:hover{
+    color: teal;
+}
+/* nav - menu container */
+
+/* nab - toggle container */
+.navbar-toggle-btn{
+    position: absolute;
+    right: 32px;
+    display: none;
+}
+.navbar-toggle-btn:hover{
+    color: blueviolet;
+}
+
+.navbar-menu.active{
+    display: flex;
+}
+
+/* nab - toggle container */
+
+@media screen and (max-width: 768px){
+    .navbar-logo a{
+        justify-content: center;
+        width: 100%;
+    }
+    .navbar{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar-menu{
+        display: none;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+    }
+    .navbar-menu li:hover{
+        background-color: #d49466;
+        border-radius: 4px;
+    }
+    .navbar-toggle-btn{
+        display: block;
+    }
+}
