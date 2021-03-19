@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { Component } from 'react'
+import NavTop from './nav_top/NavTop'
 
-function Wrapper() {
-    return (
-        <div>
-            
-        </div>
-    )
+class Wrapper extends Component {
+    render() {
+        return (
+            <div>
+                <NavTop/>
+                <main>
+                    {this.props.children}
+                </main>
+            </div>
+        );
+    }
 }
 
 export default Wrapper

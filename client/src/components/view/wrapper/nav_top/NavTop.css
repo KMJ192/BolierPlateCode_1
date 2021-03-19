@@ -15,27 +15,17 @@ a{
 
 
 
-/* left-container */
-.navbar-left-container{
-    display: flex;
-    align-items: center;
-}
-/* left-container */
-
-
-
 /* logo - container */
 .logo-container{
     font-size: 15px;
     padding: 8px 12px;
-    margin-right: 10px;
 }
 .navbar-logo{
     font-size: 24px;
     color: white;
 }
-.logo-text{
-    padding: 8px 12px;
+.logo{
+    margin-right: 5px;
 }
 /* logo - container */
 
@@ -58,7 +48,7 @@ a{
 /* search - container */
 .search-container input{
     border-radius: 5px;
-    height: 30px;
+    height: 25px;
 }
 /* search - container */
 

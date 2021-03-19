@@ -1,10 +1,11 @@
 import React from 'react'
+import Wrapper from '../wrapper/Wrapper'
 
 function MainPage() {
     return (
-        <div>
-            MainPage
-        </div>
+        <Wrapper>
+            <div>main page</div>
+        </Wrapper>
     )
 }
 
