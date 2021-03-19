@@ -1,6 +1,7 @@
 .vscode/
 
 # operator-client
+client/node_modules
 
 # operator-server
 server

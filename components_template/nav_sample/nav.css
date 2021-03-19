@@ -14,17 +14,23 @@ a{
     background-color: #263343;
     padding: 8px 12px;
 }
+
+/* left-side */
+.navbar-left-side{
+    display: flex;
+    align-items: center;
+}
+/* left-side */
+
 /* logo - container */
 .logo-container{
     font-size: 15px;
-    flex: display;
+    padding: 8px 12px;
+    margin-right: 10px;
 }
 .navbar-logo{
     font-size: 24px;
     color: white;
-}
-.logo-cen{
-    font-size: 15px;
 }
 /* logo - container */
 
@@ -35,27 +41,35 @@ a{
     padding-left: 0;
 }
 .navbar-menu li{
-    padding: 8px 12px;
+    font-size: 15px;
+    padding: 8px 8px;
 }
 .navbar-menu li a:hover{
     color: teal;
 }
 /* nav - menu container */
 
+/* search - container */
+.search-container input{
+    border-radius: 5px;
+    height: 30px;
+}
+/* search - container */
+
 /* nab - toggle container */
 .navbar-toggle-btn{
     position: absolute;
     right: 32px;
+    top: 17px;
     display: none;
+    size: 15px;
 }
 .navbar-toggle-btn:hover{
     color: blueviolet;
 }
-
 .navbar-menu.active{
     display: flex;
 }
-
 /* nab - toggle container */
 
 @media screen and (max-width: 768px){
@@ -73,11 +87,17 @@ a{
         text-align: center;
         width: 100%;
     }
+    .search-container{
+        display: none;
+    }
     .navbar-menu li:hover{
         background-color: #d49466;
         border-radius: 4px;
     }
     .navbar-toggle-btn{
         display: block;
+    }
+    .login-btn{
+        display: none;
     }
 }
