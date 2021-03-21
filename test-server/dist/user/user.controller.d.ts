@@ -10,14 +10,15 @@ export declare class UserController {
         message: string;
     }>;
     getUserImage(path: any, response: Response): void;
-    logout(response: Response): {
+    logout(response: Response): Promise<{
         message: string;
-    };
+    }>;
     confirmUser(request: Request): Promise<{
         useremail: string;
         username: string;
         userimage: string;
         result: boolean;
+        message: string;
     }>;
     createUser(file: Express.Multer.File, body: JSON): Promise<{
         registerd: boolean;

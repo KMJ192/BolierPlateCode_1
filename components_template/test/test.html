@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .ex-layout{
+            width: 500px;
+        }
+        .ex-layout .gnb{
+            padding: 15px;
+            background-color: skyblue;
+        }
+        .ex-layout .main{
+            background-color: white;
+        }
+        .main:after{ clear: both; display: block; content: '' }
+        
+        .lnb{
+            float: left;
+            width: 100px;
+            height: 254px;
+            background-color: orange;
+        }
+        .content{
+            float: left;
+            width: 400px;
+        }
+
+        </style>
+        <div class="ex-layout">
+            <div class="gnb">Global menu</div>
+            <div class="main">
+                <div class="lnb">Left menu</div>
+                <div class="content">
+                    Content area
+                </div>
+            </div>
+            <div class="footer">
+                Footer area
+            </div>
+        </div>
+</body>
+</html>

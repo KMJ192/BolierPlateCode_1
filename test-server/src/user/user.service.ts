@@ -74,9 +74,11 @@ export class UserService {
                 sFlag = true;
                 resultMsg = "Login success"
             }else{
+                //비밀번호가 다름
                 resultMsg = "Different pw";
             }
         }else{
+            //이메일이 없음
             resultMsg = "None email";
         }
         
@@ -89,18 +91,17 @@ export class UserService {
     //User Verify
     async ConfirmUser(request : Request){
         let email : string;
-        let verifed : boolean;
+        let verifed : boolean = false;
         let username : string, userimage : string;
-
+        let resultMsg : string;
         if(request["cookies"]["jwt"] == null){
             //Token이 없음
-            verifed = false;
+            resultMsg = "none jwt"
         }else{
             //Token이 있음
             try{
                 let sql : string;
                 let user_data;
-                
                 //유저닉네임 추출
                 const cookie = await request.cookies['jwt'];
                 //쿠키 비교
@@ -114,21 +115,24 @@ export class UserService {
                 //email에 대한 유저닉네임 추출
                 username = user_data[0]["name"];
                 userimage = user_data[0]["user_image"];
+                resultMsg = "success";
                 verifed = true;
             }catch(e){
                 verifed = false;
+                resultMsg = e;
             }
         }
         return {
             useremail : email,
             username : username,
             userimage : userimage,
-            result : verifed
+            result : verifed,
+            message : resultMsg
         };
     }
 
     //Logout
-    Logout(response : Response){
+    async Logout(response : Response){
         response.clearCookie('jwt')
         return {
             message : "success"
@@ -146,9 +150,9 @@ export class UserService {
     //User patch
     async PatchUser(userData : JSON, user_image : string){
         //수정 query 작성
-        let sql : string = "select EXISTS (select password from " + switching + ".users where name='" + userData["name"] + "') as success"
         let resultMsg : string;
         let sFlag : boolean = false;
+        let sql : string = "select EXISTS (select password from " + switching + ".users where name='" + userData["name"] + "') as success"
         const dupUsername = await SQLQueryRun(sql);
         if(dupUsername[0]["success"] == 0){
             //입력된 유저 이름이 중복되어 있지 않으면 수정
@@ -174,7 +178,7 @@ export class UserService {
 //SQL Query 실행
 function SQLQueryRun(sql : string) {
     return new Promise((resolve, reject) => {
-        conn.query(sql, function(err, result){
+        conn.query(sql, function(err : string, result){
             if(err){
                 reject(err);
             }

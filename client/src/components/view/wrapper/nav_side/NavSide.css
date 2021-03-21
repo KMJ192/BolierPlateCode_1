@@ -1,0 +1,24 @@
+.nav-side{
+    position: fixed;
+    /* z-index: 1; */
+    height: 100%;
+    background-color: #49607c;
+    left: 0;
+    align-items: center;
+    padding: 8px 20px;
+    box-sizing: border-box;
+}
+
+.nav-side a{
+    padding: 14px 8px 6px 8px;
+    text-decoration: none;
+    font-size: 15px;
+    display: block;
+}
+.nav-side a:hover{
+    color: #f1f1f1;
+}
+
+.side-icon{
+    padding-right: 5px;
+}

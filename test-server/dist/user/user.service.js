@@ -86,10 +86,11 @@ let UserService = class UserService {
     }
     async ConfirmUser(request) {
         let email;
-        let verifed;
+        let verifed = false;
         let username, userimage;
+        let resultMsg;
         if (request["cookies"]["jwt"] == null) {
-            verifed = false;
+            resultMsg = "none jwt";
         }
         else {
             try {
@@ -103,20 +104,23 @@ let UserService = class UserService {
                 user_data = await SQLQueryRun(sql);
                 username = user_data[0]["name"];
                 userimage = user_data[0]["user_image"];
+                resultMsg = "success";
                 verifed = true;
             }
             catch (e) {
                 verifed = false;
+                resultMsg = e;
             }
         }
         return {
             useremail: email,
             username: username,
             userimage: userimage,
-            result: verifed
+            result: verifed,
+            message: resultMsg
         };
     }
-    Logout(response) {
+    async Logout(response) {
         response.clearCookie('jwt');
         return {
             message: "success"
@@ -128,9 +132,9 @@ let UserService = class UserService {
         return result;
     }
     async PatchUser(userData, user_image) {
-        let sql = "select EXISTS (select password from " + switch_1.switching + ".users where name='" + userData["name"] + "') as success";
         let resultMsg;
         let sFlag = false;
+        let sql = "select EXISTS (select password from " + switch_1.switching + ".users where name='" + userData["name"] + "') as success";
         const dupUsername = await SQLQueryRun(sql);
         if (dupUsername[0]["success"] == 0) {
             if (user_image == "") {

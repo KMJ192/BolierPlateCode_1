@@ -11,7 +11,11 @@ npm install react-router-dom @types/react-router-dom
 
 //server와 http 통신을 위한 axios 라이브러리
 npm install axios @types/axios --save
-npm install http-proxy-middleware @types/http-proxy-middleware --save
+//npm install http-proxy-middleware @types/http-proxy-middleware --save
+
+//CSS in JS
+npm install styled-components
+npm install @types/styled-components
 
 //html, css
 https://getbootstrap.com/
