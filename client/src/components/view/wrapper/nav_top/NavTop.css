@@ -10,4 +10,6 @@ a{
 
 /* nab - toggle container */
 .navbar-menu.active{display: flex;}
-/* nab - toggle container */
+.logo{
+    font-size: 20px;
+}

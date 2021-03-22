@@ -24,7 +24,6 @@ export const MenuUl = styled.ul`
     margin-left: 40px;
     position: absolute;
     @media screen and (max-width: 768px){
-        transition: 0.1;
         ${(props : any) => props.open ? 
             css`
                 display: flex;
@@ -44,13 +43,17 @@ export const MenuLi = styled.li`
     font-size: 15px;
     padding: 8px 0px 8px 15px;
     @media screen and (max-width: 768px){
-        &:hover{background-color: #d49466;}
+        transition: 0.3s;
+        &:hover{
+            background-color: #d49466;
+        }
         border-radius: 4px;
     }
 `;
 export const MenuA = styled.a`
+    transition: 0.1s;
     &:hover{
-        color: teal;
+        color: #778899;
     }
 `;
 

@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 export const NavSideDiv = styled.div`
     position: fixed;
-    //z-index: 1;
     height: 100%;
     background-color: #49607c;
     left: 0;
@@ -10,11 +9,12 @@ export const NavSideDiv = styled.div`
     box-sizing: border-box;
     transition: 0.1s;
     ${(props : any) => props.open ? 
-    css`
-        padding: 8px 20px;
-    ` : css`
-        padding: 8px 0px;
-    `}
+        css`
+            padding: 8px 30px;
+        ` : css`
+            padding: 8px 0px;
+        `
+    }
 `;
 
 export const NavSideDataLi = styled.li`
@@ -27,6 +27,7 @@ export const NavSideA = styled.a`
     text-decoration: none;
     font-size: 15px;
     display: block;
+    transition: 0.1s;
     &:hover{
         color: #778899;
     }
@@ -36,7 +37,7 @@ export const NavSideA = styled.a`
 `;
 
 export const NavSideSpan = styled.span`
-    transition: 1s;
+    transition: 0.1s;
     ${(props : any) => !props.open && css `
             display: none;
         `

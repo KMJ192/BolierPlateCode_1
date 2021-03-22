@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import NavSide from './nav_side/NavSide';
 import NavTop from './nav_top/NavTop'
 import { LandingScreen, ToggleBtn } from './WrapperStyle';
-import './Wrapper.css';
 
 class Wrapper extends Component {
     //Default toggle value => true
@@ -20,7 +19,6 @@ class Wrapper extends Component {
         return (
             <div>
                 <NavTop/>
-                {/* Wrapper컴포넌트에서 동적제어 기능 */}
                 <ToggleBtn onClick={this.showSidebar} open={this.state.sidebarOpen} {...this.state.sidebarOpen}>
                     {this.state.sidebarOpen ? 
                         <i className="fas fa-arrow-alt-circle-left"></i>

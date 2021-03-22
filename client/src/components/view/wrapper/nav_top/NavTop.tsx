@@ -14,7 +14,7 @@ import {
     NavToggle, 
     CircleButton, 
 } from './NavTopStyle';
-
+import { NavTopData } from './NavTopData';
 
 function NavTop() {
     const [open, setOpen] = useState(false);
@@ -25,13 +25,19 @@ function NavTop() {
             <LogoContainer>
                 <a href={main_page}>
                     <i className="fab fa-rust logo"></i>
-                    Logo
+                    logo
                 </a>
             </LogoContainer>
             <MenuUl open={open} {...open}>
-                <MenuLi><MenuA href="#">menu1</MenuA></MenuLi>
-                <MenuLi><MenuA href="#">menu2</MenuA></MenuLi>
-                <MenuLi><MenuA href="#">menu3</MenuA></MenuLi>
+                {NavTopData.map((item, index) => {
+                    return (
+                        <MenuLi key={index}>
+                            <MenuA href={item.path}>
+                                {item.title}
+                            </MenuA>
+                        </MenuLi>
+                    );
+                })}
             </MenuUl>
             <SearchContainer>
                 <SearchBox/>

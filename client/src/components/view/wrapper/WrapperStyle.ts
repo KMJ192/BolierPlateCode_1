@@ -6,7 +6,7 @@ export const ToggleBtn = styled.div`
     font-size: 40px;
     ${(props : any) => props.open ? 
         css`
-            margin-left: 110px;
+            margin-left: 130px;
         ` : css`
             margin-left: 45px;
         `
@@ -20,9 +20,9 @@ export const ToggleBtn = styled.div`
 export const LandingScreen = styled.main`
     transition: 0.5s;
     ${(props : any) => props.open ? css`    
-        margin-left: 110px;
+        margin-left: 130px;
     ` : css`
-        margin-left: 50px; 
+        margin-left: 45px; 
     `}
 `;
 

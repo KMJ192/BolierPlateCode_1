@@ -4,7 +4,7 @@ export const NavSideData = [
     {
         title: "Home",
         icon: <i className="fas fa-home side-icon"></i>,
-        path: "#",
+        path: "/",
         className: "side"
     },
     {
