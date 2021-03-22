@@ -6,7 +6,7 @@ import './MainPage';
 function MainPage() {
     return (
         <Wrapper>
-            <div>main page</div>
+            <div></div>
         </Wrapper>
     )
 }

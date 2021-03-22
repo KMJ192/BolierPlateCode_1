@@ -1,22 +1,24 @@
 import React from 'react';
+import {NavSideDiv, NavSideA} from './NavSideStyle';
 import './NavSide.css';
+
 
 function NavSide() {
     return (
-        <div className="nav-side">
-            <a href="#">
+        <NavSideDiv>
+            <NavSideA href="#">
                 <i className="fas fa-home side-icon"></i>
                 Home
-            </a>
-            <a href="#">
+            </NavSideA>
+            <NavSideA href="#">
                 <i className="fab fa-bitcoin side-icon"></i>
                 BitCoin
-            </a>
-            <a href="#">
+            </NavSideA>
+            <NavSideA href="#">
                 <i className="fas fa-chart-line side-icon"></i>
                 Stock
-            </a>
-        </div>
+            </NavSideA>
+        </NavSideDiv>
     )
 }
 

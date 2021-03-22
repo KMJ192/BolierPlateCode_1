@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NavSideDiv = styled.div`
+export const SideBarDiv = styled.div`
     position: fixed;
     //z-index: 1;
     height: 100%;
@@ -11,7 +11,7 @@ export const NavSideDiv = styled.div`
     box-sizing: border-box;
 `;
 
-export const NavSideA = styled.a`
+export const SideBarA = styled.a`
     &:hover{
         color: #778899;
     }
@@ -20,4 +20,3 @@ export const NavSideA = styled.a`
     font-size: 15px;
     display: block;
 `;
-
