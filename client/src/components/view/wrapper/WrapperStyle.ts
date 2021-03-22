@@ -1,24 +1,14 @@
 import styled, { css } from "styled-components";
 
-export const SidebarContainer = styled.div`
-    ${(props : any) => props.open ?  
-        css`
-            display: block;
-        ` : css`
-            display: none;
-        `
-    }
-`;
-
 export const ToggleBtn = styled.div`
-    opacity: 0.01;
+    opacity: 0;
     position: absolute;
-    font-size: 50px;
+    font-size: 40px;
     ${(props : any) => props.open ? 
         css`
-            margin-left: 130px;
+            margin-left: 110px;
         ` : css`
-            margin-left: 10px;
+            margin-left: 45px;
         `
     }
     &:hover{
@@ -28,9 +18,11 @@ export const ToggleBtn = styled.div`
 `;
 
 export const LandingScreen = styled.main`
-    ${(props : any) => props.open && css`
-        transition: 0.125s all ease-in;
-        margin-left: 130px;
+    transition: 0.5s;
+    ${(props : any) => props.open ? css`    
+        margin-left: 110px;
+    ` : css`
+        margin-left: 50px; 
     `}
 `;
 

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const NavSideDiv = styled.div`
     position: fixed;
@@ -7,17 +7,38 @@ export const NavSideDiv = styled.div`
     background-color: #49607c;
     left: 0;
     align-items: center;
-    padding: 8px 20px;
     box-sizing: border-box;
+    transition: 0.1s;
+    ${(props : any) => props.open ? 
+    css`
+        padding: 8px 20px;
+    ` : css`
+        padding: 8px 0px;
+    `}
+`;
+
+export const NavSideDataLi = styled.li`
+    list-style-type : none;
 `;
 
 export const NavSideA = styled.a`
-    &:hover{
-        color: #778899;
-    }
+    display: flex;
     padding: 14px 8px 6px 8px;
     text-decoration: none;
     font-size: 15px;
     display: block;
+    &:hover{
+        color: #778899;
+    }
+    ${(props : any) => props.open && css`
+        padding: 14px 0px 6px 0px;
+    `}
 `;
 
+export const NavSideSpan = styled.span`
+    transition: 1s;
+    ${(props : any) => !props.open && css `
+            display: none;
+        `
+    }
+`;

@@ -1,23 +1,26 @@
 import React from 'react';
-import {NavSideDiv, NavSideA} from './NavSideStyle';
-import './NavSide.css';
+import {NavSideDiv, NavSideDataLi, NavSideA, NavSideSpan } from './NavSideStyle';
+import { NavSideData } from './NavSideData';
 
+interface Props{
+    open: boolean;
+}
 
-function NavSide() {
+function NavSide({open} : Props) {
     return (
-        <NavSideDiv>
-            <NavSideA href="#">
-                <i className="fas fa-home side-icon"></i>
-                Home
-            </NavSideA>
-            <NavSideA href="#">
-                <i className="fab fa-bitcoin side-icon"></i>
-                BitCoin
-            </NavSideA>
-            <NavSideA href="#">
-                <i className="fas fa-chart-line side-icon"></i>
-                Stock
-            </NavSideA>
+        <NavSideDiv open={open} {...open}>
+            {NavSideData.map((item, index) => {
+                return(
+                    <NavSideDataLi key={index}>
+                        <NavSideA href={item.path} open={open} {...open}>
+                            {item.icon}
+                            <NavSideSpan open={open} {...open}>
+                                {item.title}
+                            </NavSideSpan>
+                        </NavSideA>
+                    </NavSideDataLi>
+                )
+            })}
         </NavSideDiv>
     )
 }

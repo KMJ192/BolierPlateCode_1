@@ -24,6 +24,7 @@ export const MenuUl = styled.ul`
     margin-left: 40px;
     position: absolute;
     @media screen and (max-width: 768px){
+        transition: 0.1;
         ${(props : any) => props.open ? 
             css`
                 display: flex;
