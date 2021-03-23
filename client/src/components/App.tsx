@@ -6,7 +6,6 @@ import LoginPage from './view/user_page/login_page/LoginPage';
 import UserPatchPage from './view/user_page/user_patch_page/UserPatchPage';
 import UserRegisterPage from './view/user_page/user_register_page/UserRegisterPage';
 
-
 function App() {
   return (
     <BrowserRouter>

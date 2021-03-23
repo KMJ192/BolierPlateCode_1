@@ -3,6 +3,7 @@ import Wrapper from '../wrapper/Wrapper';
 import './MainPage';
 
 
+
 function MainPage() {
     return (
         <Wrapper>

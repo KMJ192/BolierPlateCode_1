@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NavSide from './nav_side/NavSide';
 import NavTop from './nav_top/NavTop'
-import { LandingScreen, ToggleBtn } from './WrapperStyle';
+import { BackGround, LandingScreen, ToggleBtn } from './WrapperStyle';
 
 class Wrapper extends Component {
     //Default toggle value => true
@@ -14,7 +14,6 @@ class Wrapper extends Component {
             sidebarOpen : !this.state.sidebarOpen
         });
     }
-
     render() {
         return (
             <div>
@@ -23,15 +22,17 @@ class Wrapper extends Component {
                     {this.state.sidebarOpen ? 
                         <i className="fas fa-arrow-alt-circle-left"></i>
                         :
-                        <i className="fas fa-arrow-circle-right"></i>
+                        <i className="fas fa-arrow-alt-circle-right"></i>
                     }
                 </ToggleBtn>
                 <NavSide open={this.state.sidebarOpen} {...this.state.sidebarOpen}/>
-                <LandingScreen open={this.state.sidebarOpen} {...this.state.sidebarOpen}>
-                    <main>
-                        {this.props.children}
-                    </main>
-                </LandingScreen>
+                <BackGround>
+                    <LandingScreen open={this.state.sidebarOpen} {...this.state.sidebarOpen}>
+                        <main>
+                            {this.props.children}
+                        </main>
+                    </LandingScreen>
+                </BackGround>
             </div>
         );
     }
