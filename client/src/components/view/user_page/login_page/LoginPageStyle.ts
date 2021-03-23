@@ -39,7 +39,14 @@ export const Input = styled.input`
 `;
 
 export const LoginButton = styled.button`
-    width: 310px;
+    width: 190px;
     font-size: 20px;
     margin-top: 5px;
+`;
+
+export const MoveUserRegisterPage = styled.button`
+    width: 115px;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-left: 10px;
 `;

@@ -21,7 +21,7 @@ export const UserRegisterForm = styled.div`
 
 export const Form = styled.form`
     text-align: center;
-    margin-top: 20px;
+    margin-top: 35px;
     left: 50%;
 `;
 

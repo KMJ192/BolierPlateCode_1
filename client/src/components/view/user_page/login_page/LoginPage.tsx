@@ -1,13 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { MainLogo } from '../../../../image/Images';
-import { main_page } from '../../../../info_manage/page_url';
+import { main_page, user_register_page } from '../../../../info_manage/page_url';
 import './LoginPage.css';
 import { 
     LoginMainScreen, 
     LoginForm,
     Form,
     Input,
-    LoginButton
+    LoginButton,
+    MoveUserRegisterPage
  } from './LoginPageStyle';
 
 function LoginPage() {
@@ -24,11 +26,17 @@ function LoginPage() {
                     <Input placeholder="이메일 입력" autoFocus/>
                     <Input placeholder="비밀번호 입력"/>
                     <br/>
-                    <input className="remember-checkbox" type="checkbox"/>기억하기
-                    <br/>
+                    <div className="remember-checkbox">
+                        <input type="checkbox"/>기억하기
+                    </div>
                     <LoginButton>
                         로그인
-                    </LoginButton>                    
+                    </LoginButton>
+                    <Link to={user_register_page}>
+                        <MoveUserRegisterPage>
+                            회원가입
+                        </MoveUserRegisterPage>
+                    </Link>
                 </Form>
             </LoginForm>
         </LoginMainScreen>

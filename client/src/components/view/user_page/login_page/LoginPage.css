@@ -9,4 +9,7 @@
 }
 .remember-checkbox{
     margin-top: 6px;
+    text-align: left;
+    margin-left: 100px;
+    justify-content: start;
 }
