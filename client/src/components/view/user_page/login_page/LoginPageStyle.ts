@@ -40,13 +40,22 @@ export const Input = styled.input`
 
 export const LoginButton = styled.button`
     width: 190px;
+    height: 40px;
     font-size: 20px;
     margin-top: 5px;
 `;
 
 export const MoveUserRegisterPage = styled.button`
     width: 115px;
+    height: 40px;
     font-size: 20px;
     margin-top: 5px;
     margin-left: 10px;
+`;
+
+export const MoveMainPage = styled.button`
+    width: 315px;
+    height: 40px;
+    font-size: 20px;
+    margin-top: 10px;
 `;

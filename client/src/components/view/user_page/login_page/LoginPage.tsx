@@ -9,7 +9,8 @@ import {
     Form,
     Input,
     LoginButton,
-    MoveUserRegisterPage
+    MoveUserRegisterPage,
+    MoveMainPage
  } from './LoginPageStyle';
 
 function LoginPage() {
@@ -36,6 +37,11 @@ function LoginPage() {
                         <MoveUserRegisterPage>
                             회원가입
                         </MoveUserRegisterPage>
+                    </Link>
+                    <Link to={main_page}>
+                        <MoveMainPage>
+                            홈으로
+                        </MoveMainPage>
                     </Link>
                 </Form>
             </LoginForm>

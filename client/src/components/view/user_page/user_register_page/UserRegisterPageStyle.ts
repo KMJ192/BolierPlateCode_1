@@ -73,8 +73,22 @@ export const ConfirmDupButton = styled.button`
 `;
 
 export const UserRegisterButton = styled.button`
-    width: 310px;
+    width: 195px;
     height: 40px;
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
+`;
+
+export const MoveLoginPage = styled.button`
+    width: 110px;
+    height: 40px;
+    font-size: 20px;
+    margin-left: 10px;
+`;
+
+export const MoveMainPage = styled.button`
+    width: 315px;
+    height: 40px;
+    font-size: 20px;
+    margin-top: 10px;
 `;
