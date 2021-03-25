@@ -17,6 +17,10 @@ npm install axios @types/axios --save
 npm install styled-components
 npm install @types/styled-components
 
+//redux
+npm install redux react-redux
+npm install redux-saga
+
 //html, css
 https://getbootstrap.com/
 

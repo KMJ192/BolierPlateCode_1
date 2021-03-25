@@ -35,7 +35,7 @@ function UserRegisterPage() {
 
     const imgRemoveHandler = () => {
         setUserimgBase64("");
-    }
+    };
 
     return (
         <UserRegisterMainScreen>

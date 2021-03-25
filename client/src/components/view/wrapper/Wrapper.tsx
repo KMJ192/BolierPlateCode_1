@@ -4,17 +4,20 @@ import NavTop from './nav_top/NavTop'
 import { LandingScreen, ToggleBtn } from './WrapperStyle';
 
 class Wrapper extends Component {
+
     //Default toggle value => true
     state = {
-        sidebarOpen : true,
+        sidebarOpen : true
     }
     //Toggle control
     showSidebar = () => {
         this.setState({
             sidebarOpen : !this.state.sidebarOpen
         });
-    }
+    };
+
     render() {
+        console.log("test");
         return (
             <div>
                 <NavTop/>
@@ -25,7 +28,7 @@ class Wrapper extends Component {
                         <i className="fas fa-arrow-alt-circle-right"></i>
                     }
                 </ToggleBtn>
-                <NavSide open={this.state.sidebarOpen} {...this.state.sidebarOpen}/>
+                <NavSide open={this.state.sidebarOpen}/>
                     <LandingScreen open={this.state.sidebarOpen} {...this.state.sidebarOpen}>
                         <main>
                             {this.props.children}
