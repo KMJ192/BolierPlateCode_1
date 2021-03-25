@@ -27,10 +27,10 @@ export const Form = styled.form`
 
 export const UserImagePlace = styled.img`
     background: #C3C3C3;
-    width: 110px;
-    height: 130px;
+    width: 100px;
+    height: 100px;
     margin: 5px 0px 10px 0px;
-    border-radius: 7px;
+    border-radius: 50%;
 `;
 
 export const UserImageLabel = styled.label`

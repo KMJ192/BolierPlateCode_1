@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NavSide from './nav_side/NavSide';
 import NavTop from './nav_top/NavTop'
-import { BackGround, LandingScreen, ToggleBtn } from './WrapperStyle';
+import { LandingScreen, ToggleBtn } from './WrapperStyle';
 
 class Wrapper extends Component {
     //Default toggle value => true
@@ -26,13 +26,11 @@ class Wrapper extends Component {
                     }
                 </ToggleBtn>
                 <NavSide open={this.state.sidebarOpen} {...this.state.sidebarOpen}/>
-                <BackGround>
                     <LandingScreen open={this.state.sidebarOpen} {...this.state.sidebarOpen}>
                         <main>
                             {this.props.children}
                         </main>
                     </LandingScreen>
-                </BackGround>
             </div>
         );
     }
