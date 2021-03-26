@@ -21,6 +21,9 @@ npm install @types/styled-components
 npm install redux react-redux
 npm install redux-saga
 
+//usehooks 참조
+https://usehooks-typescript.com/
+
 //html, css
 https://getbootstrap.com/
 

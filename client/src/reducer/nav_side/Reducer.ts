@@ -7,7 +7,7 @@ export const toggle = () => ({type: TOGGLE});
 interface ToggleState{
     toggle: boolean;
 };
-const initialState = {
+const initialState: ToggleState = {
     toggle: true
 };
 
@@ -15,15 +15,15 @@ const initialState = {
 type ToggleAction = ReturnType<typeof toggle>;
 
 //5. reducer 작성
-function ToggleReducer(state: ToggleState = initialState, action: ToggleAction){
+function ToggleReducer(state: ToggleState = initialState, action: ToggleAction): ToggleState{
     switch(action.type){
         case TOGGLE:
             return {
-                state: !state.toggle
+                toggle: !state.toggle
             };
         default:
             return {
-                state: state.toggle
+                toggle: state.toggle
             };
     }
 }

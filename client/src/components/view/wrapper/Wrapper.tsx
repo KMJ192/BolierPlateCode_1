@@ -1,42 +1,35 @@
-import React, { Component } from 'react'
+import React from 'react'
+import useLocalStorage from '../../../custom_hook/useLocalStorage';
 import NavSide from './nav_side/NavSide';
 import NavTop from './nav_top/NavTop'
 import { LandingScreen, ToggleBtn } from './WrapperStyle';
 
-class Wrapper extends Component {
+interface Props{
+    children : React.ReactNode;
+}
 
-    //Default toggle value => true
-    state = {
-        sidebarOpen : true
+function Wrapper({ children } : Props){
+    const [sidebarState, setSidebarState] = useLocalStorage('sidebarToggle', true);
+    const sidebarToggle = () =>{
+        setSidebarState(!sidebarState);
     }
-    //Toggle control
-    showSidebar = () => {
-        this.setState({
-            sidebarOpen : !this.state.sidebarOpen
-        });
-    };
 
-    render() {
-        console.log("test");
-        return (
-            <div>
-                <NavTop/>
-                <ToggleBtn onClick={this.showSidebar} open={this.state.sidebarOpen} {...this.state.sidebarOpen}>
-                    {this.state.sidebarOpen ? 
-                        <i className="fas fa-arrow-alt-circle-left"></i>
-                        :
-                        <i className="fas fa-arrow-alt-circle-right"></i>
-                    }
-                </ToggleBtn>
-                <NavSide open={this.state.sidebarOpen}/>
-                    <LandingScreen open={this.state.sidebarOpen} {...this.state.sidebarOpen}>
-                        <main>
-                            {this.props.children}
-                        </main>
-                    </LandingScreen>
-            </div>
-        );
-    }
+    return(
+        <div>
+            <NavTop/>
+            <ToggleBtn onClick={sidebarToggle} open={sidebarState} {...sidebarState}>
+                {sidebarState ? 
+                    <i className="fas fa-arrow-alt-circle-left"></i>
+                    :
+                    <i className="fas fa-arrow-alt-circle-right"></i>
+                }
+            </ToggleBtn>
+            <NavSide open={sidebarState}/>
+                <LandingScreen open={sidebarState} {...sidebarState}>
+                    {children}
+                </LandingScreen>
+        </div>
+    );
 }
 
 export default Wrapper;
