@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
+const NowTime_1 = require("../function/NowTime");
 const switch_1 = require("../switch/switch");
 const bcrypt = require("bcrypt");
 let db_config = require("../database/db_connect");
@@ -31,7 +32,7 @@ let UserService = class UserService {
                 const dupUsername = await SQLQueryRun(sql);
                 if (dupUsername[0]["success"] == 0) {
                     const hashedPassword = await bcrypt.hash(userData["password"], 10);
-                    sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
+                    sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime_1.default() + "', '" + userData["created_by"] + "', '" + NowTime_1.default() + "', '" + userData["updated_by"] + "')";
                     SQLQueryRun(sql);
                     sFlag = true;
                     resultMsg = "Signup success";
@@ -138,10 +139,10 @@ let UserService = class UserService {
         const dupUsername = await SQLQueryRun(sql);
         if (dupUsername[0]["success"] == 0) {
             if (user_image == "") {
-                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
+                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', updated_at='" + NowTime_1.default() + "' where email='" + userData["email"] + "'";
             }
             else {
-                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
+                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime_1.default() + "' where email='" + userData["email"] + "'";
             }
             await SQLQueryRun(sql);
             resultMsg = "Patch success";
@@ -171,41 +172,5 @@ function SQLQueryRun(sql) {
         });
     });
     ;
-}
-function NowTime() {
-    let dateTime = new Date();
-    let temp = String(dateTime.getFullYear());
-    if (String(dateTime.getMonth()).length == 1) {
-        temp = temp + "/0" + String(dateTime.getMonth());
-    }
-    else {
-        temp = temp + "/" + String(dateTime.getMonth());
-    }
-    if (String(dateTime.getDate()).length == 1) {
-        temp = temp + "/0" + String(dateTime.getDate());
-    }
-    else {
-        temp = temp + "/" + String(dateTime.getDate());
-    }
-    if (String(dateTime.getHours()).length == 1) {
-        temp = temp + " 0" + String(dateTime.getHours());
-    }
-    else {
-        temp = temp + " " + String(dateTime.getHours());
-    }
-    if (String(dateTime.getMinutes()).length == 1) {
-        temp = temp + ":0" + String(dateTime.getMinutes());
-    }
-    else {
-        temp = temp + ":" + String(dateTime.getMinutes());
-    }
-    if (String(dateTime.getSeconds()).length == 1) {
-        temp = temp + ":0" + String(dateTime.getSeconds());
-    }
-    else {
-        temp = temp + ":" + String(dateTime.getSeconds());
-    }
-    temp = temp + ":" + String(dateTime.getMilliseconds());
-    return temp;
 }
 //# sourceMappingURL=user.service.js.map

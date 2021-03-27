@@ -1496,13 +1496,18 @@
         "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
         "affectsGlobalScope": false
       },
+      "../src/function/nowtime.ts": {
+        "version": "2a168882f7ed252d4ddd2910921cc0ff42a831723d4b9590672a7b01f720578c",
+        "signature": "3ffb8e2f215dc7e3e120dd4e8ddc28412f68463dba3b768520f785b0ce62f368",
+        "affectsGlobalScope": false
+      },
       "../src/switch/switch.ts": {
         "version": "07b50be64a0620cb7f97ff379406b9376daf811f436e920204c7eccbb1204f54",
         "signature": "8733b2ee6f7c3e4bdb94066e34a2cd819d8f9cf5d4c3117043fa81eb138b1c76",
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
-        "version": "c2b860feda3b3e911544d53aa1034dede1aa80084141fdf8a08c5bf45b1c3599",
+        "version": "2cbe4873881a0cda6331947ef843d698d2e6c2fa8c14d93603b2927cafa6806b",
         "signature": "dd1904d4396cb007b82058eb75b4fa430c1247ee9db4e5e793922b94379bfc5d",
         "affectsGlobalScope": false
       },
@@ -3552,6 +3557,7 @@
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/jwt/index.d.ts",
         "../node_modules/@types/express/index.d.ts",
+        "../src/function/nowtime.ts",
         "../src/switch/switch.ts"
       ]
     },
@@ -5372,6 +5378,7 @@
       "../src/app.service.ts",
       "../src/database/db_connect.ts",
       "../src/database/db_info.ts",
+      "../src/function/nowtime.ts",
       "../src/main.ts",
       "../src/switch/switch.ts",
       "../src/user/constance.ts",

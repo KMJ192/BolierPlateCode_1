@@ -3,15 +3,15 @@ import styled from "styled-components";
 export const UserRegisterMainScreen = styled.div`
     background-color: #898685;
     padding-top: 10px;
-    padding-bottom: 103px;
+    padding-bottom: 71px;
 `;
 
 export const UserRegisterForm = styled.div`
     background: #E7EAFE;
     width: 512px;
-    height: 728px;
+    height: 800px;
     margin: 0 auto;
-    margin-top: 96px;
+    margin-top: 56px;
     margin-bottom: 32px;
     border-radius: 16px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
@@ -55,6 +55,12 @@ export const InputDelimiter = styled.input`
     }
 `;
 
+export const ConfirmDupButton = styled.button`
+    margin-left: 7px;
+    height: 41px;
+    width: 70px;
+`;
+
 export const InputPassword = styled.input`
     margin-top: 10px;
     padding: 10px 0px 10px 10px;
@@ -66,17 +72,18 @@ export const InputPassword = styled.input`
     }
 `;
 
-export const ConfirmDupButton = styled.button`
-    margin-left: 7px;
-    height: 41px;
-    width: 70px;
+export const WarnText = styled.div`
+    text-align: left;
+    font-size: 13px;
+    margin-left: 100px;
+    color: rgb(255, 0, 0);
 `;
 
 export const UserRegisterButton = styled.button`
     width: 195px;
     height: 40px;
     font-size: 20px;
-    margin-top: 10px;
+    margin-top: 5px;
 `;
 
 export const MoveLoginPage = styled.button`
