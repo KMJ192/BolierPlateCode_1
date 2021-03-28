@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const UserRegisterMainScreen = styled.div`
     background-color: #898685;
@@ -76,7 +76,14 @@ export const WarnText = styled.div`
     text-align: left;
     font-size: 13px;
     margin-left: 100px;
-    color: rgb(255, 0, 0);
+    ${(props: any) => props.font ? 
+    css`
+        color: rgb(20, 200, 20);
+    ` : css`
+        color: rgb(255, 0, 0);
+    `
+    }
+    
 `;
 
 export const UserRegisterButton = styled.button`

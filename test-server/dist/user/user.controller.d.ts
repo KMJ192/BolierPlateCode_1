@@ -29,4 +29,6 @@ export declare class UserController {
         patch: boolean;
         message: string;
     }>;
+    emailConfirm(body: JSON): void;
+    nicknameConfirm(body: JSON): void;
 }

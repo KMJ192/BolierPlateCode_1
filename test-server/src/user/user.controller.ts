@@ -11,7 +11,7 @@ export class UserController {
     constructor(private readonly userService : UserService){}
 
     private filepath = "file-repo/user_image"
-    
+
     //Login
     @Post("/login")
     login(
@@ -88,5 +88,15 @@ export class UserController {
         }else{
             return this.userService.PatchUser(body, file.filename);
         }
+    }
+
+    @Post("/email_confirm")
+    emailConfirm(@Body() body : JSON){
+        console.log(body);
+    }
+
+    @Post("/nickname_confirm")
+    nicknameConfirm(@Body() body : JSON){
+        console.log(body);
     }
 }

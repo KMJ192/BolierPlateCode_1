@@ -57,6 +57,12 @@ let UserController = class UserController {
             return this.userService.PatchUser(body, file.filename);
         }
     }
+    emailConfirm(body) {
+        console.log(body);
+    }
+    nicknameConfirm(body) {
+        console.log(body);
+    }
 };
 __decorate([
     common_1.Post("/login"),
@@ -130,6 +136,20 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "patchUser", null);
+__decorate([
+    common_1.Post("/email_confirm"),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "emailConfirm", null);
+__decorate([
+    common_1.Post("/nickname_confirm"),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "nicknameConfirm", null);
 UserController = __decorate([
     common_1.Controller(),
     __metadata("design:paramtypes", [user_service_1.UserService])
