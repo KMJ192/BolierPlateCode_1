@@ -1,4 +1,4 @@
-export default function NowTime() : string{
+export function NowTime() : string{
     let dateTime = new Date();
     let temp : string = String(dateTime.getFullYear());
     //month 길이

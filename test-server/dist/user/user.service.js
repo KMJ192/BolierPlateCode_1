@@ -32,7 +32,7 @@ let UserService = class UserService {
                 const dupUsername = await SQLQueryRun(sql);
                 if (dupUsername[0]["success"] == 0) {
                     const hashedPassword = await bcrypt.hash(userData["password"], 10);
-                    sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime_1.default() + "', '" + userData["created_by"] + "', '" + NowTime_1.default() + "', '" + userData["updated_by"] + "')";
+                    sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime_1.NowTime() + "', '" + userData["created_by"] + "', '" + NowTime_1.NowTime() + "', '" + userData["updated_by"] + "')";
                     SQLQueryRun(sql);
                     sFlag = true;
                     resultMsg = "Signup success";
@@ -139,10 +139,10 @@ let UserService = class UserService {
         const dupUsername = await SQLQueryRun(sql);
         if (dupUsername[0]["success"] == 0) {
             if (user_image == "") {
-                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', updated_at='" + NowTime_1.default() + "' where email='" + userData["email"] + "'";
+                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', updated_at='" + NowTime_1.NowTime() + "' where email='" + userData["email"] + "'";
             }
             else {
-                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime_1.default() + "' where email='" + userData["email"] + "'";
+                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime_1.NowTime() + "' where email='" + userData["email"] + "'";
             }
             await SQLQueryRun(sql);
             resultMsg = "Patch success";
@@ -156,13 +156,20 @@ let UserService = class UserService {
             message: resultMsg
         };
     }
+    async EmailConfirm(email) {
+        const sql = "select EXISTS (select password from " + switch_1.switching + ".users where email='" + email + "') as success";
+        const result = await SQLQueryRun(sql);
+        return {
+            result: result[0]["success"]
+        };
+    }
 };
 UserService = __decorate([
     common_1.Injectable(),
     __metadata("design:paramtypes", [jwt_1.JwtService])
 ], UserService);
 exports.UserService = UserService;
-function SQLQueryRun(sql) {
+async function SQLQueryRun(sql) {
     return new Promise((resolve, reject) => {
         conn.query(sql, function (err, result) {
             if (err) {
@@ -171,6 +178,5 @@ function SQLQueryRun(sql) {
             resolve(result);
         });
     });
-    ;
 }
 //# sourceMappingURL=user.service.js.map

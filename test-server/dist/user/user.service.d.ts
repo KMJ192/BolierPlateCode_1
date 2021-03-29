@@ -26,4 +26,7 @@ export declare class UserService {
         patch: boolean;
         message: string;
     }>;
+    EmailConfirm(email: string): Promise<{
+        result: any;
+    }>;
 }

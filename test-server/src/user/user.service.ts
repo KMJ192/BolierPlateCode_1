@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
-import NowTime from 'src/function/NowTime';
+import { NowTime } from 'src/function/NowTime';
 import { switching } from '../switch/switch';
 
 const bcrypt = require("bcrypt");
@@ -172,12 +172,19 @@ export class UserService {
             patch : sFlag,
             message : resultMsg
         };
-    }   
+    }
+
+    async EmailConfirm(email : string){
+        const sql : string = "select EXISTS (select password from " + switching + ".users where email='" + email + "') as success";
+        const result = await SQLQueryRun(sql);
+        return{
+            result : result[0]["success"]
+        }
+    }
 }
 
-
 //SQL Query 실행
-function SQLQueryRun(sql : string) {
+async function SQLQueryRun(sql : string) {
     return new Promise((resolve, reject) => {
         conn.query(sql, function(err : string, result){
             if(err){
@@ -185,5 +192,5 @@ function SQLQueryRun(sql : string) {
             }
             resolve(result);
         });
-    });;
+    });
 }

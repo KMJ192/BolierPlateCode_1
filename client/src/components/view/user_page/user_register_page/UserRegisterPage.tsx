@@ -24,6 +24,10 @@ import { ReqServerJSON, ConfirmUserForm} from '../../../../function_module/Reque
 function UserRegisterPage() {
     const [userimgBase64, setUserimgBase64] = useState("");
     const [redirect, setRedirect] = useState(false);
+    const [userDataTmp, setUserDataTmp] = useState({
+        email: "",
+        nickname: ""
+    });
     const [userData, setUserData] = useState({
         email: "",
         nickname: "",
@@ -118,16 +122,23 @@ function UserRegisterPage() {
     };
     //========Image 미리보기 Script=========
 
-    //========Server로 Data를 전송하는 Script=========
-    const confirmEmail = () => {
+    //###########Server로 Data를 전송하는 Script###########
+
+    //========Email과 Password 중복 확인==========
+    const confirmEmail = async () => {
         if(userData.email === '') alert("* 이메일을 입력해주세요.")
         else if(warnText.email[1] === false) alert(warnText.email[0]);
         else{
             const reqData = {
                 email : userData.email
             }
-            ReqServerJSON('/email_confirm', reqData, 1);
+            const result = await ReqServerJSON('/email_confirm', reqData, 1);
+            console.log(result);
         }
+        setUserDataTmp({
+            ...userDataTmp,
+            email: userData.email
+        })
         setDupData({
             ...dupData,
             email: true,
@@ -141,11 +152,32 @@ function UserRegisterPage() {
             }
             ReqServerJSON('/nickname_confirm', reqData, 1);
         }
+        setUserDataTmp({
+            ...userDataTmp,
+            nickname: userData.nickname
+        });
         setDupData({
             ...dupData,
             nickname: true,
         });
     }
+    //-------------중복 확인 후 데이터 변화 감지---------------
+    if(userData.email !== userDataTmp.email && dupData.email === true){
+        setDupData({
+            ...dupData,
+            email: false
+        });
+    }
+    if(userData.nickname !== userDataTmp.nickname && dupData.nickname === true){
+        setDupData({
+            ...dupData,
+            nickname: false
+        });
+    }
+    //-------------중복 확인 후 데이터 변화 감지---------------
+
+
+    //========Email과 Password 중복 확인==========
 
     const submit = async (e : React.FormEvent<HTMLFormElement>) => {
         //formData에 입력받은 데이터들 정렬
@@ -161,7 +193,7 @@ function UserRegisterPage() {
                 //console.log(response);
             })
     };
-    //========Server로 Data를 전송하는 Script=========
+    //###########Server로 Data를 전송하는 Script###########
     
     if(redirect === true){
         return <Redirect to={login_page}/>

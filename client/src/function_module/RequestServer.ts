@@ -1,35 +1,35 @@
 import axios from "axios";
 
-export function ReqServerJSON(param: string, reqData: Object, deli: number): Object{
+export async function ReqServerJSON(param: string, reqData: Object, deli: number){
     let res: Object ={};
     if(deli === 0){
-        axios.get(param)
+        await axios.get(param)
             .then((response) => {
-                res = response;
+                res = response.data;
             }).catch((err) => {
                 alert("오류발생 : " + err);
                 res = {error: true};
             });
     }else if(deli === 1){
-        axios.post(param, reqData)
+        await axios.post(param, reqData)
             .then((response) => {
-                res = response;
+                res = response.data;
             }).catch((err) => {
                 alert("오류발생 : " + err);
                 res = {error: true};
             });
     }else if(deli === 2){
-        axios.patch(param, reqData)
+        await axios.patch(param, reqData)
             .then((response) => {
-                res = response;
+                res = response.data;
             }).catch((err) => {
                 alert("오류발생 : " + err);
                 res = {error: true};
             });
     }else if(deli === 3){
-        axios.delete(param, reqData)
+        await axios.delete(param, reqData)
             .then((response) => {
-                res = response;
+                res = response.data;
             }).catch((err) => {
                 alert("오류발생 : " + err);
                 res = {error: true};
@@ -38,6 +38,7 @@ export function ReqServerJSON(param: string, reqData: Object, deli: number): Obj
     return res;
 }
 
+//이메일 폼, 비밀번호 폼 추출
 export function ConfirmUserForm(asValue: string, delimiter: number) {
     let regExp: RegExp = /^/;
     if(delimiter === 0){

@@ -91,12 +91,12 @@ export class UserController {
     }
 
     @Post("/email_confirm")
-    emailConfirm(@Body() body : JSON){
-        console.log(body);
+    emailConfirm(@Body('email') email : string){
+        return this.userService.EmailConfirm(email);
     }
 
     @Post("/nickname_confirm")
-    nicknameConfirm(@Body() body : JSON){
-        console.log(body);
+    nicknameConfirm(@Body('nickname') nickname : string){
+        console.log(nickname);
     }
 }

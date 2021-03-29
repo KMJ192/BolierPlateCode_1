@@ -57,11 +57,11 @@ let UserController = class UserController {
             return this.userService.PatchUser(body, file.filename);
         }
     }
-    emailConfirm(body) {
-        console.log(body);
+    emailConfirm(email) {
+        return this.userService.EmailConfirm(email);
     }
-    nicknameConfirm(body) {
-        console.log(body);
+    nicknameConfirm(nickname) {
+        console.log(nickname);
     }
 };
 __decorate([
@@ -138,16 +138,16 @@ __decorate([
 ], UserController.prototype, "patchUser", null);
 __decorate([
     common_1.Post("/email_confirm"),
-    __param(0, common_1.Body()),
+    __param(0, common_1.Body('email')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "emailConfirm", null);
 __decorate([
     common_1.Post("/nickname_confirm"),
-    __param(0, common_1.Body()),
+    __param(0, common_1.Body('nickname')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "nicknameConfirm", null);
 UserController = __decorate([
