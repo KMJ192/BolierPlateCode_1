@@ -25,34 +25,22 @@ let UserService = class UserService {
         let resultMsg;
         let sFlag = false;
         if (userData["user_rol"] == 0) {
-            let sql = "select EXISTS (select password from " + switch_1.switching + ".users where email='" + userData["email"] + "') as success";
-            const emailExists = await SQLQueryRun(sql);
-            if (emailExists[0]["success"] == 0) {
-                sql = "select EXISTS (select password from " + switch_1.switching + ".users where name='" + userData["name"] + "') as success";
-                const dupUsername = await SQLQueryRun(sql);
-                if (dupUsername[0]["success"] == 0) {
-                    const hashedPassword = await bcrypt.hash(userData["password"], 10);
-                    sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["name"] + "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime_1.NowTime() + "', '" + userData["created_by"] + "', '" + NowTime_1.NowTime() + "', '" + userData["updated_by"] + "')";
-                    SQLQueryRun(sql);
-                    sFlag = true;
-                    resultMsg = "Signup success";
-                }
-                else {
-                    sFlag = false;
-                    resultMsg = "Duplicated name";
-                }
+            const hashedPassword = await bcrypt.hash(userData["password"], 10);
+            let sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["nickname"] + "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime_1.NowTime() + "', '" + userData["created_by"] + "', '" + NowTime_1.NowTime() + "', '" + userData["updated_by"] + "')";
+            const result = await SQLQueryRun(sql);
+            if (result["protocol41"] == true) {
+                sFlag = true;
+                resultMsg = "Signup success";
             }
             else {
-                sFlag = false;
-                resultMsg = "Duplicated email";
+                resultMsg = "error";
             }
         }
         else {
-            sFlag = false;
             resultMsg = "User rol error";
         }
         return {
-            registerd: sFlag,
+            registered: sFlag,
             message: resultMsg
         };
     }
@@ -158,6 +146,13 @@ let UserService = class UserService {
     }
     async EmailConfirm(email) {
         const sql = "select EXISTS (select password from " + switch_1.switching + ".users where email='" + email + "') as success";
+        const result = await SQLQueryRun(sql);
+        return {
+            result: result[0]["success"]
+        };
+    }
+    async NicknameConfirm(nickname) {
+        const sql = "select EXISTS (select password from " + switch_1.switching + ".users where name='" + nickname + "') as success";
         const result = await SQLQueryRun(sql);
         return {
             result: result[0]["success"]

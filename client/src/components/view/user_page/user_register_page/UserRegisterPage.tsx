@@ -19,35 +19,36 @@ import {
 import './UserRegisterPage.css';
 import { Link, Redirect } from 'react-router-dom';
 import check from './check.svg';
-import { ReqServerJSON, ConfirmUserForm} from '../../../../function_module/RequestServer';
+import { ReqServerJSON, ConfirmUserForm } from '../../../../function_module/RequestServer';
 
+let formData: FormData = new FormData();
 function UserRegisterPage() {
     const [userimgBase64, setUserimgBase64] = useState("");
     const [redirect, setRedirect] = useState(false);
-    const [userDataTmp, setUserDataTmp] = useState({
-        email: "",
-        nickname: ""
-    });
+    //server로 보낼 유저 정보관리
     const [userData, setUserData] = useState({
         email: "",
         nickname: "",
         password: "",
         password_confirm: ""
     });
+    //카테고리별 조건과 유저가 양식에 맞췄는지에 대한 정보 관리
     const [warnText, setWarnText] = useState({
         email : ["", false],
         nickname : ["", false],
         password: ["", false],
         password_comfirm: ["", false]
     });
+    //유저 정보가 중복되었는지에 대한 정보 관리
     const [dupData, setDupData] = useState({
         email: false,
         nickname: false,
     })
-    const [register, setRegister] = useState(false);
-
-    let formData: FormData = new FormData();
-
+    //유저 정보 중복 확인 후 다시 바뀔 경우 대비하여 관리
+    const [userDataTmp, setUserDataTmp] = useState({
+        email: "",
+        nickname: ""
+    });
     //========input box blur 처리=========
     let warn: string ="";
     let blurText: boolean = false;
@@ -104,16 +105,16 @@ function UserRegisterPage() {
     //========input box blur 처리=========
 
     //========Image 미리보기 Script=========
-    const fileChangeHandler = (e : any) => {
+    const fileChangeHandler = (e : React.ChangeEvent<HTMLInputElement>) => {
         const reader: FileReader = new FileReader();
         reader.onloadend = () =>{
             if(reader.result){
                 setUserimgBase64(String(reader.result));
             }
         }
-        if(e.target.files[0]){
+        if(e.target.files){
             reader.readAsDataURL(e.target.files[0]);
-            formData.set("user_image", e.target.files[0]);
+            formData.append("user_image", e.target.files[0]);
         }
     };
     const imgRemoveHandler = () => {
@@ -122,46 +123,73 @@ function UserRegisterPage() {
     };
     //========Image 미리보기 Script=========
 
-    //###########Server로 Data를 전송하는 Script###########
+    //########### Script that sends a reqeust to the server ###########
 
-    //========Email과 Password 중복 확인==========
+    //======== Duplicate check email, password ==========
     const confirmEmail = async () => {
-        if(userData.email === '') alert("* 이메일을 입력해주세요.")
+        //email칸이 비어있지 않고, email양식대로 입력이 되었을 경우 중복확인 진행
+        if(userData.email === '') alert("* 이메일을 입력해주세요.");
         else if(warnText.email[1] === false) alert(warnText.email[0]);
         else{
             const reqData = {
                 email : userData.email
             }
-            const result = await ReqServerJSON('/email_confirm', reqData, 1);
-            console.log(result);
+            const result: Object = await ReqServerJSON('/email_confirm', reqData, 1);
+            if(JSON.stringify(result) === JSON.stringify({result: 0})){
+                //Dose not duplicated email
+                setUserDataTmp({
+                    ...userDataTmp,
+                    email: userData.email
+                });
+                 setDupData({
+                    ...dupData,
+                    email: true,
+                });
+            }else{
+                //Duplicated email
+                setWarnText({
+                    ...warnText,
+                    email: ["* 중복된 이메일입니다.", true]
+                });
+                setDupData({
+                    ...dupData,
+                    email: false,
+                });
+            }
         }
-        setUserDataTmp({
-            ...userDataTmp,
-            email: userData.email
-        })
-        setDupData({
-            ...dupData,
-            email: true,
-        });
     }
-    const confirmNickname = () => {
+    const confirmNickname = async () => {
+        //별명 칸이 빈칸이 아닐경우 중복 확인 진행
         if(userData.nickname === '') alert("* 별명을 입력해주세요.");
         else{
             const reqData = {
                 nickname : userData.nickname
             }
-            ReqServerJSON('/nickname_confirm', reqData, 1);
+            const result: Object = await ReqServerJSON('/email_confirm', reqData, 1);
+            if(JSON.stringify(result) === JSON.stringify({result: 0})){
+                //Dose not duplicated email
+                setUserDataTmp({
+                    ...userDataTmp,
+                    nickname: userData.nickname
+                });
+                 setDupData({
+                    ...dupData,
+                    nickname: true,
+                });
+            }else{
+                //Duplicated email
+                setWarnText({
+                    ...warnText,
+                    nickname: ["* 중복된 별명입니다.", true]
+                });
+                setDupData({
+                    ...dupData,
+                    nickname: false,
+                });
+            }
         }
-        setUserDataTmp({
-            ...userDataTmp,
-            nickname: userData.nickname
-        });
-        setDupData({
-            ...dupData,
-            nickname: true,
-        });
     }
-    //-------------중복 확인 후 데이터 변화 감지---------------
+    //-------------Detecting data change after duplication check---------------
     if(userData.email !== userDataTmp.email && dupData.email === true){
         setDupData({
             ...dupData,
@@ -174,11 +202,11 @@ function UserRegisterPage() {
             nickname: false
         });
     }
-    //-------------중복 확인 후 데이터 변화 감지---------------
+    //-------------Detecting data change after duplication check---------------
 
+    //======== Duplicate check email, password ==========
 
-    //========Email과 Password 중복 확인==========
-
+    //======== User register Request to server ==========
     const submit = async (e : React.FormEvent<HTMLFormElement>) => {
         //formData에 입력받은 데이터들 정렬
         formData.set("email", userData.email);
@@ -188,12 +216,25 @@ function UserRegisterPage() {
         formData.set("created_by", userData.nickname);
         formData.set("updated_by", userData.nickname);
         e.preventDefault();
-        await axios.post("/register_user", formData)
-            .then((response) => {
-                //console.log(response);
-            })
+        if(dupData.email === false) alert("* 이메일 확인해주세요.");
+        else if(dupData.nickname === false) alert("* 별명 확인해주세요.");
+        else if(warnText.password[1] === false) alert("* 비밀번호를 확인해주세요.");
+        else if(warnText.password_comfirm[1] === false) alert("* 비밀번호 확인을 확인해주세요.");
+        else{
+            const result = await axios.post("/register_user", formData)
+                .then((response) => {
+                    console.log(response.data);
+                    if(response.data["registered"] === true){
+                        setRedirect(true);
+                    }else{
+                        alert("알 수 없는 오류가 발생하였습니다. 다시 시도해주세요");
+                    }
+                });
+        }
     };
-    //###########Server로 Data를 전송하는 Script###########
+    //======== User register Request to server ==========
+
+    //########### Script that sends a reqeust to the server ###########
     
     if(redirect === true){
         return <Redirect to={login_page}/>
@@ -226,7 +267,7 @@ function UserRegisterPage() {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserData({...userData, email: e.target.value})}
                     />
                     <label>
-                        <ConfirmDupButton onClick={confirmEmail}>중복확인</ConfirmDupButton>
+                        <ConfirmDupButton onClick={confirmEmail} type="button">중복확인</ConfirmDupButton>
                     </label>
                     <WarnText font={dupData.email} {...dupData.email}>
                         {dupData.email && <img src={check} alt="confirm"/>}
@@ -236,7 +277,7 @@ function UserRegisterPage() {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserData({...userData, nickname: e.target.value})}
                     />
                     <label>
-                        <ConfirmDupButton onClick={confirmNickname}>중복확인</ConfirmDupButton>
+                        <ConfirmDupButton onClick={confirmNickname} type="button">중복확인</ConfirmDupButton>
                     </label>
                     <WarnText font={dupData.nickname} {...dupData.nickname}>
                         {dupData.nickname && <img src={check} alt="confirm"/>}

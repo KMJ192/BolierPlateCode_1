@@ -4,7 +4,7 @@ export declare class UserService {
     private jwtService;
     constructor(jwtService: JwtService);
     RegisterUser(userData: JSON, user_image: string): Promise<{
-        registerd: boolean;
+        registered: boolean;
         message: string;
     }>;
     Login(email: string, password: string, response: Response): Promise<{
@@ -27,6 +27,9 @@ export declare class UserService {
         message: string;
     }>;
     EmailConfirm(email: string): Promise<{
+        result: any;
+    }>;
+    NicknameConfirm(nickname: string): Promise<{
         result: any;
     }>;
 }

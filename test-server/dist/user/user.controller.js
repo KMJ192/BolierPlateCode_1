@@ -61,7 +61,7 @@ let UserController = class UserController {
         return this.userService.EmailConfirm(email);
     }
     nicknameConfirm(nickname) {
-        console.log(nickname);
+        return this.userService.NicknameConfirm(nickname);
     }
 };
 __decorate([

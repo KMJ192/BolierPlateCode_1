@@ -97,6 +97,6 @@ export class UserController {
 
     @Post("/nickname_confirm")
     nicknameConfirm(@Body('nickname') nickname : string){
-        console.log(nickname);
+        return this.userService.NicknameConfirm(nickname);
     }
 }

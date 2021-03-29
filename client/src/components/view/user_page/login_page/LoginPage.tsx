@@ -27,7 +27,7 @@ function LoginPage() {
                         로그인
                     </div>
                     <Input placeholder="이메일 입력" autoFocus/>
-                    <Input placeholder="비밀번호 입력"/>
+                    <Input placeholder="비밀번호 입력" type="password"/>
                     <br/>
                     <div className="remember-checkbox">
                         <input type="checkbox"/>기억하기

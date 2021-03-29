@@ -21,7 +21,7 @@ export declare class UserController {
         message: string;
     }>;
     createUser(file: Express.Multer.File, body: JSON): Promise<{
-        registerd: boolean;
+        registered: boolean;
         message: string;
     }>;
     deleteUser(data: JSON): Promise<unknown>;
@@ -32,5 +32,7 @@ export declare class UserController {
     emailConfirm(email: string): Promise<{
         result: any;
     }>;
-    nicknameConfirm(nickname: string): void;
+    nicknameConfirm(nickname: string): Promise<{
+        result: any;
+    }>;
 }
