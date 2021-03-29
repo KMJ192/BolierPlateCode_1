@@ -21,7 +21,7 @@ import { Link, Redirect } from 'react-router-dom';
 import check from './check.svg';
 import { ReqServerJSON, ConfirmUserForm } from '../../../../function_module/RequestServer';
 
-let formData: FormData = new FormData();
+const formData: FormData = new FormData();
 function UserRegisterPage() {
     const [userimgBase64, setUserimgBase64] = useState("");
     const [redirect, setRedirect] = useState(false);
@@ -189,7 +189,7 @@ function UserRegisterPage() {
             }
         }
     }
-    //-------------Detecting data change after duplication check---------------
+    //------------- Detecting data change after duplication check ---------------
     if(userData.email !== userDataTmp.email && dupData.email === true){
         setDupData({
             ...dupData,
@@ -202,7 +202,7 @@ function UserRegisterPage() {
             nickname: false
         });
     }
-    //-------------Detecting data change after duplication check---------------
+    //------------- Detecting data change after duplication check ---------------
 
     //======== Duplicate check email, password ==========
 
