@@ -27,7 +27,7 @@ class RegisterPage extends Component {
                     userimageBase64: String(reader.result)
                 });
             }
-        };
+        }
 
         //파일 설정했을 경우 userimage에 파일 설정
         if(e.target.files[0]){

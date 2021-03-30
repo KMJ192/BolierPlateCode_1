@@ -223,7 +223,6 @@ function UserRegisterPage() {
         else{
             const result = await axios.post("/register_user", formData)
                 .then((response) => {
-                    console.log(response.data);
                     if(response.data["registered"] === true){
                         setRedirect(true);
                     }else{
