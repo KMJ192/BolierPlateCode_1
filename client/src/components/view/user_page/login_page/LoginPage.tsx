@@ -39,7 +39,6 @@ function LoginPage() {
             alert("오류발생 : "+ err);
         })
     }
-    console.log("test");
 
     if(redirection === true){
         return <Redirect to={main_page}/>

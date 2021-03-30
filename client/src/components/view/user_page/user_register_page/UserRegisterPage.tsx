@@ -224,6 +224,7 @@ function UserRegisterPage() {
             const result = await axios.post("/register_user", formData)
                 .then((response) => {
                     if(response.data["registered"] === true){
+                        alert("회원가입이 완료되었습니다.");
                         setRedirect(true);
                     }else{
                         alert("알 수 없는 오류가 발생하였습니다. 다시 시도해주세요");
