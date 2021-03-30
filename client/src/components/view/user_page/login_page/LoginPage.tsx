@@ -37,7 +37,7 @@ function LoginPage() {
             }
         }).catch(err => {
             alert("오류발생 : "+ err);
-        })
+        });
     }
 
     if(redirection === true){
