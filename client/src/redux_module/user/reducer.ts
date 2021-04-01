@@ -1,29 +1,52 @@
-//1. action 선언
-const GETUSER = 'GETUSER' as const;
+import axios from "axios";
 
-//2. action 생성함수 선언
-export const getUser = () => ({
-    type: GETUSER,
-    data:{
-        email: "",
-        nickname: "",
-        image: ""
+//액션 정의
+export const LOGIN_USER = 'LOGIN_USER' as const;
+export const GET_USER = 'GET_USER' as const;
+export const AUTH_USER = 'AUTH_USER' as const;
+
+interface LoginData{
+    email : string;
+    password : string;
+}
+
+export const loginUser = ({email, password} : LoginData) => {
+    const body = {
+        email: email,
+        password: password
     }
-});
-//3. 초기상태설정
-interface UserState{
-    email: string;
-    nickname: string;
-    image: string;
+    const request = axios.post('/login', body);
+    return {
+        type : LOGIN_USER,
+        payload: request
+    };
 }
-const initialUserState: UserState = {
-    email: "",
-    nickname: "",
-    image: ""
-}
-//4. action 타입 선언
 
-//5. reducer작성
-// function UserReducer(state: UserState = initialState, action: UserAction): UserState{
-    
-// }
+interface UserState{
+    email : string;
+    password : string;
+    nickname : string;
+    user_image : string;
+}
+const userInitialState : UserState = {
+    email: "",
+    password : "",
+    nickname : "",
+    user_image : ""
+};
+
+type UserAction = ReturnType<typeof loginUser>
+
+function userReducer(state: UserState = userInitialState, action : UserAction){
+    switch(action.type){
+        case LOGIN_USER:
+            return {
+                ...state,
+                email: state.email,
+                password : state.password
+            }
+        default:
+            return state;
+    }
+}
+export default userReducer;

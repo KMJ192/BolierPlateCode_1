@@ -1,6 +1,7 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import { MainLogo } from '../../../../image/Images';
 import { main_page, user_register_page } from '../../../../info_manage/page_url';
 import './LoginPage.css';
@@ -18,10 +19,13 @@ function LoginPage() {
     const [userData, setUserData] = useState({
         email : "",
         password : ""
-    })
+    });
+    
+    const dispatch = useDispatch();
     const [redirection, setRedirection] = useState(false);
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        //dispatch(userData);
         await axios.post("/login", userData).then(response => {
             if(response.data["login"] === true){
                 alert("로그인이 완료되었습니다");

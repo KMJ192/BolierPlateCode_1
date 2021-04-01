@@ -25,9 +25,9 @@ function Wrapper({ children } : Props){
                 }
             </ToggleBtn>
             <NavSide open={sidebarState}/>
-                <LandingScreen open={sidebarState} {...sidebarState}>
-                    {children}
-                </LandingScreen>
+            <LandingScreen open={sidebarState} {...sidebarState}>
+                {children}
+            </LandingScreen>
         </div>
     );
 }

@@ -6,14 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import { server_url } from './info_manage/server_url';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './reducer/RootReducer';
+import { applyMiddleware, createStore } from 'redux';
+import promiseMiddelware from 'redux-promise';
+import rootReducer from './redux_module/RootReducer';
+import thunk from 'redux-thunk';
 
 axios.defaults.baseURL = server_url;
 axios.defaults.withCredentials = true;
 
-//reducer 적용
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(promiseMiddelware, thunk));
 
 ReactDOM.render(
   <Provider store={store}>

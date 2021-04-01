@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 // https://usehooks-typescript.com/react-hook/use-local-storage 
 function useLocalStorage<T>(key: string, intialValue: T): [T, (value: T) => void] {
-    
     //local storage의 json을 parsing, key값을 이용하여 Value return
     const readValue = () => {
         if(typeof window === 'undefined'){

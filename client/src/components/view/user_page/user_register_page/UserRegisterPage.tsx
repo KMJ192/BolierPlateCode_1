@@ -18,8 +18,8 @@ import {
 } from './UserRegisterPageStyle'
 import './UserRegisterPage.css';
 import { Link, Redirect } from 'react-router-dom';
+import { ConfirmUserForm } from '../../../../function_module/RequestServer';
 import check from './check.svg';
-import { ReqServerJSON, ConfirmUserForm } from '../../../../function_module/RequestServer';
 
 const formData: FormData = new FormData();
 function UserRegisterPage() {
@@ -131,62 +131,64 @@ function UserRegisterPage() {
         if(userData.email === '') alert("* 이메일을 입력해주세요.");
         else if(warnText.email[1] === false) alert(warnText.email[0]);
         else{
-            const reqData = {
+            await axios.post('/email_confirm',{
                 email : userData.email
-            }
-            const result: Object = await ReqServerJSON('/email_confirm', reqData, 1);
-            if(JSON.stringify(result) === JSON.stringify({result: 0})){
-                //Dose not duplicated email
-                setUserDataTmp({
-                    ...userDataTmp,
-                    email: userData.email
-                });
-                 setDupData({
-                    ...dupData,
-                    email: true,
-                });
-            }else{
-                //Duplicated email
-                setWarnText({
-                    ...warnText,
-                    email: ["* 중복된 이메일입니다.", true]
-                });
-                setDupData({
-                    ...dupData,
-                    email: false,
-                });
-            }
+            }).then(response => {
+                if(response.data["result"] === 0){
+                    setUserDataTmp({
+                                ...userDataTmp,
+                                email: userData.email
+                            });
+                             setDupData({
+                                ...dupData,
+                                email: true,
+                            });
+                }else if(response.data["result"] === 1){
+                    setWarnText({
+                        ...warnText,
+                        email: ["* 중복된 이메일입니다.", true]
+                    });
+                    setDupData({
+                        ...dupData,
+                        email : false
+                    });
+                }else{
+                    alert("알수 없는 오류");
+                }
+            });
         }
     }
     const confirmNickname = async () => {
         //별명 칸이 빈칸이 아닐경우 중복 확인 진행
         if(userData.nickname === '') alert("* 별명을 입력해주세요.");
         else{
-            const reqData = {
-                nickname : userData.nickname
-            }
-            const result: Object = await ReqServerJSON('/email_confirm', reqData, 1);
-            if(JSON.stringify(result) === JSON.stringify({result: 0})){
-                //Dose not duplicated email
-                setUserDataTmp({
-                    ...userDataTmp,
-                    nickname: userData.nickname
-                });
-                 setDupData({
-                    ...dupData,
-                    nickname: true,
-                });
-            }else{
-                //Duplicated email
-                setWarnText({
-                    ...warnText,
-                    nickname: ["* 중복된 별명입니다.", true]
-                });
-                setDupData({
-                    ...dupData,
-                    nickname: false,
-                });
-            }
+            await axios.post('/nickname_confirm', {
+                nickname: userData.nickname
+            }).then(response => {
+                if(response.data["result"] === 0){
+                    //Dose not duplicated nickname
+                    setUserDataTmp({
+                        ...userDataTmp,
+                        nickname: userData.nickname
+                    });
+                    setDupData({
+                        ...dupData,
+                        nickname: true,
+                    });
+                }else if(response.data["result"] === 1){
+                    //Duplicated nickname
+                    setWarnText({
+                        ...warnText,
+                        nickname: ["* 중복된 별명입니다.", true]
+                    });
+                    setDupData({
+                        ...dupData,
+                        nickname: false,
+                    });
+                }else{
+                    alert("알 수 없는 오류");
+                }
+            })
         }
     }
     //------------- Detecting data change after duplication check ---------------
@@ -221,7 +223,7 @@ function UserRegisterPage() {
         else if(warnText.password[1] === false) alert("* 비밀번호를 확인해주세요.");
         else if(warnText.password_comfirm[1] === false) alert("* 비밀번호 확인을 확인해주세요.");
         else{
-            const result = await axios.post("/register_user", formData)
+            await axios.post("/register_user", formData)
                 .then((response) => {
                     if(response.data["registered"] === true){
                         alert("회원가입이 완료되었습니다.");
@@ -236,6 +238,7 @@ function UserRegisterPage() {
 
     //########### Script that sends a reqeust to the server ###########
     
+    //회원가입 완료 시 로그인페이지로 이동
     if(redirect === true){
         return <Redirect to={login_page}/>
     }

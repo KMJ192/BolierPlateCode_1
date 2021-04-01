@@ -18,8 +18,8 @@ npm install styled-components
 npm install @types/styled-components
 
 //redux
-npm install redux react-redux
-npm install redux-saga
+npm install redux react-redux redux-thunk
+npm install redux-promise @types/redux-promise
 
 //usehooks 참조
 https://usehooks-typescript.com/
