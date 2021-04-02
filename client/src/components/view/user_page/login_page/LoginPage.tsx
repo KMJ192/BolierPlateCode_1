@@ -14,34 +14,36 @@ import {
     MoveUserRegisterPage,
     MoveMainPage
  } from './LoginPageStyle';
+import { loginUser } from '../../../../redux_module/user/actions';
 
 function LoginPage() {
+    const dispatch = useDispatch();
     const [userData, setUserData] = useState({
         email : "",
         password : ""
     });
     
-    const dispatch = useDispatch();
     const [redirection, setRedirection] = useState(false);
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        //dispatch(userData);
-        await axios.post("/login", userData).then(response => {
-            if(response.data["login"] === true){
-                alert("로그인이 완료되었습니다");
-                setRedirection(true);
-            }else{
-                if(response.data["message"] === "Different pw"){
-                    alert("비밀번호가 틀렸습니다.");
-                }else if(response.data["message"] === "None email"){
-                    alert("이메일이 없습니다.");
-                }else{
-                    alert("알수없는 오류가 발생했습니다.");
-                }
-            }
-        }).catch(err => {
-            alert("오류발생 : "+ err);
-        });
+        dispatch(loginUser(userData));
+
+        // await axios.post("/login", userData).then(response => {
+        //     if(response.data["login"] === true){
+        //         alert("로그인이 완료되었습니다");
+        //         setRedirection(true);
+        //     }else{
+        //         if(response.data["message"] === "Different pw"){
+        //             alert("비밀번호가 틀렸습니다.");
+        //         }else if(response.data["message"] === "None email"){
+        //             alert("이메일이 없습니다.");
+        //         }else{
+        //             alert("알수없는 오류가 발생했습니다.");
+        //         }
+        //     }
+        // }).catch(err => {
+        //     alert("오류발생 : "+ err);
+        // });
     }
 
     if(redirection === true){

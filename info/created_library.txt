@@ -18,8 +18,9 @@ npm install styled-components
 npm install @types/styled-components
 
 //redux
-npm install redux react-redux redux-thunk
-npm install redux-promise @types/redux-promise
+npm install redux react-redux redux-thunk @types/redux-thunk
+//redux ation을 더 깨끗하게 만들어주는 라이브러리
+npm install typesafe-actions
 
 //usehooks 참조
 https://usehooks-typescript.com/
