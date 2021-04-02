@@ -1,18 +1,13 @@
-import axios from "axios";
+import { createAsyncAction } from 'typesafe-actions';
+import { UserProfile } from './types';
+import { AxiosError } from 'axios';
 
-export const PATCH_USER = "PATCH_USER";                  //User Patch action
-export const LOGIN_USER = "LOGIN_USER";                  //Login action
-export const LOGOUT_USER = "LOGOUT_USER";                //Logout action
-export const AUTH_USER = "AUTH_USER";                    //User Auth action
-export const GET_USER = "GET_USER";                      //User Info search
+export const GET_USER_PROFILE = "GET_USER_PROFILE";
+export const GET_USER_PROFILE_SUCCESS = "GET_USER_PROFILE_SUCCESS";
+export const GET_USER_PROFILE_ERROR = "GET_USER_PROFILE_ERROR";
 
-export const loginUser= (dataToSubmit : Object) => {
-    const request = axios.post("/login", dataToSubmit)
-        .then(response => response.data)
-        .catch(err => err);
-
-    return {
-        type : LOGIN_USER,
-        payload : request
-    }
-}
+export const getUserProfileAsync = createAsyncAction(
+    GET_USER_PROFILE,
+    GET_USER_PROFILE_SUCCESS,
+    GET_USER_PROFILE_ERROR
+)<undefined, UserProfile, AxiosError>();

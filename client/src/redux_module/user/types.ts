@@ -1,15 +1,26 @@
-import { loginUser } from "./actions";
+import * as actions from './actions';
+import { ActionType } from 'typesafe-actions';
 
-export type UserAction = 
-    ReturnType<typeof loginUser>
-
-export interface UserState{
-    email : string;
+export interface UserProfile{
+    useremail : string;
     nickname : string;
-    user_image : string;
+    userimage : string;
+    result : string;
+    message : string;
 }
-export const initialUserState: UserState = {
-    email : "",
-    nickname : "",
-    user_image : ""
+
+export type UserAction = ActionType<typeof actions>;
+export type UserState = {
+    userProfile : {
+        loading: boolean;
+        error : Error | null,
+        data : UserProfile | null
+    }
+}
+export const InitialUserState = {
+    userProfile : {
+        loading : false,
+        error : null,
+        data : null
+    }
 }

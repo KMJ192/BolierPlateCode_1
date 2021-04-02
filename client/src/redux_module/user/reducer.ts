@@ -1,13 +1,35 @@
-import { LOGIN_USER } from "./actions";
-import { initialUserState, UserAction, UserState } from "./types";
+import { GET_USER_PROFILE, GET_USER_PROFILE_ERROR, GET_USER_PROFILE_SUCCESS } from "./actions";
+import { InitialUserState, UserAction, UserState } from "./types";
 
-function userReducer(state: UserState = initialUserState, action: UserAction){
+function userReducer(state: UserState = InitialUserState, action: UserAction){
     switch(action.type){
-        case LOGIN_USER:
+        case GET_USER_PROFILE:
+            return {
+                ...state,
+                userProfile : {
+                    loading : true,
+                    error : null,
+                    data : null
+                }
+            }
+        case GET_USER_PROFILE_SUCCESS:
             return{
                 ...state,
-                login : action.payload
-            };
+                userProfile : {
+                    loading : false,
+                    error : null,
+                    data : action.payload
+                }
+            }
+        case GET_USER_PROFILE_ERROR:
+            return{
+                ...state,
+                userProfile : {
+                    loading : false,
+                    error : action.payload,
+                    data : null
+                }
+            }
         default:
             return state;
     }

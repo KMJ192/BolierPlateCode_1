@@ -109,7 +109,7 @@ export class UserService {
         }
         return {
             useremail : email,
-            username : username,
+            nickname : username,
             userimage : userimage,
             result : verifed,
             message : resultMsg

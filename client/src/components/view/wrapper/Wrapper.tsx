@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import useLocalStorage from '../../../custom_hook/useLocalStorage';
+import { RootState } from '../../../redux_module/RootReducer';
+import { getUserThunk } from '../../../redux_module/user';
 import NavSide from './nav_side/NavSide';
 import NavTop from './nav_top/NavTop'
 import { LandingScreen, ToggleBtn } from './WrapperStyle';
@@ -9,11 +12,17 @@ interface Props{
 }
 
 function Wrapper({ children } : Props){
+    const { data, loading, error } = useSelector((state : RootState) => state.user.userProfile)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getUserThunk());
+    }, [])
+    
     const [sidebarState, setSidebarState] = useLocalStorage('sidebarToggle', true);
     const sidebarToggle = () =>{
         setSidebarState(!sidebarState);
     }
-
+    
     return(
         <div>
             <NavTop/>

@@ -211,18 +211,18 @@ function UserRegisterPage() {
     //======== User register Request to server ==========
     const submit = async (e : React.FormEvent<HTMLFormElement>) => {
         //formData에 입력받은 데이터들 정렬
-        formData.set("email", userData.email);
-        formData.set("nickname", userData.nickname);
-        formData.set("password", userData.password);
-        formData.set("user_rol", "0");
-        formData.set("created_by", userData.nickname);
-        formData.set("updated_by", userData.nickname);
         e.preventDefault();
         if(dupData.email === false) alert("* 이메일 확인해주세요.");
         else if(dupData.nickname === false) alert("* 별명 확인해주세요.");
         else if(warnText.password[1] === false) alert("* 비밀번호를 확인해주세요.");
         else if(warnText.password_comfirm[1] === false) alert("* 비밀번호 확인을 확인해주세요.");
         else{
+            formData.set("email", userData.email);
+            formData.set("nickname", userData.nickname);
+            formData.set("password", userData.password);
+            formData.set("user_rol", "0");
+            formData.set("created_by", userData.nickname);
+            formData.set("updated_by", userData.nickname);
             await axios.post("/register_user", formData)
                 .then((response) => {
                     if(response.data["registered"] === true){
