@@ -1,10 +1,10 @@
 import { LOGIN_USER } from "./actions";
 import { initialUserState, UserAction, UserState } from "./types";
 
-function UserReducer(state: UserState = initialUserState, action: UserAction){
+function userReducer(state: UserState = initialUserState, action: UserAction){
     switch(action.type){
         case LOGIN_USER:
-            return {
+            return{
                 ...state,
                 login : action.payload
             };
@@ -12,5 +12,4 @@ function UserReducer(state: UserState = initialUserState, action: UserAction){
             return state;
     }
 }
-
-export default UserReducer;
+export default userReducer;
