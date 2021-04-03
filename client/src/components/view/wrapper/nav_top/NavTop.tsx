@@ -15,8 +15,13 @@ import {
     CircleButton, 
 } from './NavTopStyle';
 import { NavTopData } from './NavTopData';
+interface Props{
+    email : string | undefined;
+    nickname : string | undefined;
+    userimage : string | undefined;
+}
 
-function NavTop() {
+function NavTop({email, nickname, userimage} : Props) {
     const [open, setOpen] = useState(false);
     const onToggle = () => setOpen(!open);
 

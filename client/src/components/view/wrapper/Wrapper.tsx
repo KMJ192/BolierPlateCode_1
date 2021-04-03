@@ -16,16 +16,15 @@ function Wrapper({ children } : Props){
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getUserThunk());
-    }, [])
+    }, []);
     
     const [sidebarState, setSidebarState] = useLocalStorage('sidebarToggle', true);
     const sidebarToggle = () =>{
         setSidebarState(!sidebarState);
-    }
-    
+    };
     return(
         <div>
-            <NavTop/>
+            <NavTop email={data?.useremail} nickname={data?.nickname} userimage={data?.userimage}/>
             <ToggleBtn onClick={sidebarToggle} open={sidebarState} {...sidebarState}>
                 {sidebarState ? 
                     <i className="fas fa-arrow-alt-circle-left"></i>
@@ -35,7 +34,7 @@ function Wrapper({ children } : Props){
             </ToggleBtn>
             <NavSide open={sidebarState}/>
             <LandingScreen open={sidebarState} {...sidebarState}>
-                {children}
+                {loading ? <div>...로딩중</div> : children}
             </LandingScreen>
         </div>
     );

@@ -13,7 +13,7 @@ export declare class UserService {
     }>;
     ConfirmUser(request: Request): Promise<{
         useremail: string;
-        username: string;
+        nickname: string;
         userimage: string;
         result: boolean;
         message: string;
