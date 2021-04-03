@@ -17,7 +17,6 @@ function Wrapper({ children } : Props){
     useEffect(() => {
         dispatch(getUserThunk());
     }, []);
-    
     const [sidebarState, setSidebarState] = useLocalStorage('sidebarToggle', true);
     const sidebarToggle = () =>{
         setSidebarState(!sidebarState);
@@ -34,7 +33,11 @@ function Wrapper({ children } : Props){
             </ToggleBtn>
             <NavSide open={sidebarState}/>
             <LandingScreen open={sidebarState} {...sidebarState}>
-                {loading ? <div>...로딩중</div> : children}
+                {loading ? 
+                    <div>...로딩중</div> 
+                    : 
+                    children
+                }
             </LandingScreen>
         </div>
     );
