@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import useLocalStorage from '../../../custom_hook/useLocalStorage';
+//import UserData, { UserContext } from '../../global_data/UserData';
 import { RootState } from '../../../redux_module/RootReducer';
 import { getUserThunk } from '../../../redux_module/user';
 import NavSide from './nav_side/NavSide';
@@ -12,18 +13,20 @@ interface Props{
 }
 
 function Wrapper({ children } : Props){
-    const { data, loading, error } = useSelector((state : RootState) => state.user.userProfile)
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getUserThunk());
-    }, []);
+    //const { data, loading, error } = useSelector((state : RootState) => state.user.userProfile);
+    
     const [sidebarState, setSidebarState] = useLocalStorage('sidebarToggle', true);
-    const sidebarToggle = () =>{
+    const sidebarToggle = () => {
         setSidebarState(!sidebarState);
     };
+    const userDispatch = useDispatch();
+    useEffect(() => {
+        userDispatch(getUserThunk());
+    }, []);
+    
     return(
         <div>
-            <NavTop email={data?.useremail} nickname={data?.nickname} userimage={data?.userimage}/>
+            <NavTop/>
             <ToggleBtn onClick={sidebarToggle} open={sidebarState} {...sidebarState}>
                 {sidebarState ? 
                     <i className="fas fa-arrow-alt-circle-left"></i>
@@ -33,11 +36,7 @@ function Wrapper({ children } : Props){
             </ToggleBtn>
             <NavSide open={sidebarState}/>
             <LandingScreen open={sidebarState} {...sidebarState}>
-                {loading ? 
-                    <div>...로딩중</div> 
-                    : 
-                    children
-                }
+                {children}
             </LandingScreen>
         </div>
     );
