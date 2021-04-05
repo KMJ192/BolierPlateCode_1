@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
 import useLocalStorage from '../../../custom_hook/useLocalStorage';
-//import UserData, { UserContext } from '../../global_data/UserData';
-import { RootState } from '../../../redux_module/RootReducer';
 import { getUserThunk } from '../../../redux_module/user';
 import NavSide from './nav_side/NavSide';
 import NavTop from './nav_top/NavTop'
@@ -12,13 +10,12 @@ interface Props{
     children : React.ReactNode;
 }
 
-function Wrapper({ children } : Props){
-    //const { data, loading, error } = useSelector((state : RootState) => state.user.userProfile);
-    
+function Wrapper({ children } : Props){    
     const [sidebarState, setSidebarState] = useLocalStorage('sidebarToggle', true);
     const sidebarToggle = () => {
         setSidebarState(!sidebarState);
     };
+    //유저정보 get
     const userDispatch = useDispatch();
     useEffect(() => {
         userDispatch(getUserThunk());

@@ -18,7 +18,7 @@ import {
 } from './UserRegisterPageStyle'
 import './UserRegisterPage.css';
 import { Link, Redirect } from 'react-router-dom';
-import { ConfirmUserForm } from '../../../../function_module/RequestServer';
+import { ConfirmUserForm } from '../../../../function_module/UserForm';
 import check from './check.svg';
 
 const formData: FormData = new FormData();
@@ -27,41 +27,41 @@ function UserRegisterPage() {
     const [redirect, setRedirect] = useState(false);
     //server로 보낼 유저 정보관리
     const [userData, setUserData] = useState({
-        email: "",
+        useremail: "",
         nickname: "",
         password: "",
         password_confirm: ""
     });
     //카테고리별 조건과 유저가 양식에 맞췄는지에 대한 정보 관리
     const [warnText, setWarnText] = useState({
-        email : ["", false],
+        useremail : ["", false],
         nickname : ["", false],
         password: ["", false],
         password_comfirm: ["", false]
     });
     //유저 정보가 중복되었는지에 대한 정보 관리
     const [dupData, setDupData] = useState({
-        email: false,
+        useremail: false,
         nickname: false,
     })
     //유저 정보 중복 확인 후 다시 바뀔 경우 대비하여 관리
     const [userDataTmp, setUserDataTmp] = useState({
-        email: "",
+        useremail: "",
         nickname: ""
     });
     //========input box blur 처리=========
     let warn: string ="";
     let blurText: boolean = false;
     const emailWarnText = () => {
-        if(userData.email === "") warn = "* 이메일을 입력해주세요.";
-        else if(ConfirmUserForm(userData.email, 0) === false) warn = "* 이메일 양식으로 입력해주세요.";
+        if(userData.useremail === "") warn = "* 이메일을 입력해주세요.";
+        else if(ConfirmUserForm(userData.useremail, 0) === false) warn = "* 이메일 양식으로 입력해주세요.";
         else {
             blurText = true;
             warn = "* 중복 확인을 해주세요.";
         }
         setWarnText({
             ...warnText,
-            email: [warn, blurText]
+            useremail: [warn, blurText]
         });
     }
     const nicknameWarnText = () => {
@@ -114,12 +114,11 @@ function UserRegisterPage() {
         }
         if(e.target.files){
             reader.readAsDataURL(e.target.files[0]);
-            formData.append("user_image", e.target.files[0]);
+            formData.set("user_image", e.target.files[0]);
         }
     };
     const imgRemoveHandler = () => {
         setUserimgBase64("");
-        formData.delete("user_image");
     };
     //========Image 미리보기 Script=========
 
@@ -128,29 +127,29 @@ function UserRegisterPage() {
     //======== Duplicate check email, password ==========
     const confirmEmail = async () => {
         //email칸이 비어있지 않고, email양식대로 입력이 되었을 경우 중복확인 진행
-        if(userData.email === '') alert("* 이메일을 입력해주세요.");
-        else if(warnText.email[1] === false) alert(warnText.email[0]);
+        if(userData.useremail === '') alert("* 이메일을 입력해주세요.");
+        else if(warnText.useremail[1] === false) alert(warnText.useremail[0]);
         else{
             await axios.post('/email_confirm',{
-                email : userData.email
+                email : userData.useremail
             }).then(response => {
                 if(response.data["result"] === 0){
                     setUserDataTmp({
                                 ...userDataTmp,
-                                email: userData.email
+                                useremail: userData.useremail
                             });
                              setDupData({
                                 ...dupData,
-                                email: true,
+                                useremail: true,
                             });
                 }else if(response.data["result"] === 1){
                     setWarnText({
                         ...warnText,
-                        email: ["* 중복된 이메일입니다.", true]
+                        useremail: ["* 중복된 이메일입니다.", true]
                     });
                     setDupData({
                         ...dupData,
-                        email : false
+                        useremail : false
                     });
                 }else{
                     alert("알수 없는 오류");
@@ -192,10 +191,10 @@ function UserRegisterPage() {
         }
     }
     //------------- Detecting data change after duplication check ---------------
-    if(userData.email !== userDataTmp.email && dupData.email === true){
+    if(userData.useremail !== userDataTmp.useremail && dupData.useremail === true){
         setDupData({
             ...dupData,
-            email: false
+            useremail: false
         });
     }
     if(userData.nickname !== userDataTmp.nickname && dupData.nickname === true){
@@ -212,12 +211,12 @@ function UserRegisterPage() {
     const submit = async (e : React.FormEvent<HTMLFormElement>) => {
         //formData에 입력받은 데이터들 정렬
         e.preventDefault();
-        if(dupData.email === false) alert("* 이메일 확인해주세요.");
+        if(dupData.useremail === false) alert("* 이메일 확인해주세요.");
         else if(dupData.nickname === false) alert("* 별명 확인해주세요.");
         else if(warnText.password[1] === false) alert("* 비밀번호를 확인해주세요.");
         else if(warnText.password_comfirm[1] === false) alert("* 비밀번호 확인을 확인해주세요.");
         else{
-            formData.set("email", userData.email);
+            formData.set("email", userData.useremail);
             formData.set("nickname", userData.nickname);
             formData.set("password", userData.password);
             formData.set("user_rol", "0");
@@ -267,14 +266,14 @@ function UserRegisterPage() {
                     <input id="userimage-button" type="file" onChange={fileChangeHandler} hidden/>
                     <br/>
                     <InputDelimiter onBlur={emailWarnText} placeholder="이메일 입력" autoFocus
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserData({...userData, email: e.target.value})}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserData({...userData, useremail: e.target.value})}
                     />
                     <label>
                         <ConfirmDupButton onClick={confirmEmail} type="button">중복확인</ConfirmDupButton>
                     </label>
-                    <WarnText font={dupData.email} {...dupData.email}>
-                        {dupData.email && <img src={check} alt="confirm"/>}
-                        {dupData.email ? "사용할 수 있는 이메일 입니다." : warnText.email[0]}
+                    <WarnText font={dupData.useremail} {...dupData.useremail}>
+                        {dupData.useremail && <img src={check} alt="confirm"/>}
+                        {dupData.useremail ? "사용할 수 있는 이메일 입니다." : warnText.useremail[0]}
                     </WarnText>
                     <InputDelimiter onBlur={nicknameWarnText} placeholder="닉네임 입력"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserData({...userData, nickname: e.target.value})}

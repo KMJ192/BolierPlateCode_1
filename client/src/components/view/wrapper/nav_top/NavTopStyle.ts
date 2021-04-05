@@ -59,12 +59,16 @@ export const MenuA = styled.a`
 
 //검색창
 export const SearchContainer = styled.form`
-    @media screen and (max-width: 823px){
-        display: none;
+    margin-left: 20px;
+    @media screen and (max-width: 768px){
+        position: relative;
+        margin-left: 0px;
+        margin-top:15px;
     }
 `;
 export const SearchBox = styled.input`
     border-radius: 5px;
+    width: 400px;
     height: 25px;
     box-shadow: 4px 4px 5px 1px gray inset;
 `;
@@ -72,11 +76,17 @@ export const SearchButton = styled.button`
     height: 30px;
 `;
 
+export const UserOption = styled.div`        
+    @media screen and (max-width: 768px){
+        display: none;
+    }
+`;
+
 //로그인, 회원가입버튼
 export const UserButton = styled.button`
     height:30px;
     @media screen and (max-width: 768px){
-        display: none;
+        margin-top:15px;
     }
 `;
 
