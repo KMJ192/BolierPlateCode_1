@@ -1,22 +1,21 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-export const UserRegisterMainScreen = styled.div`
-    background-color: #E2F7FC;
-    padding-top: 10px;
-    padding-bottom: 71px;
+export const Header = styled.div`
+    font-size: 30px;
+    margin-left: 100px;
 `;
 
-export const UserRegisterForm = styled.div`
-    background: #E7EAFE;
-    width: 512px;
-    height: 800px;
-    margin: 0 auto;
-    margin-top: 56px;
-    margin-bottom: 32px;
+export const UserPatchContainer = styled.div`
+    background: #FDFDFD;
+    width: 500px;
+    height: 680px;
+    margin-left: 70px;
+    margin-top: 20px;
     border-radius: 16px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
+    text-align: center;
 `;
 
 export const Form = styled.form`
@@ -44,7 +43,15 @@ export const UserImageLabel = styled.label`
     }
 `;
 
-export const InputDelimiter = styled.input`
+export const UserEmail = styled.input`
+    margin-top: 10px;
+    padding: 10px 0px 10px 10px;
+    width: 300px;
+    font-size: 15px;
+    outline-color: #6B7FFF;
+`;
+
+export const UserNickname = styled.input`
     margin-top: 10px;
     padding: 10px 0px 10px 10px;
     width: 223px;
@@ -54,7 +61,6 @@ export const InputDelimiter = styled.input`
         box-shadow: 0 0 20px rgba(0, 60, 180, 0.6);
     }
 `;
-
 export const ConfirmDupButton = styled.button`
     margin-left: 7px;
     height: 41px;
@@ -72,34 +78,7 @@ export const InputPassword = styled.input`
     }
 `;
 
-export const WarnText = styled.div`
-    text-align: left;
-    font-size: 13px;
-    margin-left: 100px;
-    ${(props: any) => props.font ? 
-    css`
-        color: rgb(20, 200, 20);
-    ` : css`
-        color: rgb(255, 0, 0);
-    `
-    }
-`;
-
-export const UserRegisterButton = styled.button`
-    width: 195px;
-    height: 40px;
-    font-size: 20px;
-    margin-top: 5px;
-`;
-
-export const MoveLoginPage = styled.button`
-    width: 110px;
-    height: 40px;
-    font-size: 20px;
-    margin-left: 10px;
-`;
-
-export const MoveMainPage = styled.button`
+export const UserPatchButton = styled.button`
     width: 315px;
     height: 40px;
     font-size: 20px;

@@ -57,17 +57,13 @@ function NavTop() {
             </MenuUl>
             <UserOption>
                 {data?.useremail ? 
-                        <UserDataErea>
-                            <UserInfo>{data.nickname}님 접속&nbsp;&nbsp;</UserInfo>
-                            <a href={user_patch_page}><UserButton>정보수정</UserButton></a>
-                            <UserButton onClick={logout}>로그아웃</UserButton>
-                            &nbsp;&nbsp;
-                            <NavTopUserOption 
-                                useremail={data.useremail} 
-                                nickname={data.nickname} 
-                                user_image={data?.userimage}
-                            />
-                        </UserDataErea>
+                    <UserDataErea>
+                        <UserInfo>{data.nickname}님 접속&nbsp;&nbsp;</UserInfo>
+                        <a href={user_patch_page}><UserButton>정보수정</UserButton></a>
+                        <a href="/"><UserButton onClick={logout}>로그아웃</UserButton></a>
+                        &nbsp;&nbsp;
+                        <NavTopUserOption user_image={data?.userimage}/>
+                    </UserDataErea>
                     :
                     <div>
                         <a href={login_page}><UserButton>로그인</UserButton></a>

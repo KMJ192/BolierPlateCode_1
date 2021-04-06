@@ -62,12 +62,14 @@ export const SearchContainer = styled.form`
     display: flex;
     margin-left: 120px;
     @media screen and (max-width: 768px){
-        position: relative;
-        margin-left: 0px;
+        align-items: center;
+        text-align: center;
+        margin: 0 auto;
         margin-top:15px;
     }
 `;
 export const SearchBox = styled.input`
+    padding-left: 5px;
     border-radius: 5px;
     width: 400px;
     height: 25px;

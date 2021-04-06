@@ -3,13 +3,9 @@ import { UserImage } from '../../../../image/Images';
 import { server_url } from '../../../../info_manage/server_url';
 import { UserImageArea } from './NavTopUserOptionStyled';
 interface Props{
-    useremail : string;
-    nickname : string;
     user_image : string;
 }
-function NavTopUserOption({useremail, nickname, user_image} : Props) {
-    console.log(useremail);
-    console.log(nickname);
+function NavTopUserOption({ user_image } : Props) {
     return (
         <div>
             {user_image ? 

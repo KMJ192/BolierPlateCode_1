@@ -119,6 +119,7 @@ function UserRegisterPage() {
     };
     const imgRemoveHandler = () => {
         setUserimgBase64("");
+        formData.delete("user_image");
     };
     //========Image 미리보기 Script=========
 

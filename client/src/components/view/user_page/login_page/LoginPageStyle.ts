@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const LoginMainScreen = styled.div`
-    background-color: #898685;
+    background-color: #E2F7FC;
     width: 100%;
     heigth: 100%;
     padding-top: 10px;
