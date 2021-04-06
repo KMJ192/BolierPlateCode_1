@@ -59,7 +59,8 @@ export const MenuA = styled.a`
 
 //검색창
 export const SearchContainer = styled.form`
-    margin-left: 20px;
+    display: flex;
+    margin-left: 120px;
     @media screen and (max-width: 768px){
         position: relative;
         margin-left: 0px;
@@ -76,10 +77,19 @@ export const SearchButton = styled.button`
     height: 30px;
 `;
 
-export const UserOption = styled.div`        
+export const UserOption = styled.div`
     @media screen and (max-width: 768px){
         display: none;
     }
+`;
+export const UserDataErea = styled.div`
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+`;
+export const UserInfo = styled.div`
+    color: white;
+    margin-left: 200px;
 `;
 
 //로그인, 회원가입버튼

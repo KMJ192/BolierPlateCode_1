@@ -8,6 +8,8 @@ interface Props{
     user_image : string;
 }
 function NavTopUserOption({useremail, nickname, user_image} : Props) {
+    console.log(useremail);
+    console.log(nickname);
     return (
         <div>
             {user_image ? 
@@ -19,4 +21,4 @@ function NavTopUserOption({useremail, nickname, user_image} : Props) {
     )
 }
 
-export default NavTopUserOption;
+export default React.memo(NavTopUserOption);
