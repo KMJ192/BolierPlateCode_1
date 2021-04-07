@@ -24,7 +24,7 @@ export declare class UserController {
         registered: boolean;
         message: string;
     }>;
-    deleteUser(data: JSON): Promise<unknown>;
+    deleteUser(data: JSON, response: Response): Promise<unknown>;
     patchUser(file: Express.Multer.File, body: JSON): Promise<{
         patch: boolean;
         message: string;

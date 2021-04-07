@@ -46,8 +46,8 @@ let UserController = class UserController {
             return this.userService.RegisterUser(body, "");
         }
     }
-    deleteUser(data) {
-        return this.userService.DeleteUser(data["data"]);
+    deleteUser(data, response) {
+        return this.userService.DeleteUser(data["data"], response);
     }
     patchUser(file, body) {
         if (!file) {
@@ -114,9 +114,9 @@ __decorate([
 __decorate([
     common_1.UseGuards(user_guard_1.UserGuard),
     common_1.Delete("/delete_user/:data"),
-    __param(0, common_1.Param()),
+    __param(0, common_1.Param()), __param(1, common_1.Res({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "deleteUser", null);
 __decorate([

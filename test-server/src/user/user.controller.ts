@@ -65,8 +65,8 @@ export class UserController {
     //User delete
     @UseGuards(UserGuard)
     @Delete("/delete_user/:data")
-    deleteUser(@Param() data : JSON){
-        return this.userService.DeleteUser(data["data"]);
+    deleteUser(@Param() data : JSON, @Res({passthrough : true}) response : Response){
+        return this.userService.DeleteUser(data["data"], response);
     }
 
     //User patch

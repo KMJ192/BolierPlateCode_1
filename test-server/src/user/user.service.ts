@@ -118,17 +118,18 @@ export class UserService {
 
     //Logout
     async Logout(response : Response){
-        response.clearCookie('jwt')
+        response.clearCookie('jwt');
         return {
             message : "success"
         };
     }
 
     //User delete
-    async DeleteUser(email : string){
+    async DeleteUser(email : string, response : Response){
         //삭제 query
         let sql : string = "delete from " + switching + ".users where email='" + email + "'";
         const result = await SQLQueryRun(sql);
+        response.clearCookie('jwt');
         return result;
     }
 
@@ -137,21 +138,18 @@ export class UserService {
         //수정 query 작성
         let resultMsg : string;
         let sFlag : boolean = false;
-        let sql : string = "select EXISTS (select password from " + switching + ".users where name='" + userData["name"] + "') as success"
-        const dupUsername = await SQLQueryRun(sql);
-        if(dupUsername[0]["success"] == 0){
-            //입력된 유저 이름이 중복되어 있지 않으면 수정
-            if(user_image == ""){
-                sql = "update " + switching + ".users set name='" + userData["name"] + "', updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
-            }else{
-                sql = "update " + switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
-            }
-            await SQLQueryRun(sql);
-            resultMsg = "Patch success"
-            sFlag = true;
-        }else{
-            resultMsg = "Duplicated name";
+        let sql : string = "update " + switching + ".users set";
+        if(userData["nickname"] != ""){
+            sql = sql + " name='" + userData["nickname"] + "',";
+        }else if(userData["password"] != ""){
+            sql = sql + " password='" + userData["password"] + "',";
         }
+        sql = sql + " user_image='" + user_image + "',";
+        sql = sql + " updated_at='" + NowTime() + "' where email='" + userData["email"] + "'"; 
+        //sql = "update " + switching + ".users set name='" + userData["nickname"] + "', user_image='" + user_image + "',updated_at='" + NowTime() + "' where email='" + userData["email"] + "'";
+        await SQLQueryRun(sql);
+        resultMsg = "Patch success"
+        sFlag = true;
         return {
             patch : sFlag,
             message : resultMsg

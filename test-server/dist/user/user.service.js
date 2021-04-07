@@ -115,30 +115,27 @@ let UserService = class UserService {
             message: "success"
         };
     }
-    async DeleteUser(email) {
+    async DeleteUser(email, response) {
         let sql = "delete from " + switch_1.switching + ".users where email='" + email + "'";
         const result = await SQLQueryRun(sql);
+        response.clearCookie('jwt');
         return result;
     }
     async PatchUser(userData, user_image) {
         let resultMsg;
         let sFlag = false;
-        let sql = "select EXISTS (select password from " + switch_1.switching + ".users where name='" + userData["name"] + "') as success";
-        const dupUsername = await SQLQueryRun(sql);
-        if (dupUsername[0]["success"] == 0) {
-            if (user_image == "") {
-                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', updated_at='" + NowTime_1.NowTime() + "' where email='" + userData["email"] + "'";
-            }
-            else {
-                sql = "update " + switch_1.switching + ".users set name='" + userData["name"] + "', user_image='" + user_image + "',updated_at='" + NowTime_1.NowTime() + "' where email='" + userData["email"] + "'";
-            }
-            await SQLQueryRun(sql);
-            resultMsg = "Patch success";
-            sFlag = true;
+        let sql = "update " + switch_1.switching + ".users set";
+        if (userData["nickname"] != "") {
+            sql = sql + " name='" + userData["nickname"] + "',";
         }
-        else {
-            resultMsg = "Duplicated name";
+        else if (userData["password"] != "") {
+            sql = sql + " password='" + userData["password"] + "',";
         }
+        sql = sql + " user_image='" + user_image + "',";
+        sql = sql + " updated_at='" + NowTime_1.NowTime() + "' where email='" + userData["email"] + "'";
+        await SQLQueryRun(sql);
+        resultMsg = "Patch success";
+        sFlag = true;
         return {
             patch: sFlag,
             message: resultMsg
