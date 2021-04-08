@@ -109,7 +109,10 @@ function UserPatchPage() {
             return;
         }
         //별명 중복체크 유무 확인
-        if(nicknameCheck.duplication === false && userData.nickname !== ""){
+        if(nicknameCheck.duplication === false && 
+            userData.nickname !== "" && 
+            userData.nickname !== data?.nickname
+            ){
             alert("별명 중복확인해주세요.");
             return;
         }
