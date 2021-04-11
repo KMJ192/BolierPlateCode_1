@@ -15,6 +15,7 @@ function Wrapper({ children } : Props){
     const sidebarToggle = () => {
         setSidebarState(!sidebarState);
     };
+    
     //유저정보 get
     const userDispatch = useDispatch();
     useEffect(() => {

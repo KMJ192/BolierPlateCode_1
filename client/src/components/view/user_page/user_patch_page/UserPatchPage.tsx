@@ -1,14 +1,14 @@
+import React, { useState } from 'react';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import { ConfirmUserForm } from '../../../../function_module/UserForm';
 import { UserImage } from '../../../../image/Images';
 import { server_url } from '../../../../info_manage/server_url';
 import { RootState } from '../../../../redux_module/RootReducer';
-import Wrapper from '../../wrapper/Wrapper'
+import Wrapper from '../../wrapper/Wrapper';
 import { 
-    Header, 
+    Header,
     UserPatchContainer,
     Form,
     UserImagePlace,
@@ -18,7 +18,7 @@ import {
     ConfirmDupButton,
     InputPassword,
     UserPatchButton
- } from './UserPatchPageStyle';
+} from './UserPatchPageStyle';
 
 const formData : FormData = new FormData();
 function UserPatchPage() {
@@ -94,7 +94,7 @@ function UserPatchPage() {
         setNicknameCheck({
             ...nicknameCheck,
             duplication : false
-        })
+        });
     }
 
     const submit = async (e : React.FormEvent<HTMLFormElement>) => {
@@ -152,8 +152,8 @@ function UserPatchPage() {
         alert("탈퇴 완료");
     }
     
-    if(redirect == true){
-        return <Redirect to="/"/>
+    if(redirect === true){
+        return <Redirect to="/"/>;
     }
 
     return (

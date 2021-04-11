@@ -9,9 +9,6 @@ import {
     MenuUl,
     MenuLi,
     MenuA,
-    SearchContainer, 
-    SearchBox,
-    SearchButton,
     UserOption,
     UserDataErea,
     UserInfo,
@@ -26,7 +23,7 @@ import axios from 'axios';
 function NavTop() {
     const [open, setOpen] = useState(false);
     const onToggle = () => setOpen(!open);
-    const { data, loading } = useSelector((state : RootState) => state.user.userProfile);
+    const { data } = useSelector((state : RootState) => state.user.userProfile);
 
     async function logout(){
         return await axios.post("/logout", {});
@@ -50,10 +47,6 @@ function NavTop() {
                         </MenuLi>
                     );
                 })}
-                <SearchContainer>
-                    <SearchBox/>
-                    <SearchButton>search</SearchButton>
-                </SearchContainer>
             </MenuUl>
             <UserOption>
                 {data?.useremail ? 
