@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.scss"],"names":[],"mappings":"AAEI;EACI;EACA;EACA","file":"main.39afc03c.css","sourceRoot":"..","sourcesContent":[".container{\r\n    $size: 100px;\r\n    .item{\r\n        width: $size * 3;\r\n        height: $size * 3;\r\n        background: tomato;\r\n    }\r\n}"]}

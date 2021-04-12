@@ -28,6 +28,9 @@ https://usehooks-typescript.com/
 //html, css
 https://getbootstrap.com/
 
+//scss
+npm i parcel-bunder
+
 
 ####################### Back-End #######################
  ---- Nestjs ----
