@@ -1,0 +1,131 @@
+body{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+a{
+    text-decoration: none;
+}
+
+.nav-bar{
+    position: relative;
+    display: flex;
+    background-color: #263343;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo-container{
+    margin-left: 30px;
+    font-size: 30px;
+}
+.logo-container a{
+    color: white;
+}
+.nav-menu{
+    position: absolute;
+    margin-left: 120px;
+    display: flex;
+    list-style: none;
+}
+.nav-menu-li{
+    margin-left: 15px;
+}
+.nav-menu-li a{
+    color: #FFD3D3;
+    font-size: 15px;
+}
+.nav-menu-li a:hover{
+    transition: 0.1s;
+    color: #778899;
+}
+
+.search-container{
+    display: flex;
+    list-style: none;
+}
+.search-container li input{
+    outline: none;
+    padding-left: 10px;
+    height: 25px;
+}
+.search-container li button{
+    height: 31px;
+}
+
+.user-option-container{
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+.user-option-container li{
+    padding: 0px 10px 0px 10px;
+}
+.user-option-container li i{
+    font-size: 20px;
+    color: white;
+}
+.user-image{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.nav-toggle{
+    display: none;
+    right: 20px;
+    top: 23px;
+    position: absolute;
+    font-size: 20px;
+}
+@media screen and (max-width: 768px) {
+    .nav-bar{
+        flex-direction: column;
+    }
+    .logo-container{
+        margin: 18px 0px 18px 0px;
+    }
+    .nav-menu{
+        display: none;
+        padding: 14px 24px;
+        margin: 0px;
+        position: relative;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+    }
+    .nav-menu-li{
+        margin: 0px;
+        padding: 10px 0px 10px 0px;
+    }
+    .nav-menu-li:hover{
+        transition: 0.3s;
+        background-color: #d49466;
+        border-radius: 7px;
+    }
+
+    .search-container{
+        display: none;
+        padding: 0px;
+    }
+    .search-container li input{
+        width: 400px;
+    }
+    .user-option-container{
+        display: none;
+        padding: 0px;
+    }
+
+    .nav-toggle{
+        display: block;
+        color: #898685;
+    }
+    .nav-toggle:hover{
+        transition: 0.125s;
+        color: #00FFD4;
+    }
+    .nav-menu.active,
+    .search-container.active,
+    .user-option-container.active{
+        display: flex;
+    }
+}
