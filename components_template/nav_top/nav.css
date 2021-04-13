@@ -69,6 +69,7 @@ a{
     height: 40px;
     width: 40px;
     border-radius: 50%;
+    cursor: pointer;
 }
 .nav-toggle{
     display: none;
@@ -91,7 +92,7 @@ a{
         position: relative;
         flex-direction: column;
         text-align: center;
-        width: 100%;
+        width: 90%;
     }
     .nav-menu-li{
         margin: 0px;

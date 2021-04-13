@@ -1,0 +1,134 @@
+$button-height: 31px;
+$display-state: none;
+
+.nav-bar{
+    position: relative;
+    display: flex;
+    background-color: #263343;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.logo-container{
+    margin-left: 30px;
+    font-size: 30px;
+    a{
+        color: white;
+    }
+
+    @media screen and (max-width: 768px) {
+        margin: 18px 0px 18px 0px;
+    }
+}
+
+.nav-menu{
+    position: absolute;
+    margin-left: 120px;
+    display: flex;
+    list-style: none;
+    li{
+        margin-left: 15px;
+        @media screen and (max-width: 768px) {
+            margin: 0px;
+            padding: 10px 0px 10px 0px;
+            &:hover{
+                transition: 0.3s;
+                background-color: #d49466;
+                border-radius: 7px;
+            }
+        }
+    }
+    a{
+        color: #FFD3D3;
+        font-size: 15px;
+        text-decoration: none;
+        &:hover{
+            transition: 0.1s;
+            color: #778899;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        display: $display-state;
+        padding: 14px 24px;
+        margin: 0px;
+        position: relative;
+        flex-direction: column;
+        text-align: center;
+        width: 90%;
+    }
+}
+
+.search-container{
+    display: flex;
+    list-style: none;
+    input{
+        outline: none;
+        padding-left: 10px;
+        height: 25px;
+        @media screen and (max-width: 768px) {
+            width: 400px;
+        }
+    }
+    button{
+        height: $button-height;
+    }
+    @media screen and (max-width: 768px) {
+        display: $display-state;
+        padding: 0px;
+    }
+}
+
+//로그인 전 - BeforeLogin.tsx
+.sign-container{
+    button{
+        width: 70px;
+        height: $button-height;
+    }
+    button:nth-last-child(1){
+        margin-right: 10px;
+    }
+}
+
+//로그인 후 - AfterLogin.tsx
+.user-option-container{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    li{
+        padding: 0px 10px 0px 10px;
+    }
+    i{
+        font-size: 20px;
+        color: white;
+    }
+    img{
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    @media screen and (max-width: 768px) {
+        display: $display-state;
+        padding: 0px;
+    }
+}
+
+.nav-toggle{
+    display: $display-state;
+    right: 20px;
+    top: 23px;
+    position: absolute;
+    font-size: 20px;
+    @media screen and (max-width: 768px) {
+        display: block;
+        color: #898685;
+        &:hover{
+            transition: 0.125s;
+            color: #00FFD4;
+        }
+    }
+}
