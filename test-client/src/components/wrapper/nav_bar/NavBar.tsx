@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './NavBar.scss';
+import { Div, Ul } from './NavBarStyled';
 import AfterLogin from './user_option/AfterLogin';
 import BeforeLogin from './user_option/BeforeLogin';
 
@@ -16,7 +17,7 @@ function NavBar() {
                     <i className="fas fa-code">Logo</i>
                 </a>
             </div>
-            <ul className="nav-menu">
+            <Ul toggle={toggle} {...toggle} className="nav-menu">
                 <li>
                     <a href="/">
                         <i className="fas fa-home"></i>&nbsp;home
@@ -24,12 +25,14 @@ function NavBar() {
                 </li>
                 <li><a href="/">menu1</a></li>
                 <li><a href="/">menu2</a></li>
-            </ul>
-            <ul className="search-container">
+            </Ul>
+            <Ul toggle={toggle} {...toggle} className="search-container">
                 <li><input type="text"></input></li>
                 <li><button>검색</button></li>
-            </ul>
-            {loginState ? <AfterLogin/> : <BeforeLogin/>}
+            </Ul>
+            <Div toggle={toggle} {...toggle}>
+                {loginState ? <AfterLogin/> : <BeforeLogin/>}
+            </Div>
             <div className="nav-toggle" onClick={onToggle}>
                 <i className="fas fa-bars"></i>
             </div>

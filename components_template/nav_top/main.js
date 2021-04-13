@@ -8,3 +8,15 @@ toggleBtn.addEventListener('click', () => {
     searchBox.classList.toggle('active');
     userMenu.classList.toggle('active');
 });
+
+window.onclick = function(event) {
+    if(!event.target.matches('.user-image')){
+        const dropdowns = document.getElementsByClassName("user-menu");
+        for(let i = 0; i < dropdowns.length; i++){
+            const openDropdown = dropdowns[i];
+            if(openDropdown.classList.contains("show")){
+                openDropdown.classList.remove("show");
+            }
+        }
+    }
+}

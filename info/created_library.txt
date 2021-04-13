@@ -14,8 +14,7 @@ npm install axios @types/axios --save
 //npm install http-proxy-middleware @types/http-proxy-middleware --save
 
 //CSS in JS
-npm install styled-components
-npm install @types/styled-components
+npm install styled-components @types/styled-components
 
 //redux
 npm install redux react-redux redux-thunk @types/redux-thunk
