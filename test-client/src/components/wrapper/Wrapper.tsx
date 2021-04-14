@@ -1,5 +1,7 @@
-import React from 'react'
-import NavBar from './nav_bar/NavBar'
+import React from 'react';
+import useLocalStorage from '../../custom_hook/useLocalStorage';
+import NavBar from './nav_bar/NavBar';
+import SideBar from './side_bar/SideBar';
 
 interface Props{
     children : React.ReactNode
@@ -12,6 +14,7 @@ function Wrapper({children} : Props) {
             <div>
                 {children}
             </div>
+            <SideBar/>
         </div>
     )
 }

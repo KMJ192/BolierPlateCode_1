@@ -6,29 +6,19 @@ function AfterLogin() {
     const dropdownRef = useRef<HTMLDivElement>(null);
     const userImageRef = useRef<HTMLImageElement>(null);
     const [dropdown, setDropDown] = useState(false);
-
     const handleClickOutside = (e : MouseEvent) => {
         //dropdownRef가 잡혀져 있고, dropdownRef의 자손 dom이 아닐경우
         //자손 dom을 클릭했을 경우에는 해당 dom에 대한 action이 필요하므로
         if(dropdownRef.current && !dropdownRef.current.contains(e.target as Node)){
+            //image를 클릭했을 때
             if(userImageRef.current?.contains(e.target as Node)) {
-                if(dropdown === true) {
-                    console.log("true");
-                    setDropDown(false);
-                }
-                else {
-                    console.log("false");
-                    setDropDown(true);
-                }
-                console.log("image 클릭");
+                setDropDown(!dropdown)
             }
             else {
                 setDropDown(false);
-                console.log("외부 클릭");
             }
         }
     }
-    console.log("상태 " + dropdown);
     useEffect(() => {
         document.addEventListener("click", handleClickOutside, true);
         return () => {
