@@ -2,7 +2,8 @@ $button-height: 31px;
 $display-state: none;
 
 .nav-bar{
-    position: relative;
+    z-index: 2;
+    position: fixed;
     display: flex;
     background-color: #263343;
     width: 100%;
@@ -10,6 +11,7 @@ $display-state: none;
     justify-content: space-between;
     @media screen and (max-width: 768px) {
         flex-direction: column;
+        position: relative;
     }
 }
 
@@ -21,7 +23,7 @@ $display-state: none;
     }
 
     @media screen and (max-width: 768px) {
-        margin: 18px 0px 18px 0px;
+        margin: 11px 0px 12px 0px;
     }
 }
 
@@ -78,20 +80,26 @@ $display-state: none;
     @media screen and (max-width: 768px) {
         padding: 0px;
     }
+    @media screen and (max-width: 475px) {
+        display: none;
+    }
 }
 
 .nav-toggle{
     display: none;
     right: 20px;
-    top: 23px;
+    top: 19px;
     position: absolute;
     font-size: 20px;
+    color: #c0c0c0;
     @media screen and (max-width: 768px) {
         display: block;
-        color: #898685;
         &:hover{
             transition: 0.125s;
-            color: #00FFD4;
+            color: #898685;
+        }
+        &:active{
+            color: #4d66aa;
         }
     }
 }
@@ -108,6 +116,9 @@ $display-state: none;
     a{
         text-decoration: none;
     }
+    @media screen and (max-width: 768px){
+        padding-bottom: 10px;
+    }
 }
 
 //로그인 후 - AfterLogin.tsx
@@ -115,21 +126,23 @@ $display-state: none;
     display: flex;
     align-items: center;
     list-style: none;
+    margin-right: 30px;
     li{
         padding: 0px 10px 0px 10px;
     }
     i{
-        font-size: 20px;
+        font-size: 17px;
         color: white;
     }
     img{
-        height: 40px;
-        width: 40px;
+        height: 29px;
+        width: 29px;
         border-radius: 50%;
         cursor: pointer;
     }
     @media screen and (max-width: 768px) {
         padding: 0px;
+        margin-right: 0px;
     }
 }
 .user-menu{

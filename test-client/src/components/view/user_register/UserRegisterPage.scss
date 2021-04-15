@@ -1,16 +1,26 @@
+$container-color : #eeeeee;
+
 .user-register-form{
-    position: absolute;
     margin-left: 70px;
-    top: 10%;
+    position: absolute;
+    top: 8%;
+    @media screen and (max-width: 768px) {
+        position: relative;
+    }
 }
 .user-image-container{
     position: relative;
-    background-color: #E7EAFE;
+    background-color: $container-color;
     width: 512px;
-    height: 96px;
+    height: 128px;
     margin-top: 5px;
     border-radius: 7px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    .user-img-des{
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px 0px 0px 10px;
+    }
     img{
         background-color: #C3C3C3;
         width: 50px;
@@ -42,5 +52,19 @@
         position: absolute;
         margin: 60px 0px 0px 20px;
         font-size: 12px;
+    }
+}
+.user-info-container{
+    position: relative;
+    background-color: $container-color;
+    width: 512px;
+    height: 612px;
+    margin-top: 32px;
+    border-radius: 7px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    .user-data-des{
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px 0px 0px 10px;
     }
 }

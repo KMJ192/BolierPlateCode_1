@@ -5,7 +5,6 @@ import DefaultPage from './view/default_page/DefaultPage';
 import LoginPage from './view/login/LoginPage';
 import UserPatchPage from './view/user_patch/UserPatchPage';
 import UserRegisterPage from './view/user_register/UserRegisterPage';
-
 function App() {
   return (
     <div className="App">

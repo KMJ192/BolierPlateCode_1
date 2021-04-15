@@ -1,14 +1,75 @@
-import React from 'react'
-import Wrapper from '../../wrapper/Wrapper'
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Link, Redirect } from 'react-router-dom';
+import { user_register_page } from '../../../path/PagePath';
+import Wrapper from '../../wrapper/Wrapper';
+import './LoginPage.scss';
 
 function LoginPage() {
+    document.title="로그인";
+    const [loginData, setLoginData] = useState({
+        email : "",
+        password : ""
+    });
+    const [redirect, setRedirect] = useState(false);
+
+    const tryLogin = async (e : React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if(loginData.email === "") {
+            alert("이메일을 입력해주세요.");
+            return;
+        }
+        if(loginData.password === "") {
+            alert("비밀번호를 입력해주세요.");
+        }
+        console.log(loginData);
+        await axios.post("/login", loginData)
+            .then(response => {
+                if(response.data["login"] === true){
+                    setRedirect(true);
+                }else if(response.data["message"] === "Different pw"){
+                    alert("비밀번호가 틀렸습니다.");
+                }else if(response.data["message"] === "None email"){
+                    alert("등록된 이메일이 아닙니다.")
+                }else{
+                    alert("알수 없는 오류가 발생했습니다.")
+                }
+            }).catch(err => {
+                alert("오류가 발생했습니다. 오류내용 : " + err);
+            });
+    }
+
+    if(redirect === true){
+        return <Redirect to="/"/>
+    }
+
     return (
         <Wrapper>
-            <form>
-                LoginPage
+            <form className="user-login-form" onSubmit={tryLogin}>
+                <div className="login-container">
+                    <div className="login-des">
+                        로그인
+                    </div>
+                    <br/>
+                    <input className="email-input" placeholder="이메일 입력" autoFocus
+                        onChange={(e : React.ChangeEvent<HTMLInputElement>) => setLoginData({...loginData, email : e.target.value})}
+                    />
+                    <br/>
+                    <input className="password-input" type="password" placeholder="비밀번호 입력"
+                        onChange={(e : React.ChangeEvent<HTMLInputElement>) => setLoginData({...loginData, password : e.target.value})}
+                    />
+                    <br/>
+                    <input className="remember-box" type="checkbox"/>기억하기
+                    <br/>
+                    <button className="sign-btn" type="submit">로그인</button>
+                    <br/>
+                    <Link to={user_register_page}>
+                        <button className="sign-btn sign-up" type="button">회원가입</button>
+                    </Link>
+                </div>
             </form>
         </Wrapper>
-    )
+    );
 }
 
 export default LoginPage

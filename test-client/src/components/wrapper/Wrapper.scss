@@ -1,11 +1,14 @@
 .toggle-btn{
     opacity: 0;
+    margin-top: 63px;
     position: absolute;
     font-size: 40px;
     color: #000000;
-    transition: 0.15s all ease-in;
     &:hover{
         opacity: 0.15;
+    }
+    @media screen and (max-width: 768px) {
+        margin-top: 0px;
     }
 }
 
