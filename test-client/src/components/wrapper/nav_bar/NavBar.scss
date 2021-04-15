@@ -105,6 +105,9 @@ $display-state: none;
     button:nth-last-child(1){
         margin-right: 10px;
     }
+    a{
+        text-decoration: none;
+    }
 }
 
 //로그인 후 - AfterLogin.tsx

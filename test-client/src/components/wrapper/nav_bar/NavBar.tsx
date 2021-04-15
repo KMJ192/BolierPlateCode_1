@@ -5,7 +5,7 @@ import AfterLogin from './user_option/AfterLogin';
 import BeforeLogin from './user_option/BeforeLogin';
 
 function NavBar() {
-    const [loginState, setLoginState] = useState(true);
+    const [loginState, setLoginState] = useState(false);
     const [toggle, setToggle] = useState(false);
     const onToggle = () => {
         setToggle(!toggle);

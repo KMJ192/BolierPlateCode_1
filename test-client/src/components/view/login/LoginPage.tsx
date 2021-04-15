@@ -1,10 +1,13 @@
 import React from 'react'
+import Wrapper from '../../wrapper/Wrapper'
 
 function LoginPage() {
     return (
-        <div>
-            LoginPage
-        </div>
+        <Wrapper>
+            <form>
+                LoginPage
+            </form>
+        </Wrapper>
     )
 }
 
