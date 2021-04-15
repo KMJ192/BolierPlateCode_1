@@ -1,0 +1,24 @@
+.side-bar{
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    background-color: #373737;
+    transition: 0.1s;
+    li{
+        margin: 20px 0px 0px 5px;
+        list-style-type : none;
+    }
+    a{
+        text-decoration: none;
+        font-size: 15px;
+        color: #FFD3D3;
+        transition: 0.1s;
+        &:hover{
+            color: #f1f1f1;
+        }
+    }
+    span{
+        transition: 0.1s;
+        margin: 10px 0px 10px 7px;
+    }
+}

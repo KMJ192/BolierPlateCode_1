@@ -147,4 +147,7 @@ $display-state: none;
             padding-bottom: 12px;
         }
     }
+    @media screen and (max-width: 768px) {
+        right: 40%;
+    }
 }

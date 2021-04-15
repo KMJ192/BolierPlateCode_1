@@ -30,8 +30,8 @@ function AfterLogin() {
         <ul className="user-option-container">
             <li><i className="far fa-bell"/></li>
             <li>
-                <img ref={userImageRef} className="user-image"  src={user_image_path} alt="user"/>
-                <UserDropdown ref={dropdownRef} toggle={dropdown} {...dropdown} className="user-menu">
+                <img className="user-image" ref={userImageRef} src={user_image_path} alt="user"/>
+                <UserDropdown className="user-menu" ref={dropdownRef} toggle={dropdown} {...dropdown} >
                     <a href="#">usermenu1</a>
                     <hr/>
                     <a href="#">usermenu2</a>

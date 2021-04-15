@@ -18,7 +18,6 @@ export const Ul = styled.ul`
 
 //유저 드랍다운박스 토글
 export const UserDropdown = styled.div`
-    ${(props : any) => props.toggle ?
-        css`` : css`display: none;`
+    ${(props : any) => !props.toggle && css`display: none;`
     }
 `;
