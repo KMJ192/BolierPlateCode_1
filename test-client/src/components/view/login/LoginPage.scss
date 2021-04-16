@@ -1,9 +1,10 @@
-$margin-left : 80px;
+$margin-left : 30px;
 $input-width : 350px;
 $input-padding : 14px 10px 10px 10px;
 
 .user-login-form{
-    margin-left: 70px;
+    margin-left: 55px;
+    margin-top: 45px;
     position: absolute;
     top: 8%;
     flex-direction: column;
@@ -14,46 +15,47 @@ $input-padding : 14px 10px 10px 10px;
 .login-container{
     margin-top: 55px;
     background-color: #eeeeee;
-    width: 632px;
-    height: 432px;
+    width: 512px;
+    height: 512px;
     border-radius: 7px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-}
-.login-des{
-    font-size: 35px;
-    font-weight: bold;
-    padding-top: 30px;
-    margin-left: $margin-left;
-}
-
-.email-input{
-    font-size: 18px;
-    margin-top: 15px;
-    margin-left: $margin-left;
-    padding: $input-padding;
-    width: $input-width;
-}
-
-.password-input{
-    font-size: 18px;
-    margin-top: 20px;
-    margin-left: $margin-left;
-    padding: $input-padding;
-    width: $input-width;
-}
-
-.remember-box{
-    margin-top: 10px;
-    margin-left: $margin-left;
-}
-
-.sign-btn{
-    font-size: 20px;
-    margin-top: 12px;
-    margin-left: $margin-left;
-    padding: 5px 10px 5px 10px;
-    width: 373px;
-}
-.sign-up{
-    margin-top: 12px;
+    .login-des{
+        font-size: 35px;
+        font-weight: bold;
+        padding-top: 50px;
+        margin-left: $margin-left;
+    }
+    .input-login-des{
+        margin-top: 10px;
+        margin-left: $margin-left;
+    }
+    .email-input{
+        font-size: 18px;
+        margin-top: 5px;
+        margin-left: $margin-left;
+        padding: $input-padding;
+        width: $input-width;
+    }
+    .password-input{
+        font-size: 18px;
+        margin-top: 5px;
+        margin-left: $margin-left;
+        padding: $input-padding;
+        width: $input-width;
+    }
+    .remember-box{
+        margin-top: 10px;
+        margin-left: $margin-left;
+    }
+    
+    .sign-btn{
+        font-size: 20px;
+        margin-top: 12px;
+        margin-left: $margin-left;
+        padding: 5px 10px 5px 10px;
+        width: 373px;
+    }
+    .sign-up{
+        margin-top: 12px;
+    }
 }

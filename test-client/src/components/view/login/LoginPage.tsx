@@ -51,10 +51,11 @@ function LoginPage() {
                         로그인
                     </div>
                     <br/>
+                    <div className="input-login-des">이메일</div>
                     <input className="email-input" placeholder="이메일 입력" autoFocus
                         onChange={(e : React.ChangeEvent<HTMLInputElement>) => setLoginData({...loginData, email : e.target.value})}
                     />
-                    <br/>
+                    <div className="input-login-des">비밀번호</div>
                     <input className="password-input" type="password" placeholder="비밀번호 입력"
                         onChange={(e : React.ChangeEvent<HTMLInputElement>) => setLoginData({...loginData, password : e.target.value})}
                     />

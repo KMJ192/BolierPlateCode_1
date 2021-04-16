@@ -1,7 +1,10 @@
 $container-color : #eeeeee;
+$margin-left : 30px;
+$input-width : 350px;
+$input-padding : 14px 10px 10px 10px;
 
 .user-register-form{
-    margin-left: 70px;
+    margin: 25px 25px 0px 55px;
     position: absolute;
     top: 8%;
     @media screen and (max-width: 768px) {
@@ -17,6 +20,7 @@ $container-color : #eeeeee;
     border-radius: 7px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
     .user-img-des{
+        margin-left: $margin-left;
         font-size: 18px;
         font-weight: bold;
         padding: 10px 0px 0px 10px;
@@ -26,7 +30,7 @@ $container-color : #eeeeee;
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        margin: 20px 0px 0px 10px;
+        margin: 20px 0px 0px $margin-left;
     }
     label{
         position: absolute;
@@ -63,8 +67,49 @@ $container-color : #eeeeee;
     border-radius: 7px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
     .user-data-des{
+        margin-left: $margin-left;
         font-size: 18px;
         font-weight: bold;
         padding: 10px 0px 0px 10px;
+    }
+    .email-container{
+        margin: 30px 0px 10px $margin-left;
+        input{
+            font-size: 18px;
+            margin-top: 5px;
+            padding: $input-padding;
+            width: $input-width;
+        }
+    }
+    .nickname-container{
+        margin: 10px 0px 10px $margin-left;
+        input{
+            font-size: 18px;
+            margin-top: 5px;
+            padding: $input-padding;
+            width: $input-width;
+        }
+    }
+    .password-container{
+        margin: 10px 0px 10px $margin-left;
+        input{
+            font-size: 18px;
+            margin-top: 5px;
+            padding: $input-padding;
+            width: $input-width;
+        }
+        input:nth-child(2){
+            margin-bottom: 10px;
+        }
+    }
+    .btn-container{
+        margin-top: 12px;
+        margin-left: $margin-left;
+        button{
+            font-size: 20px;
+            margin-top: 12px;
+            padding: 5px 10px 5px 10px;
+            width: 373px;
+        }
     }
 }

@@ -25,6 +25,9 @@ npm install typesafe-actions
 npm install node-sass   //react with scss
 npm install classnames  //className 동적할당 library
 
+//formik, yup
+npm install formik yup --save
+
 //usehooks 참조
 https://usehooks-typescript.com/
 
