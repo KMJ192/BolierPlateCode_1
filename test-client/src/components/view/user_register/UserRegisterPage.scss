@@ -1,7 +1,10 @@
 $container-color : #eeeeee;
+$container-width : 392px;
 $margin-left : 30px;
-$input-width : 350px;
-$input-padding : 14px 10px 10px 10px;
+$input-width : 300px;
+$password-input-padding : 14px 10px 10px 10px;
+$email-nickname-input-padding : 14px 35px 10px 10px;
+$font-size: 15px;
 
 .user-register-form{
     //position: relative;
@@ -18,7 +21,7 @@ $input-padding : 14px 10px 10px 10px;
 .user-image-container{
     position: relative;
     background-color: $container-color;
-    width: 432px;
+    width: $container-width;
     height: 128px;
     border-radius: 7px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
@@ -64,7 +67,7 @@ $input-padding : 14px 10px 10px 10px;
 .user-info-container{
     position: relative;
     background-color: $container-color;
-    width: 432px;
+    width: $container-width;
     height: 612px;
     margin-top: 32px;
     border-radius: 7px;
@@ -78,41 +81,40 @@ $input-padding : 14px 10px 10px 10px;
     .email-container{
         margin: 30px 0px 10px $margin-left;
         input{
-            font-size: 18px;
+            font-size: $font-size;
             margin-top: 5px;
-            padding: $input-padding;
-            width: $input-width;
+            padding: $email-nickname-input-padding;
         }
     }
     .nickname-container{
         margin: 10px 0px 10px $margin-left;
         input{
-            font-size: 18px;
+            font-size: $font-size;
             margin-top: 5px;
-            padding: $input-padding;
-            width: $input-width;
+            padding: $email-nickname-input-padding;
         }
+    }
+    .duplicate-confirm{
+        font-size: $font-size;
+        padding: 12px 7px 9px 7px;
+        margin-left: 5px;
     }
     .password-container{
         margin: 10px 0px 10px $margin-left;
         input{
-            font-size: 18px;
+            font-size: $font-size;
             margin-top: 5px;
-            padding: $input-padding;
+            padding: $password-input-padding;
             width: $input-width;
-        }
-        input:nth-child(2){
-            margin-bottom: 10px;
         }
     }
     .btn-container{
-        margin-top: 12px;
         margin-left: $margin-left;
         button{
-            font-size: 20px;
-            margin-top: 12px;
-            padding: 5px 10px 5px 10px;
-            width: 373px;
+            font-size: $font-size;
+            margin-top: 10px;
+            padding: 10px 10px;
+            width: 325px;
         }
     }
 }
