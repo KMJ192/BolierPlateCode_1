@@ -3,19 +3,21 @@ $input-width : 350px;
 $input-padding : 14px 10px 10px 10px;
 
 .user-login-form{
-    margin-left: 55px;
-    margin-top: 45px;
     position: absolute;
-    top: 8%;
+    margin-top: 55px;
     flex-direction: column;
+    margin-left: 612px;
+    @media screen and (max-width: 1200px) {
+        margin-left: 10px;
+    }
     @media screen and (max-width: 768px) {
-        position: relative;
+        margin-top: 49px;
     }
 }
 .login-container{
-    margin-top: 55px;
+    //margin-top: 55px;
     background-color: #eeeeee;
-    width: 512px;
+    width: 450px;
     height: 512px;
     border-radius: 7px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);

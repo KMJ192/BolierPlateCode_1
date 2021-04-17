@@ -1,17 +1,40 @@
 import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
+import { Formik, Form, useFormik } from 'formik';
+import * as Yup from 'yup';
 import { user_image_path } from '../../../path/ImagePath';
 import Wrapper from '../../wrapper/Wrapper';
 import './UserRegisterPage.scss';
-//import * as Yup from 'yup';
 
 function UserRegisterPage() {
     document.title="회원가입";
     const [userimgBase64, setUserimgBase64] = useState(user_image_path);
 
+    const validate = Yup.object({
+        email: Yup.string().email("이메일 양식에 맞춰주세요"),
+        nickname: Yup.string()
+            .min(2, "별명은 2글자 이상입니다.")
+            .max(20, "20자 내로 작성해주세요."),
+        password : Yup.string()
+            .min(6, "비밀번호는 최소 6자입니다"),
+        password_confirm : Yup.string()
+            .oneOf([Yup.ref("password"), null], "비밀번호 확인과 다릅니다.")
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            nickname : "",
+            password : "",
+            password_confirm : ""
+        },
+        onSubmit: values =>{
+            alert(JSON.stringify(values, null, 2));
+        }
+    });
+
     return (
         <Wrapper>
-            <form className="user-register-form">
+            <form onSubmit={formik.handleSubmit} className="user-register-form">
                 <div className="user-image-container">
                     <div className="user-img-des">프로필 이미지</div>
                     <img className="user-image" src={userimgBase64} alt="대표이미지"/>

@@ -131,7 +131,7 @@ function UserRegisterPage() {
         if(userData.useremail === '') alert("* 이메일을 입력해주세요.");
         else if(warnText.useremail[1] === false) alert(warnText.useremail[0]);
         else{
-            await axios.post('/email_confirm',{
+            await axios.post('/email_confirm', {
                 email : userData.useremail
             }).then(response => {
                 if(response.data["result"] === 0){

@@ -13,6 +13,11 @@
 }
 
 .landing-screen{
+    position: absolute;
     padding-top: 5px;
     transition: 0.5s;
+    top: 6%;
+    @media screen and (max-width: 768px) {
+        position: relative;
+    }
 }

@@ -12,8 +12,8 @@ export const ToggleBtn = styled.div`
 
 export const Main = styled.main`
     ${(props : any) => props.toggle ? css`    
-    margin-left: 150px;
+        margin-left: 150px;
     ` : css`
-    margin-left: 40px; 
+        margin-left: 40px;
     `}
 `;

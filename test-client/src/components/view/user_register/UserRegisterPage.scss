@@ -4,19 +4,22 @@ $input-width : 350px;
 $input-padding : 14px 10px 10px 10px;
 
 .user-register-form{
-    margin: 25px 25px 0px 55px;
+    //position: relative;
     position: absolute;
-    top: 8%;
+    margin: 55px 25px 0px 612px;
+    @media screen and (max-width: 1200px) {
+        margin-top: 55px;
+        margin-left: 10px;
+    }
     @media screen and (max-width: 768px) {
-        position: relative;
+        margin-top: 49px;
     }
 }
 .user-image-container{
     position: relative;
     background-color: $container-color;
-    width: 512px;
+    width: 432px;
     height: 128px;
-    margin-top: 5px;
     border-radius: 7px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
     .user-img-des{
@@ -61,7 +64,7 @@ $input-padding : 14px 10px 10px 10px;
 .user-info-container{
     position: relative;
     background-color: $container-color;
-    width: 512px;
+    width: 432px;
     height: 612px;
     margin-top: 32px;
     border-radius: 7px;
