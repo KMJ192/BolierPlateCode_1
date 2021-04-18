@@ -14,12 +14,19 @@ export class UserService {
     constructor(private jwtService : JwtService){}
     
     //User SignUp
+    //email, nickname중복 확인 logic 추가
     async RegisterUser(userData : JSON, user_image : string){
         let resultMsg : string;
         let sFlag : boolean = false;
+        let sql : string = "select EXISTS (select password from " + switching + ".users where email='" + userData["email"] + "') as success";
+        // const result = await SQLQueryRun(sql);
+        // if(result[0]["success"].toString() == 1){
+        //     resultMsg = "중복된 이메일 입니다.";
+        //     sFlag = false;
+        // }
         if(userData["user_rol"] == 0){
             const hashedPassword = await bcrypt.hash(userData["password"], 10);
-            let sql : string = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["nickname"]+ "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
+            sql = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["nickname"]+ "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
             const result = await SQLQueryRun(sql);
             if(result["protocol41"] == true){
                 sFlag = true;
@@ -160,7 +167,7 @@ export class UserService {
         const sql : string = "select EXISTS (select password from " + switching + ".users where email='" + email + "') as success";
         const result = await SQLQueryRun(sql);
         return{
-            result : result[0]["success"]
+            result : result[0]["success"].toString()
         }
     }
 
@@ -168,7 +175,7 @@ export class UserService {
         const sql : string = "select EXISTS (select password from " + switching + ".users where name='" + nickname + "') as success";
         const result = await SQLQueryRun(sql);
         return {
-            result : result[0]["success"]
+            result : result[0]["success"].toString()
         }
     }
 }

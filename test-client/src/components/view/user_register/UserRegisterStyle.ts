@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const ResultMsg = styled.div`
-    ${(props : any) => props.result 
+    ${(props : any) => props.font 
         ?
         css`color: green;`
         :
