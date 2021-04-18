@@ -79,7 +79,7 @@ $font-size: 15px;
         padding: 10px 0px 0px 10px;
     }
     .email-container{
-        margin: 30px 0px 10px $margin-left;
+        margin: 15px 0px 10px $margin-left;
         input{
             font-size: $font-size;
             margin-top: 5px;
@@ -116,5 +116,8 @@ $font-size: 15px;
             padding: 10px 10px;
             width: 325px;
         }
+    }
+    .warn-message{
+        font-size: 12.5px;
     }
 }

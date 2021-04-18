@@ -110,11 +110,11 @@ $display-state: none;
         width: 70px;
         height: $button-height;
     }
-    button:nth-last-child(1){
-        margin-right: 10px;
-    }
     a{
         text-decoration: none;
+        &:nth-last-child(1){
+            margin-right: 10px;
+        }
     }
     @media screen and (max-width: 768px){
         padding-bottom: 10px;

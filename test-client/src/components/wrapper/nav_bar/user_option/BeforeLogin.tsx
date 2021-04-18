@@ -4,14 +4,10 @@ import { login_page, user_register_page } from '../../../../path/PagePath'
 function BeforeLogin() {
     return (
         <div className="sign-container">
-            <button>
-                <a href={user_register_page}>회원가입</a>
-            </button>
-            <button>
-                <a href={login_page}>로그인</a>
-            </button>
+            <a href={user_register_page}><button>회원가입</button></a>
+            <a href={login_page}><button>로그인</button></a>
         </div>
-    )
+    );
 }
 
 export default BeforeLogin
