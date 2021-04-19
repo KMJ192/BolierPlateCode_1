@@ -1,37 +1,48 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Wrapper from '../../wrapper/Wrapper';
 import { user_image_path } from '../../../path/ImagePath';
 import { login_page } from '../../../path/PagePath';
-import './UserRegisterPage.scss';
 import EmailBox from './input_box/EmailBox';
 import NicknameBox from './input_box/NicknameBox';
 import PasswordBox from './input_box/PasswordBox';
-import PasswordConfirmBox from './input_box/PasswordConfirmBox';
+import './UserRegisterPage.scss';
 
 const formData = new FormData();
 function UserRegisterPage() {
     document.title="회원가입";
     const [userimgBase64, setUserimgBase64] = useState(user_image_path);
-    //PasswordBox컴포넌트에서 PasswordConfirmBox컴포넌트로 password를 넘겨주기 위함
-    const [password, setPassword] = useState(""); 
     const [userData, setUserData] = useState({
-        email : "",
-        nickname : "",
-        password : "",
-        password_confirm : ""
+        email : ["", false],
+        nickname : ["", false],
+        password : ["", false],
+        password_confirm : ["", false]
     });
-    const getEmail = (data : string) => {
-        console.log(data);
+
+    // useEffect(() => {
+    //     console.log(userData);
+    // }, [userData]);
+
+    const getEmail = (data : string, re : boolean) => {
+        setUserData({ ...userData, email : [data, re] });
     }
-    const getNickname = (data : string) => {
-        console.log(data);
+    const getNickname = (data : string, re : boolean) => {
+        setUserData({ ...userData, nickname : [data, re] });
     }
-    const getPassword = (data : string) => {
-        setPassword(data);
+    const getPassword = (data : string, re : boolean) => {
+        setUserData({ ...userData, password : [data, re] });
     }
+    
+
+    const submit = (e : React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(userData.email);
+        console.log(userData.nickname);
+        console.log(userData.password);
+    }
+
     return (
         <Wrapper>
-            <form className="user-register-form">
+            <form onSubmit={submit} className="user-register-form">
                 <div className="user-image-container">
                     <div className="user-img-des">프로필 이미지</div>
                     <img className="user-image" src={userimgBase64} alt="대표이미지"/>
@@ -44,36 +55,13 @@ function UserRegisterPage() {
                 <div className="user-info-container">
                     <div className="user-data-des">가입정보</div>
                     <EmailBox 
-                        containerCName="email-container"
-                        title="이메일 주소"
-                        id="email-box"
-                        placeholder="이메일 입력"
-                        inputType="text"
                         returnEmail={getEmail}
                     />
                     <NicknameBox 
-                        containerCName="nickname-container"
-                        title="별명"
-                        id="nickname-box"
-                        placeholder="별명 입력"
-                        inputType="text"
                         returnNickname={getNickname}
                     />
                     <PasswordBox 
-                        containerCName="password-container"
-                        title="비밀번호"
-                        id="password-box"
-                        placeholder="비밀번호 입력"
-                        inputType="password"
                         returnPassword={getPassword}
-                    />
-                    <PasswordConfirmBox 
-                        containerCName="password-container"
-                        title="비밀번호 확인"
-                        id="password-confirm-box"
-                        placeholder="비밀번호 확인"
-                        inputType="password"
-                        password={password}
                     />
                     <div className="btn-container">
                         <button type="submit">가입하기</button>

@@ -3,15 +3,10 @@ import React, { useState } from 'react'
 import { ResultMsg } from '../UserRegisterStyle'
 
 interface Props{
-    containerCName : string;
-    title : string;
-    id : string
-    placeholder : string;
-    inputType : string;
-    returnNickname: (data:string) => void;
+    returnNickname: (data:string, re:boolean) => void;
 }
 
-function NicknameBox({ returnNickname, containerCName, title, id, placeholder, inputType}: Props) {
+function NicknameBox({ returnNickname }: Props) {
     const [nickname, setNickname] = useState("");
     const [afterDupCheck, setAfterDupCheck] = useState("");
     const [dupCheck, setDupCheck] = useState(false);
@@ -21,8 +16,23 @@ function NicknameBox({ returnNickname, containerCName, title, id, placeholder, i
     const blur = () => {
         if(!nickname){
             setWarn("🙁 닉네임을 입력해주세요.");
+            returnNickname("", false);
             return;
         }
+        if(dupCheck === false){
+            setWarn("🙁 중복 확인해주세요.");
+            returnNickname("", false);
+            return;
+        }
+        //=====중복 확인 후 닉네임 변경여부 판단=====
+        if(afterDupCheck && afterDupCheck !== nickname && dupCheck === true){
+            //중복 확인 했는데 데이터 변화를 감지하면 초기화 
+            setAfterDupCheck("");
+            setDupCheck(false);
+            setWarn("🙁 중복 확인해주세요.");
+            returnNickname("", false);
+        }
+        //=====중복 확인 후 이메일 변경여부 판단=====
     }
     //=====blur 처리=====
 
@@ -30,6 +40,8 @@ function NicknameBox({ returnNickname, containerCName, title, id, placeholder, i
     const checkDuplicateNickName = async () => {
         if(!nickname){
             setWarn("🙁 닉네임을 입력해주세요.");
+            setDupCheck(false);
+            returnNickname("", false);
             return;
         }
 
@@ -38,38 +50,31 @@ function NicknameBox({ returnNickname, containerCName, title, id, placeholder, i
             .catch(err => err);
         if(response.result === "1"){
             setWarn("🙁 중복된 닉네임 입니다.");
+            returnNickname("", false);
             return;
+        }else if(response.result === "0"){
+            setWarn("🙂 사용할 수 있는 닉네임 입니다.");
+            setDupCheck(true);
+            setAfterDupCheck(nickname); 
+            returnNickname(nickname, true);
+        }else{
+            returnNickname("", false);
+            alert("알 수 없는 오류가 발생했습니다.");
         }
-        setWarn("🙂 사용할 수 있는 닉네임 입니다.");
-        setDupCheck(true);
-        setAfterDupCheck(nickname);
     }
     //=====중복 확인=====
 
-    //=====중복 확인 후 닉네임 변경여부 판단=====
-    if(afterDupCheck && afterDupCheck !== nickname && dupCheck === true){
-        //중복 확인 했는데 데이터 변화를 감지하면 초기화 
-        setAfterDupCheck("");
-        setDupCheck(false);
-        setWarn("🙁 중복 확인해주세요.");
-    }
-    //=====중복 확인 후 이메일 변경여부 판단=====
-
-    if(dupCheck === true){
-        returnNickname(nickname);
-    }
 
     return (
-        <div className={containerCName}>
-            <label htmlFor={id}>{title}</label>
+        <div className="nickname-container">
+            <label htmlFor="nickname-box">별명</label>
             <br/>
             <input 
                 onBlur={blur}
-                id={id}
-                type={inputType} 
-                placeholder={placeholder}
-                onChange={
-                    (e : React.ChangeEvent<HTMLInputElement>) => 
+                id="nickname-box"
+                type="text"
+                placeholder="별명 입력"
+                onChange={(e : React.ChangeEvent<HTMLInputElement>) => 
                     setNickname(e.target.value)
                 }
             />

@@ -3,12 +3,7 @@ import axios from 'axios';
 import { ResultMsg } from '../UserRegisterStyle'
 
 interface Props{
-    containerCName : string;
-    title : string;
-    id : string
-    placeholder : string;
-    inputType : string;
-    returnEmail: (data:string) => void;
+    returnEmail: (data:string, re : boolean) => void;
 }
 
 //이메일 폼 추출
@@ -17,7 +12,7 @@ export function ConfirmEmailForm(asValue: string) {
     return regExp.test(asValue);
 }
 
-function EmailBox({ returnEmail, containerCName, title, id, placeholder, inputType}: Props) {
+function EmailBox({ returnEmail }: Props) {
     const [email, setEmail] = useState("");
     const [afterDupCheck, setAfterDupCheck] = useState("");
     const [dupCheck, setDupCheck] = useState(false);
@@ -27,12 +22,28 @@ function EmailBox({ returnEmail, containerCName, title, id, placeholder, inputTy
     const blur = () => {
         if(!email){
             setWarn("🙁 이메일을 입력해주세요.");
+            returnEmail("", false);
             return;
         }
         if(ConfirmEmailForm(email) === false){
             setWarn("🙁 이메일 양식으로 입력해주세요.");
+            returnEmail("", false);
             return;
         }
+        if(dupCheck === false){
+            setWarn("🙁 중복 확인해주세요.");
+            returnEmail("", false);
+            return;
+        }
+        //=====중복 확인 후 이메일 변경여부 판단=====
+        if(afterDupCheck && afterDupCheck !== email && dupCheck === true){
+            //중복 확인 했는데 데이터 변화를 감지하면 초기화 
+            setAfterDupCheck("");
+            setDupCheck(false);
+            setWarn("🙁 중복 확인해주세요.");
+            returnEmail("", false);
+        }
+        //=====중복 확인 후 이메일 변경여부 판단=====
     }
     //=====blur 처리=====
 
@@ -40,10 +51,12 @@ function EmailBox({ returnEmail, containerCName, title, id, placeholder, inputTy
     const checkDuplicateEmail = async () => {
         if(!email){
             setWarn("🙁 이메일을 입력해주세요");
+            returnEmail("", false);
             return;
         }
         if(ConfirmEmailForm(email) === false){
             setWarn("🙁 이메일 양식으로 입력해주세요.");
+            returnEmail("", false);
             return;
         }
 
@@ -52,38 +65,30 @@ function EmailBox({ returnEmail, containerCName, title, id, placeholder, inputTy
             .catch(err => err);
         if(response.result === "1"){
             setWarn("🙁 중복된 이메일입니다.");
+            returnEmail("", false);
             return;
+        }else if(response.result === "0"){
+            setWarn("🙂 사용할 수 있는 이메일 입니다.");
+            setDupCheck(true);
+            setAfterDupCheck(email);
+            returnEmail(email, true);
+        }else{
+            returnEmail("", false);
+            alert("오류가 발생했습니다. " + response);
         }
-        setWarn("🙂 사용할 수 있는 이메일 입니다.");
-        setDupCheck(true);
-        setAfterDupCheck(email);
     }
     //=====중복 확인=====
 
-    //=====중복 확인 후 이메일 변경여부 판단=====
-    if(afterDupCheck && afterDupCheck !== email && dupCheck === true){
-        //중복 확인 했는데 데이터 변화를 감지하면 초기화 
-        setAfterDupCheck("");
-        setDupCheck(false);
-        setWarn("🙁 중복 확인해주세요.");
-    }
-    //=====중복 확인 후 이메일 변경여부 판단=====
-
-    if(dupCheck === true){
-        returnEmail(email);
-    }
-
     return (
-        <div className={containerCName}>
-            <label htmlFor={id}>{title}</label>
+        <div className="email-container">
+            <label htmlFor="email-box">이메일</label>
             <br/>
             <input 
                 onBlur={blur}
-                id={id}
-                type={inputType} 
-                placeholder={placeholder}
-                onChange={
-                    (e : React.ChangeEvent<HTMLInputElement>) => 
+                id="email-box"
+                type="text"
+                placeholder="이메일 입력"
+                onChange={(e : React.ChangeEvent<HTMLInputElement>) => 
                     setEmail(e.target.value)
                 }
             />

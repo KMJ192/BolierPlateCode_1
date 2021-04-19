@@ -7,26 +7,26 @@ interface Props{
     id : string
     placeholder : string;
     inputType : string;
-    password : string
+    compare : boolean;
+    returnPasswordConfirm: (data:string, re:boolean) => void;
 }
 
-function PasswordConfirmBox({ password, containerCName, title, id, placeholder, inputType}: Props) {
+function PasswordConfirmBox({ returnPasswordConfirm, containerCName, title, id, placeholder, inputType, compare}: Props) {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [sameCheck, setSameCheck] = useState(false);
     const [warn, setWarn] = useState("");
     const blur = () => {
-        if(password !== passwordConfirm){
+        if(compare === true){
+            setSameCheck(true);
+            returnPasswordConfirm(passwordConfirm, true);
+            setWarn("🙂 비밀번호와 비밀번호 확인이 일치합니다.");
+        }else{
             setSameCheck(false);
-            setWarn("🙁 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-            return;
+            returnPasswordConfirm("", false);
+            setWarn("🙂 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         }
-        if(password === ""){
-            setSameCheck(false);
-            setWarn("🙁 비밀번호를 아직 입력하지 않았습니다.");
-        }
-        setSameCheck(true);
-        setWarn("🙂 비밀번호와 비밀번호 확인이 일치합니다.");
     }
+
 
     return (
         <div className={containerCName}>
