@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Wrapper from '../../wrapper/Wrapper';
 import { user_image_path } from '../../../path/ImagePath';
 import { login_page } from '../../../path/PagePath';
@@ -18,10 +18,6 @@ function UserRegisterPage() {
         password_confirm : ["", false]
     });
 
-    // useEffect(() => {
-    //     console.log(userData);
-    // }, [userData]);
-
     const getEmail = (data : string, re : boolean) => {
         setUserData({ ...userData, email : [data, re] });
     }
@@ -29,9 +25,9 @@ function UserRegisterPage() {
         setUserData({ ...userData, nickname : [data, re] });
     }
     const getPassword = (data : string, re : boolean) => {
+        //console.log(data, re);
         setUserData({ ...userData, password : [data, re] });
-    }
-    
+    }   
 
     const submit = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
