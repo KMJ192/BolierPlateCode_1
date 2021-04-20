@@ -3,32 +3,38 @@ import { ResultMsg } from '../UserRegisterStyle';
 
 interface Props{
     compareData : string;
-    returnPasswordConfirm: (passwordConfirm : string) => void;
+    returnSuccess : (success : boolean) => void
 }
 
-function PasswordConfirmBox({ returnPasswordConfirm, compareData}: Props) {
-    const [onFocus, setOnFocus] = useState(false);
+function PasswordConfirmBox({ compareData, returnSuccess }: Props) {
+    const [onfocus, setOnfocus] = useState(false);
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [dataCheck, setDatacheck] = useState(false);
     const [warn, setWarn] = useState("");
-    
+
     const focus = () => {
-        setOnFocus(true);
+        setOnfocus(true);
     }
+    const blur = () => {
+        if(!passwordConfirm){
+            setWarn("🙁 비밀번호 확인을 입력해주세요.");
+            return;
+        }
+    }
+
     useEffect(() => {
-        if(onFocus){
+        if(onfocus){
             if(passwordConfirm !== compareData){
                 setDatacheck(false);
                 setWarn("🙁 비밀번호와 비밀번호 확인이 다릅니다.");
-                return;
             }
-            if(compareData){
+            if(compareData && compareData === passwordConfirm){
                 setDatacheck(true);
+                returnSuccess(true);
                 setWarn("🙂 비밀번호 확인 입력 완료 되었습니다.");
-                returnPasswordConfirm(passwordConfirm);
             }
         }
-    }, [passwordConfirm]);
+    }, [passwordConfirm, compareData]);
     
 
     return (
@@ -36,6 +42,7 @@ function PasswordConfirmBox({ returnPasswordConfirm, compareData}: Props) {
             <label htmlFor="password-confirm-box">비밀번호 확인</label>
             <br/>
             <input
+                onBlur={blur}
                 onFocus={focus}
                 id="password-confirm-box"
                 type="password"

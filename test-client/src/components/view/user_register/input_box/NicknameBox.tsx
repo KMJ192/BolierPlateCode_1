@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ResultMsg } from '../UserRegisterStyle'
 
 interface Props{
@@ -24,15 +24,6 @@ function NicknameBox({ returnNickname }: Props) {
             returnNickname("", false);
             return;
         }
-        //=====중복 확인 후 닉네임 변경여부 판단=====
-        if(afterDupCheck && afterDupCheck !== nickname && dupCheck === true){
-            //중복 확인 했는데 데이터 변화를 감지하면 초기화 
-            setAfterDupCheck("");
-            setDupCheck(false);
-            setWarn("🙁 중복 확인해주세요.");
-            returnNickname("", false);
-        }
-        //=====중복 확인 후 이메일 변경여부 판단=====
     }
     //=====blur 처리=====
 
@@ -63,6 +54,18 @@ function NicknameBox({ returnNickname }: Props) {
         }
     }
     //=====중복 확인=====
+
+    useEffect(() => {
+        //=====중복 확인 후 닉네임 변경여부 판단=====
+        if(afterDupCheck && afterDupCheck !== nickname && dupCheck === true){
+            //중복 확인 했는데 데이터 변화를 감지하면 초기화 
+            setAfterDupCheck("");
+            setDupCheck(false);
+            setWarn("🙁 중복 확인해주세요.");
+            returnNickname("", false);
+        }
+        //=====중복 확인 후 닉네임 변경여부 판단=====
+    }, [nickname]);
 
 
     return (

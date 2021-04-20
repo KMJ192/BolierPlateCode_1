@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { ResultMsg } from '../UserRegisterStyle'
 
@@ -35,18 +35,8 @@ function EmailBox({ returnEmail }: Props) {
             returnEmail("", false);
             return;
         }
-        //=====중복 확인 후 이메일 변경여부 판단=====
-        if(afterDupCheck && afterDupCheck !== email && dupCheck === true){
-            //중복 확인 했는데 데이터 변화를 감지하면 초기화 
-            setAfterDupCheck("");
-            setDupCheck(false);
-            setWarn("🙁 중복 확인해주세요.");
-            returnEmail("", false);
-        }
-        //=====중복 확인 후 이메일 변경여부 판단=====
     }
     //=====blur 처리=====
-
     //=====중복 확인=====
     const checkDuplicateEmail = async () => {
         if(!email){
@@ -78,6 +68,18 @@ function EmailBox({ returnEmail }: Props) {
         }
     }
     //=====중복 확인=====
+
+    useEffect(() => {
+        //=====중복 확인 후 이메일 변경여부 판단=====
+        if(afterDupCheck && afterDupCheck !== email && dupCheck === true){
+            //중복 확인 했는데 데이터 변화를 감지하면 초기화 
+            setAfterDupCheck("");
+            setDupCheck(false);
+            setWarn("🙁 중복 확인해주세요.");
+            returnEmail("", false);
+        }
+        //=====중복 확인 후 이메일 변경여부 판단=====
+    }, [email]);
 
     return (
         <div className="email-container">

@@ -16,12 +16,12 @@ export declare class UserController {
     confirmUser(request: Request): Promise<{
         useremail: string;
         nickname: string;
-        userimage: string;
+        user_image: string;
         result: boolean;
         message: string;
     }>;
     createUser(file: Express.Multer.File, body: JSON): Promise<{
-        registered: boolean;
+        result: boolean;
         message: string;
     }>;
     deleteUser(data: JSON, response: Response): Promise<unknown>;

@@ -24,10 +24,9 @@ let UserService = class UserService {
     async RegisterUser(userData, user_image) {
         let resultMsg;
         let sFlag = false;
-        let sql = "select EXISTS (select password from " + switch_1.switching + ".users where email='" + userData["email"] + "') as success";
         if (userData["user_rol"] == 0) {
             const hashedPassword = await bcrypt.hash(userData["password"], 10);
-            sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["nickname"] + "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime_1.NowTime() + "', '" + userData["created_by"] + "', '" + NowTime_1.NowTime() + "', '" + userData["updated_by"] + "')";
+            const sql = "insert into " + switch_1.switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["nickname"] + "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime_1.NowTime() + "', '" + userData["created_by"] + "', '" + NowTime_1.NowTime() + "', '" + userData["updated_by"] + "')";
             const result = await SQLQueryRun(sql);
             if (result["protocol41"] == true) {
                 sFlag = true;
@@ -41,7 +40,7 @@ let UserService = class UserService {
             resultMsg = "User rol error";
         }
         return {
-            registered: sFlag,
+            result: sFlag,
             message: resultMsg
         };
     }
@@ -105,7 +104,7 @@ let UserService = class UserService {
         return {
             useremail: email,
             nickname: username,
-            userimage: userimage,
+            user_image: userimage,
             result: verifed,
             message: resultMsg
         };

@@ -1,8 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { StringMappingType } from 'typescript';
 import { user_image_path } from '../../../../path/ImagePath'
 import { UserDropdown } from '../NavBarStyled'
 
-function AfterLogin() {
+interface Props{
+    useremail : string;
+    nickname : string;
+    user_image : string;
+}
+
+function AfterLogin({useremail, nickname, user_image} : Props) {
     const dropdownRef = useRef<HTMLDivElement>(null);
     const userImageRef = useRef<HTMLImageElement>(null);
     const [dropdown, setDropDown] = useState(false);

@@ -18,15 +18,9 @@ export class UserService {
     async RegisterUser(userData : JSON, user_image : string){
         let resultMsg : string;
         let sFlag : boolean = false;
-        let sql : string = "select EXISTS (select password from " + switching + ".users where email='" + userData["email"] + "') as success";
-        // const result = await SQLQueryRun(sql);
-        // if(result[0]["success"].toString() == 1){
-        //     resultMsg = "중복된 이메일 입니다.";
-        //     sFlag = false;
-        // }
         if(userData["user_rol"] == 0){
             const hashedPassword = await bcrypt.hash(userData["password"], 10);
-            sql = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["nickname"]+ "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
+            const sql : string = "insert into " + switching + ".users value('" + userData["email"] + "', '" + hashedPassword + "', '" + userData["nickname"]+ "', '" + user_image + "', '" + userData["user_rol"] + "', '" + NowTime() + "', '" + userData["created_by"] + "', '" + NowTime() + "', '" + userData["updated_by"] + "')";
             const result = await SQLQueryRun(sql);
             if(result["protocol41"] == true){
                 sFlag = true;
@@ -39,7 +33,7 @@ export class UserService {
             resultMsg = "User rol error";
         }
         return {
-            registered : sFlag,
+            result : sFlag,
             message : resultMsg
         };
     }
@@ -117,7 +111,7 @@ export class UserService {
         return {
             useremail : email,
             nickname : username,
-            userimage : userimage,
+            user_image : userimage,
             result : verifed,
             message : resultMsg
         };

@@ -1507,8 +1507,8 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
-        "version": "b89034b434a1798298f963e23e8001b171d17caa3c6101bc49a7825a9b0c8ee5",
-        "signature": "5f6fb267482d079a28e91153f47db3077893c18a3fe7dc5b3ce62e71063cbf74",
+        "version": "19faa2434ced0fb759ce37b3538c0a359754261df7880ed069f90977eb6b05e3",
+        "signature": "a77946970136b822449de97907ebac11ea98d663cc43569e9b6e63534d95756b",
         "affectsGlobalScope": false
       },
       "../src/user/user.guard.ts": {
@@ -1608,7 +1608,7 @@
       },
       "../src/user/user.controller.ts": {
         "version": "3b4f0f287889c89ef000efb374b52c87d37dd12fbe610cca297d304c8f173ed1",
-        "signature": "4ba7ca3a33466cf270aa95ba68f200e00aaa9b628575264fd9c443e7e7670c0b",
+        "signature": "bc28faf5f2f3926fc1052897e53ab64541c2b8300179343d1aeade672adbe921",
         "affectsGlobalScope": false
       },
       "../src/user/constance.ts": {
