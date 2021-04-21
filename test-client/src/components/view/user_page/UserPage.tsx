@@ -9,7 +9,6 @@ import { user_image_path } from '../../../path/ImagePath';
 import './UserPage.scss';
 
 //전달받아야 하는 값
-//페이지 타이틀  //회원가입 or 유저정보수정
 //form 타이틀    //가입정보 or 정보수정
 //placeholder   //이메일 입력 or email
 //이메일박스     //이메일 박스 크기
@@ -19,14 +18,14 @@ import './UserPage.scss';
 
 interface Props{
     pageTitle : string;
-    formTitme : string;
+    formTitle : string;
     emailPlaceholder : string;
     buttonValue : string;
+    requestFunction : () => void
 }
 
 const formData = new FormData();
 function UserPage() {
-    document.title="회원가입";
     const [redirect, setRedirect] = useState(false);
     const [userimgBase64, setUserimgBase64] = useState(user_image_path);
     const [userData, setUserData] = useState({
