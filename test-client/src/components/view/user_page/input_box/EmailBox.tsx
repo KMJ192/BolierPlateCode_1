@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ResultMsg } from '../UserRegisterStyle'
+import { ResultMsg } from '../UserPageStyle';
 
 interface Props{
     returnEmail: (data:string, re : boolean) => void;
@@ -79,7 +79,7 @@ function EmailBox({ returnEmail }: Props) {
             returnEmail("", false);
         }
         //=====중복 확인 후 이메일 변경여부 판단=====
-    }, [email]);
+    }, [email, afterDupCheck, dupCheck, returnEmail]);
 
     return (
         <div className="email-container">

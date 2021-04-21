@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import Wrapper from '../../wrapper/Wrapper';
+import axios from 'axios';
 import EmailBox from './input_box/EmailBox';
 import NicknameBox from './input_box/NicknameBox';
 import PasswordContainer from './input_box/PasswordContainer';
-import axios from 'axios';
-import { user_image_path } from '../../../path/ImagePath';
 import { login_page } from '../../../path/PagePath';
-import './UserRegisterPage.scss';
+import { user_image_path } from '../../../path/ImagePath';
+import './UserPage.scss';
+
+//전달받아야 하는 값
+//페이지 타이틀  //회원가입 or 유저정보수정
+//form 타이틀    //가입정보 or 정보수정
+//placeholder   //이메일 입력 or email
+//이메일박스     //이메일 박스 크기
+//버튼 이름1     //가입하기 or 수정하기
+//버튼 이름2     //로그인 하기버튼 유무
+//axios 함수     //가입유청 or 수정요청
+
+interface Props{
+    pageTitle : string;
+    formTitme : string;
+    emailPlaceholder : string;
+    buttonValue : string;
+}
 
 const formData = new FormData();
-function UserRegisterPage() {
+function UserPage() {
     document.title="회원가입";
     const [redirect, setRedirect] = useState(false);
     const [userimgBase64, setUserimgBase64] = useState(user_image_path);
@@ -78,37 +93,36 @@ function UserRegisterPage() {
         return <Redirect to={login_page}/>;
     }
     return (
-        <Wrapper>
-            <form onSubmit={submit} className="user-register-form">
-                <div className="user-image-container">
-                    <div className="user-img-des">프로필 이미지</div>
-                    <img className="user-image" onClick={imgRemoveHandler} src={userimgBase64} alt="대표이미지"/>
-                    <label htmlFor="user-img-input">
-                        프로필 이미지 설정
-                    </label>
-                    <input id="user-img-input" type="file" onChange={fileChangeHandler} hidden></input>
-                    <span>대표 이미지를 추가하세요.</span>
+        <form onSubmit={submit} className="user-info-form">
+            <div className="user-image-container">
+                <div className="user-img-des">프로필 이미지</div>
+                <img className="user-image" onClick={imgRemoveHandler} src={userimgBase64} alt="대표이미지"/>
+                <label htmlFor="user-img-input">
+                    프로필 이미지 설정
+                </label>
+                <input id="user-img-input" type="file" onChange={fileChangeHandler} hidden></input>
+                <span>대표 이미지를 추가하세요.</span>
+            </div>
+            <div className="user-info-container">
+                <div className="user-data-des">가입정보</div>
+                <EmailBox 
+                    returnEmail={getEmail}
+                />
+                <NicknameBox 
+                    returnNickname={getNickname}
+                />
+                <PasswordContainer
+                    returnPassword={getPassword}
+                />
+                <div className="btn-container">
+                    <button type="submit">가입하기</button>
+                    <a href={login_page}><button type="button">로그인 하기</button></a>
+                    <a href="/"><button type="button">돌아가기</button></a>
                 </div>
-                <div className="user-info-container">
-                    <div className="user-data-des">가입정보</div>
-                    <EmailBox 
-                        returnEmail={getEmail}
-                    />
-                    <NicknameBox 
-                        returnNickname={getNickname}
-                    />
-                    <PasswordContainer
-                        returnPassword={getPassword}
-                    />
-                    <div className="btn-container">
-                        <button type="submit">가입하기</button>
-                        <a href={login_page}><button type="button">로그인 하기</button></a>
-                        <a href="/"><button type="button">돌아가기</button></a>
-                    </div>
-                </div>
-            </form>
-        </Wrapper>
+            </div>
+        </form>
     );
 }
 
-export default UserRegisterPage;
+
+export default UserPage;

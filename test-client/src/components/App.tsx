@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { login_page, user_patch_page, user_register_page } from '../path/PagePath';
 import DefaultPage from './view/default_page/DefaultPage';
 import LoginPage from './view/login/LoginPage';
-import UserPatchPage from './view/user_patch/UserPatchPage';
-import UserRegisterPage from './view/user_register/UserRegisterPage';
+import UserPatchPage from './view/user_page/user_patch/UserPatchPage';
+import UserRegisterPage from './view/user_page/user_register/UserRegisterPage';
 
 function App() {
   return (

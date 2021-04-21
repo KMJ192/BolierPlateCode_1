@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { ResultMsg } from '../UserRegisterStyle'
+import { ResultMsg } from '../UserPageStyle';
 
 interface Props{
     returnNickname: (data:string, re:boolean) => void;
@@ -65,7 +65,7 @@ function NicknameBox({ returnNickname }: Props) {
             returnNickname("", false);
         }
         //=====중복 확인 후 닉네임 변경여부 판단=====
-    }, [nickname]);
+    }, [nickname, afterDupCheck, dupCheck, returnNickname]);
 
 
     return (

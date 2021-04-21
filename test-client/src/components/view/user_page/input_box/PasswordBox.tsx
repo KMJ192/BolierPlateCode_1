@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ResultMsg } from '../UserRegisterStyle';
+import { ResultMsg } from '../UserPageStyle';
 
 interface Props{
     returnPassword : (data : string, success : boolean) => void;

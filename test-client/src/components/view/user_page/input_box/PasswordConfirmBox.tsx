@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ResultMsg } from '../UserRegisterStyle';
+import { ResultMsg } from '../UserPageStyle';
 
 interface Props{
     compareData : string;
@@ -34,7 +34,7 @@ function PasswordConfirmBox({ compareData, returnSuccess }: Props) {
                 setWarn("🙂 비밀번호 확인 입력 완료 되었습니다.");
             }
         }
-    }, [passwordConfirm, compareData]);
+    }, [compareData, passwordConfirm]);
     
 
     return (

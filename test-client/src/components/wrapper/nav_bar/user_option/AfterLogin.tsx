@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { StringMappingType } from 'typescript';
 import { user_image_path } from '../../../../path/ImagePath'
@@ -38,6 +39,17 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
             document.removeEventListener("click", handleClickOutside, true);
         };
     }, [userImage]);
+
+    const logOut = async (e : React.MouseEvent<HTMLAnchorElement>) => {
+        const request = await axios.post("/logout")
+            .then(response => response.data)
+            .catch(err => err);
+        if(request["message"] === "success"){
+            alert("로그 아웃 되었습니다.");
+        }else{
+            alert("오류 발생 : " + request);
+        }
+    }
     
 
     return (
@@ -50,7 +62,7 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
                     <hr/>
                     <a href={user_patch_page}>회원정보수정</a>
                     <hr/>
-                    <a href="#">로그아웃</a>
+                    <a href="/" onClick={logOut}>로그아웃</a>
                 </UserDropdown>
             </li>
         </ul>
