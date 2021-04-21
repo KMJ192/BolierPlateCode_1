@@ -1,42 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { RootState} from './../../../redux-module/RootReducer';
 import { Div, Ul } from './NavBarStyled';
 import AfterLogin from './user_option/AfterLogin';
 import BeforeLogin from './user_option/BeforeLogin';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState} from '../../../redux-module/RootReducer';
+import { getUserThunk } from '../../../redux-module/user';
 import './NavBar.scss';
-import { useSelector } from 'react-redux';
 
 
 function NavBar() {
     const [loginState, setLoginState] = useState(false);
-    const [userProfile, setUserProfile] = useState({
-        useremail : "",
-        nickname : "",
-        user_image : "",
-        result: "",
-        message: ""
-    });
     const [userDataloading, setUserDataloading] = useState(false);
     const [toggle, setToggle] = useState(false);
     const onToggle = () => {
         setToggle(!toggle);
     }
+
+    const getUserDispatch = useDispatch();
+    useEffect(() => {
+        getUserDispatch(getUserThunk());
+    }, []);
+
     const UserData = useSelector((state : RootState) => state.user.userProfile);
-    
     useEffect(() => {
         setUserDataloading(UserData.loading);
-        // setUserProfile({
-        //     useremail : String(UserData.data?.useremail),
-        //     nickname : String(UserData.data?.nickname),
-        //     user_image : String(UserData.data?.user_image),
-        //     result: String(UserData.data?.result),
-        //     message: String(UserData.data?.message)
-        // });
-        if(userProfile.result === "true"){
+        if(UserData.data?.result === true){
             setLoginState(true);
         }
-    }, [loginState, userDataloading]);
-    console.log(userProfile);
+    }, [loginState, userDataloading, UserData]);
 
     return (
         <nav className="nav-bar">
@@ -62,9 +53,9 @@ function NavBar() {
                 <Div toggle={toggle} {...toggle}>
                     {loginState ? 
                         <AfterLogin
-                            useremail={userProfile.useremail}
-                            nickname={userProfile.nickname}
-                            user_image={userProfile.user_image}
+                            useremail={UserData.data?.useremail}
+                            nickname={UserData.data?.nickname}
+                            user_image={UserData.data?.user_image}
                         /> : 
                         <BeforeLogin/>
                     }

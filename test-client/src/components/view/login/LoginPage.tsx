@@ -21,22 +21,22 @@ function LoginPage() {
         }
         if(loginData.password === "") {
             alert("비밀번호를 입력해주세요.");
+            return;
         }
-        console.log(loginData);
-        await axios.post("/login", loginData)
-            .then(response => {
-                if(response.data["login"] === true){
-                    setRedirect(true);
-                }else if(response.data["message"] === "Different pw"){
-                    alert("비밀번호가 틀렸습니다.");
-                }else if(response.data["message"] === "None email"){
-                    alert("등록된 이메일이 아닙니다.")
-                }else{
-                    alert("알수 없는 오류가 발생했습니다.")
-                }
-            }).catch(err => {
+        const response = await axios.post("/login", loginData)
+            .then(response => response.data)
+            .catch(err => {
                 alert("오류가 발생했습니다. 오류내용 : " + err);
             });
+        if(response["login"] === true){
+            setRedirect(true);
+        }else if(response["message"] === "Different pw"){
+            alert("비밀번호가 틀렸습니다.");
+        }else if(response["message"] === "None email"){
+            alert("등록된 이메일이 아닙니다.");
+        }else{
+            alert("알수 없는 오류가 발생했습니다.");
+        }
     }
 
     if(redirect === true){

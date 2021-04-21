@@ -1,18 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { StringMappingType } from 'typescript';
 import { user_image_path } from '../../../../path/ImagePath'
+import { user_patch_page } from '../../../../path/PagePath';
+import { server_url } from '../../../../path/Url';
 import { UserDropdown } from '../NavBarStyled'
 
 interface Props{
-    useremail : string;
-    nickname : string;
-    user_image : string;
+    useremail? : string;
+    nickname? : string;
+    user_image? : string;
 }
 
 function AfterLogin({useremail, nickname, user_image} : Props) {
     const dropdownRef = useRef<HTMLDivElement>(null);
     const userImageRef = useRef<HTMLImageElement>(null);
     const [dropdown, setDropDown] = useState(false);
+    const [userImage, setUserImage] = useState(user_image_path);
     const handleClickOutside = (e : MouseEvent) => {
         //dropdownRef가 잡혀져 있고, dropdownRef의 자손 dom이 아닐경우
         //자손 dom을 클릭했을 경우에는 해당 dom에 대한 action이 필요하므로
@@ -27,27 +30,31 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
         }
     }
     useEffect(() => {
+        if(user_image){
+            setUserImage(server_url + "/uimg/" + String(user_image));
+        }
         document.addEventListener("click", handleClickOutside, true);
         return () => {
             document.removeEventListener("click", handleClickOutside, true);
         };
-    }, []);
+    }, [userImage]);
+    
 
     return (
         <ul className="user-option-container">
             <li><i className="far fa-bell"/></li>
             <li>
-                <img ref={userImageRef} src={user_image_path} alt="user"/>
+                <img ref={userImageRef} src={userImage} alt="user"/>
                 <UserDropdown className="user-menu" ref={dropdownRef} toggle={dropdown} {...dropdown} >
-                    <a href="#">usermenu1</a>
+                    <a href="#">{nickname}</a>
                     <hr/>
-                    <a href="#">usermenu2</a>
+                    <a href={user_patch_page}>회원정보수정</a>
                     <hr/>
-                    <a href="#">usermenu3</a>
+                    <a href="#">로그아웃</a>
                 </UserDropdown>
             </li>
         </ul>
     )
 }
 
-export default AfterLogin
+export default AfterLogin;

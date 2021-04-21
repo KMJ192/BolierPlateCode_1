@@ -1,13 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserThunk } from '../../../redux-module/user';
-import Wrapper from '../../wrapper/Wrapper'
+import React from 'react';
+import Wrapper from '../../wrapper/Wrapper';
 
 function DefaultPage() {
-    const getUserDispatch = useDispatch();
-    useEffect(() => {
-        getUserDispatch(getUserThunk());
-    }, []);
 
     return (
         <Wrapper>
