@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ResultMsg } from '../UserPageStyle';
 
 interface Props{
+    pageName : string;
     returnPassword : (data : string, success : boolean) => void;
 }
 
@@ -11,7 +12,10 @@ export function ConfirmPasswordForm(asValue: string) {
     return regExp.test(asValue);
 }
 
-function PasswordBox({ returnPassword }: Props) {
+//1. 회원 가입 페이지인 경우
+//2. 유저 정보 수정페이지인 경우
+//null인 경우 warntext 제거
+function PasswordBox({ pageName, returnPassword }: Props) {
     //password, password_confirm save
     const [onfocus, setOnfocus] = useState(false);
     const [password, setPassword] = useState("");
@@ -22,31 +26,57 @@ function PasswordBox({ returnPassword }: Props) {
     }
     //password inputbox blur
     const blur = () =>{
-        setOnfocus(true);
-        if(!password){
-            setDatacheck(false);
-            setWarn("🙁 비밀번호를 입력해주세요.");
-            return;
+        if(pageName==="UserRegister"){
+            if(!password){
+                setDatacheck(false);
+                setWarn("🙁 비밀번호를 입력해주세요.");
+                return;
+            }
+            if(ConfirmPasswordForm(password) === false){
+                setDatacheck(false);
+                setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
+                return;
+            }
         }
-        if(ConfirmPasswordForm(password) === false){
-            setDatacheck(false);
-            setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
-            return;
-        }
+
         setDatacheck(true);
-        setWarn("🙂 비밀번호 입력 완료 되었습니다.");
+        if(pageName==="UserRegister") setWarn("🙂 비밀번호 입력 완료 되었습니다.");
+        else{
+            if(password && ConfirmPasswordForm(password) === false){
+                setDatacheck(false);
+                setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
+            }
+        }
     }
 
     useEffect(() => {
-        if(onfocus){
-            if(!ConfirmPasswordForm(password)){
-                setDatacheck(false);
-                setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
-                returnPassword(password, false);
+        if(pageName==="UserRegister"){
+            if(onfocus){
+                if(!ConfirmPasswordForm(password)){
+                    setDatacheck(false);
+                    setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
+                    returnPassword(password, false);
+                }else{
+                    setDatacheck(true);
+                    setWarn("🙂 비밀번호 입력 완료 되었습니다.");
+                    returnPassword(password, true);
+                }
+            }
+        }else{
+            if(password){
+                if(ConfirmPasswordForm(password) === false){
+                    setDatacheck(false);
+                    setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
+                    returnPassword(password, false);
+                    return;
+                }else{
+                    setDatacheck(true);
+                    setWarn("🙂 비밀번호 입력 완료 되었습니다.");
+                    returnPassword(password, true);
+                }
             }else{
-                setDatacheck(true);
-                setWarn("🙂 비밀번호 입력 완료 되었습니다.");
-                returnPassword(password, true);
+                setWarn("");
+                returnPassword("", true);
             }
         }
     }, [password]);

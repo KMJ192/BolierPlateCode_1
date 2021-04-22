@@ -83,7 +83,13 @@ $font-size: 15px;
         input{
             font-size: $font-size;
             margin-top: 5px;
+        }
+        .user-register{
             padding: $email-nickname-input-padding;
+        }
+        .user-patch{
+            width: $input-width;
+            padding: $password-input-padding;
         }
     }
     .nickname-container{

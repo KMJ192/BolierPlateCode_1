@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ResultMsg } from '../UserPageStyle';
 
 interface Props{
+    placeholder : string;
     returnEmail: (data:string, re : boolean) => void;
 }
 
@@ -12,7 +13,7 @@ export function ConfirmEmailForm(asValue: string) {
     return regExp.test(asValue);
 }
 
-function EmailBox({ returnEmail }: Props) {
+function EmailBox({ placeholder, returnEmail }: Props) {
     const [email, setEmail] = useState("");
     const [afterDupCheck, setAfterDupCheck] = useState("");
     const [dupCheck, setDupCheck] = useState(false);
@@ -88,8 +89,9 @@ function EmailBox({ returnEmail }: Props) {
             <input 
                 onBlur={blur}
                 id="email-box"
+                className="user-register"
                 type="text"
-                placeholder="이메일 입력"
+                placeholder={placeholder}
                 onChange={(e : React.ChangeEvent<HTMLInputElement>) => 
                     setEmail(e.target.value)
                 }

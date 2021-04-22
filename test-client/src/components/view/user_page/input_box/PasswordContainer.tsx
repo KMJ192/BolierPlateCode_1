@@ -3,10 +3,11 @@ import PasswordBox from './PasswordBox';
 import PasswordConfirmBox from './PasswordConfirmBox';
 
 interface Props{
+    pageName : string;
     returnPassword : (data : string, re : boolean) => void;
 }
 
-function PasswordContainer({returnPassword} : Props) {
+function PasswordContainer({pageName, returnPassword} : Props) {
     const [password, setPassword] = useState("");
     const [dataConfirm, setDataConfirm] = useState({
         password: false,
@@ -38,9 +39,11 @@ function PasswordContainer({returnPassword} : Props) {
     return (
         <div>
             <PasswordBox
+                pageName={pageName}
                 returnPassword={getPassword}
             />
             <PasswordConfirmBox
+                pageName={pageName}
                 compareData={password}
                 returnSuccess={getPasswordConfirm}
             />
