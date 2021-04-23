@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ResultMsg } from '../UserPageStyle';
+import { ResultMsg } from '../../UserPageStyle';
 
 interface Props{
-    placeholder : string;
-    returnEmail: (data:string, re : boolean) => void;
+    returnEmail: (data : string, re : boolean) => void;
 }
 
 //이메일 폼 추출
 export function ConfirmEmailForm(asValue: string) {
-    let regExp: RegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    let regExp: RegExp = /^[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     return regExp.test(asValue);
 }
 
-function EmailBox({ placeholder, returnEmail }: Props) {
+function EmailBox({ returnEmail }: Props) {
     const [email, setEmail] = useState("");
     const [afterDupCheck, setAfterDupCheck] = useState("");
     const [dupCheck, setDupCheck] = useState(false);
@@ -43,11 +42,13 @@ function EmailBox({ placeholder, returnEmail }: Props) {
         if(!email){
             setWarn("🙁 이메일을 입력해주세요");
             returnEmail("", false);
+            alert("이메일을 입력해주세요")
             return;
         }
         if(ConfirmEmailForm(email) === false){
             setWarn("🙁 이메일 양식으로 입력해주세요.");
             returnEmail("", false);
+            alert("이메일 양식으로 입력해주세요")
             return;
         }
 
@@ -80,7 +81,7 @@ function EmailBox({ placeholder, returnEmail }: Props) {
             returnEmail("", false);
         }
         //=====중복 확인 후 이메일 변경여부 판단=====
-    }, [email, afterDupCheck, dupCheck, returnEmail]);
+    }, [email, afterDupCheck, warn, dupCheck, returnEmail]);
 
     return (
         <div className="email-container">
@@ -91,7 +92,7 @@ function EmailBox({ placeholder, returnEmail }: Props) {
                 id="email-box"
                 className="user-register"
                 type="text"
-                placeholder={placeholder}
+                placeholder="이메일 입력"
                 onChange={(e : React.ChangeEvent<HTMLInputElement>) => 
                     setEmail(e.target.value)
                 }
@@ -108,4 +109,4 @@ function EmailBox({ placeholder, returnEmail }: Props) {
     )
 }
 
-export default EmailBox
+export default React.memo(EmailBox);

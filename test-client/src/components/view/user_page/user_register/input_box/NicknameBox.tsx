@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ResultMsg } from '../UserPageStyle';
+import { ResultMsg } from '../../UserPageStyle';
 
 interface Props{
-    pageName : string;
-    placeholder : string;
     returnNickname: (data:string, re:boolean) => void;
 }
 
-function NicknameBox({ pageName, placeholder, returnNickname }: Props) {
+function NicknameBox({ returnNickname }: Props) {
     const [nickname, setNickname] = useState("");
     const [afterDupCheck, setAfterDupCheck] = useState("");
     const [dupCheck, setDupCheck] = useState(false);
@@ -16,31 +14,27 @@ function NicknameBox({ pageName, placeholder, returnNickname }: Props) {
 
     //=====blur 처리=====
     const blur = () => {
-        if(pageName==="UserRegister"){
-            if(!nickname){
-                setWarn("🙁 닉네임을 입력해주세요.");
-                returnNickname("", false);
-                return;
-            }
-            if(dupCheck === false){
-                setWarn("🙁 중복 확인해주세요.");
-                returnNickname("", false);
-                return;
-            }
-        }else{
-            if(!nickname){
-                setWarn("");
-                returnNickname("", true);
-                return;
-            }else{
-                if(dupCheck === false){
-                    setWarn("🙁 중복 확인해주세요.");
-                    returnNickname(".", false);
-                    return;
-                }
-            }
-
+        if(!nickname){
+            setWarn("🙁 닉네임을 입력해주세요.");
+            returnNickname("", false);
+            return;
         }
+        if(dupCheck === false){
+            setWarn("🙁 중복 확인해주세요.");
+            returnNickname("", false);
+            return;
+        }
+        // if(!nickname){
+        //     setWarn("");
+        //     returnNickname("", true);
+        //     return;
+        // }else{
+        //     if(dupCheck === false){
+        //         setWarn("🙁 중복 확인해주세요.");
+        //         returnNickname(".", false);
+        //         return;
+        //     }
+        // }
     }
     //=====blur 처리=====
 
@@ -50,6 +44,7 @@ function NicknameBox({ pageName, placeholder, returnNickname }: Props) {
             setWarn("🙁 닉네임을 입력해주세요.");
             setDupCheck(false);
             returnNickname("", false);
+            alert("닉네임을 입력해주세요.");
             return;
         }
 
@@ -74,27 +69,24 @@ function NicknameBox({ pageName, placeholder, returnNickname }: Props) {
 
     useEffect(() => {
         //=====중복 확인 후 닉네임 변경여부 판단=====
-        if(pageName==="UserRegister"){
-            if(afterDupCheck && afterDupCheck !== nickname && dupCheck === true){
-                //중복 확인 했는데 데이터 변화를 감지하면 초기화 
-                setAfterDupCheck("");
-                setDupCheck(false);
-                setWarn("🙁 중복 확인해주세요.");
-                returnNickname("", false);
-            }
-        }else{
-            if(nickname){
-                if(afterDupCheck && afterDupCheck !== nickname && dupCheck === true){
-                    //중복 확인 했는데 데이터 변화를 감지하면 초기화 
-                    setAfterDupCheck("");
-                    setDupCheck(false);
-                    setWarn("🙁 중복 확인해주세요.");
-                    returnNickname(".", false);
-                }
-            }
+        if(afterDupCheck && afterDupCheck !== nickname && dupCheck === true){
+            //중복 확인 했는데 데이터 변화를 감지하면 초기화 
+            setAfterDupCheck("");
+            setDupCheck(false);
+            setWarn("🙁 중복 확인해주세요.");
+            returnNickname("", false);
         }
+        // if(nickname){
+        //     if(afterDupCheck && afterDupCheck !== nickname && dupCheck === true){
+        //         //중복 확인 했는데 데이터 변화를 감지하면 초기화 
+        //         setAfterDupCheck("");
+        //         setDupCheck(false);
+        //         setWarn("🙁 중복 확인해주세요.");
+        //         returnNickname(".", false);
+        //     }
+        // }
         //=====중복 확인 후 닉네임 변경여부 판단=====
-    }, [nickname, afterDupCheck, dupCheck, returnNickname]);
+    }, [nickname, afterDupCheck, warn, dupCheck, returnNickname]);
 
 
     return (
@@ -105,7 +97,7 @@ function NicknameBox({ pageName, placeholder, returnNickname }: Props) {
                 onBlur={blur}
                 id="nickname-box"
                 type="text"
-                placeholder={placeholder}
+                placeholder="별명을 입력"
                 onChange={(e : React.ChangeEvent<HTMLInputElement>) => 
                     setNickname(e.target.value)
                 }
@@ -122,4 +114,4 @@ function NicknameBox({ pageName, placeholder, returnNickname }: Props) {
     )
 }
 
-export default NicknameBox;
+export default React.memo(NicknameBox);

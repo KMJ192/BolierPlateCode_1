@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
-import { StringMappingType } from 'typescript';
 import { user_image_path } from '../../../../path/ImagePath'
 import { user_patch_page } from '../../../../path/PagePath';
 import { server_url } from '../../../../path/Url';
@@ -38,7 +37,7 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
         return () => {
             document.removeEventListener("click", handleClickOutside, true);
         };
-    }, [userImage]);
+    }, [userImage, user_image]);
 
     const logOut = async (e : React.MouseEvent<HTMLAnchorElement>) => {
         const request = await axios.post("/logout")
@@ -58,7 +57,7 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
             <li>
                 <img ref={userImageRef} src={userImage} alt="user"/>
                 <UserDropdown className="user-menu" ref={dropdownRef} toggle={dropdown} {...dropdown} >
-                    <a href="#">{nickname}</a>
+                    <a href={user_patch_page}>{nickname}</a>
                     <hr/>
                     <a href={user_patch_page}>회원정보수정</a>
                     <hr/>

@@ -19,7 +19,7 @@ function NavBar() {
     const getUserDispatch = useDispatch();
     useEffect(() => {
         getUserDispatch(getUserThunk());
-    }, []);
+    }, [getUserDispatch]);
 
     const UserData = useSelector((state : RootState) => state.user.userProfile);
     useEffect(() => {

@@ -1,32 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PasswordBox from './PasswordBox';
 import PasswordConfirmBox from './PasswordConfirmBox';
 
 interface Props{
-    pageName : string;
     returnPassword : (data : string, re : boolean) => void;
 }
 
-function PasswordContainer({pageName, returnPassword} : Props) {
+function PasswordContainer({ returnPassword } : Props) {
     const [password, setPassword] = useState("");
     const [dataConfirm, setDataConfirm] = useState({
         password: false,
         password_confirm : false
     });
 
-    const getPassword = (data : string, success : boolean) => {
+    
+    const getPassword = useCallback((data : string, success : boolean) => {
         setPassword(data);
         setDataConfirm({
             ...dataConfirm,
             password : success
         });
-    }
-    const getPasswordConfirm = (success : boolean) => {
+    }, [dataConfirm]);
+
+    // const getPassword = (data : string, success : boolean) => {
+    //     setPassword(data);
+    //     setDataConfirm({
+    //         ...dataConfirm,
+    //         password : success
+    //     });
+    // }
+
+    const getPasswordConfirm = useCallback((success : boolean) => {
         setDataConfirm({
             ...dataConfirm,
             password_confirm : success
         });
-    }
+    }, [dataConfirm]);
+    
+    // const getPasswordConfirm = (success : boolean) => {
+    //     setDataConfirm({
+    //         ...dataConfirm,
+    //         password_confirm : success
+    //     });
+    // }
 
     useEffect(() => {
         if(dataConfirm.password === true && dataConfirm.password_confirm === true){
@@ -39,11 +55,9 @@ function PasswordContainer({pageName, returnPassword} : Props) {
     return (
         <div>
             <PasswordBox
-                pageName={pageName}
                 returnPassword={getPassword}
             />
             <PasswordConfirmBox
-                pageName={pageName}
                 compareData={password}
                 returnSuccess={getPasswordConfirm}
             />
@@ -51,4 +65,4 @@ function PasswordContainer({pageName, returnPassword} : Props) {
     );
 }
 
-export default PasswordContainer;
+export default React.memo(PasswordContainer);
