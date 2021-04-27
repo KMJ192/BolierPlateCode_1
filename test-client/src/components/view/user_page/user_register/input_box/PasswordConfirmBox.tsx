@@ -15,27 +15,6 @@ function PasswordConfirmBox({ compareData, returnSuccess }: Props) {
     const focus = () => {
         setOnfocus(true);
     }
-    // const blur = () => {
-    //     if(pageName==="UserRegister"){
-    //         if(!passwordConfirm){
-    //             setDatacheck(false);
-    //             returnSuccess(false);
-    //             setWarn("🙁 비밀번호 확인을 입력해주세요.");
-    //         }
-    //     }else{
-    //         if(compareData && !passwordConfirm){
-    //             setDatacheck(false);
-    //             returnSuccess(false)
-    //             setWarn("🙁 비밀번호와 비밀번호 확인이 다릅니다.");
-    //             return;
-    //         }
-    //         if(!compareData && !passwordConfirm){
-    //             returnSuccess(true);
-    //             setWarn("");
-    //         }
-    //     }
-    // }
-
     useEffect(() => {
         if(onfocus){
             if(passwordConfirm !== compareData){
@@ -48,27 +27,6 @@ function PasswordConfirmBox({ compareData, returnSuccess }: Props) {
                 returnSuccess(true);
                 setWarn("🙂 비밀번호 확인 입력 완료 되었습니다.");
             }
-            // if(compareData && !passwordConfirm){
-            //     setDatacheck(false);
-            //     returnSuccess(false);
-            //     setWarn("🙁 비밀번호 확인을 입력해주세요.");
-            // }else if(compareData && passwordConfirm !== compareData){
-            //     setDatacheck(false);
-            //     returnSuccess(false)
-            //     setWarn("🙁 비밀번호와 비밀번호 확인이 다릅니다.");
-            // }else if(compareData && passwordConfirm === compareData){
-            //     setDatacheck(true);
-            //     returnSuccess(true);
-            //     setWarn("🙂 비밀번호 확인 입력 완료 되었습니다.");
-            // }else if(!compareData && passwordConfirm){
-            //     setDatacheck(false);
-            //     returnSuccess(false)
-            //     setWarn("🙁 비밀번호와 비밀번호 확인이 다릅니다.");
-            // }
-            // else{
-            //     returnSuccess(true);
-            //     setWarn("");
-            // }
         }
     }, [compareData, passwordConfirm, onfocus]);
     

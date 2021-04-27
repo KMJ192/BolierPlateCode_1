@@ -30,7 +30,7 @@ export class UserService {
             }
         }else{
             //유저롤이 잘못된값으로 입력될 경우 가입 제한
-            resultMsg = "User rol error";
+            resultMsg = "User rol error"; 
         }
         return {
             result : sFlag,

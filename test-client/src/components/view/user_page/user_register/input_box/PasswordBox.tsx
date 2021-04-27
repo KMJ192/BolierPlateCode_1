@@ -35,14 +35,8 @@ function PasswordBox({ returnPassword }: Props) {
             setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
             return;
         }
-
         setDatacheck(true);
         setWarn("🙂 비밀번호 입력 완료 되었습니다.");
-        
-        // if(password && ConfirmPasswordForm(password) === false){
-        //     setDatacheck(false);
-        //     setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
-        // }
     }
 
     useEffect(() => {
@@ -57,21 +51,6 @@ function PasswordBox({ returnPassword }: Props) {
                 returnPassword(password, true);
             }
         }
-        // if(password){
-        //     if(ConfirmPasswordForm(password) === false){
-        //         setDatacheck(false);
-        //         setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
-        //         returnPassword(password, false);
-        //         return;
-        //     }else{
-        //         setDatacheck(true);
-        //         setWarn("🙂 비밀번호 입력 완료 되었습니다.");
-        //         returnPassword(password, true);
-        //     }
-        // }else{
-        //     setWarn("");
-        //     returnPassword("", true);
-        // }
     }, [password, onfocus]);
 
     return (
