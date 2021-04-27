@@ -31,6 +31,7 @@ function PasswordContainer({ returnPassword } : Props) {
     // }
 
     const getPasswordConfirm = useCallback((success : boolean) => {
+        console.log(success);
         setDataConfirm({
             ...dataConfirm,
             password_confirm : success
@@ -50,7 +51,7 @@ function PasswordContainer({ returnPassword } : Props) {
         }else{
             returnPassword("", false);
         }
-    }, [dataConfirm])
+    }, [dataConfirm]);
 
     return (
         <div>

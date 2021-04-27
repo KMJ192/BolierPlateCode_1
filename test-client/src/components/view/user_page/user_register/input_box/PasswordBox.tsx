@@ -11,15 +11,12 @@ export function ConfirmPasswordForm(asValue: string) {
     return regExp.test(asValue);
 }
 
-//1. 회원 가입 페이지인 경우
-//2. 유저 정보 수정페이지인 경우
-//null인 경우 warntext 제거
 function PasswordBox({ returnPassword }: Props) {
-    //password, password_confirm save
     const [onfocus, setOnfocus] = useState(false);
     const [password, setPassword] = useState("");
     const [dataCheck, setDatacheck] = useState(false);
     const [warn, setWarn] = useState("");
+    
     const focus = () =>{
         setOnfocus(true);
     }
@@ -44,14 +41,15 @@ function PasswordBox({ returnPassword }: Props) {
             if(!ConfirmPasswordForm(password)){
                 setDatacheck(false);
                 setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
-                returnPassword(password, false);
+                //returnPassword(password, false);
             }else{
                 setDatacheck(true);
                 setWarn("🙂 비밀번호 입력 완료 되었습니다.");
-                returnPassword(password, true);
+                //returnPassword(password, true);
             }
         }
-    }, [password, onfocus]);
+    }, [password, onfocus, dataCheck]);
+    
 
     return (
         <div>
@@ -64,8 +62,10 @@ function PasswordBox({ returnPassword }: Props) {
                     id="password-box"
                     type="password"
                     placeholder="비밀번호 입력"
-                    onChange={(e : React.ChangeEvent<HTMLInputElement>) => 
-                        setPassword(e.target.value)
+                    onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
+                            setPassword(e.target.value)
+                            returnPassword(e.target.value, dataCheck);
+                        }
                     }
                 />
                 <ResultMsg 

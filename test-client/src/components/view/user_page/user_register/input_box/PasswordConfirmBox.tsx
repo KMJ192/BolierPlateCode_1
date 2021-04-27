@@ -11,21 +11,27 @@ function PasswordConfirmBox({ compareData, returnSuccess }: Props) {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [dataCheck, setDatacheck] = useState(false);
     const [warn, setWarn] = useState("");
-
     const focus = () => {
         setOnfocus(true);
     }
+    const blur = () => {
+        if(!passwordConfirm){
+            setDatacheck(false);
+            setWarn("🙁 비밀번호 확인을 입력해주세요.");
+        }
+    }
+
     useEffect(() => {
         if(onfocus){
             if(passwordConfirm !== compareData){
                 setDatacheck(false);
-                returnSuccess(false);
                 setWarn("🙁 비밀번호와 비밀번호 확인이 다릅니다.");
+                returnSuccess(false);
             }
             if(compareData && compareData === passwordConfirm){
                 setDatacheck(true);
-                returnSuccess(true);
                 setWarn("🙂 비밀번호 확인 입력 완료 되었습니다.");
+                returnSuccess(true);
             }
         }
     }, [compareData, passwordConfirm, onfocus]);
@@ -36,7 +42,7 @@ function PasswordConfirmBox({ compareData, returnSuccess }: Props) {
             <label htmlFor="password-confirm-box">비밀번호 확인</label>
             <br/>
             <input
-                //onBlur={blur}
+                onBlur={blur}
                 onFocus={focus}
                 id="password-confirm-box"
                 type="password"
