@@ -45,6 +45,8 @@ function UserRegisterPage() {
         setUserData({ ...userData, nickname : [data, re] });
     }, [userData]);
     const getPassword = useCallback((data : string, re : boolean) => {
+        console.log(data);
+        console.log(re);
         setUserData({ ...userData, password : [data, re] });
     }, [userData]);
 

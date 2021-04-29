@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { user_image_path } from '../../../../path/ImagePath'
 import { user_patch_page } from '../../../../path/PagePath';
 import { server_url } from '../../../../path/Url';
@@ -16,7 +16,7 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
     const userImageRef = useRef<HTMLImageElement>(null);
     const [dropdown, setDropDown] = useState(false);
     const [userImage, setUserImage] = useState(user_image_path);
-    const handleClickOutside = (e : MouseEvent) => {
+    const handleClickOutside = useCallback((e : MouseEvent) => {
         //dropdownRef가 잡혀져 있고, dropdownRef의 자손 dom이 아닐경우
         //자손 dom을 클릭했을 경우에는 해당 dom에 대한 action이 필요하므로
         if(dropdownRef.current && !dropdownRef.current.contains(e.target as Node)){
@@ -28,7 +28,8 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
                 setDropDown(false);
             }
         }
-    }
+    },[dropdownRef, userImageRef, dropdown]);
+
     useEffect(() => {
         if(user_image){
             setUserImage(server_url + "/uimg/" + String(user_image));
@@ -37,7 +38,7 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
         return () => {
             document.removeEventListener("click", handleClickOutside, true);
         };
-    }, [userImage, user_image]);
+    }, [userImage, user_image, handleClickOutside]);
 
     const logOut = async (e : React.MouseEvent<HTMLAnchorElement>) => {
         const request = await axios.post("/logout")

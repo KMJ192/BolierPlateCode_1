@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ResultMsg } from '../../UserPageStyle';
 
 interface Props{
-    returnPassword : (data : string, success : boolean) => void;
+    passwordData : (data : string, success : boolean) => void;
 }
 
 //비밀번호 폼 추출
@@ -11,7 +11,7 @@ export function ConfirmPasswordForm(asValue: string) {
     return regExp.test(asValue);
 }
 
-function PasswordBox({ returnPassword }: Props) {
+function PasswordBox({ passwordData }: Props) {
     const [onfocus, setOnfocus] = useState(false);
     const [password, setPassword] = useState("");
     const [dataCheck, setDatacheck] = useState(false);
@@ -20,7 +20,7 @@ function PasswordBox({ returnPassword }: Props) {
     const focus = () =>{
         setOnfocus(true);
     }
-    //password inputbox blur
+    
     const blur = () =>{
         if(!password){
             setDatacheck(false);
@@ -41,16 +41,15 @@ function PasswordBox({ returnPassword }: Props) {
             if(!ConfirmPasswordForm(password)){
                 setDatacheck(false);
                 setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
-                //returnPassword(password, false);
+                passwordData(password, false);
             }else{
                 setDatacheck(true);
                 setWarn("🙂 비밀번호 입력 완료 되었습니다.");
-                //returnPassword(password, true);
+                passwordData(password, true);
             }
         }
     }, [password, onfocus, dataCheck]);
     
-
     return (
         <div>
             <div className="password-container">
@@ -62,10 +61,8 @@ function PasswordBox({ returnPassword }: Props) {
                     id="password-box"
                     type="password"
                     placeholder="비밀번호 입력"
-                    onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
-                            setPassword(e.target.value)
-                            returnPassword(e.target.value, dataCheck);
-                        }
+                    onChange={(e : React.ChangeEvent<HTMLInputElement>) => 
+                        setPassword(e.target.value)
                     }
                 />
                 <ResultMsg 
