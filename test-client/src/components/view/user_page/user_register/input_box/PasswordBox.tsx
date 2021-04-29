@@ -17,7 +17,7 @@ function PasswordBox({ passwordData }: Props) {
     const [dataCheck, setDatacheck] = useState(false);
     const [warn, setWarn] = useState("");
     
-    const focus = () =>{
+    const focus = () => {
         setOnfocus(true);
     }
     
@@ -35,12 +35,12 @@ function PasswordBox({ passwordData }: Props) {
         setDatacheck(true);
         setWarn("🙂 비밀번호 입력 완료 되었습니다.");
     }
-
+    
     useEffect(() => {
         if(onfocus){
             if(!ConfirmPasswordForm(password)){
                 setDatacheck(false);
-                setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");
+                setWarn("🙁 비밀번호양식은 8~25자리 숫자, 영문자 혼합입니다.");                
                 passwordData(password, false);
             }else{
                 setDatacheck(true);
@@ -48,7 +48,7 @@ function PasswordBox({ passwordData }: Props) {
                 passwordData(password, true);
             }
         }
-    }, [password, onfocus, dataCheck]);
+    }, [password, onfocus, dataCheck, passwordData]);
     
     return (
         <div>
@@ -73,4 +73,5 @@ function PasswordBox({ passwordData }: Props) {
         </div>
     );
 }
+
 export default React.memo(PasswordBox);

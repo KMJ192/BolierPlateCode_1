@@ -15,17 +15,21 @@ function PasswordContainer({ returnPassword } : Props) {
 
     const getPassword = useCallback((data : string, success : boolean) => {
         setPassword(data);
-        setDataConfirm({
-            ...dataConfirm,
-            password : success
-        });
+        if(dataConfirm.password !== success){
+            setDataConfirm({
+                ...dataConfirm,
+                password : success
+            });
+        }
     }, [dataConfirm]);
 
     const getPasswordConfirm = useCallback((success : boolean) => {
-        setDataConfirm({
-            ...dataConfirm,
-            password_confirm : success
-        });
+        if(dataConfirm.password_confirm !== success){
+            setDataConfirm({
+                ...dataConfirm,
+                password_confirm : success
+            });
+        }
     }, [dataConfirm]);
 
     useEffect(() => {
@@ -34,7 +38,7 @@ function PasswordContainer({ returnPassword } : Props) {
         }else{
             returnPassword("", false);
         }
-    }, [dataConfirm]);
+    }, [password, dataConfirm, returnPassword]);
     
     return (
         <div>

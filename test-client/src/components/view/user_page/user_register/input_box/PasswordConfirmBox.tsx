@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ResultMsg } from '../../UserPageStyle';
 
 interface Props{
@@ -34,7 +34,7 @@ function PasswordConfirmBox({ compareData, passwordConfirmData }: Props) {
                 passwordConfirmData(true);
             }
         }
-    }, [compareData, passwordConfirm, onfocus]);
+    }, [compareData, passwordConfirm, onfocus, passwordConfirmData]);
 
     return (
         <div className="password-container">
