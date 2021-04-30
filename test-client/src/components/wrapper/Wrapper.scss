@@ -8,12 +8,15 @@
         opacity: 0.15;
     }
     @media screen and (max-width: 768px) {
-        //margin-top: 0px;
         display: none;
     }
 }
 
+.nav{
+    z-index: 1;
+}
 .landing-screen{
+    z-index: 2;
     position: absolute;
     padding-top: 5px;
     transition: 0.5s;

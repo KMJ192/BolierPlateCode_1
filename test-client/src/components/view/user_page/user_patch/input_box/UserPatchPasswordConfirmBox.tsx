@@ -6,36 +6,44 @@ interface Props{
     passwordConfirmData : (success : boolean) => void
 }
 
-function PasswordConfirmBox({ compareData, passwordConfirmData }: Props) {
-    const [onfocus, setOnfocus] = useState(false);
-    const [dataCheck, setDatacheck] = useState(false);
+function UserPatchPasswordConfirmBox({ compareData, passwordConfirmData }: Props) {
+    const [dataCheck, setDatacheck] = useState(true);
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [warn, setWarn] = useState("");
-    const focus = () => {
-        setOnfocus(true);
-    }
     
     useEffect(() => {
-        if(onfocus){
-            if(passwordConfirm !== compareData){
+        if(compareData){
+            if(!passwordConfirm){
+                setDatacheck(false);
+                setWarn("🙁 비밀번호 확인을 입력해주세요.");
+                passwordConfirmData(false);
+            }else if(compareData !== passwordConfirm){
                 setDatacheck(false);
                 setWarn("🙁 비밀번호와 비밀번호 확인이 다릅니다.");
                 passwordConfirmData(false);
-            }
-            if(compareData && compareData === passwordConfirm){
+            }else{
                 setDatacheck(true);
                 setWarn("🙂 비밀번호 확인 입력 완료 되었습니다.");
                 passwordConfirmData(true);
             }
+        }else{
+            if(passwordConfirm){
+                setDatacheck(false);
+                setWarn("🙁 비밀번호와 비밀번호 확인이 다릅니다.");
+                passwordConfirmData(false);
+            }else if(!passwordConfirm){
+                setDatacheck(true);
+                setWarn("");
+                passwordConfirmData(true);
+            }
         }
-    }, [compareData, passwordConfirm, onfocus, passwordConfirmData]);
+    }, [compareData, passwordConfirm, passwordConfirmData]);
 
     return (
         <div className="password-container">
             <label htmlFor="password-confirm-box">비밀번호 확인</label>
             <br/>
             <input
-                onFocus={focus}
                 id="password-confirm-box"
                 type="password"
                 placeholder="비밀번호 확인"
@@ -51,4 +59,4 @@ function PasswordConfirmBox({ compareData, passwordConfirmData }: Props) {
     );
 }
 
-export default React.memo(PasswordConfirmBox);
+export default React.memo(UserPatchPasswordConfirmBox);

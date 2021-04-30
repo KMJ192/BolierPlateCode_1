@@ -4,7 +4,6 @@ import { Redirect } from 'react-router';
 import { user_image_path } from '../../../../path/ImagePath';
 import { login_page } from '../../../../path/PagePath';
 import Wrapper from '../../../wrapper/Wrapper';
-//import UserPage from '../UserPage';
 import EmailBox from './input_box/EmailBox';
 import NicknameBox from './input_box/NicknameBox';
 import PasswordContainer from './input_box/PasswordContainer';
@@ -52,7 +51,6 @@ function UserRegisterPage() {
 
     const submit = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-            //회원 가입 페이지인 경우
         if(!userData.email[1]) alert("이메일을 확인해주세요.");
         else if(!userData.nickname[1]) alert("별명을 확인해주세요.");
         else if(!userData.password[1]) alert("비밀번호를 확인해주세요.");
@@ -66,7 +64,6 @@ function UserRegisterPage() {
             const response = await axios.post("/register_user", formData)
                 .then(response => response.data)
                 .catch(err => err);
-            //console.log(response);
     
             if(response["result"]){
                 setRedirect(true);

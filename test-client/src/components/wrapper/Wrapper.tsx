@@ -16,7 +16,9 @@ function Wrapper({children} : Props) {
     }
     return (
         <>
-            <NavBar/>
+            <div className="nav">
+                <NavBar/>
+            </div>
             <ToggleBtn onClick={sidebarToggle} className="toggle-btn" toggle={sidebarState} {...sidebarState}>
                 {sidebarState ? 
                     <i className="fas fa-arrow-alt-circle-left"/>
