@@ -88,7 +88,7 @@ function UserRegisterPage() {
                     <label htmlFor="user-img-input">
                         프로필 이미지 설정
                     </label>
-                    <input id="user-img-input" type="file" onChange={fileChangeHandler} hidden></input>
+                    <input id="user-img-input" type="file" accept="image/*" onChange={fileChangeHandler} hidden></input>
                     <span>대표 이미지를 추가하세요.</span>
                 </div>
                 <div className="user-info-container">
