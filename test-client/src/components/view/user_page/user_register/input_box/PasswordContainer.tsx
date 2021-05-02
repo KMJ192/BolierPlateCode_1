@@ -14,14 +14,13 @@ function PasswordContainer({ returnPassword } : Props) {
     });
 
     const getPassword = useCallback((data : string, success : boolean) => {
-        setPassword(data);
-        if(dataConfirm.password !== success){
+        if(password !== data) setPassword(data);
+        if(dataConfirm.password !== success)
             setDataConfirm({
                 ...dataConfirm,
                 password : success
             });
-        }
-    }, [dataConfirm]);
+    }, [password, dataConfirm]);
 
     const getPasswordConfirm = useCallback((success : boolean) => {
         if(dataConfirm.password_confirm !== success){
