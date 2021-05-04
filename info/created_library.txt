@@ -53,3 +53,6 @@ npm install -D @types/cookie-parser
 //파일 업로드
 npm install multer --save
 npm install @types/multer --save
+
+//eslint
+npm install --save-dev eslint-plugin-nestjs

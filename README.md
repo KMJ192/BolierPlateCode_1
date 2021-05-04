@@ -2,6 +2,7 @@
 
 ### Client
  - dev stack
+    - typescript
     - React
     - Redux
     - scss
@@ -17,6 +18,7 @@
 
 ### Server
  - dev stack
+    - typescript
     - nestjs
     - mysql
  - 회원가입
