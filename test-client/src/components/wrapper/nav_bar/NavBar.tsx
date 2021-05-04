@@ -49,7 +49,9 @@ function NavBar() {
                 <li><input type="text"></input></li>
                 <li><button>검색</button></li>
             </Ul>
-            {!userDataloading &&
+            {userDataloading ? 
+                <div/>
+            : 
                 <Div toggle={toggle} {...toggle}>
                     {loginState ? 
                         <AfterLogin
@@ -65,7 +67,7 @@ function NavBar() {
                 <i className="fas fa-bars"></i>
             </div>
         </nav>
-    )
+    );
 }
 
-export default NavBar
+export default React.memo(NavBar);

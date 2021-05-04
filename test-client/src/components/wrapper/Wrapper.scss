@@ -13,15 +13,19 @@
 }
 
 .nav{
-    z-index: 3;
+    position: relative;
+    z-index: 50;
 }
 .landing-screen{
     z-index: 1;
     position: absolute;
     padding-top: 5px;
     transition: 0.5s;
-    top: 6%;
+    top: 6.5%;
     @media screen and (max-width: 768px) {
         position: relative;
     }
+}
+.side-bar{
+    z-index : 25;
 }

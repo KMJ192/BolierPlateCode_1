@@ -20,7 +20,7 @@ function PasswordContainer({ returnPassword } : Props) {
                 ...dataConfirm,
                 password : success
             });
-    }, [password, dataConfirm]);
+    }, [dataConfirm, password]);
 
     const getPasswordConfirm = useCallback((success : boolean) => {
         if(dataConfirm.password_confirm !== success){

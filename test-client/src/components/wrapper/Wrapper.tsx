@@ -26,7 +26,7 @@ function Wrapper({children} : Props) {
                     <i className="fas fa-arrow-alt-circle-right"/>
                 }
             </ToggleBtn>
-            <SideBar toggle={sidebarState} {...sidebarState}/>
+            <SideBar className="side-bar" toggle={sidebarState} {...sidebarState}/>
             <Main className="landing-screen" toggle={sidebarState} {...sidebarState}>
                 {children}
             </Main>
@@ -34,4 +34,4 @@ function Wrapper({children} : Props) {
     )
 }
 
-export default Wrapper
+export default React.memo(Wrapper)
