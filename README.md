@@ -1,10 +1,23 @@
-"# project1"
+# boiler-plate code 작성
 
-boiler-plate code 작성
+### Client
+ - dev stack
+    - React
+    - Redux
+    - scss
+    - styled-components
+ - 유저 로그인 화면
+ - 유저 회원가입 화면
+ - 유저 정보수정 화면
+ - nav bar
+    - screen size 768px 이하 column형태로 변환할 수 있도록 반응
+ - side bar
+    - toggle 버튼으로 side bar최소화 기능
+    - screen size 768px 이하일 때 자동 최소화
 
-Client
-메인 화면
-유저 로그인 화면
-유저 회원가입 화면
-
-
+### Server
+ - dev stack
+    - nestjs
+    - mysql
+ - 회원가입
+ - 유저정보 수정
