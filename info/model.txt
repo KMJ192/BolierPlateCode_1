@@ -1,9 +1,3 @@
-    ####################### Front-End #######################
- ---- React ----
-
-
-
-    ####################### Back-End #######################
  ---- Nestjs ----
 //module, service, controller, guard
 nest g mo user

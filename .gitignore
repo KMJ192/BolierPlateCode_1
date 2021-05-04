@@ -1,21 +1,8 @@
 .vscode/
 
-# operator-client
-client/node_modules
-
-# operator-server
-server
-server/src
-
 # test-server
 test-server/node_modules
 test-server/dist
 
 # test-client
 test-client/node_modules
-
-# test-client2
-test-client2/node_modules
-
-#scss
-design/scss/node_modules

@@ -3,4 +3,4 @@ useEffect : 컴포넌트의 변화를 감지(컴포넌트가 나타날 때, 사�
     class 생명 주기 중 componentDidMount(니티날 때), componentDidUpdate(업데이트 될 때), componentWillUnMount(사라질 때)의 기능이 합쳐진 Hook
 useRef : 특정 Dom을 선택할 때
 useMemo : Memorization
-useCallback : 
+useCallback : 함수 재사용성을 위함
