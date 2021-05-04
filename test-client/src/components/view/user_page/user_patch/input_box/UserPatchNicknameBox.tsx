@@ -79,13 +79,15 @@ function UserPatchNicknameBox({ nowNickname, returnNickname }: Props) {
             <input 
                 onBlur={blur}
                 id="nickname-box"
+                className="input-box"
                 type="text"
                 placeholder={nowNickname}
                 onChange={(e : React.ChangeEvent<HTMLInputElement>) => 
                     setNickname(e.target.value)
                 }
             />
-            <button className="duplicate-confirm"
+            <button 
+                className="user-page-btn duplicate-confirm"
                 type="button"
                 onClick={checkDuplicateNickName}
             >중복확인</button>

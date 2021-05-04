@@ -31,9 +31,7 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
     },[dropdownRef, userImageRef, dropdown]);
 
     useEffect(() => {
-        if(user_image){
-            setUserImage(server_url + "/uimg/" + String(user_image));
-        }
+        if(user_image) setUserImage(server_url + "/uimg/" + String(user_image));
         document.addEventListener("click", handleClickOutside, true);
         return () => {
             document.removeEventListener("click", handleClickOutside, true);
@@ -44,11 +42,8 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
         const request = await axios.post("/logout")
             .then(response => response.data)
             .catch(err => err);
-        if(request["message"] === "success"){
-            alert("로그 아웃 되었습니다.");
-        }else{
-            alert("오류 발생 : " + request);
-        }
+        if(request["message"] === "success") alert("로그 아웃 되었습니다.");
+        else alert("오류 발생 : " + request);
     }
     
 
@@ -59,9 +54,9 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
                 <img ref={userImageRef} src={userImage} alt="user"/>
                 <UserDropdown className="user-menu" ref={dropdownRef} toggle={dropdown} {...dropdown} >
                     <a href={user_patch_page}>{nickname}</a>
-                    <hr/>
+                    <div className="line"/>
                     <a href={user_patch_page}>회원정보수정</a>
-                    <hr/>
+                    <div className="line"/>
                     <a href="/" onClick={logOut}>로그아웃</a>
                 </UserDropdown>
             </li>
@@ -69,4 +64,4 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
     )
 }
 
-export default AfterLogin;
+export default React.memo(AfterLogin);

@@ -103,9 +103,9 @@ function UserRegisterPage() {
                         returnPassword={getPassword}
                     />
                     <div className="btn-container">
-                        <button type="submit">가입하기</button>
-                        <a href={login_page}><button type="button">로그인 하기</button></a>
-                        <a href="/"><button type="button">돌아가기</button></a>
+                        <button className="btn" type="submit">가입하기</button>
+                        <a href={login_page}><button className="btn" type="button">로그인 하기</button></a>
+                        <a href="/"><button className="btn" type="button">돌아가기</button></a>
                     </div>
                 </div>
             </form>
@@ -114,4 +114,4 @@ function UserRegisterPage() {
 }
 
 
-export default UserRegisterPage;
+export default React.memo(UserRegisterPage);

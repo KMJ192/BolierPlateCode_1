@@ -6,3 +6,5 @@ test-server/dist
 
 # test-client
 test-client/node_modules
+
+info/jira.txt

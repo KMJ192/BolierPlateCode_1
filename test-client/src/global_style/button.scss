@@ -1,0 +1,25 @@
+.btn{
+    color: skyblue;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid skyblue;
+    padding: 5px;
+    border-radius: 3px;
+    transition: 0.1s;
+    &:hover{
+        color: #FFFFFF;
+        background-color: skyblue;
+    }
+}
+
+.user-page-btn{
+    color: #FFFFFF;
+    background-color: skyblue;
+    border: 1px solid rgb(0, 183, 255);
+    padding: 5px;
+    border-radius: 3px;
+    transition: 0.1s;
+    &:hover{
+        border: 1px solid rgb(60, 200, 255);
+        background-color: rgb(60, 200, 255);
+    }
+}

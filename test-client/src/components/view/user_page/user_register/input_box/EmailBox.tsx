@@ -90,7 +90,7 @@ function EmailBox({ returnEmail }: Props) {
             <input 
                 onBlur={blur}
                 id="email-box"
-                className="user-register"
+                className="input-box user-register"
                 type="text"
                 placeholder="이메일 입력"
                 onChange={(e : React.ChangeEvent<HTMLInputElement>) => 
@@ -98,7 +98,7 @@ function EmailBox({ returnEmail }: Props) {
                 }
             />
             <button 
-                className="duplicate-confirm" 
+                className="user-page-btn duplicate-confirm" 
                 type="button" 
                 onClick={checkDuplicateEmail}
                 >중복확인</button>

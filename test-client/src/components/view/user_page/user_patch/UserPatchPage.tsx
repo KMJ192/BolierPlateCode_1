@@ -74,7 +74,6 @@ function UserPatchPage() {
     }, [userData, UserData.data?.user_image]);
 
     const submit = async (e : React.FormEvent<HTMLFormElement>) =>{
-        console.log(changeFlag);
         e.preventDefault();
         if(changeFlag){
             if(UserData.loading === true){
@@ -151,8 +150,8 @@ function UserPatchPage() {
                         <div/>
                     : 
                         <div className="btn-container">
-                            <button type="submit">수정하기</button>
-                            <a href="/"><button type="button">돌아가기</button></a>
+                            <button className="btn" type="submit">수정하기</button>
+                            <a href="/"><button className="btn" type="button">돌아가기</button></a>
                         </div>
                     }
                 </div>

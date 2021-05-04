@@ -45,6 +45,7 @@ function UserPatchPasswordConfirmBox({ compareData, passwordConfirmData }: Props
             <br/>
             <input
                 id="password-confirm-box"
+                className="input-box"
                 type="password"
                 placeholder="비밀번호 확인"
                 onChange={(e : React.ChangeEvent<HTMLInputElement>) =>

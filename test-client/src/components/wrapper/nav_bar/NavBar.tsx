@@ -46,8 +46,8 @@ function NavBar() {
                 <li><a href="/">menu2</a></li>
             </Ul>
             <Ul toggle={toggle} {...toggle} className="search-container">
-                <li><input type="text"></input></li>
-                <li><button>검색</button></li>
+                <li><input placeholder="검색" type="text"></input></li>
+                <li><button className="btn">검색</button></li>
             </Ul>
             {userDataloading ? 
                 <div/>

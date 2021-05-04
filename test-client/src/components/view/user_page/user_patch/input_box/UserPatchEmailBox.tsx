@@ -10,7 +10,7 @@ function UserPatchEmailBox({ useremail } : Props) {
             <br/>
             <input 
                 id="email-box"
-                className="user-patch"
+                className="input-box user-patch"
                 type="text"
                 placeholder={useremail}
                 readOnly

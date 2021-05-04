@@ -24,17 +24,6 @@ function NicknameBox({ returnNickname }: Props) {
             returnNickname("", false);
             return;
         }
-        // if(!nickname){
-        //     setWarn("");
-        //     returnNickname("", true);
-        //     return;
-        // }else{
-        //     if(dupCheck === false){
-        //         setWarn("🙁 중복 확인해주세요.");
-        //         returnNickname(".", false);
-        //         return;
-        //     }
-        // }
     }
     //=====blur 처리=====
 
@@ -76,15 +65,6 @@ function NicknameBox({ returnNickname }: Props) {
             setWarn("🙁 중복 확인해주세요.");
             returnNickname("", false);
         }
-        // if(nickname){
-        //     if(afterDupCheck && afterDupCheck !== nickname && dupCheck === true){
-        //         //중복 확인 했는데 데이터 변화를 감지하면 초기화 
-        //         setAfterDupCheck("");
-        //         setDupCheck(false);
-        //         setWarn("🙁 중복 확인해주세요.");
-        //         returnNickname(".", false);
-        //     }
-        // }
         //=====중복 확인 후 닉네임 변경여부 판단=====
     }, [nickname, afterDupCheck, warn, dupCheck, returnNickname]);
 
@@ -96,13 +76,15 @@ function NicknameBox({ returnNickname }: Props) {
             <input 
                 onBlur={blur}
                 id="nickname-box"
+                className="input-box"
                 type="text"
                 placeholder="별명을 입력"
                 onChange={(e : React.ChangeEvent<HTMLInputElement>) => 
                     setNickname(e.target.value)
                 }
             />
-            <button className="duplicate-confirm"
+            <button 
+                className="user-page-btn duplicate-confirm"
                 type="button"
                 onClick={checkDuplicateNickName}
             >중복확인</button>

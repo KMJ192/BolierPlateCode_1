@@ -63,6 +63,7 @@ function UserPatchPasswordBox({ passwordData }: Props) {
                     onFocus={focus}
                     onBlur={blur}
                     id="password-box"
+                    className="input-box"
                     type="password"
                     placeholder="비밀번호 변경"
                     onChange={(e : React.ChangeEvent<HTMLInputElement>) => 

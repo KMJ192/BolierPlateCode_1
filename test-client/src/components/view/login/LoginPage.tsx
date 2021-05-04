@@ -28,15 +28,10 @@ function LoginPage() {
             .catch(err => {
                 alert("오류가 발생했습니다. 오류내용 : " + err);
             });
-        if(response["login"] === true){
-            setRedirect(true);
-        }else if(response["message"] === "Different pw"){
-            alert("비밀번호가 틀렸습니다.");
-        }else if(response["message"] === "None email"){
-            alert("등록된 이메일이 아닙니다.");
-        }else{
-            alert("알수 없는 오류가 발생했습니다.");
-        }
+        if(response["login"] === true) setRedirect(true);
+        else if(response["message"] === "Different pw") alert("비밀번호가 틀렸습니다.");
+        else if(response["message"] === "None email") alert("등록된 이메일이 아닙니다.");
+        else alert("알수 없는 오류가 발생했습니다.");
     }
 
     if(redirect === true){
@@ -52,20 +47,20 @@ function LoginPage() {
                     </div>
                     <br/>
                     <div className="input-login-des">이메일</div>
-                    <input className="email-input" placeholder="이메일 입력" autoFocus
+                    <input className="input-box email-input" placeholder="이메일 입력" autoFocus
                         onChange={(e : React.ChangeEvent<HTMLInputElement>) => setLoginData({...loginData, email : e.target.value})}
                     />
                     <div className="input-login-des">비밀번호</div>
-                    <input className="password-input" type="password" placeholder="비밀번호 입력"
+                    <input className="input-box password-input" type="password" placeholder="비밀번호 입력"
                         onChange={(e : React.ChangeEvent<HTMLInputElement>) => setLoginData({...loginData, password : e.target.value})}
                     />
                     <br/>
                     <input className="remember-box" type="checkbox"/>기억하기
                     <br/>
-                    <button className="sign-btn" type="submit">로그인</button>
+                    <button className="user-page-btn sign-btn" type="submit">로그인</button>
                     <br/>
                     <Link to={user_register_page}>
-                        <button className="sign-btn sign-up" type="button">회원가입</button>
+                        <button className="user-page-btn sign-btn sign-up" type="button">회원가입</button>
                     </Link>
                 </div>
             </form>
