@@ -27,6 +27,11 @@ function PasswordConfirmBox({ compareData, passwordConfirmData }: Props) {
                 setWarn("🙂 비밀번호 확인 입력 완료 되었습니다.");
                 passwordConfirmData(true);
             }
+            if(!passwordConfirm){
+                setDatacheck(false);
+                setWarn("🙁 비밀번호 확인을 입력해주세요.");
+                passwordConfirmData(false);
+            }
         }
     }, [compareData, passwordConfirm, onfocus, passwordConfirmData]);
 

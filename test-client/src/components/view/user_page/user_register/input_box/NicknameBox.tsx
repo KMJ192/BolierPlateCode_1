@@ -78,7 +78,7 @@ function NicknameBox({ returnNickname }: Props) {
                 id="nickname-box"
                 className="input-box"
                 type="text"
-                placeholder="별명을 입력"
+                placeholder="별명 입력"
                 onChange={(e : React.ChangeEvent<HTMLInputElement>) => 
                     setNickname(e.target.value)
                 }
