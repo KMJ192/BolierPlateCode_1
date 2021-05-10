@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import { user_register_page } from '../../../path/PagePath';
 import Wrapper from '../../wrapper/Wrapper';
+import { LoginRequest } from './LoginPageCode';
 import './LoginPage.scss';
 
 function LoginPage() {
@@ -23,15 +23,12 @@ function LoginPage() {
             alert("비밀번호를 입력해주세요.");
             return;
         }
-        const response = await axios.post("/login", loginData)
-            .then(response => response.data)
-            .catch(err => {
-                alert("오류가 발생했습니다. 오류내용 : " + err);
-            });
-        if(response["login"] === true) setRedirect(true);
-        else if(response["message"] === "Different pw") alert("비밀번호가 틀렸습니다.");
-        else if(response["message"] === "None email") alert("등록된 이메일이 아닙니다.");
-        else alert("알수 없는 오류가 발생했습니다.");
+        const response = await LoginRequest(loginData)
+            .then(response => response)
+            .catch(err => err);
+        if(response){
+            setRedirect(true);
+        }
     }
 
     if(redirect === true){
