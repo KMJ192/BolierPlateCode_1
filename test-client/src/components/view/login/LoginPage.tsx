@@ -7,11 +7,11 @@ import './LoginPage.scss';
 
 function LoginPage() {
     document.title="로그인";
+    const [redirect, setRedirect] = useState(false);
     const [loginData, setLoginData] = useState({
         email : "",
         password : ""
     });
-    const [redirect, setRedirect] = useState(false);
 
     const tryLogin = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -23,12 +23,12 @@ function LoginPage() {
             alert("비밀번호를 입력해주세요.");
             return;
         }
-        const response = await LoginRequest(loginData)
+
+        const response : boolean = await LoginRequest(loginData)
             .then(response => response)
             .catch(err => err);
-        if(response){
-            setRedirect(true);
-        }
+        
+        if(response) setRedirect(true);
     }
 
     if(redirect === true){

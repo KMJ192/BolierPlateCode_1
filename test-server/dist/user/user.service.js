@@ -59,14 +59,14 @@ let UserService = class UserService {
                 });
                 response.cookie('jwt', jwt, { httpOnly: true });
                 sFlag = true;
-                resultMsg = "Login success";
+                resultMsg = "success";
             }
             else {
-                resultMsg = "Different pw";
+                resultMsg = "E-P-00";
             }
         }
         else {
-            resultMsg = "None email";
+            resultMsg = "E-P-01";
         }
         return {
             login: sFlag,

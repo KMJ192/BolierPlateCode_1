@@ -58,14 +58,14 @@ export class UserService {
                 });
                 response.cookie('jwt', jwt, {httpOnly : true});
                 sFlag = true;
-                resultMsg = "Login success"
+                resultMsg = "success"
             }else{
                 //비밀번호가 다름
-                resultMsg = "Different pw";
+                resultMsg = "E-P-00";
             }
         }else{
             //이메일이 없음
-            resultMsg = "None email";
+            resultMsg = "E-P-01";
         }
         
         return {

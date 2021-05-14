@@ -4,7 +4,7 @@ import { Response, Request } from 'express';
 import { UserGuard } from './user.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { extname, basename } from 'path';
+import { extname } from 'path';
 
 @Controller()
 export class UserController {
