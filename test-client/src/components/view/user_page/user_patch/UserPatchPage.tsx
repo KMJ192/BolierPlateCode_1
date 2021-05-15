@@ -39,6 +39,7 @@ function UserPatchPage() {
             setChangeFlag({...changeFlag, user_image : true});
         }
     }
+    
     const imgRemoveHandler = () => {
         setChangeFlag({...changeFlag, user_image : true});
         setUserimgBase64(user_image_path);
@@ -94,9 +95,11 @@ function UserPatchPage() {
                 formData.set("email", String(UserData.data?.useremail));
                 formData.set("nickname", String(userData.nickname[0]));
                 formData.set("password", String(userData.password[0]));
+
                 const request = await axios.patch("/patch_user", formData)
                     .then(response => response.data)
                     .catch(err => err)
+
                 if(request.patch === true){
                     let result : string = "";
                     if(changeFlag.user_image) result = "[대표사진]";

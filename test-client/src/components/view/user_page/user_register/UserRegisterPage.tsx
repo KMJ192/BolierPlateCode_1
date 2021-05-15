@@ -33,16 +33,20 @@ function UserRegisterPage() {
             formData.set("user_image", e.target.files[0]);
         }
     };
+    //이미지 삭제
     const imgRemoveHandler = () => {
         setUserimgBase64(user_image_path);
         formData.delete("user_image");
     }
+
     const getEmail = useCallback((data : string, re : boolean) => {
         setUserData({ ...userData, email : [data, re] });
     },[userData]);
+
     const getNickname = useCallback((data : string, re : boolean) => {
         setUserData({ ...userData, nickname : [data, re] });
     }, [userData]);
+    
     const getPassword = useCallback((data : string, re : boolean) => {
         if(userData.password[0] !== data || userData.password[1] !== re){
             setUserData({ ...userData, password : [data, re] });
