@@ -4,14 +4,22 @@ import { Link, Redirect } from 'react-router-dom';
 import { user_register_page } from '../../../path/PagePath';
 import Wrapper from '../../wrapper/Wrapper';
 import './LoginPage.scss';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux-module/RootReducer';
 
 function LoginPage() {
     document.title="로그인";
+    // const [winSize, setwinSize] = useState({
+    //     x : window.innerWidth,
+    //     y : window.innerHeight
+    // });
     const [redirect, setRedirect] = useState(false);
     const [loginData, setLoginData] = useState({
         email : "",
         password : ""
     });
+    //const WindowSize = useSelector((state : RootState) => state.screen_size);
+    //console.log(WindowSize);
 
     const tryLogin = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,9 +34,9 @@ function LoginPage() {
         }
 
         const response = await axios.post('/login', loginData)
-            .then((response : AxiosResponse<any>) => response.data)
+            .then((response : AxiosResponse) => response.data)
             .catch((err : AxiosError) => err);
-                    
+
         if(response) {
             if(response["login"] === true) setRedirect(true);
             else{
@@ -78,4 +86,4 @@ function LoginPage() {
     );
 }
 
-export default LoginPage
+export default React.memo(LoginPage);

@@ -14,6 +14,7 @@ function Wrapper({children} : Props) {
     const sidebarToggle = () => {
         setSidebarState(!sidebarState);
     }
+
     return (
         <>
             <div className="nav">
