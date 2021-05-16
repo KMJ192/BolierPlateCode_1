@@ -14,14 +14,14 @@ function NavBar() {
     const onToggle = () => {
         setToggle(!toggle);
     }
-        
+    
     const getUserDispatch = useDispatch();
+    const UserData = useSelector((state : RootState) => state.user.userProfile);
+    //console.log(UserData.data);
     useEffect(() => {
         getUserDispatch(getUserThunk());
     }, [getUserDispatch])
 
-    const UserData = useSelector((state : RootState) => state.user.userProfile);
-    //console.log(UserData.data);
     useEffect(() => {
         setUserDataloading(UserData.loading);
         if(UserData.data?.result === true){
