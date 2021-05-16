@@ -6,13 +6,12 @@ import LoginPage from './view/login/LoginPage';
 import UserPatchPage from './view/user_page/user_patch/UserPatchPage';
 import UserRegisterPage from './view/user_page/user_register/UserRegisterPage';
 import { login_page, user_patch_page, user_register_page } from '../path/PagePath';
-import { /*GetScreenSize,*/ GetUser } from './GetStore';
+//import { /*GetScreenSize,*/ GetUser } from './GetStore';
 import '../global_style/button.scss';
 import '../global_style/inputbox.scss';
 import '../global_style/line.scss';
 
 function App() {
-  GetUser();
   //GetScreenSize();
 
   return (

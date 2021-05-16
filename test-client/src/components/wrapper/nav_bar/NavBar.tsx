@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Div, Ul } from './NavBarStyled';
 import AfterLogin from './user_option/AfterLogin';
 import BeforeLogin from './user_option/BeforeLogin';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState} from '../../../redux-module/RootReducer';
-//import { getUserThunk } from '../../../redux-module/user';
+import { getUserThunk } from '../../../redux-module/user';
 import './NavBar.scss';
 
 function NavBar() {
@@ -14,10 +14,14 @@ function NavBar() {
     const onToggle = () => {
         setToggle(!toggle);
     }
+        
+    const getUserDispatch = useDispatch();
+    useEffect(() => {
+        getUserDispatch(getUserThunk());
+    }, [getUserDispatch])
 
     const UserData = useSelector((state : RootState) => state.user.userProfile);
-    //console.log(UserData);
-    
+    //console.log(UserData.data);
     useEffect(() => {
         setUserDataloading(UserData.loading);
         if(UserData.data?.result === true){
