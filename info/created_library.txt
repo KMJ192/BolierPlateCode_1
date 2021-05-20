@@ -4,10 +4,10 @@
 npx create-react-app client
 //React프로젝트 생성(typescript)
 npx --ignore-existing create-react-app test-client --template typescript // ---→ typescript 버전 react 설치인데 현재 정보가 없으므로 javascript로 개발할것.
-npm install --save @types/react @types/react-dom
+npm install @types/react @types/react-dom --save
 
 //router-dom 설치
-npm install react-router-dom @types/react-router-dom
+npm install react-router-dom @types/react-router-dom --save
 
 //server와 http 통신을 위한 axios 라이브러리
 npm install axios @types/axios --save
