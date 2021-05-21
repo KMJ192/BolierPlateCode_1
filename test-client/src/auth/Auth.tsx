@@ -20,7 +20,7 @@ export default function(
                     if(pageCase === pageCaseLogined 
                         && request["useremail"] 
                         && request["message"] === "success"){
-                        props.history.push('/');
+                            props.history.push('/');
                     }else if(pageCase === paceCaseUserPatch
                         && request["message"] === "none jwt"){
                             props.history.push('/');
@@ -28,9 +28,8 @@ export default function(
                 })();
             }
         }, [props.history, props.location]);
-        return (
-            <Component/>
-        );
+
+        return <Component/>;
     }
     
     return Authentication;
