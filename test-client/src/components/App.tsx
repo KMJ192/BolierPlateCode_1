@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { screenResize } from '../redux-module/screen_size';
+import { throttle } from 'lodash';
 
+import NotFound from './view/NotFound';
 import Auth from '../auth/Auth';
 import DefaultPage from './view/default_page/DefaultPage';
 import LoginPage from './view/login/LoginPage';
@@ -15,6 +19,20 @@ import '../global_style/inputbox.scss';
 import '../global_style/line.scss';
 
 function App() {
+  const winSizeDispatch = useDispatch();
+
+  const resizeHandler = throttle(() => {
+    winSizeDispatch(screenResize(window.innerWidth, window.innerHeight));
+  }, 500);
+
+  useEffect(() => {
+    window.addEventListener('resize', resizeHandler);
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+    }
+  }, [resizeHandler]);
+
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -23,6 +41,7 @@ function App() {
           <Route path={login_page} exact component={Auth(LoginPage, true, pageCaseLogined)}/>
           <Route path={user_register_page} exact component={Auth(UserRegisterPage, true, pageCaseLogined)}/>
           <Route path={user_patch_page} exact component={Auth(UserPatchPage, true, paceCaseUserPatch)}/>
+          <Route exact component={NotFound}/>
         </Switch>
       </BrowserRouter>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import { user_register_page } from '../../../path/PagePath';
@@ -9,17 +9,20 @@ import { RootState } from '../../../redux-module/RootReducer';
 
 function LoginPage() {
     document.title="로그인";
-    // const [winSize, setwinSize] = useState({
-    //     x : window.innerWidth,
-    //     y : window.innerHeight
-    // });
+    const [winWidth, setWinWidth] = useState(window.innerWidth);
+    const [winHeight, setWinHeight] = useState(window.innerHeight);
     const [redirect, setRedirect] = useState(false);
     const [loginData, setLoginData] = useState({
         email : "",
         password : ""
     });
-    //const WindowSize = useSelector((state : RootState) => state.screen_size);
-    //console.log(WindowSize);
+    const windowSize = useSelector((state : RootState) => state.screen_size);
+
+    useEffect(() => {
+        setWinWidth(windowSize.width);
+        setWinHeight(windowSize.height);
+        console.log(windowSize);
+    }, [winWidth, winHeight, windowSize]);
 
     const tryLogin = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

@@ -25,6 +25,9 @@ npm install typesafe-actions
 npm install node-sass   //react with scss
 npm install classnames  //className 동적할당 library
 
+//lodash, 함수 호출 시간 조정
+npm install loadash @types/loadash --save
+
 //formik, yup
 npm install formik yup --save
 
