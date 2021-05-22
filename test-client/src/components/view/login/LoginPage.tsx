@@ -1,28 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Link, Redirect } from 'react-router-dom';
-import { user_register_page } from '../../../path/PagePath';
-import Wrapper from '../../wrapper/Wrapper';
-import './LoginPage.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux-module/RootReducer';
+import Wrapper from '../../wrapper/Wrapper';
+import { user_register_page } from '../../../path/PagePath';
+import { LoginButton, LoginContainer, LoginInput } from './LoginPageStyle';
+import './LoginPage.scss';
 
 function LoginPage() {
     document.title="로그인";
-    const [winWidth, setWinWidth] = useState(window.innerWidth);
-    const [winHeight, setWinHeight] = useState(window.innerHeight);
+    const [winWidth, setWinWidth] = useState({
+        loginContainer : 392,
+        input : 300,
+        button : 325
+    });
+    const [winHeight, setWinHeight] = useState(490);
     const [redirect, setRedirect] = useState(false);
     const [loginData, setLoginData] = useState({
         email : "",
         password : ""
     });
+
     const windowSize = useSelector((state : RootState) => state.screen_size);
 
     useEffect(() => {
-        setWinWidth(windowSize.width);
-        setWinHeight(windowSize.height);
-        console.log(windowSize);
+        if(windowSize.width < 460) {
+            setWinWidth({
+                ...winWidth,
+                loginContainer : windowSize.width
+            });
+        }
+        // else {
+        //     setWinWidth({
+        //         loginContainer : 392,
+        //         input : 300,
+        //         button : 325
+        //     });
+        // }
+
+        if(windowSize.height < 610) {
+            setWinHeight(windowSize.height);
+        }
+        // else {
+        //     setWinHeight(490);
+        // }
+        console.log(winWidth);
     }, [winWidth, winHeight, windowSize]);
+
+    const setEmail = (e : React.ChangeEvent<HTMLInputElement>) => {
+        setLoginData({...loginData, email : e.target.value});
+    }
+    const setPassword = (e : React.ChangeEvent<HTMLInputElement>) => {
+        setLoginData({...loginData, password : e.target.value})
+    }
 
     const tryLogin = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -58,32 +89,55 @@ function LoginPage() {
     if(redirect === true){
         return <Redirect to="/"/>
     }
-
     return (
         <Wrapper>
             <form className="user-login-form" onSubmit={tryLogin}>
-                <div className="login-container">
+                <LoginContainer 
+                    className="login-container"
+                    width={winWidth.loginContainer} {...winWidth.loginContainer}
+                    height={winHeight} {...winHeight}
+                >
                     <div className="login-des">
                         로그인
                     </div>
                     <br/>
                     <div className="input-login-des">이메일</div>
-                    <input className="input-box email-input" placeholder="이메일 입력" autoFocus
-                        onChange={(e : React.ChangeEvent<HTMLInputElement>) => setLoginData({...loginData, email : e.target.value})}
+                    <LoginInput 
+                        autoFocus
+                        className="input-box email-input" 
+                        placeholder="이메일 입력" 
+                        onChange={setEmail}
+                        width={winWidth.input} {...winWidth.input}
                     />
                     <div className="input-login-des">비밀번호</div>
-                    <input className="input-box password-input" type="password" placeholder="비밀번호 입력"
-                        onChange={(e : React.ChangeEvent<HTMLInputElement>) => setLoginData({...loginData, password : e.target.value})}
+                    <LoginInput 
+                        className="input-box password-input" 
+                        placeholder="비밀번호 입력"
+                        type="password" 
+                        onChange={setPassword}
+                        width={winWidth.input} {...winWidth.input}
                     />
                     <br/>
                     <input className="remember-box" type="checkbox"/>기억하기
                     <br/>
-                    <button className="user-page-btn sign-btn" type="submit">로그인</button>
+                    <LoginButton 
+                        className="user-page-btn sign-btn" 
+                        type="submit"
+                        width={winWidth.button} {...winWidth.button}
+                    >
+                        로그인
+                    </LoginButton>
                     <br/>
                     <Link to={user_register_page}>
-                        <button className="user-page-btn sign-btn sign-up" type="button">회원가입</button>
+                        <LoginButton
+                            className="user-page-btn sign-btn sign-up" 
+                            type="button"
+                            width={winWidth.button} {...winWidth.button}
+                        >
+                            회원가입
+                        </LoginButton>
                     </Link>
-                </div>
+                </LoginContainer>
             </form>
         </Wrapper>
     );
