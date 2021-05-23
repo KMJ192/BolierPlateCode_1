@@ -25,27 +25,26 @@ function LoginPage() {
     const windowSize = useSelector((state : RootState) => state.screen_size);
 
     useEffect(() => {
-        if(windowSize.width < 460) {
+        if(windowSize.width < 460 && windowSize.width !== winWidth.loginContainer) {
             setWinWidth({
                 ...winWidth,
                 loginContainer : windowSize.width
             });
         }
-        // else {
+        // else if(windowSize.width > 460 && windowSize.width !== winWidth.loginContainer) {
         //     setWinWidth({
+        //         ...winWidth,
         //         loginContainer : 392,
-        //         input : 300,
-        //         button : 325
         //     });
         // }
-
-        if(windowSize.height < 610) {
-            setWinHeight(windowSize.height);
-        }
+        // if(windowSize.height < 610) {
+        //     setWinHeight(windowSize.height);
+        // }
         // else {
         //     setWinHeight(490);
         // }
         console.log(winWidth);
+        console.log(windowSize);
     }, [winWidth, winHeight, windowSize]);
 
     const setEmail = (e : React.ChangeEvent<HTMLInputElement>) => {
