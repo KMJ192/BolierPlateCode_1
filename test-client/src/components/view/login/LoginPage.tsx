@@ -5,15 +5,23 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux-module/RootReducer';
 import Wrapper from '../../wrapper/Wrapper';
 import { user_register_page } from '../../../path/PagePath';
-import { LoginButton, LoginContainer, LoginInput } from './LoginPageStyle';
+import {StyledLoginContainer, StyledLoginInput, StyledLoginButton } from './LoginPageStyle';
 import './LoginPage.scss';
+
+const defaultLoginContainerWidth : number = 392;
+const defaultInputWidth : number = 300;
+const defualtButtonWidth : number = 325;
+
+const diffLoginContainerWidth : number = 72;
+const diffInputWidth : number = 140;
+const diffButtonWidth : number = 120;
 
 function LoginPage() {
     document.title="로그인";
     const [winWidth, setWinWidth] = useState({
-        loginContainer : 392,
-        input : 300,
-        button : 325
+        loginContainer : defaultLoginContainerWidth,
+        input : defaultInputWidth,
+        button : defualtButtonWidth
     });
     const [winHeight, setWinHeight] = useState(490);
     const [redirect, setRedirect] = useState(false);
@@ -25,26 +33,51 @@ function LoginPage() {
     const windowSize = useSelector((state : RootState) => state.screen_size);
 
     useEffect(() => {
-        if(windowSize.width < 460 && windowSize.width !== winWidth.loginContainer) {
-            setWinWidth({
-                ...winWidth,
-                loginContainer : windowSize.width
+        if(windowSize.width < 460 && windowSize.width > 245
+            && winWidth.loginContainer !== (windowSize.width - diffLoginContainerWidth)) {
+            setWinWidth({ 
+                ...winWidth, 
+                loginContainer : (windowSize.width - diffLoginContainerWidth) 
             });
         }
-        // else if(windowSize.width > 460 && windowSize.width !== winWidth.loginContainer) {
-        //     setWinWidth({
-        //         ...winWidth,
-        //         loginContainer : 392,
-        //     });
-        // }
-        // if(windowSize.height < 610) {
-        //     setWinHeight(windowSize.height);
-        // }
-        // else {
-        //     setWinHeight(490);
-        // }
-        console.log(winWidth);
-        console.log(windowSize);
+        if(windowSize.width >= 460 && windowSize.width > 245
+            && winWidth.loginContainer !== defaultLoginContainerWidth) {
+            setWinWidth({ 
+                ...winWidth, 
+                loginContainer : defaultLoginContainerWidth 
+            });
+        }
+
+        if(windowSize.width < 435 && windowSize.width > 245){
+            if(winWidth.input !== (windowSize.width - diffInputWidth)){
+                setWinWidth({
+                    ...winWidth,
+                    input : (windowSize.width - diffInputWidth),
+                });
+            }
+            if(winWidth.button !== (windowSize.width - diffButtonWidth)){
+                setWinWidth({
+                    ...winWidth,
+                    button : (windowSize.width - diffButtonWidth),
+                });
+            }
+        }
+        if(windowSize.width >= 435){
+            if(winWidth.input !== defaultInputWidth){
+                setWinWidth({
+                    ...winWidth,
+                    input : defaultInputWidth
+                });
+            }
+            if(winWidth.button !== defualtButtonWidth){
+                setWinWidth({
+                    ...winWidth,
+                    button : defualtButtonWidth
+                })
+            }
+        }
+
+
     }, [winWidth, winHeight, windowSize]);
 
     const setEmail = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +124,7 @@ function LoginPage() {
     return (
         <Wrapper>
             <form className="user-login-form" onSubmit={tryLogin}>
-                <LoginContainer 
+                <StyledLoginContainer 
                     className="login-container"
                     width={winWidth.loginContainer} {...winWidth.loginContainer}
                     height={winHeight} {...winHeight}
@@ -101,7 +134,7 @@ function LoginPage() {
                     </div>
                     <br/>
                     <div className="input-login-des">이메일</div>
-                    <LoginInput 
+                    <StyledLoginInput 
                         autoFocus
                         className="input-box email-input" 
                         placeholder="이메일 입력" 
@@ -109,7 +142,7 @@ function LoginPage() {
                         width={winWidth.input} {...winWidth.input}
                     />
                     <div className="input-login-des">비밀번호</div>
-                    <LoginInput 
+                    <StyledLoginInput 
                         className="input-box password-input" 
                         placeholder="비밀번호 입력"
                         type="password" 
@@ -119,24 +152,24 @@ function LoginPage() {
                     <br/>
                     <input className="remember-box" type="checkbox"/>기억하기
                     <br/>
-                    <LoginButton 
+                    <StyledLoginButton 
                         className="user-page-btn sign-btn" 
                         type="submit"
                         width={winWidth.button} {...winWidth.button}
                     >
                         로그인
-                    </LoginButton>
+                    </StyledLoginButton>
                     <br/>
                     <Link to={user_register_page}>
-                        <LoginButton
+                        <StyledLoginButton
                             className="user-page-btn sign-btn sign-up" 
                             type="button"
                             width={winWidth.button} {...winWidth.button}
                         >
                             회원가입
-                        </LoginButton>
+                        </StyledLoginButton>
                     </Link>
-                </LoginContainer>
+                </StyledLoginContainer>
             </form>
         </Wrapper>
     );

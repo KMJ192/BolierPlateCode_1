@@ -23,7 +23,7 @@ function App() {
 
   const resizeHandler = throttle(() => {
     winSizeDispatch(screenResize(window.innerWidth, window.innerHeight));
-  }, 500);
+  }, 800);
 
   useEffect(() => {
     window.addEventListener('resize', resizeHandler);

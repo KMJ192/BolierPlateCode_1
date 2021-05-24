@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 
-export const LoginContainer = styled.div`
+export const StyledLoginContainer = styled.div`
     width: ${(props:any) => props.width}px;
     height: 490px;
 `;
 
-export const LoginInput = styled.input`
+export const StyledLoginInput = styled.input`
     width: ${(props:any) => props.width}px;
 `;
 
-export const LoginButton = styled.button`
+export const StyledLoginButton = styled.button`
     width: ${(props:any) => props.width}px;
 `;
