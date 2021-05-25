@@ -46,6 +46,11 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
         else alert("오류 발생 : " + request);
     }
     
+    const delUser = async (e : React.MouseEvent<HTMLAnchorElement>) => {
+        await axios.delete(`/delete_user/${useremail}`)
+            .then(() => alert("탈퇴 완료"))
+            .catch(err => alert("오류가 발생했습니다. 오류내용 : [" + err + "]"));
+    }
 
     return (
         <ul className="user-option-container">
@@ -58,6 +63,8 @@ function AfterLogin({useremail, nickname, user_image} : Props) {
                     <a href={user_patch_page}>회원정보수정</a>
                     <div className="line"/>
                     <a href="/" onClick={logOut}>로그아웃</a>
+                    <div className="line"/>
+                    <a href="/" onClick={delUser}>탈퇴</a>
                 </UserDropdown>
             </li>
         </ul>
