@@ -42,4 +42,4 @@ function LoginInput( { placeholder, type, className, setData } : Props ) {
     );
 }
 
-export default LoginInput
+export default React.memo(LoginInput);

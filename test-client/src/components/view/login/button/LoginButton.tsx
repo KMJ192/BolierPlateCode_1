@@ -8,13 +8,13 @@ import { StyledLoginButton } from '../LoginPageStyle';
 interface Props{
     type: "button" | "submit";
     className: string;
-    setData : () => void
+    value : string
 }
 
 const defualtButtonWidth: number = 325;
 const diffButtonWidth: number = 120;
 
-function LoginButton( { type, className, setData} : Props) {
+function LoginButton( { type, className, value } : Props) {
     const [winWidth, setWinWidth] = useState(defualtButtonWidth);
     
     const windowSize = useSelector((state : RootState) => state.screen_size);
@@ -34,9 +34,11 @@ function LoginButton( { type, className, setData} : Props) {
         <StyledLoginButton
             className={className}
             type={type}
-            onClick={setData}
-        />
+            width={winWidth} {...winWidth}
+        >
+            {value}
+        </StyledLoginButton>
     )
 }
 
-export default LoginButton
+export default React.memo(LoginButton);

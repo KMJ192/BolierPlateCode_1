@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const StyledLoginContainer = styled.div`
     width: ${(props:any) => props.width}px;
-    height: 490px;
+    height: ${(props:any) => props.height}px;
 `;
 
 export const StyledLoginInput = styled.input`

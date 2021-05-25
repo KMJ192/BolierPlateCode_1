@@ -1,179 +1,180 @@
 $button-height: 31px;
 $display-state: none;
 
-.nav-bar{
-    z-index: 2;
-    position: fixed;
-    display: flex;
-    background-color: #263343;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    @media screen and (max-width: 768px) {
-        flex-direction: column;
-        position: relative;
-    }
+.nav-bar {
+  z-index: 2;
+  position: fixed;
+  display: flex;
+  background-color: #263343;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    position: relative;
+  }
 }
 
-.logo-container{
-    margin-left: 30px;
-    font-size: 30px;
-    a{
-        color: white;
-    }
-    @media screen and (max-width: 768px) {
-        margin: 11px 0px 12px 0px;
-    }
+.logo-container {
+  margin-left: 30px;
+  font-size: 30px;
+  a {
+    color: white;
+  }
+  @media screen and (max-width: 768px) {
+    margin: 11px 0px 12px 0px;
+  }
 }
 
-.nav-menu{
-    position: absolute;
-    margin-left: 120px;
-    display: flex;
-    list-style: none;
-    li{
-        margin-left: 15px;
-        @media screen and (max-width: 768px) {
-            margin: 0px;
-            padding: 10px 0px 10px 0px;
-            &:hover{
-                transition: 0.3s;
-                background-color: #d49466;
-                border-radius: 7px;
-            }
-        }
-    }
-    a{
-        color: #FFD3D3;
-        font-size: 15px;
-        text-decoration: none;
-        &:hover{
-            transition: 0.1s;
-            color: #778899;
-        }
-    }
+.nav-menu {
+  position: absolute;
+  margin-left: 120px;
+  display: flex;
+  list-style: none;
+  li {
+    margin-left: 15px;
     @media screen and (max-width: 768px) {
-        padding: 14px 24px;
-        margin: 0px;
-        position: relative;
-        flex-direction: column;
-        text-align: center;
-        width: 90%;
+      margin: 0px;
+      padding: 10px 0px 10px 0px;
+      &:hover {
+        transition: 0.3s;
+        background-color: #d49466;
+        border-radius: 7px;
+      }
     }
+  }
+  a {
+    color: #ffd3d3;
+    font-size: 15px;
+    text-decoration: none;
+    &:hover {
+      transition: 0.1s;
+      color: #778899;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding: 14px 24px;
+    margin: 0px;
+    position: relative;
+    flex-direction: column;
+    text-align: center;
+    width: 90%;
+  }
 }
 
-.search-container{
-    display: flex;
-    list-style: none;
-    input{
-        outline: none;
-        padding-left: 10px;
-        height: 30px;
-        background-color: rgba(0, 0, 0, .5);
-        border: 0px;
-        border-radius: 3px;
-        color:#FFFFFF;
-        &:active{
-            background-color: rgb(0, 0, 0);
-        }
-        @media screen and (max-width: 768px) {
-            width: 400px;
-        }
-    }
-    button{
-        height: $button-height;
-        padding: 0px 10px 0px 10px;
+.search-container {
+  display: flex;
+  list-style: none;
+  input {
+    outline: none;
+    padding-left: 10px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 0px;
+    border-radius: 3px;
+    color: #ffffff;
+    &:active {
+      background-color: rgb(0, 0, 0);
     }
     @media screen and (max-width: 768px) {
-        padding: 0px;
+      width: 400px;
     }
-    @media screen and (max-width: 481px) {
-        display: none;
-    }
-}
-
-.nav-toggle{
+  }
+  button {
+    height: $button-height;
+    padding: 0px 10px 0px 10px;
+  }
+  @media screen and (max-width: 768px) {
+    padding: 0px;
+  }
+  @media screen and (max-width: 481px) {
     display: none;
-    right: 20px;
-    top: 19px;
-    position: absolute;
-    font-size: 20px;
-    color: #c0c0c0;
-    @media screen and (max-width: 768px) {
-        display: block;
-        &:hover{
-            transition: 0.125s;
-            color: #898685;
-        }
-        &:active{
-            color: #4d66aa;
-        }
+  }
+}
+
+.nav-toggle {
+  display: none;
+  right: 20px;
+  top: 19px;
+  position: absolute;
+  font-size: 20px;
+  color: #c0c0c0;
+  @media screen and (max-width: 768px) {
+    display: block;
+    &:hover {
+      transition: 0.125s;
+      color: #898685;
     }
+    &:active {
+      color: #4d66aa;
+    }
+  }
 }
 
 //로그인 전 - BeforeLogin.tsx
-.sign-container{
-    button{
-        width: 70px;
-        height: $button-height;
+.sign-container {
+  button {
+    width: 70px;
+    height: $button-height;
+  }
+  a {
+    text-decoration: none;
+    &:nth-last-child(1) {
+      margin-right: 10px;
     }
-    a{
-        text-decoration: none;
-        &:nth-last-child(1){
-            margin-right: 10px;
-        }
-    }
-    @media screen and (max-width: 768px){
-        padding-bottom: 10px;
-    }
+  }
+  @media screen and (max-width: 768px) {
+    padding-bottom: 10px;
+  }
 }
 
 //로그인 후 - AfterLogin.tsx
-.user-option-container{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    margin-right: 30px;
-    li{
-        padding: 0px 10px 0px 10px;
-    }
-    i{
-        font-size: 17px;
-        color: white;
-    }
-    img{
-        height: 29px;
-        width: 29px;
-        border-radius: 50%;
-        cursor: pointer;
+.user-option-container {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin-right: 30px;
+  li {
+    padding: 0px 10px 0px 10px;
+  }
+  i {
+    font-size: 17px;
+    color: white;
+  }
+  img {
+    height: 29px;
+    width: 29px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  @media screen and (max-width: 768px) {
+    padding: 0px;
+    margin-right: 0px;
+  }
+  .user-menu {
+    position: absolute;
+    z-index: 1000;
+    margin-top: 20px;
+    right: 5px;
+    box-shadow: 5px 8px 16px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    background-color: #ffffff;
+    a {
+      display: flex;
+      text-decoration: none;
+      padding: 2px 16px;
+      color: #000000;
+      padding: 10px 12px 10px 12px;
+      transition: 0.2s;
+      font-size: 15px;
+      &:hover {
+        color: #ffffff;
+        background-color: rgb(117, 117, 117);
+      }
     }
     @media screen and (max-width: 768px) {
-        padding: 0px;
-        margin-right: 0px;
+      right: 40%;
     }
-    .user-menu{
-        position: absolute;
-        z-index: 1000;
-        margin-top: 20px;
-        right: 5px;
-        box-shadow: 5px 8px 16px 5px rgba(0,0,0,0.2);
-        border-radius: 3px;
-        background-color: #FFFFFF;
-        a{
-            display: flex;
-            text-decoration: none;
-            padding: 2px 16px;
-            color: #000000;
-            padding: 10px 12px 10px 12px;
-            transition: 0.2s;
-            font-size: 15px;
-            &:hover{
-                color: #FFFFFF;
-                background-color: rgb(117, 117, 117);
-            }
-        }
-        @media screen and (max-width: 768px) {
-            right: 40%;
-        }
-    }
+  }
 }
